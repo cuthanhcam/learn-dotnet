@@ -71,155 +71,155 @@ namespace CS030_LINQ
             };
 
             // Select: Lấy ra các phần tử từ một nguồn dữ liệu và chuyển đổi chúng thành một dạng mới
-                // Lấy ra các sản phẩm có giá == 700
-                var querySelect = from p in products
-                            where p.Price == 700
-                            select p;
+            // Lấy ra các sản phẩm có giá == 700
+            var querySelect = from p in products
+                              where p.Price == 700
+                              select p;
 
-                foreach (var item in querySelect)
-                {
-                    Console.WriteLine(item);
-                }
-            
-                // Lấy tên và giá theo phương thức delegate
-                var resultSelect = products.Select(
-                    (p) =>
-                    {
-                        // return p.Name + " - " + p.Price;
-                        return new { Name = p.Name, Price = p.Price }; // Anonymous Type - Kiểu vô danh
-                    }
-                );
+            foreach (var item in querySelect)
+            {
+                Console.WriteLine(item);
+            }
 
-                foreach (var item in resultSelect)
+            // Lấy tên và giá theo phương thức delegate
+            var resultSelect = products.Select(
+                (p) =>
                 {
-                    Console.WriteLine(item);
+                    // return p.Name + " - " + p.Price;
+                    return new { Name = p.Name, Price = p.Price }; // Anonymous Type - Kiểu vô danh
                 }
+            );
+
+            foreach (var item in resultSelect)
+            {
+                Console.WriteLine(item);
+            }
 
             // Where: Lọc các phần tử từ một nguồn dữ liệu dựa trên một điều kiện
-                // Lấy ra các sản phẩm có giá > 700 và < 900
-                var resultWhere = products.Where(
-                    (p) =>
-                    {
-                        return p.Price > 700 && p.Price < 900;
-                    }
-                );
-                foreach (var item in resultWhere)
+            // Lấy ra các sản phẩm có giá > 700 và < 900
+            var resultWhere = products.Where(
+                (p) =>
                 {
-                    Console.WriteLine(item);
+                    return p.Price > 700 && p.Price < 900;
                 }
+            );
+            foreach (var item in resultWhere)
+            {
+                Console.WriteLine(item);
+            }
 
             // SelectMany: Lấy ra các phần tử từ một nguồn dữ liệu và chuyển đổi chúng thành một dạng mới
-                var resultSelectMany = products.SelectMany(
-                    (p) =>
-                    {
-                        return p.Colors;
-                    }
-                );
-                foreach (var item in resultSelectMany)
+            var resultSelectMany = products.SelectMany(
+                (p) =>
                 {
-                    Console.WriteLine(item);
+                    return p.Colors;
                 }
+            );
+            foreach (var item in resultSelectMany)
+            {
+                Console.WriteLine(item);
+            }
             // Min, max, Sum, Average
-                var minPrice = products.Min(p => p.Price);
-                var maxPrice = products.Max(p => p.Price);
-                var sumPrice = products.Sum(p => p.Price);
-                var avgPrice = products.Average(p => p.Price);
-                Console.WriteLine($"Min: {minPrice}, Max: {maxPrice}, Sum: {sumPrice}, Avg: {avgPrice}");    
+            var minPrice = products.Min(p => p.Price);
+            var maxPrice = products.Max(p => p.Price);
+            var sumPrice = products.Sum(p => p.Price);
+            var avgPrice = products.Average(p => p.Price);
+            Console.WriteLine($"Min: {minPrice}, Max: {maxPrice}, Sum: {sumPrice}, Avg: {avgPrice}");
             // Join
-                var queryJoin = from p in products
-                                join b in brands on p.Brand equals b.ID
-                                select new { ProductName = p.Name, BrandName = b.Name };
-                foreach (var item in queryJoin)
-                {
-                    Console.WriteLine(item);
-                }
+            var queryJoin = from p in products
+                            join b in brands on p.Brand equals b.ID
+                            select new { ProductName = p.Name, BrandName = b.Name };
+            foreach (var item in queryJoin)
+            {
+                Console.WriteLine(item);
+            }
 
             // GroupJoin
-                var queryGroupJoin = from b in brands
-                                join p in products on b.ID equals p.Brand into g
-                                select new { BrandName = b.Name, Products = g };
-                foreach (var item in queryGroupJoin)
+            var queryGroupJoin = from b in brands
+                                 join p in products on b.ID equals p.Brand into g
+                                 select new { BrandName = b.Name, Products = g };
+            foreach (var item in queryGroupJoin)
+            {
+                Console.WriteLine(item.BrandName);
+                foreach (var product in item.Products)
                 {
-                    Console.WriteLine(item.BrandName);
-                    foreach (var product in item.Products)
-                    {
-                        Console.WriteLine(product);
-                    }
-                }   
+                    Console.WriteLine(product);
+                }
+            }
             // Take
-                var queryTake = products.Take(3);
-                foreach (var item in queryTake)
-                {
-                    Console.WriteLine(item);
-                }
+            var queryTake = products.Take(3);
+            foreach (var item in queryTake)
+            {
+                Console.WriteLine(item);
+            }
             // Skip
-                var querySkip = products.Skip(3);
-                foreach (var item in querySkip)
-                {
-                    Console.WriteLine(item);
-                }
+            var querySkip = products.Skip(3);
+            foreach (var item in querySkip)
+            {
+                Console.WriteLine(item);
+            }
             // OrderBy, OrderByDescending
-                var queryOrderBy = products.OrderBy(p => p.Price);
-                foreach (var item in queryOrderBy)
-                {
-                    Console.WriteLine(item);
-                }
-                var queryOrderByDescending = products.OrderByDescending(p => p.Price);
-                foreach (var item in queryOrderByDescending)
-                {
-                    Console.WriteLine(item);
-                }
+            var queryOrderBy = products.OrderBy(p => p.Price);
+            foreach (var item in queryOrderBy)
+            {
+                Console.WriteLine(item);
+            }
+            var queryOrderByDescending = products.OrderByDescending(p => p.Price);
+            foreach (var item in queryOrderByDescending)
+            {
+                Console.WriteLine(item);
+            }
             // Reverse
-                var queryReverse = products.AsEnumerable().Reverse(); // AsEnumerable() to see the difference
-                foreach (var item in queryReverse)
-                {
-                    Console.WriteLine(item);
-                }            
+            var queryReverse = products.AsEnumerable().Reverse(); // AsEnumerable() to see the difference
+            foreach (var item in queryReverse)
+            {
+                Console.WriteLine(item);
+            }
             // GroupBy
-                var queryGroupBy = from p in products
-                                group p by p.Brand into g
-                                select new { Brand = g.Key, Products = g };
-                foreach (var item in queryGroupBy)
+            var queryGroupBy = from p in products
+                               group p by p.Brand into g
+                               select new { Brand = g.Key, Products = g };
+            foreach (var item in queryGroupBy)
+            {
+                Console.WriteLine(item.Brand);
+                foreach (var product in item.Products)
                 {
-                    Console.WriteLine(item.Brand);
-                    foreach (var product in item.Products)
-                    {
-                        Console.WriteLine(product);
-                    }
+                    Console.WriteLine(product);
                 }
+            }
             // Distinct
-                var queryDistinct = products.SelectMany(p => p.Colors).Distinct();
-                foreach (var item in queryDistinct)
-                {
-                    Console.WriteLine(item);
-                }
+            var queryDistinct = products.SelectMany(p => p.Colors).Distinct();
+            foreach (var item in queryDistinct)
+            {
+                Console.WriteLine(item);
+            }
             // Single, SingeOrDefault
-                var querySingle = products.Single(p => p.ID == 1);
-                Console.WriteLine(querySingle);
-                var querySingleOrDefault = products.SingleOrDefault(p => p.ID == 1);
-                Console.WriteLine(querySingleOrDefault);
+            var querySingle = products.Single(p => p.ID == 1);
+            Console.WriteLine(querySingle);
+            var querySingleOrDefault = products.SingleOrDefault(p => p.ID == 1);
+            Console.WriteLine(querySingleOrDefault);
             // Any
-                var queryAny = products.Any(p => p.Price == 700);
-                Console.WriteLine(queryAny);
+            var queryAny = products.Any(p => p.Price == 700);
+            Console.WriteLine(queryAny);
             // All
-                var queryAll = products.All(p => p.Price > 0);
-                Console.WriteLine(queryAll);
+            var queryAll = products.All(p => p.Price > 0);
+            Console.WriteLine(queryAll);
             // Count
-                var queryCount = products.Count(p => p.Price == 700);
-                Console.WriteLine(queryCount);
+            var queryCount = products.Count(p => p.Price == 700);
+            Console.WriteLine(queryCount);
 
             // Ví dụ tổng hợp sử dụng API LINQ
             // In tên sản phẩm, tên thương hiệu có giá (Price) lớn hơn 700 và có màu sắc (Colors) là Black, giá giảm dần
-                var query = from p in products
-                            join b in brands on p.Brand equals b.ID
-                            where p.Price > 700 && p.Colors.Contains("Black")
-                            orderby p.Price descending
-                            select new { ProductName = p.Name, BrandName = b.Name };
-                foreach (var item in query)
-                {
-                    Console.WriteLine(item);
-                }
-                
+            var query = from p in products
+                        join b in brands on p.Brand equals b.ID
+                        where p.Price > 700 && p.Colors.Contains("Black")
+                        orderby p.Price descending
+                        select new { ProductName = p.Name, BrandName = b.Name };
+            foreach (var item in query)
+            {
+                Console.WriteLine(item);
+            }
+
         }
     }
 }
