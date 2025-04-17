@@ -1,4 +1,0 @@
-mkdir ... (e.g: mkdir cs01)
-cd ... (e.g: cd cs01)
-dotnet new console --use-program-main
-code .
