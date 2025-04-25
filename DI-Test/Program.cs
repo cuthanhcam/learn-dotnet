@@ -10,9 +10,9 @@ namespace DI_Test
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSingleton<IMySingletonService>(services => new MySingletonService());
-            serviceCollection.AddScoped<IMyScopedService>(services => new MyScopedService());
-            serviceCollection.AddTransient<IMyTransientService>(services => new MyTransientService());
+            serviceCollection.AddSingleton<IMySingletonService>(services => new MySingletonService()); // Được tạo ra 1 lần duy nhất
+            serviceCollection.AddScoped<IMyScopedService>(services => new MyScopedService()); // Được tạo ra 1 lần cho mỗi scope
+            serviceCollection.AddTransient<IMyTransientService>(services => new MyTransientService()); // Được tạo ra mỗi khi được yêu cầu
 
             var service = serviceCollection.BuildServiceProvider();
 
@@ -33,6 +33,9 @@ namespace DI_Test
             obj = service.GetService<IMyTransientService>();
             obj = service.GetService<IMyTransientService>();
 
+
+            // Tạo scope mới
+            
             Console.WriteLine();
             Console.WriteLine("--- Create new scope ---");
             Console.WriteLine();
