@@ -9,7 +9,7 @@ namespace optimize_loop
         static void Main()
         {
             long n = 10_000_000_000;
-            int numThreads = 6;
+            int numThreads = 12;
         
             Stopwatch sw = Stopwatch.StartNew();
 
