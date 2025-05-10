@@ -1,36 +1,29 @@
 ﻿using System;
+using System.Dynamic;
 
 namespace Practice
 {
-    public struct Point
+    interface ITest
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        int A { get; }
+        public void displayText(string str);
     }
 
-    public class Person
+    public class Test : ITest
     {
-        public string Name { get; set; }
+        public int A => throw new NotImplementedException();
+
+        public void displayText(string str)
+        {
+            Console.WriteLine(str);
+        }
     }
-    public class Program 
+    internal class Program
     {
         public static void Main(string[] args)
         {
-            Point p1 = new Point { X = 1, Y = 2 };
-            Point p2 = p1;
-            p2.X = 10;
-            Console.WriteLine($"p1.X: {p1.X}, p2.X: {p2.X}"); // Output: p1.X: 1, p2.X: 10
-
-            Person person1 = new Person { Name = "Alice" };
-            Person person2 = person1;
-            person2.Name = "Bob";
-            Console.WriteLine($"person1.Name: {person1.Name}, person2.Name: {person2.Name}"); // Output: person1.Name: Bob, person2.Name: Bob
-
-            string s1 = "Hello";
-            string s2 = s1;
-            s2 = "World";
-            Console.WriteLine($"s1: {s1}, s2: {s2}"); // Output: s1: Hello, s2: World
-
+            ITest test = new Test();
+            test.displayText("Hello World!");
         }
     }
 }
