@@ -3,27 +3,14 @@ using System.Dynamic;
 
 namespace Practice
 {
-    interface ITest
-    {
-        int A { get; }
-        public void displayText(string str);
-    }
-
-    public class Test : ITest
-    {
-        public int A => throw new NotImplementedException();
-
-        public void displayText(string str)
-        {
-            Console.WriteLine(str);
-        }
-    }
     internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            ITest test = new Test();
-            test.displayText("Hello World!");
+            for (int i = 0; i < args.Length; i++)
+            {
+                Console.WriteLine($"Argument {i}: {args[i]}");
+            }
         }
     }
 }
