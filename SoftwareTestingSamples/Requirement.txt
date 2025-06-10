@@ -1,0 +1,64 @@
+﻿1. YÊU CẦU CHI TIẾT CHO BÀI TOÁN “GIẢI PHƯƠNG TRÌNH BẬC HAI”
+1.1. Mô tả chức năng
+* Tên module: QuadraticSolver
+* Đầu vào: ba hệ số a, b, c kiểu số thực (float64).
+* Đầu ra:
+* Nếu a ≠ 0:
+   * Tính Δ = b² – 4ac
+   * Nếu Δ > 0: trả về hai nghiệm phân biệt (x₁, x₂) dưới dạng số thực.
+   * Nếu Δ = 0: trả về nghiệm kép x = –b / (2a).
+   * Nếu Δ < 0: trả về thông báo “Phương trình vô nghiệm”.
+* Nếu a = 0: trả về lỗi “Không phải phương trình bậc hai”.
+1.2. Yêu cầu chức năng
+1. Tính toán chính xác các nghiệm với sai số ≤ 1e-12.
+2. Xử lý trường hợp biên giá trị rất lớn hoặc rất nhỏ (±1e308).
+3. Báo lỗi rõ ràng khi đầu vào không hợp lệ (ví dụ kiểu không phải số).
+1.3. Yêu cầu phi chức năng
+* Hiệu năng: mỗi phép giải xong trong < 1ms.
+* Tính tái lập: cùng đầu vào phải cho cùng kết quả.
+* Tính mở rộng: dễ dàng bổ sung solver hệ số phức trong tương lai.
+1.4. Định nghĩa test case
+Mỗi test case gồm:
+* ID
+* Mô tả
+* Đầu vào (a,b,c)
+* Môi trường (ví dụ Windows 10, v1.0.0)
+* Kết quả mong đợi
+* Kết quả thực tế (để trống)
+* Trạng thái (Pass/Fail)
+________________
+2. HƯỚNG DẪN GIẢI BÀI TẬP
+2.1. Black-Box (Hộp đen)
+1. Xác định phân vùng tương đương dựa trên Δ và giá trị của a:
+* P1: a ≠ 0 & Δ > 0 → hai nghiệm phân biệt.
+* P2: a ≠ 0 & Δ = 0 → nghiệm kép.
+* P3: a ≠ 0 & Δ < 0 → vô nghiệm.
+* P4: a = 0 → lỗi không phải bậc hai.
+* P5: Đầu vào không phải số → lỗi kiểu dữ liệu.
+1. Chọn giá trị biên trong mỗi phân vùng:
+* Ví dụ Δ = 0: chọn b² == 4ac (vd: a=1, b=2, c=1).
+* Giá trị rất lớn: a=1e308, b=–1e308, c=1 → Δ ~ 0.
+1. Viết tối thiểu 8 test case bao phủ cả P1–P5.
+2.2. White-Box (Hộp trắng)
+1. Xem sơ đồ luồng điều khiển trong code:
+* Nhánh kiểm a == 0
+* Nhánh tính Δ và ba nhánh so sánh Δ > 0, =0, <0
+1. Đảm bảo mỗi nhánh và các con đường ngoại lệ đều được gọi ít nhất một lần.
+2. Viết tối thiểu 2 test case:
+* Đường đi “a=0”
+* Đường đi “Δ > 0”
+* (nếu có vòng lặp đọc nhiều bộ số, thêm trường hợp lặp 0 lần, 1 lần, n lần)
+________________
+3. BÀI TẬP
+Chức năng cần kiểm thử: Module TriangleClassifier
+* Mô tả: Nhận ba cạnh x, y, z (số thực > 0) của một tam giác, trả về loại:
+1. “Equilateral” (tam giác đều) nếu x = y = z.
+2. “Isosceles” (tam giác cân) nếu đúng hai cạnh bằng nhau.
+3. “Scalene” (tam giác thường) nếu cả ba khác nhau.
+4. “Not a triangle” nếu ba số không thỏa điều kiện tổng hai cạnh > cạnh còn lại.
+Yêu cầu:
+1. Viết 8 test case Black-Box (phân vùng: 4 loại tam giác + lỗi đầu vào: cạnh ≤ 0, không thỏa bất đẳng thức tam giác, kiểu dữ liệu sai).
+2. Viết 2 test case White-Box (bao phủ nhánh “Not a triangle” và nhánh “Equilateral”).
+3. Trình bày đầy đủ các trường thông tin như đã nêu ở phần định nghĩa test case.
+Thời gian làm bài: 60 phút.
+Chúc bạn làm bài hiệu quả!
