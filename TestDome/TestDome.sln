@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstUniqueChar", "FirstUni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidParentheses", "ValidParentheses\ValidParentheses.csproj", "{91F63F12-EB96-47AF-9F4E-FD91DA914E53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePlatform", "GamePlatform\GamePlatform.csproj", "{9C7EA5BE-B8C5-4769-BC5C-0F50D9B34CB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MegaStore", "MegaStore\MegaStore.csproj", "{DFC2479E-453E-4F53-8DFA-3A7056FBD2CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{91F63F12-EB96-47AF-9F4E-FD91DA914E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91F63F12-EB96-47AF-9F4E-FD91DA914E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91F63F12-EB96-47AF-9F4E-FD91DA914E53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7EA5BE-B8C5-4769-BC5C-0F50D9B34CB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7EA5BE-B8C5-4769-BC5C-0F50D9B34CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7EA5BE-B8C5-4769-BC5C-0F50D9B34CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7EA5BE-B8C5-4769-BC5C-0F50D9B34CB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFC2479E-453E-4F53-8DFA-3A7056FBD2CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFC2479E-453E-4F53-8DFA-3A7056FBD2CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFC2479E-453E-4F53-8DFA-3A7056FBD2CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFC2479E-453E-4F53-8DFA-3A7056FBD2CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
