@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1 d17.14
+VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Part7StreamAndFile", "Part7StreamAndFile\Part7StreamAndFile.csproj", "{51872893-E971-4A8A-94A0-640E3D278070}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ndir", "ndir\ndir.csproj", "{267EE93C-852D-4582-9B09-3A74C48C0EFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ncopy", "ncopy\ncopy.csproj", "{A8A28763-6B98-49A6-8FE0-A1BF6D313BFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{51872893-E971-4A8A-94A0-640E3D278070}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51872893-E971-4A8A-94A0-640E3D278070}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51872893-E971-4A8A-94A0-640E3D278070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267EE93C-852D-4582-9B09-3A74C48C0EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267EE93C-852D-4582-9B09-3A74C48C0EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267EE93C-852D-4582-9B09-3A74C48C0EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267EE93C-852D-4582-9B09-3A74C48C0EFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8A28763-6B98-49A6-8FE0-A1BF6D313BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8A28763-6B98-49A6-8FE0-A1BF6D313BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8A28763-6B98-49A6-8FE0-A1BF6D313BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8A28763-6B98-49A6-8FE0-A1BF6D313BFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
