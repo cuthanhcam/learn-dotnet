@@ -4,15 +4,29 @@
     {
         static void Main(string[] args)
         {
-            int[] scores = { 3, 1, 4, 1, 5, 9 };
+            var dataSource = GetIntNumbers();
 
-            IEnumerable<int> scoreQuery = from score in scores
-                                          where score % 2 == 1
-                                          orderby score ascending
-                                          select score;
-            foreach (var item in scoreQuery)
+            Print(dataSource);
+
+            Console.WriteLine("\n\nFiltered numbers greater than 1000:\n");
+
+            var query = from n in dataSource
+                        where n > 1000
+                        select n;
+            Print(query);
+        }
+
+        static IEnumerable<int> GetIntNumbers()
+        {
+            var ns = new int[] { 1, 2, 32, 4324, 3242, 324234, 231, -123, -123123, 2321321 };
+            return ns;
+        }
+
+        static void Print(IEnumerable<int> numbers)
+        {
+            foreach (var value in numbers)
             {
-                Console.WriteLine(item);
+                Console.Write($"{value} ");
             }
         }
     }
