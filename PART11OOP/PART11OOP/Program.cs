@@ -7,17 +7,17 @@ namespace PART11OOP
     {
         static void Main(string[] args)
         {
-            var printer = new Printer("Cam")
-            {
-                Page = 100
-            };
+            //var printer = new Printer("Test")
+            //{
+            //    Page = 100
+            //};
 
-            var laserPrinter = new LaserPrinter()
+            var laserPrinter = new LaserPrinter("Test2")
             {
                 Page = 200
             };
 
-            printer.Print("Hello, World!");
+            laserPrinter.Print("Hello, World!");
         }
     }
 }

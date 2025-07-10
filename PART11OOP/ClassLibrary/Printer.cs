@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    public class Printer
+    public abstract class Printer
     {
         private string _message;
 
@@ -28,5 +28,7 @@ namespace ClassLibrary
         {
             Console.WriteLine(message);
         }
+
+        public abstract void MyAbstractMethod();
     }
 }
