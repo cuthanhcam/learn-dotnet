@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PART11OOP
+namespace ClassLibrary
 {
-    public class Printer
+    internal class Class2
     {
-        public void Print(string message)
+        private void P()
         {
-            Console.WriteLine(message);
+            var p = new Class1();
+            p.P();
         }
     }
 }
