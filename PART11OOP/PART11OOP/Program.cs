@@ -18,6 +18,11 @@ namespace PART11OOP
             };
 
             laserPrinter.Print("Hello, World!");
+
+            var a = new A();
+
+            a.A1();
+            a.B1();
         }
     }
 }
