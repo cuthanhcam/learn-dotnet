@@ -8,7 +8,7 @@ namespace PART13STATIC
 {
     internal class C
     {
-        public int x;
+        public static int x;
 
     }
 }

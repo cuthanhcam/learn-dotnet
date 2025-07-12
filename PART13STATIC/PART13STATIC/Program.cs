@@ -4,19 +4,24 @@
     {
         static void Main(string[] args)
         {
-            var c1 = new C() { x = 111 }; 
+            var c1 = new C() { }; 
 
-            var c2 = new C() { x = 222 };
+            var c2 = new C() { };
 
-            Console.WriteLine(c1.x);
+            Console.WriteLine(C.x);
 
-            Console.WriteLine(c2.x);
+            C.x = 333;
 
-            c2.x = 333;
+            Console.WriteLine(C.x);
 
-            Console.WriteLine(c1.x);
+            F1();
 
-            Console.WriteLine(c2.x);
+            Console.WriteLine(C.x);
+        }
+    
+        static void F1()
+        {
+            C.x = 123;
         }
     }
 }
