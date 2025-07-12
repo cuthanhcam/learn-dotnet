@@ -4,8 +4,13 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(C.x);
-            
+            Person person = new Person
+            {
+                Id = 1,
+                Name = "John Doe"
+            };
+
+            person.Print();
         }
     }
 }
