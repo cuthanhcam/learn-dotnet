@@ -11,6 +11,10 @@
 
         static void Run(IReadable reader)
         {
+            reader.WriteName(); // Call the extension method
+
+            IReadable.WriteName(reader); // Call the static method
+
             Console.WriteLine(reader.Name);
 
             int n = reader.ReadInt();
