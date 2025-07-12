@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace PART13STATIC
 {
-    internal class C
+    internal static class C
     {
-        public static int x;
+        public static int x = 999;
 
+        static C()
+        {
+            Console.WriteLine(x);
+            Console.WriteLine("Static constructor called");
+        }
+        
     }
 }
