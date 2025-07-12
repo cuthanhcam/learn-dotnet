@@ -4,13 +4,10 @@
     {
         static void Main(string[] args)
         {
-            Person person = new Person
+            for (int i = 0; i < 5; i++)
             {
-                Id = 1,
-                Name = "John Doe"
-            };
-
-            person.Print();
+                Console.WriteLine(AccessCounter.GetInstance().Inc());
+            }
         }
     }
 }
