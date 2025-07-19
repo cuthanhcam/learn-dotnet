@@ -1,7 +1,7 @@
 ﻿
 namespace NFind
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -14,7 +14,7 @@ namespace NFind
             var fileOptions = BuildOptions(args);
         }
 
-        private static object BuildOptions(string[] args)
+        public static object BuildOptions(string[] args)
         {
             throw new NotImplementedException();
         }
