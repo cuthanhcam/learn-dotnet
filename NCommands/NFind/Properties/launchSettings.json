@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NFind": {
+      "commandName": "Project",
+      "commandLineArgs": "MENTEITH *.txt"
+    }
+  }
+}
