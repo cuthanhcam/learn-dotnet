@@ -14,9 +14,53 @@ namespace NFind
             var fileOptions = BuildOptions(args);
         }
 
-        public static object BuildOptions(string[] args)
+        public static FindOptions BuildOptions(string[] args)
         {
-            throw new NotImplementedException();
+            var options = new FindOptions();
+
+            foreach (var arg in args)
+            {
+                if (arg =="/v")
+                {
+                    options.FindDontConstain = true;
+                }
+                else if (arg == "/c")
+                {
+                    options.CountMode = true;
+                }
+                else if (arg == "/n")
+                {
+                    options.ShowLineNumbers = true;
+                }
+                else if (arg == "/i")
+                {
+                    options.IsCaseSensitive = false;
+                }
+                else if (arg == "/off" || arg == "/offline")
+                {
+                    options.SkipOfflineFiles = false;
+                }
+                else if (arg == "/?")
+                {
+                    options.HelpMode = true;
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(options.StringToFind))
+                    {
+                        options.StringToFind = arg;
+                    }
+                    else if (string.IsNullOrEmpty(options.Path))
+                    {
+                        options.Path = arg;
+                    }
+                    else
+                    {
+                        throw new ArgumentException(arg);
+                    }
+                }
+            }
+            return options;
         }
     }
 }
