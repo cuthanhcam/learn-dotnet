@@ -10,7 +10,7 @@ namespace DSA.Core.Algorithms.Searching
     /// Binary Search Algorithm
     /// 
     /// Requirements:
-    /// - Input array must be sorted in ascending order.
+    /// - Input numsay must be sorted in ascending order.
     /// 
     /// Time Complexity: O(log n)
     /// Space Complexity: O(1)
@@ -18,26 +18,31 @@ namespace DSA.Core.Algorithms.Searching
     public static class BinarySearch
     {
         // Iterative implementation of Binary Search
-        public static int BinarySearchIterative(int[] arr, int target)
+        public static int BinarySearchIterative(int[] nums, int target)
         {
-            int low = 0;
-            int high = arr.Length - 1;
-
-            while (low <= high)
+            if (nums == null || nums.Length == 0)
             {
-                int mid = low + (high - low) / 2;
+                return -1;
+            }
 
-                if (arr[mid] == target)
+            int left = 0;
+            int right = nums.Length - 1;
+
+            while (left <= right)
+            {
+                int mid = left + (right - left) / 2;
+
+                if (nums[mid] == target)
                 {
                     return mid;
                 }
-                else if (arr[mid] < target)
+                else if (nums[mid] < target)
                 {
-                    low = mid + 1;
+                    left = mid + 1;
                 }
                 else
                 {
-                    high = mid - 1;
+                    right = mid - 1;
                 }
             }
 
@@ -45,5 +50,37 @@ namespace DSA.Core.Algorithms.Searching
         }
 
         // Recursive implementation of Binary Search
+        public static int BinarySearchRecursive(int[] nums, int target)
+        {
+            if (nums == null || nums.Length == 0)
+            {
+                return -1;
+            }
+
+            return BinarySearchRecursive(nums, target, 0, nums.Length - 1);
+        }
+
+        private static int BinarySearchRecursive(int[] nums, int target, int left, int right)
+        {
+            if (left > right)
+            {
+                return -1;
+            }
+
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target)
+            {
+                return mid;
+            }
+
+            if (nums[mid] < target)
+            {
+                return BinarySearchRecursive(nums, target, mid + 1, right);
+            }
+
+            return BinarySearchRecursive(nums, target, left, mid - 1);
+        }
+
     }
 }

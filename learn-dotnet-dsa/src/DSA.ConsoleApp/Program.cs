@@ -8,19 +8,32 @@ namespace DSA.ConsoleApp
         {
             Console.WriteLine("Binary Search Demo");
 
-            int[] arr = { 1, 3, 5, 7, 9, 11, 13 };
+            int[] nums = { 1, 3, 5, 7, 9, 11, 13 };
             int target = 11;
 
-            int index = BinarySearch.BinarySearchIterative(arr, target);
+            for (int i = 0; i <= nums.Length - 1; i++)
+            {
+                Console.Write($"{nums[i]} ");
+            }
+
+            Console.WriteLine($"\nTarget: {target}");
+            
+            // Iterative
+            int index = BinarySearch.BinarySearchIterative(nums, target);
 
             if (index != -1)
             {
-                Console.WriteLine($"Found: {target} at index {index}");
+                Console.WriteLine($"Iterative search resul: index = {index}");
             }
             else
             {
                 Console.WriteLine($"{target} not found");
             }
+
+            // Recursive
+            int recursiveIndex = BinarySearch.BinarySearchRecursive(nums, target);
+
+            Console.WriteLine($"Recursive search result: index = {recursiveIndex}");
         }
     }
 }
