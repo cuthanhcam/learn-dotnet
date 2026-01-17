@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\tests\DSA.Tests\DSA.Tests.csproj" />
+    <ProjectReference Include="..\DSA.Core\DSA.Core.csproj" />
+    <ProjectReference Include="..\DSA.Practice\DSA.Practice.csproj" />
+  </ItemGroup>
+
 </Project>
