@@ -22,7 +22,10 @@
 
   <ItemGroup>
     <Folder Include="DataStructures\" />
-    <Folder Include="Algorithms\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DSA.Core\DSA.Core.csproj" />
   </ItemGroup>
 
 </Project>
