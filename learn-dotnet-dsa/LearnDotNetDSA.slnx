@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DSA.ConsoleApp/DSA.ConsoleApp.csproj" />
+    <Project Path="src/DSA.Core/DSA.Core.csproj" />
+    <Project Path="src/DSA.Practice/DSA.Practice.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DSA.Tests/DSA.Tests.csproj" />
+  </Folder>
+</Solution>
