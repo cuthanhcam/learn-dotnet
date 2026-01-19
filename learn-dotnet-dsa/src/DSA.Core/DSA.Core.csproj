@@ -12,7 +12,6 @@
     <Folder Include="Algorithms\Backtracking\" />
     <Folder Include="Algorithms\String\" />
     <Folder Include="Algorithms\Sorting\" />
-    <Folder Include="DataStructures\Arrays\" />
     <Folder Include="DataStructures\LinkedLists\" />
     <Folder Include="DataStructures\Heaps\" />
     <Folder Include="DataStructures\Graphs\" />
