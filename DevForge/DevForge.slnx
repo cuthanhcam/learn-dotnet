@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DevForge.API/DevForge.API.csproj" />
+    <Project Path="src/DevForge.Application/DevForge.Application.csproj" />
+    <Project Path="src/DevForge.Domain/DevForge.Domain.csproj" />
+    <Project Path="src/DevForge.Infrastructure/DevForge.Infrastructure.csproj" />
+  </Folder>
+</Solution>
