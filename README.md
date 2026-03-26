@@ -1,6 +1,6 @@
 # 🚀 Learn .NET
 
-*A structured journey from C# fundamentals to production-ready backend development with .NET*
+A structured journey from C# fundamentals to production-ready backend development with .NET
 
 ---
 
@@ -60,7 +60,7 @@ The repository is organized progressively from **fundamentals → advanced → r
 * `Equals()`, `GetHashCode()`, `ToString()`
 * SOLID principles (introduction)
 
-**Bonus:**
+### Bonus
 
 * Records vs Classes
 * Immutability
@@ -237,7 +237,7 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Apply everything into real-world applications
 
-**Suggested projects:**
+### Suggested Projects
 
 * Sales Management API
 * Authentication Service (RBAC)
