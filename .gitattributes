@@ -1,0 +1,34 @@
+# Normalize line endings
+* text=auto
+
+# C# source
+*.cs text diff=csharp
+
+# Project files
+*.csproj text
+*.props text
+*.targets text
+
+# Config / data formats
+*.json text
+*.yml text
+*.yaml text
+*.xml text
+
+# Markdown
+*.md text
+
+# Scripts
+*.sh text eol=lf
+*.ps1 text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+
+# Security reports
+*.sarif text
