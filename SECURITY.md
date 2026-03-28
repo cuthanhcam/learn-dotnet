@@ -2,16 +2,17 @@
 
 ## Reporting A Vulnerability
 
-If you discover a security vulnerability, please do not open a public issue.
+If you discover a security vulnerability, do not open a public issue.
 
-Please report it by email to: `security@placeholder.local`
+Please report it by email to: cuthanhcam04@gmail.com
+Maintainer profile: https://github.com/cuthanhcam
 
 Include:
 
-- A clear description of the issue
-- Reproduction steps
-- Potential impact
-- Suggested fix (if available)
+- A clear description of the issue.
+- Reproduction steps.
+- Potential impact.
+- Suggested fix (if available).
 
 ## Response Process
 
