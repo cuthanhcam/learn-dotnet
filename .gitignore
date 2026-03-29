@@ -204,3 +204,4 @@ wwwroot/service-worker-assets.js
 
 *.meta
 *.cache
+temp/
