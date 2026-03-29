@@ -1,0 +1,28 @@
+<Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/StringBenchmark/StringBenchmark.csproj" Id="09c0d712-db16-447e-a59b-7b05b642ab9e" />
+  </Folder>
+  <Folder Name="/docs/">
+    <File Path="docs/00-roadmap.md" />
+    <File Path="docs/01-dotnet-ecosystem.md" />
+    <File Path="docs/02-variables-types.md" />
+    <File Path="docs/03-operators-control-flow.md" />
+    <File Path="docs/04-methods.md" />
+    <File Path="docs/05-collections.md" />
+    <File Path="docs/06-strings.md" />
+    <File Path="docs/07-nullability.md" />
+    <File Path="docs/common-pitfalls.md" />
+  </Folder>
+  <Folder Name="/exercises/" />
+  <Folder Name="/exercises/Easy/" />
+  <Folder Name="/exercises/Hard/" />
+  <Folder Name="/exercises/Medium/" />
+  <Folder Name="/src/">
+    <Project Path="src/CSharpBasics.ConsoleApp/CSharpBasics.ConsoleApp.csproj" Id="a0f80c7b-9454-451d-b079-ec0f6be15478" />
+    <Project Path="src/CSharpBasics.Examples/CSharpBasics.Examples.csproj" Id="b3f2525f-1730-48c9-ba50-21b1d34e660b" />
+    <Project Path="src/CSharpBasics.Playground/CSharpBasics.Playground.csproj" Id="f453d336-ca63-4b92-a62c-3e80c73bb2b9" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CSharpBasics.Tests/CSharpBasics.Tests.csproj" Id="0b096863-e289-46fc-a6e2-7bd67ec15e59" />
+  </Folder>
+</Solution>
