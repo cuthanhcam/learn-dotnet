@@ -1,4 +1,5 @@
-﻿using CSharpBasics.Examples.Variables;
+﻿using CSharpBasics.Examples.ControlFlow;
+using CSharpBasics.Examples.Variables;
 
 namespace CSharpBasics.ConsoleApp
 {
@@ -7,12 +8,17 @@ namespace CSharpBasics.ConsoleApp
         public static void Main(string[] args)
         {
             Console.WriteLine("C# Fundamentasl Demo Runner");
-            Console.WriteLine(new string('-', 50));
+            Console.WriteLine(new string('-', 60));
 
             RunSection("Variables & Types", static () =>
             {
                 VariablesExamples.Run();
+                DynamicVsTypedExample.Run();
+            });
 
+            RunSection("Control Flow", static () =>
+            {
+                IfElseExample.Run();
             });
         }
         
