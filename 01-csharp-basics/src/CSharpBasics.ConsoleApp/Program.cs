@@ -19,6 +19,8 @@ namespace CSharpBasics.ConsoleApp
             RunSection("Control Flow", static () =>
             {
                 IfElseExample.Run();
+                SwitchExample.Run();
+                LoopsExample.Run();
             });
         }
         

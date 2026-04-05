@@ -27,7 +27,7 @@ namespace CSharpBasics.Examples.Variables
         /// </summary>
         public static void Run()
         {
-            Console.WriteLine("=== DynamicVsTypedExample ===");
+            Console.WriteLine($"{new string('=', 5)} DynamicVsTypedExample {new string('=', 5)}");
 
             PrintSection("TYPED OPERATIONS (COMPILE-TIME SAFE)");
             DemoTypedOperations();

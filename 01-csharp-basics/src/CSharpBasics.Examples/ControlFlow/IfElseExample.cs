@@ -31,7 +31,7 @@
     {
         public static void Run()
         {
-            Console.WriteLine("=== IfElseExample ===");
+            Console.WriteLine($"{new string('=', 5)} IfElseExample {new string('=', 5)}");
 
             PrintSection("SCORE CLASSIFICATION");
             DemoScoreClassification();
