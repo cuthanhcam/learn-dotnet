@@ -266,7 +266,7 @@ namespace CSharpBasics.Examples.ControlFlow
             Console.WriteLine($"Sum using while: {SumWithWhile(numbers)}");
 
             // Countdown example
-            Console.WriteLine("Countdown: ", string.Empty);
+            Console.Write("Countdown: ");
             int countdown = 5;
             while (countdown > 0)
             {

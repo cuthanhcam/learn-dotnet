@@ -128,7 +128,7 @@
                 return false;
             }
 
-            if (isNotBanned)
+            if (!isNotBanned)
             {
                 return false;
             }

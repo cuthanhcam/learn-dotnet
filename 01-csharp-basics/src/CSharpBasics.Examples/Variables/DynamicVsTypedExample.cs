@@ -29,16 +29,22 @@ namespace CSharpBasics.Examples.Variables
         {
             Console.WriteLine($"{new string('=', 5)} DynamicVsTypedExample {new string('=', 5)}");
 
-            PrintSection("TYPED OPERATIONS (COMPILE-TIME SAFE)");
+            PrintSection("BASIC: TYPED OPERATIONS (COMPILE-TIME SAFE)");
             DemoTypedOperations();
 
-            PrintSection("DYNAMIC OPERATIONS (RUNTIME RESOLVED)");
+            PrintSection("INTERMEDIATE: DYNAMIC OPERATIONS (RUNTIME RESOLVED)");
             DemoDynamicOperations();
 
-            PrintSection("ERROR HANDLING WITH DYNAMIC");
+            PrintSection("INTERMEDIATE: DYNAMIC PROPERTY ACCESS");
+            DemoDynamicPropertyAccess();
+
+            PrintSection("INTERMEDIATE: ERROR HANDLING WITH DYNAMIC");
             DemoErrorHandling();
 
-            PrintSection("PERFORMANCE COMPARISON");
+            PrintSection("ADVANCED: SAFE FALLBACK FROM DYNAMIC TO TYPED");
+            DemoAdvancedSafeFallback();
+
+            PrintSection("ADVANCED: PERFORMANCE COMPARISON");
             DemoPerformanceImpact();
 
             Console.WriteLine();
@@ -133,16 +139,15 @@ namespace CSharpBasics.Examples.Variables
             person.Name = "Charlie Cu";
             person.Title = "Software Engineer";
 
-            try
+            var members = (IDictionary<string, object>)person;
+            if (members.TryGetValue(propertyName, out var foundValue))
             {
-                value = person.GetType().GetProperty(propertyName)?.GetValue(person);
-                return value != null;
+                value = foundValue;
+                return true;
             }
-            catch
-            {
-                value = null;
-                return false;
-            }
+
+            value = null;
+            return false;
         }
 
         /// <summary>
@@ -270,6 +275,107 @@ namespace CSharpBasics.Examples.Variables
                 Console.WriteLine($"Method invocation failed (safely caught)");
                 Console.WriteLine($"Error: {errorMessage}");
             }
+
+            if (!TryAccessMissingProperty())
+            {
+                Console.WriteLine("Missing property access failed as expected");
+            }
+
+            if (!TryCallUnknownMethod(out string methodError))
+            {
+                Console.WriteLine("Unknown method call failed as expected");
+                Console.WriteLine($"Error: {methodError}");
+            }
+        }
+
+        /// <summary>
+        /// Demonstrates reading known/missing properties from a dynamic object.
+        /// Shows a safe approach when member existence is uncertain.
+        /// </summary>
+        private static void DemoDynamicPropertyAccess()
+        {
+            if (TryAccessProperty("Name", out object? name))
+            {
+                Console.WriteLine($"Name property found: {name}");
+            }
+
+            if (TryAccessProperty("Title", out object? title))
+            {
+                Console.WriteLine($"Title property found: {title}");
+            }
+
+            bool hasDepartment = TryAccessProperty("Department", out _);
+            Console.WriteLine($"Department property exists: {hasDepartment}");
+        }
+
+        /// <summary>
+        /// Demonstrates advanced strategy: accept flexible input, then convert
+        /// into typed values before business logic is applied.
+        /// </summary>
+        private static void DemoAdvancedSafeFallback()
+        {
+            dynamic d1 = "25.5";
+            dynamic d2 = 10;
+
+            if (TrySafeAddNumbers(d1, d2, out decimal safeSum))
+            {
+                Console.WriteLine($"Safe add (dynamic -> typed): {safeSum}");
+            }
+
+            dynamic d3 = "not-a-number";
+            bool success = TrySafeAddNumbers((object?)d3, (object?)d2, out decimal _);
+            Console.WriteLine($"Safe add with invalid input: {success}");
+
+            object?[] samples = [123, 4.5m, "hello", true, null, DateTime.UtcNow];
+            foreach (var sample in samples)
+            {
+                Console.WriteLine($"Runtime type: {ClassifyRuntimeType(sample)}");
+            }
+        }
+
+        /// <summary>
+        /// Attempts to convert two values to decimal and add them safely.
+        /// Useful when input comes from dynamic/loosely-typed sources.
+        /// </summary>
+        public static bool TrySafeAddNumbers(object? left, object? right, out decimal result)
+        {
+            result = 0m;
+
+            if (left is null || right is null)
+            {
+                return false;
+            }
+
+            if (!decimal.TryParse(left.ToString(), out var leftNumber))
+            {
+                return false;
+            }
+
+            if (!decimal.TryParse(right.ToString(), out var rightNumber))
+            {
+                return false;
+            }
+
+            result = leftNumber + rightNumber;
+            return true;
+        }
+
+        /// <summary>
+        /// Classifies runtime value type for learning/debugging scenarios.
+        /// </summary>
+        public static string ClassifyRuntimeType(dynamic value)
+        {
+            return value switch
+            {
+                null => "null",
+                int => "int",
+                long => "long",
+                decimal => "decimal",
+                double => "double",
+                string => "string",
+                bool => "bool",
+                _ => value.GetType().Name
+            };
         }
 
         /// <summary>
