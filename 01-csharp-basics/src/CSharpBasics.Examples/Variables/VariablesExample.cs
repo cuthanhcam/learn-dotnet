@@ -26,7 +26,7 @@ namespace CSharpBasics.Examples.Variables
 
         public static void Run()
         {
-            Console.WriteLine($"Variables Examples");
+            Console.WriteLine($"{new string('=', 5)} Variables Examples {new string('=', 5)}");
             PrintSection("PRIMITIVE SNAPSHOT");
             DemoPrimitiveSnapshot();
 
