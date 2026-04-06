@@ -1,5 +1,6 @@
 ﻿using CSharpBasics.Examples.ControlFlow;
 using CSharpBasics.Examples.Variables;
+using CSharpBasics.Examples.Methods;
 
 namespace CSharpBasics.ConsoleApp
 {
@@ -21,6 +22,14 @@ namespace CSharpBasics.ConsoleApp
                 IfElseExample.Run();
                 SwitchExample.Run();
                 LoopsExample.Run();
+            });
+
+            RunSection("Methods", static () =>
+            {
+                MethodBasicsExample.Run();
+                ParamModifiersExample.Run();
+                OverloadingExample.Run();
+                OptionalParametersExample.Run();
             });
         }
         
