@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharpBasics.Examples.Methods
 {
@@ -58,6 +55,9 @@ namespace CSharpBasics.Examples.Methods
             PrintSection("OPTIONAL NULLABLE PARAMETERS");
             DemoOptionalNullableParameters();
 
+            PrintSection("WHEN OPTIONALS BECOME TOO MANY");
+            DemoParameterObjectPattern();
+
             Console.WriteLine();
         }
 
@@ -102,16 +102,22 @@ namespace CSharpBasics.Examples.Methods
             if (string.IsNullOrWhiteSpace(baseUrl))
                 throw new ArgumentException("Base URL is required.", nameof(baseUrl));
 
+            if (pageNumber.HasValue && pageNumber <= 0)
+                throw new ArgumentOutOfRangeException(nameof(pageNumber), "Page number must be greater than zero.");
+
+            if (pageSize.HasValue && (pageSize <= 0 || pageSize > 500))
+                throw new ArgumentOutOfRangeException(nameof(pageSize), "Page size must be between 1 and 500.");
+
             var parameters = new List<string>();
 
-            if (pageNumber.HasValue && pageNumber > 0)
+            if (pageNumber.HasValue)
                 parameters.Add($"page={pageNumber}");
 
-            if (pageSize.HasValue && pageSize > 0)
+            if (pageSize.HasValue)
                 parameters.Add($"pageSize={pageSize}");
 
             if (!string.IsNullOrWhiteSpace(sortBy))
-                parameters.Add($"sortBy={sortBy}");
+                parameters.Add($"sortBy={Uri.EscapeDataString(sortBy.Trim())}");
 
             return parameters.Count > 0
                 ? $"{baseUrl}?{string.Join("&", parameters)}"
@@ -138,6 +144,12 @@ namespace CSharpBasics.Examples.Methods
             if (delayMs < 0)
                 throw new ArgumentOutOfRangeException(nameof(delayMs), "Delay cannot be negative.");
 
+            if (delayMs > 60_000)
+                throw new ArgumentOutOfRangeException(nameof(delayMs), "Delay cannot exceed 60,000 ms for this demo.");
+
+            if (maxRetries is < 0 or > 10)
+                throw new ArgumentOutOfRangeException(nameof(maxRetries), "Retry count must be between 0 and 10.");
+
             var settings = new List<string>();
             if (delayMs > 0)
                 settings.Add($"delay={delayMs}ms");
@@ -146,6 +158,31 @@ namespace CSharpBasics.Examples.Methods
                 settings.Add("async");
 
             return $"Notification to {recipient}: '{message}' [{string.Join(", ", settings)}]";
+        }
+
+        /// <summary>
+        /// Parameter object approach for APIs that would otherwise require too many optional parameters.
+        /// </summary>
+        public static string SendNotificationWithOptions(string recipient, string message, NotificationOptions? options = null)
+        {
+            if (string.IsNullOrWhiteSpace(recipient))
+                throw new ArgumentException("Recipient is required.", nameof(recipient));
+
+            if (string.IsNullOrWhiteSpace(message))
+                throw new ArgumentException("Message is required.", nameof(message));
+
+            options ??= new NotificationOptions();
+
+            if (options.DelayMs is < 0 or > 60_000)
+                throw new ArgumentOutOfRangeException(nameof(options.DelayMs), "Delay must be between 0 and 60,000 ms.");
+
+            if (options.MaxRetries is < 0 or > 10)
+                throw new ArgumentOutOfRangeException(nameof(options.MaxRetries), "Max retries must be between 0 and 10.");
+
+            string priority = options.IsHighPriority ? "high-priority" : "normal";
+            string channel = options.Channel;
+
+            return $"Notification[{priority}] via {channel} to {recipient} (delay={options.DelayMs}ms, retries={options.MaxRetries}): '{message}'";
         }
 
         /// <summary>
@@ -162,6 +199,14 @@ namespace CSharpBasics.Examples.Methods
 
             string timestamp = includeTimestamp ? $" [{DateTime.Now:HH:mm:ss}]" : "";
             return $"[{level}] [{category}]{timestamp} {message}";
+        }
+
+        public sealed record NotificationOptions
+        {
+            public int DelayMs { get; init; } = 0;
+            public int MaxRetries { get; init; } = 3;
+            public bool IsHighPriority { get; init; }
+            public string Channel { get; init; } = "email";
         }
 
         // PRIVATE DEMO METHODS
@@ -254,6 +299,26 @@ namespace CSharpBasics.Examples.Methods
             Console.WriteLine("Logging with defaults:");
             Console.WriteLine(LogMessage("Operation started"));
             Console.WriteLine(LogMessage("Error occurred", level: "Error", category: "Database"));
+        }
+
+        /// <summary>
+        /// Demonstrates the switch from many optional parameters to a parameter object.
+        /// </summary>
+        private static void DemoParameterObjectPattern()
+        {
+            Console.WriteLine("As options grow, parameter object keeps call sites readable:");
+
+            Console.WriteLine(SendNotificationWithOptions("owner@example.com", "Daily digest"));
+
+            var options = new NotificationOptions
+            {
+                DelayMs = 1_500,
+                MaxRetries = 5,
+                IsHighPriority = true,
+                Channel = "sms"
+            };
+
+            Console.WriteLine(SendNotificationWithOptions("oncall@example.com", "Service latency high", options));
         }
     }
 }
