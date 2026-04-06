@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 
 namespace CSharpBasics.Examples.Methods
 {
@@ -64,6 +62,9 @@ namespace CSharpBasics.Examples.Methods
             PrintSection("OVERLOAD RESOLUTION");
             DemoOverloadResolution();
 
+            PrintSection("GENERIC NUMERIC OVERLOAD");
+            DemoGenericOverload();
+
             Console.WriteLine();
         }
 
@@ -93,12 +94,15 @@ namespace CSharpBasics.Examples.Methods
             ArgumentNullException.ThrowIfNull(values);
 
             if (values.Length == 0)
-                return 0;  // Empty case: return neutral element
+                return 1;  // Multiplicative identity
 
             int result = 1;
             foreach (int value in values)
             {
-                result *= value;
+                checked
+                {
+                    result *= value;
+                }
             }
 
             return result;
@@ -126,11 +130,20 @@ namespace CSharpBasics.Examples.Methods
             int total = 0;
             foreach (int value in values)
             {
-                total += value;
+                checked
+                {
+                    total += value;
+                }
             }
 
             return total;
         }
+
+        /// <summary>
+        /// Generic numeric overload using modern .NET generic math.
+        /// Useful when APIs should support multiple numeric types without duplication.
+        /// </summary>
+        public static T Add<T>(T left, T right) where T : INumber<T> => left + right;
 
         // FORMAT OVERLOADS (Different responsibilities)
 
@@ -144,10 +157,9 @@ namespace CSharpBasics.Examples.Methods
         /// </summary>
         public static string FormatPair(string left, string right, string separator)
         {
-            if (left == null)
-                throw new ArgumentNullException(nameof(left));
-            if (right == null)
-                throw new ArgumentNullException(nameof(right));
+            ArgumentNullException.ThrowIfNull(left);
+            ArgumentNullException.ThrowIfNull(right);
+            ArgumentNullException.ThrowIfNull(separator);
 
             return $"{left.Trim()}{separator}{right.Trim()}";
         }
@@ -194,6 +206,7 @@ namespace CSharpBasics.Examples.Methods
 
             // No elements
             Console.WriteLine($"Multiply() = {Multiply()}");
+            Console.WriteLine("Multiply() returns 1 (multiplicative identity)");
 
             Console.WriteLine();
             Console.WriteLine("Addition with params:");
@@ -232,6 +245,19 @@ namespace CSharpBasics.Examples.Methods
             Console.WriteLine("  1. Exact type match");
             Console.WriteLine("  2. Implicit conversion");
             Console.WriteLine("  3. Params/variable-length");
+        }
+
+        /// <summary>
+        /// Demonstrates generic math overload with explicit type arguments.
+        /// </summary>
+        private static void DemoGenericOverload()
+        {
+            int intResult = Add<int>(10, 20);
+            decimal decimalResult = Add<decimal>(3.25m, 4.75m);
+
+            Console.WriteLine($"Add<int>(10, 20) = {intResult}");
+            Console.WriteLine($"Add<decimal>(3.25m, 4.75m) = {decimalResult}");
+            Console.WriteLine("Generic math reduces duplicate overloads when behavior is identical.");
         }
     }
 }

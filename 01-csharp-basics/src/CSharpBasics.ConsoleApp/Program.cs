@@ -8,7 +8,7 @@ namespace CSharpBasics.ConsoleApp
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("C# Fundamentasl Demo Runner");
+            Console.WriteLine("C# Fundamentals Demo Runner");
             Console.WriteLine(new string('-', 60));
 
             RunSection("Variables & Types", static () =>
