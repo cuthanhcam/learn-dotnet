@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharpBasics.Examples.Methods
 {
@@ -78,6 +75,21 @@ namespace CSharpBasics.Examples.Methods
         public static double Multiply(double left, double right) => left * right;
 
         /// <summary>
+        /// Applies percentage discount to a price.
+        /// Demonstrates guard clauses with range validation.
+        /// </summary>
+        public static decimal ApplyDiscount(decimal originalPrice, decimal discountPercent)
+        {
+            if (originalPrice < 0)
+                throw new ArgumentOutOfRangeException(nameof(originalPrice), "Price cannot be negative.");
+
+            if (discountPercent < 0 || discountPercent > 100)
+                throw new ArgumentOutOfRangeException(nameof(discountPercent), "Discount must be between 0 and 100.");
+
+            return originalPrice * (1 - discountPercent / 100m);
+        }
+
+        /// <summary>
         /// Builds a welcome message with validation.
         /// Demonstrates input validation using guard clauses.
         /// Throws ArgumentException with nameof for clarity.
@@ -100,6 +112,9 @@ namespace CSharpBasics.Examples.Methods
         /// </summary>
         public static int ParseAgeOrDefault(string? rawValue, int defaultValue)
         {
+            if (defaultValue <= 0)
+                throw new ArgumentOutOfRangeException(nameof(defaultValue), "Default age must be positive.");
+
             if (int.TryParse(rawValue, out int parsed) && parsed > 0)
                 return parsed;
 
@@ -113,8 +128,7 @@ namespace CSharpBasics.Examples.Methods
         /// </summary>
         public static (int Min, int Max) GetMinMax(IReadOnlyList<int> numbers)
         {
-            if (numbers == null)
-                throw new ArgumentNullException(nameof(numbers));
+            ArgumentNullException.ThrowIfNull(numbers);
 
             if (numbers.Count == 0)
                 throw new ArgumentException("Collection cannot be empty.", nameof(numbers));
@@ -140,8 +154,7 @@ namespace CSharpBasics.Examples.Methods
         /// </summary>
         public static (int Min, int Max, double Average) GetStatistics(IReadOnlyList<int> numbers)
         {
-            if (numbers == null)
-                throw new ArgumentNullException(nameof(numbers));
+            ArgumentNullException.ThrowIfNull(numbers);
 
             if (numbers.Count == 0)
                 throw new ArgumentException("Collection cannot be empty.", nameof(numbers));
@@ -182,6 +195,18 @@ namespace CSharpBasics.Examples.Methods
             return true;
         }
 
+        /// <summary>
+        /// Modern alternative to out-parameters for division.
+        /// Returning a tuple keeps call sites concise and readable.
+        /// </summary>
+        public static (bool Success, decimal Value, string? Error) DivideResult(decimal numerator, decimal denominator)
+        {
+            if (denominator == 0)
+                return (false, 0, "Denominator cannot be zero.");
+
+            return (true, numerator / denominator, null);
+        }
+
         // PRIVATE DEMO METHODS
 
         private static void PrintSection(string title)
@@ -197,6 +222,7 @@ namespace CSharpBasics.Examples.Methods
         {
             Console.WriteLine($"Add(7, 5) = {Add(7, 5)}");
             Console.WriteLine($"Multiply(3.5, 2.0) = {Multiply(3.5, 2.0)}");
+            Console.WriteLine($"ApplyDiscount(120, 15) = {ApplyDiscount(120m, 15m):0.00}");
             Console.WriteLine("Pure methods: same input always produces same output (no side effects)");
         }
 
@@ -255,6 +281,12 @@ namespace CSharpBasics.Examples.Methods
             var (minVal, maxVal, avg) = GetStatistics(numbers);
             Console.WriteLine($"Statistics - Min: {minVal}, Max: {maxVal}, Avg: {avg:0.00}");
             Console.WriteLine("↳ Named tuple fields make results self-documenting");
+
+            var division = DivideResult(22, 7);
+            Console.WriteLine($"DivideResult(22, 7) - success: {division.Success}, value: {division.Value:0.0000}");
+
+            var divisionError = DivideResult(10, 0);
+            Console.WriteLine($"DivideResult(10, 0) - success: {divisionError.Success}, error: {divisionError.Error}");
         }
 
         /// <summary>

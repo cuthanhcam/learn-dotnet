@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharpBasics.Examples.Methods
 {
@@ -64,6 +61,9 @@ namespace CSharpBasics.Examples.Methods
 
             PrintSection("IN PARAMETER (READONLY REFERENCE)");
             DemoInParameter();
+
+            PrintSection("REF RETURN");
+            DemoRefReturn();
 
             PrintSection("PRACTICAL EXAMPLES");
             DemoPracticalUsage();
@@ -148,6 +148,9 @@ namespace CSharpBasics.Examples.Methods
             if (!int.TryParse(parts[1], out int parsedAge))
                 return false;
 
+            if (parsedAge <= 0)
+                return false;
+
             name = parts[0].Trim();
             age = parsedAge;
             return true;
@@ -173,15 +176,43 @@ namespace CSharpBasics.Examples.Methods
         }
 
         /// <summary>
+        /// Returns a reference to an array element so callers can update it in-place.
+        /// Advanced and niche use case for ref returns.
+        /// </summary>
+        public static ref int GetElementRef(int[] values, int index)
+        {
+            ArgumentNullException.ThrowIfNull(values);
+
+            if (index < 0 || index >= values.Length)
+                throw new ArgumentOutOfRangeException(nameof(index));
+
+            return ref values[index];
+        }
+
+        /// <summary>
         /// Example struct that benefits from 'in' parameter.
         /// Large structs should use 'in' to avoid copying.
         /// </summary>
-        public struct ComplexValue
+        public readonly struct ComplexValue
         {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public double Value { get; set; }
-            public byte[] Data { get; set; }
+            public int Id { get; }
+            public string Name { get; }
+            public double Value { get; }
+            public decimal Amount1 { get; }
+            public decimal Amount2 { get; }
+            public decimal Amount3 { get; }
+
+            public ComplexValue(int id, string name, double value, decimal amount1, decimal amount2, decimal amount3)
+            {
+                ArgumentNullException.ThrowIfNull(name);
+
+                Id = id;
+                Name = name;
+                Value = value;
+                Amount1 = amount1;
+                Amount2 = amount2;
+                Amount3 = amount3;
+            }
         }
 
         // PRIVATE DEMO METHODS
@@ -263,8 +294,8 @@ namespace CSharpBasics.Examples.Methods
             Console.WriteLine();
             Console.WriteLine("Most useful for large structs:");
 
-            var val1 = new ComplexValue { Id = 1, Name = "Item", Value = 10.5 };
-            var val2 = new ComplexValue { Id = 1, Name = "Item", Value = 10.5 };
+            var val1 = new ComplexValue(1, "Item", 10.5, 100m, 200m, 300m);
+            var val2 = new ComplexValue(1, "Item", 10.5, 100m, 200m, 300m);
 
             bool equal = AreEqual(in val1, in val2);
             Console.WriteLine($"Comparing structs: {val1.Name} == {val2.Name} ? {equal}");
@@ -272,6 +303,20 @@ namespace CSharpBasics.Examples.Methods
             Console.WriteLine();
             Console.WriteLine("'in' is mostly for optimization. Use sparingly!");
             Console.WriteLine("  Premature optimization usually not worth the added complexity.");
+        }
+
+        /// <summary>
+        /// Demonstrates ref return for direct element updates.
+        /// </summary>
+        private static void DemoRefReturn()
+        {
+            int[] scores = [10, 20, 30];
+
+            ref int middle = ref GetElementRef(scores, 1);
+            middle += 15;
+
+            Console.WriteLine($"After ref update: [{string.Join(", ", scores)}]");
+            Console.WriteLine("ref return is powerful, but can hurt readability if overused.");
         }
 
         /// <summary>
