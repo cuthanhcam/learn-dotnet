@@ -35,6 +35,12 @@ namespace CSharpBasics.Examples.Collections
     /// </summary>
     public static class ArraysExample
     {
+        // PUBLIC METHODS
+
+        /// <summary>
+        /// Entry point to run all array demos.
+        /// Designed as a guided lesson from basics to practical patterns.
+        /// </summary>
         public static void Run()
         {
             Console.WriteLine($"{new string('=', 5)} ArraysExample {new string('=', 5)}");
@@ -82,6 +88,8 @@ namespace CSharpBasics.Examples.Collections
 
         /// <summary>
         /// Flattens a jagged array while preserving row-major order.
+        /// Time complexity: O(n), where n is total element count.
+        /// Space complexity: O(n) for the resulting flattened array.
         /// </summary>
         public static int[] Flatten(int[][] jaggedArray)
         {
@@ -109,6 +117,8 @@ namespace CSharpBasics.Examples.Collections
 
         /// <summary>
         /// Creates a matrix and fills it with sequential values.
+        /// Time complexity: O(rows * columns).
+        /// Space complexity: O(rows * columns).
         /// </summary>
         public static int[,] CreateMatrix(int rows, int columns)
         {
@@ -128,6 +138,10 @@ namespace CSharpBasics.Examples.Collections
             return matrix;
         }
 
+        /// <summary>
+        /// Sums all elements using a single linear pass.
+        /// Time complexity: O(n), space: O(1).
+        /// </summary>
         public static int Sum(int[] values)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -141,6 +155,10 @@ namespace CSharpBasics.Examples.Collections
             return total;
         }
 
+        /// <summary>
+        /// Calculates average by reusing Sum logic.
+        /// Returns 0 for empty arrays to avoid divide-by-zero.
+        /// </summary>
         public static double Average(int[] values)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -152,6 +170,10 @@ namespace CSharpBasics.Examples.Collections
             return (double)Sum(values) / values.Length;
         }
 
+        /// <summary>
+        /// Finds maximum value via linear scan.
+        /// Time complexity: O(n), space: O(1).
+        /// </summary>
         public static int FindMax(int[] values)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -172,6 +194,10 @@ namespace CSharpBasics.Examples.Collections
             return max;
         }
 
+        /// <summary>
+        /// Finds minimum value via linear scan.
+        /// Time complexity: O(n), space: O(1).
+        /// </summary>
         public static int FindMin(int[] values)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -192,6 +218,10 @@ namespace CSharpBasics.Examples.Collections
             return min;
         }
 
+        /// <summary>
+        /// Finds first index of target with linear search.
+        /// Returns -1 if target is not found.
+        /// </summary>
         public static int LinearSearch(int[] values, int target)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -265,6 +295,10 @@ namespace CSharpBasics.Examples.Collections
             return true;
         }
 
+        /// <summary>
+        /// Creates a deep copy of array values (for value types).
+        /// Demonstrates explicit copy semantics vs reference aliasing.
+        /// </summary>
         public static int[] ManualCopy(int[] source)
         {
             ArgumentNullException.ThrowIfNull(source);
@@ -278,6 +312,11 @@ namespace CSharpBasics.Examples.Collections
             return copy;
         }
 
+        /// <summary>
+        /// Educational Bubble Sort implementation.
+        /// Time complexity: O(n^2), space: O(1).
+        /// Not recommended for production sorting where Array.Sort is preferred.
+        /// </summary>
         public static void BubbleSort(int[] values)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -302,6 +341,10 @@ namespace CSharpBasics.Examples.Collections
             }
         }
 
+        /// <summary>
+        /// Reverses an array in-place using two-pointer swapping.
+        /// Time complexity: O(n), space: O(1).
+        /// </summary>
         public static void ReverseInPlace(int[] values)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -313,6 +356,9 @@ namespace CSharpBasics.Examples.Collections
             }
         }
 
+        /// <summary>
+        /// Checks if array is non-decreasing (ascending order with equals allowed).
+        /// </summary>
         public static bool IsSortedAscending(int[] values)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -328,6 +374,10 @@ namespace CSharpBasics.Examples.Collections
             return true;
         }
 
+        /// <summary>
+        /// Counts occurrences of a target value.
+        /// Time complexity: O(n), space: O(1).
+        /// </summary>
         public static int CountOccurrences(int[] values, int target)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -344,6 +394,10 @@ namespace CSharpBasics.Examples.Collections
             return count;
         }
 
+        /// <summary>
+        /// Removes duplicates while preserving first-seen order.
+        /// HashSet tracks membership; List preserves stable output order.
+        /// </summary>
         public static int[] DistinctPreserveOrder(int[] values)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -361,6 +415,10 @@ namespace CSharpBasics.Examples.Collections
             return [.. result];
         }
 
+        /// <summary>
+        /// Rotates array to the right by k steps using copy-buffer strategy.
+        /// Handles negative and large rotation counts via modulo normalization.
+        /// </summary>
         public static void RotateRight(int[] values, int rotationCount)
         {
             ArgumentNullException.ThrowIfNull(values);
@@ -493,10 +551,12 @@ namespace CSharpBasics.Examples.Collections
         {
             int[] original = [1, 2, 3, 4, 5];
 
+            // Reference copy (alias): both variables point to same array.
             int[] wrongCopy = original;
             wrongCopy[0] = 999;
             Console.WriteLine($"original[0] after reference copy: {original[0]}");
 
+            // Value copy: independent memory block.
             original[0] = 1;
             int[] manualCopy = ManualCopy(original);
             manualCopy[0] = 99;
@@ -513,9 +573,12 @@ namespace CSharpBasics.Examples.Collections
         private static void DemoSorting()
         {
             int[] unsorted = [5, 2, 8, 1, 9, 3];
+
+            // Educational custom algorithm.
             int[] bubbleSorted = ManualCopy(unsorted);
             BubbleSort(bubbleSorted);
 
+            // Production-ready built-in algorithm.
             int[] builtInSorted = ManualCopy(unsorted);
             Array.Sort(builtInSorted);
 
