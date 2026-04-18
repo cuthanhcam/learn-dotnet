@@ -36,6 +36,7 @@ namespace CSharpBasics.ConsoleApp
             RunSection("Collections", static () =>
             {
                 ArraysExample.Run();
+                ListExample.Run();
             });
         }
         
