@@ -2,6 +2,7 @@
 using CSharpBasics.Examples.Variables;
 using CSharpBasics.Examples.Methods;
 using CSharpBasics.Examples.Collections;
+using CSharpBasics.Examples.Strings;
 
 namespace CSharpBasics.ConsoleApp
 {
@@ -40,6 +41,11 @@ namespace CSharpBasics.ConsoleApp
                 DictionaryExample.Run();
                 HashSetExample.Run();
                 EnumerableExample.Run();
+            });
+
+            RunSection("Strings", static () =>
+            {
+                StringBasicsExample.Run();
             });
         }
         
