@@ -165,17 +165,21 @@ action?.Invoke();                   // Only calls if not null
 int? count = list?[0];             // Null if list null
 ```
 
-## DefaultIfNull Extension
+## Reusable Null-Default Helper (Custom Extension)
 
-Simple default value helper:
+If you want reuse across many files, implement your own extension:
 
 ```csharp
-using System.Diagnostics.CodeAnalysis;
+public static class StringExtensions
+{
+    public static string OrDefault(this string? value, string fallback)
+        => value ?? fallback;
+}
 
 string? text = GetValue();
-text = text.DefaultIfNull("Unknown");  // C# 11+
+text = text.OrDefault("Unknown");
 
-// Manual equivalent
+// Equivalent built-in pattern
 text = text ?? "Unknown";
 ```
 
@@ -300,6 +304,62 @@ string? maybeNull = null;
 
 ---
 
+## Case Studies: Real-World Scenarios
+
+### Case Study 1: Avoiding NullReferenceException in Production APIs
+
+**Problem:** A REST API endpoint crashes when processing incomplete user data.
+
+**Solution:** Use null-conditional operators and pattern matching with graceful error handling, meaningful HTTP status codes, and sensible defaults.
+
+**Key Learning:**  
+- Always check for null before accessing nested properties
+- Use ?. to prevent crashes from intermediate nulls
+- Return meaningful HTTP status codes (404 vs 500)
+- Provide sensible defaults for missing data
+
+---
+
+### Case Study 2: Migrating from int? to Nullable Reference Types
+
+**Problem:** Legacy code mixes nullable value types and reference types inconsistently.
+
+**Solution:** Enable nullable reference types project-wide and consistently mark optional vs required properties with `?`.
+
+**Migration Path:**
+1. Enable `<Nullable>enable</Nullable>` in .csproj
+2. Add `?` to reference types that can be null
+3. Fix compiler warnings by adding null checks
+4. Use guard clauses to validate parameters
+
+**Key Learning:**
+- NRT catches many bugs at compile-time
+- Use `ArgumentNullException.ThrowIfNull()` for required parameters
+- Pattern matching simplifies null handling
+- Consistency prevents runtime surprises
+
+---
+
+### Case Study 3: Pattern Matching for Null Safety in Business Logic
+
+**Problem:** Complex validation logic with nested nulls and type checks becomes error-prone.
+
+**Solution:** Use pattern matching to create declarative, exhaustive switch expressions that handle all null cases cleanly.
+
+**Benefits:**
+- Single switch expression handles all cases
+- Pattern combinations reduce cognitive load
+- Compiler ensures all cases covered
+- Easy to extend with new patterns
+
+**Key Learning:**
+- Use property patterns: `{ Property: value }`
+- Combine with `or`: `null or ""`
+- Use `when` guards for complex conditions
+- Switch expressions are exhaustive (compiler verifies)
+
+---
+
 ## Key Takeaways
 
 - Enable nullable reference types for compile-time checks
@@ -310,3 +370,4 @@ string? maybeNull = null;
 - Pattern matching provides powerful null handling
 - Avoid ! operator unless you know better than compiler
 - Nullable value types wrapped in Nullable<T>
+- Learn from case studies: Prevention is better than handling crashes

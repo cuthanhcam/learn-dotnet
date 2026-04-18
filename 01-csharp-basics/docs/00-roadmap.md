@@ -11,7 +11,21 @@ This is your reference guide for navigating the C# fundamentals module.
 5. Learn `05-collections.md` - work with data structures
 6. Study `06-strings.md` - string handling optimization
 7. Read `07-nullability.md` - null safety patterns
-8. Review `common-pitfalls.md` - avoid common mistakes
+8. Read `08-memory.md` - stack/heap, GC, disposal patterns
+9. Review `common-pitfalls.md` - avoid common mistakes
+
+## Module Mapping (Docs <-> Examples)
+
+- `07-nullability.md` maps to `src/CSharpBasics.Examples/Nullability/NullabilityExample.cs`
+- `08-memory.md` maps to `src/CSharpBasics.Examples/Memory/MemoryConceptsExample.cs`
+- `06-strings.md` maps to `src/CSharpBasics.Examples/Strings/`
+- `05-collections.md` maps to `src/CSharpBasics.Examples/Collections/`
+
+## Benchmark Note
+
+- `benchmarks/StringBenchmark/` provides string operation benchmarks.
+- `benchmarks/MemoryBenchmarks/` provides memory allocation and GC behavior benchmarks.
+- `benchmarks/CollectionsBenchmark/` provides array/list/hashset/dictionary performance benchmarks.
 
 ## Study Tips
 
