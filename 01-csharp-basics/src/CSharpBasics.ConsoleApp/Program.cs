@@ -46,6 +46,7 @@ namespace CSharpBasics.ConsoleApp
             RunSection("Strings", static () =>
             {
                 StringBasicsExample.Run();
+                StringBuilderExample.Run();
             });
         }
         
