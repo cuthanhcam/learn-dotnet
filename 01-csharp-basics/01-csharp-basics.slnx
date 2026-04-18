@@ -16,10 +16,9 @@
     <File Path="docs/08-memory.md" />
     <File Path="docs/common-pitfalls.md" />
   </Folder>
-  <Folder Name="/exercises/" />
-  <Folder Name="/exercises/Easy/" />
-  <Folder Name="/exercises/Hard/" />
-  <Folder Name="/exercises/Medium/" />
+  <Folder Name="/exercises/">
+    <Project Path="exercises/CSharpBasics.Exercises/CSharpBasics.Exercises.csproj" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/CSharpBasics.ConsoleApp/CSharpBasics.ConsoleApp.csproj" Id="a0f80c7b-9454-451d-b079-ec0f6be15478" />
     <Project Path="src/CSharpBasics.Examples/CSharpBasics.Examples.csproj" Id="b3f2525f-1730-48c9-ba50-21b1d34e660b" />
