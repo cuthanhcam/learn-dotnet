@@ -1,5 +1,7 @@
 <Solution>
   <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/CollectionsBenchmark/CollectionsBenchmark.csproj" />
+    <Project Path="benchmarks/MemoryBenchmarks/MemoryBenchmarks.csproj" />
     <Project Path="benchmarks/StringBenchmark/StringBenchmark.csproj" Id="09c0d712-db16-447e-a59b-7b05b642ab9e" />
   </Folder>
   <Folder Name="/docs/">
@@ -11,6 +13,7 @@
     <File Path="docs/05-collections.md" />
     <File Path="docs/06-strings.md" />
     <File Path="docs/07-nullability.md" />
+    <File Path="docs/08-memory.md" />
     <File Path="docs/common-pitfalls.md" />
   </Folder>
   <Folder Name="/exercises/" />

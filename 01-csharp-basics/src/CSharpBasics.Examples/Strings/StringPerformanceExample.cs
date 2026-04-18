@@ -178,12 +178,12 @@ namespace CSharpBasics.Examples.Strings
         /// Computes ratio: (Concatenation time) / (StringBuilder time).
         /// Ratios > 1 mean StringBuilder is faster.
         /// </summary>
-        public static double ComputeSpeedupRatio(long concatMs, long builderMs)
+        public static double ComputeSpeedupRatio(double concatMs, double builderMs)
         {
-            if (builderMs <= 0)
+            if (builderMs <= 0.0)
                 return double.MaxValue;
 
-            return concatMs / (double)builderMs;
+            return concatMs / builderMs;
         }
 
         // PRIVATE DEMO METHODS
@@ -239,7 +239,7 @@ namespace CSharpBasics.Examples.Strings
             Console.WriteLine();
 
             (double avgConcat, double avgBuilder) = MeasureAverage(iterations, runs);
-            double ratio = ComputeSpeedupRatio((long)avgConcat, (long)avgBuilder);
+            double ratio = ComputeSpeedupRatio(avgConcat, avgBuilder);
 
             Console.WriteLine($"  Avg concatenation: {avgConcat:F2} ms");
             Console.WriteLine($"  Avg StringBuilder: {avgBuilder:F2} ms");

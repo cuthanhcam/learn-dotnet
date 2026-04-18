@@ -31,7 +31,8 @@ dotnet test
 ```
 01-csharp-basics/
 │
-├── 01-csharp-basics.sln                # Main solution file
+├── 01-csharp-basics.sln                # Main solution file (Visual Studio / dotnet)
+├── 01-csharp-basics.slnx               # Alternative solution format
 ├── global.json                         # .NET version lock
 ├── .gitignore                          # Git ignore rules
 │
@@ -69,6 +70,12 @@ dotnet test
 │   │   │   ├── StringBuilderExample.cs     # StringBuilder for performance
 │   │   │   ├── StringMethodsExample.cs     # Split, Join, Contains, etc.
 │   │   │   └── StringPerformanceExample.cs # string vs StringBuilder comparison
+│   │   │
+│   │   ├── Nullability/
+│   │   │   └── NullabilityExample.cs       # null safety, ?., ??, pattern matching
+│   │   │
+│   │   ├── Memory/
+│   │   │   └── MemoryConceptsExample.cs    # Stack vs Heap, GC, IDisposable
 │   │   │
 │   │   └── CSharpBasics.Examples.csproj
 │   │
@@ -124,28 +131,40 @@ dotnet test
 ├── tests/                              # Unit tests
 │   └── CSharpBasics.Tests/
 │       ├── VariablesTests.cs
-│       ├── MethodsTests.cs
-│       ├── StringTests.cs
+│       ├── StringsTests.cs
 │       ├── CollectionsTests.cs
+│       ├── ControlFlowTests.cs
+│       ├── MethodsTests.cs
+│       ├── NullabilityTests.cs
+│       ├── MemoryTests.cs
+│       ├── ExamplesRunSmokeTests.cs
 │       └── CSharpBasics.Tests.csproj
 │
 ├── benchmarks/                         # Performance benchmarking (optional)
-│   └── StringBenchmark/
-│       ├── StringBenchmark.cs          # BenchmarkDotNet examples
-│       └── StringBenchmark.csproj
+│   ├── StringBenchmark/
+│   │   ├── Program.cs                  # Benchmark entry point
+│   │   ├── StringBenchmark.cs          # String operation benchmarks
+│   │   └── StringBenchmark.csproj
+│   ├── MemoryBenchmarks/
+│       ├── Program.cs                  # Benchmark entry point
+│       ├── MemoryBenchmarks.cs         # Memory allocation & GC benchmarks
+│       └── MemoryBenchmarks.csproj
+│   └── CollectionsBenchmark/
+│       ├── Program.cs                  # Benchmark entry point
+│       ├── CollectionsBenchmark.cs     # Array/List/HashSet/Dictionary benchmarks
+│       └── CollectionsBenchmark.csproj
 │
 ├── docs/                               # Module documentation & notes
 │   ├── 00-roadmap.md                   # Learning path for this module
 │   ├── 01-dotnet-ecosystem.md          # CLR, JIT, assemblies explained
-│   ├── 02-variables-and-types.md       # In-depth type system
+│   ├── 02-variables-types.md           # In-depth type system
 │   ├── 03-operators-control-flow.md    # All operators and control structures
 │   ├── 04-methods.md                   # Method patterns and best practices
-│   ├── 05-collections-deep-dive.md     # Arrays, Lists, Dictionaries, etc.
+│   ├── 05-collections.md               # Arrays, Lists, Dictionaries, etc.
 │   ├── 06-strings.md                   # String handling and performance
 │   ├── 07-nullability.md               # Null handling, nullable ref types
-│   ├── cheatsheet.md                   # Quick reference
+│   ├── 08-memory.md                    # Stack/Heap, GC, disposal patterns
 │   ├── common-pitfalls.md              # Common mistakes and how to avoid them
-│   └── troubleshooting.md              # Debugging common issues
 │
 └── README.md                           # This file
 ```
@@ -162,7 +181,9 @@ dotnet test
 | **Methods** | Declarations, ref/out/in, overloading, parameters |
 | **Collections** | Arrays, List<T>, Dictionary, HashSet |
 | **Strings** | Interpolation, StringBuilder, methods |
-| **Null Handling** | Nullability, ?., ??, pattern matching |
+| **Nullability** | Nullable types, ?., ??, pattern matching, guard clauses |
+| **Memory Concepts** | Stack vs Heap, GC, value/reference types, IDisposable |
+| **Benchmark Labs** | String, memory, and collections micro-benchmarks |
 
 **👉 Deep dives** are in [`docs/`](docs/) — this README is your **entry point**, not a textbook.
 
@@ -240,8 +261,9 @@ dotnet run --project src/CSharpBasics.Playground
 dotnet test
 
 # 7. Run benchmarks (optional)
-cd benchmarks/StringBenchmark
-dotnet run -c Release
+dotnet run -c Release --project benchmarks/StringBenchmark/StringBenchmark.csproj
+dotnet run -c Release --project benchmarks/MemoryBenchmarks/MemoryBenchmarks.csproj
+dotnet run -c Release --project benchmarks/CollectionsBenchmark/CollectionsBenchmark.csproj
 ```
 
 
@@ -260,12 +282,12 @@ All detailed learning content lives in `docs/`:
 | `02-variables-types.md` | Deep type system knowledge |
 | `03-operators-control-flow.md` | Complete operator reference |
 | `04-methods.md` | Method patterns & best practices |
-| `05-collections-deep-dive.md` | Collections internals |
+| `05-collections.md` | Collections internals |
 | `06-strings.md` | String performance & techniques |
 | `07-nullability.md` | Null safety mechanisms |
-| `cheatsheet.md` | Quick syntax reference |
+| `08-memory.md` | Memory management, GC, and disposal |
 | `common-pitfalls.md` | **Must read** — avoid 80% of bugs |
-| `troubleshooting.md` | Debugging common issues |
+| `00-roadmap.md` | Suggested study sequence |
 
 ---
 

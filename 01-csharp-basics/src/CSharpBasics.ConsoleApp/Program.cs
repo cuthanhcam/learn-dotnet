@@ -3,6 +3,8 @@ using CSharpBasics.Examples.Variables;
 using CSharpBasics.Examples.Methods;
 using CSharpBasics.Examples.Collections;
 using CSharpBasics.Examples.Strings;
+using CSharpBasics.Examples.Nullability;
+using CSharpBasics.Examples.Memory;
 
 namespace CSharpBasics.ConsoleApp
 {
@@ -49,6 +51,16 @@ namespace CSharpBasics.ConsoleApp
                 StringBuilderExample.Run();
                 StringMethodsExample.Run();
                 StringPerformanceExample.Run();
+            });
+
+            RunSection("Nullability", static () =>
+            {
+                NullabilityExample.Run();
+            });
+
+            RunSection("Memory Concepts", static () =>
+            {
+                MemoryConceptsExample.Run();
             });
         }
         
