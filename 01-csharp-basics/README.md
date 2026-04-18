@@ -145,7 +145,7 @@ dotnet test
 │   │   ├── Program.cs                  # Benchmark entry point
 │   │   ├── StringBenchmark.cs          # String operation benchmarks
 │   │   └── StringBenchmark.csproj
-│   └── MemoryBenchmarks/
+│   ├── MemoryBenchmarks/
 │       ├── Program.cs                  # Benchmark entry point
 │       ├── MemoryBenchmarks.cs         # Memory allocation & GC benchmarks
 │       └── MemoryBenchmarks.csproj
