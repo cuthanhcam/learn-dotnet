@@ -1,6 +1,7 @@
 ﻿using CSharpBasics.Examples.ControlFlow;
 using CSharpBasics.Examples.Variables;
 using CSharpBasics.Examples.Methods;
+using CSharpBasics.Examples.Collections;
 
 namespace CSharpBasics.ConsoleApp
 {
@@ -30,6 +31,15 @@ namespace CSharpBasics.ConsoleApp
                 ParamModifiersExample.Run();
                 OverloadingExample.Run();
                 OptionalParametersExample.Run();
+            });
+            
+            RunSection("Collections", static () =>
+            {
+                ArraysExample.Run();
+                ListExample.Run();
+                DictionaryExample.Run();
+                HashSetExample.Run();
+                EnumerableExample.Run();
             });
         }
         
