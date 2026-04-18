@@ -39,6 +39,7 @@ namespace CSharpBasics.ConsoleApp
                 ListExample.Run();
                 DictionaryExample.Run();
                 HashSetExample.Run();
+                EnumerableExample.Run();
             });
         }
         
