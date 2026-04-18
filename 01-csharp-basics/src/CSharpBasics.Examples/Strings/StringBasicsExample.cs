@@ -193,7 +193,6 @@
         private static void DemoFormattingEscaping()
         {
             string root = @"C:\Users\Workspace";
-            string fileName = "notes.txt";
 
             Console.WriteLine(BuildEscapedPath(root, "file.txt"));
             Console.WriteLine(BuildPathVerbatim(root, "file.txt"));
@@ -261,7 +260,7 @@
         /// </summary>
         private static void DemoComparison()
         {
-            Console.WriteLine("Case-sensitive comparison:");
+            Console.WriteLine("Case-insensitive comparison:");
             Console.WriteLine($"  'DOTNET' == 'dotnet': {AreEqualIgnoreCase("DOTNET", "dotnet")}");
             Console.WriteLine($"  'CSharp' == 'csharp': {AreEqualIgnoreCase("CSharp", "csharp")}");
 
