@@ -111,7 +111,7 @@ namespace CSharpBasics.Examples.Variables
         /// <summary>
         /// Demonstrates safe dynamic operation with error handling.
         /// </summary>
-        public static bool TryMultiplyDynamic(dynamic left, dynamic right, out dynamic result)
+        public static bool TryMultiplyDynamic(dynamic left, dynamic right, out dynamic? result)
         {
             try
             {
@@ -250,7 +250,7 @@ namespace CSharpBasics.Examples.Variables
             dynamic stringSum = AddDynamic("Hello", " World");
             Console.WriteLine($"Dynamic addition (\"Hello\" + \" World\"): {stringSum}");
 
-            if (TryMultiplyDynamic(3, 4, out dynamic result))
+            if (TryMultiplyDynamic(3, 4, out dynamic? result))
             {
                 Console.WriteLine($"Dynamic multiplication (3 * 4): {result}");
             }
@@ -329,7 +329,14 @@ namespace CSharpBasics.Examples.Variables
             object?[] samples = [123, 4.5m, "hello", true, null, DateTime.UtcNow];
             foreach (var sample in samples)
             {
-                Console.WriteLine($"Runtime type: {ClassifyRuntimeType(sample)}");
+                if (sample is not null)
+                {
+                    Console.WriteLine($"Runtime type: {ClassifyRuntimeType(sample)}");
+                }
+                else
+                {
+                    Console.WriteLine($"Runtime type: null");
+                }
             }
         }
 
