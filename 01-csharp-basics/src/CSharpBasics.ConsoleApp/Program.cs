@@ -37,6 +37,7 @@ namespace CSharpBasics.ConsoleApp
             {
                 ArraysExample.Run();
                 ListExample.Run();
+                DictionaryExample.Run();
             });
         }
         
