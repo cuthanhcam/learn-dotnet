@@ -48,6 +48,7 @@ namespace CSharpBasics.ConsoleApp
                 StringBasicsExample.Run();
                 StringBuilderExample.Run();
                 StringMethodsExample.Run();
+                StringPerformanceExample.Run();
             });
         }
         
