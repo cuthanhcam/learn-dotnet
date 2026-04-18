@@ -70,6 +70,12 @@ dotnet test
 │   │   │   ├── StringMethodsExample.cs     # Split, Join, Contains, etc.
 │   │   │   └── StringPerformanceExample.cs # string vs StringBuilder comparison
 │   │   │
+│   │   ├── Nullability/
+│   │   │   └── NullabilityExample.cs       # null safety, ?., ??, pattern matching
+│   │   │
+│   │   ├── Memory/
+│   │   │   └── MemoryConceptsExample.cs    # Stack vs Heap, GC, IDisposable
+│   │   │
 │   │   └── CSharpBasics.Examples.csproj
 │   │
 │   └── CSharpBasics.Playground/        # Quick testing environment
@@ -162,7 +168,8 @@ dotnet test
 | **Methods** | Declarations, ref/out/in, overloading, parameters |
 | **Collections** | Arrays, List<T>, Dictionary, HashSet |
 | **Strings** | Interpolation, StringBuilder, methods |
-| **Null Handling** | Nullability, ?., ??, pattern matching |
+| **Nullability** | Nullable types, ?., ??, pattern matching, guard clauses |
+| **Memory Concepts** | Stack vs Heap, GC, value/reference types, IDisposable |
 
 **👉 Deep dives** are in [`docs/`](docs/) — this README is your **entry point**, not a textbook.
 
