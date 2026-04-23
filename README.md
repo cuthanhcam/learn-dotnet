@@ -1,5 +1,14 @@
 # 🚀 Learn .NET
 
+![Learning](https://img.shields.io/badge/Learning-Journey-blueviolet?logo=dotnet&logoColor=white)
+![.NET 8 | 10](https://img.shields.io/badge/.NET-8%20%7C%2010-blueviolet?logo=dotnet&logoColor=white)
+![ASP.NET Core](https://img.shields.io/badge/ASP.NET-Core-blueviolet?logo=dotnet&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![GitHub stars](https://img.shields.io/github/stars/cuthanhcam/learn-dotnet?style=social)
+![GitHub forks](https://img.shields.io/github/forks/cuthanhcam/learn-dotnet?style=social)
+
+---
+
 A structured journey from C# fundamentals to production-ready backend development with .NET
 
 ---
