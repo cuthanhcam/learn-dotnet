@@ -26,7 +26,7 @@ ipch/
 *.vspx
 
 # Visual Studio Code
-.vscode/
+# (Allow .vscode/ to be tracked for recommended settings)
 
 # JetBrains Rider / IntelliJ
 .idea/

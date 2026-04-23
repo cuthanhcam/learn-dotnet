@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <!-- Shared .NET build properties -->
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+</Project>
