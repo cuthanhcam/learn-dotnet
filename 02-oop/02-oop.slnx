@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="docs/00-roadmap.md" />
+    <File Path="docs/01-classes-objects.md" />
+    <File Path="docs/02-inheritance.md" />
+    <File Path="docs/03-polymorphism.md" />
+    <File Path="docs/04-access-modifiers.md" />
+    <File Path="docs/05-constructors-destructors.md" />
+    <File Path="docs/06-static-members.md" />
+    <File Path="docs/07-oop-patterns.md" />
+    <File Path="docs/common-pitfalls.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/OopBasics.ConsoleApp/OopBasics.ConsoleApp.csproj" Id="0ae31efb-e655-444f-92d2-02e0a421dfda" />
+    <Project Path="src/OopBasics.Examples/OopBasics.Examples.csproj" Id="e8e2fbde-da02-44e5-a211-92487db3ade9" />
+    <Project Path="src/OopBasics.Playground/OopBasics.Playground.csproj" Id="c4d86b62-f5bf-427a-8e82-0d1e3bdebc9a" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OopBasics.Tests/OopBasics.Tests.csproj" Id="d4f49eb6-a5af-435d-91f2-61ce9f25ca60" />
+  </Folder>
+</Solution>
