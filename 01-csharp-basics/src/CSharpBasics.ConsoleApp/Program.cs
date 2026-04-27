@@ -12,63 +12,99 @@ namespace CSharpBasics.ConsoleApp
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("C# Fundamentals Demo Runner");
-            Console.WriteLine(new string('-', 60));
+            PrintHeader("C# Fundamentals Demo Runner");
 
             RunSection("Variables & Types", static () =>
             {
-                VariablesExamples.Run();
-                DynamicVsTypedExample.Run();
+                RunExample(VariablesExamples.Run);
+                RunExample(DynamicVsTypedExample.Run);
             });
 
             RunSection("Control Flow", static () =>
             {
-                IfElseExample.Run();
-                SwitchExample.Run();
-                LoopsExample.Run();
+                RunExample(IfElseExample.Run);
+                RunExample(SwitchExample.Run);
+                RunExample(LoopsExample.Run);
             });
 
             RunSection("Methods", static () =>
             {
-                MethodBasicsExample.Run();
-                ParamModifiersExample.Run();
-                OverloadingExample.Run();
-                OptionalParametersExample.Run();
+                RunExample(MethodBasicsExample.Run);
+                RunExample(ParamModifiersExample.Run);
+                RunExample(OverloadingExample.Run);
+                RunExample(OptionalParametersExample.Run);
             });
-            
+
             RunSection("Collections", static () =>
             {
-                ArraysExample.Run();
-                ListExample.Run();
-                DictionaryExample.Run();
-                HashSetExample.Run();
-                EnumerableExample.Run();
+                RunExample(ArraysExample.Run);
+                RunExample(ListExample.Run);
+                RunExample(DictionaryExample.Run);
+                RunExample(HashSetExample.Run);
+                RunExample(EnumerableExample.Run);
             });
 
             RunSection("Strings", static () =>
             {
-                StringBasicsExample.Run();
-                StringBuilderExample.Run();
-                StringMethodsExample.Run();
-                StringPerformanceExample.Run();
+                RunExample(StringBasicsExample.Run);
+                RunExample(StringBuilderExample.Run);
+                RunExample(StringMethodsExample.Run);
+                RunExample(StringPerformanceExample.Run);
             });
 
             RunSection("Nullability", static () =>
             {
-                NullabilityExample.Run();
+                RunExample(NullabilityExample.Run);
             });
 
             RunSection("Memory Concepts", static () =>
             {
-                MemoryConceptsExample.Run();
+                RunExample(MemoryConceptsExample.Run);
             });
+
+            PrintFooter();
         }
-        
+
+        // ===== Layout Helpers =====
+
+        public static void PrintHeader(string title)
+        {
+            Console.WriteLine();
+            Console.WriteLine(new string('=', 70));
+            Console.WriteLine(title.ToUpper().PadLeft((70 + title.Length) / 2));
+            Console.WriteLine(new string('=', 70));
+            Console.WriteLine();
+        }
+
+        public static void PrintFooter()
+        {
+            Console.WriteLine();
+            Console.WriteLine(new string('=', 70));
+            Console.WriteLine("END OF DEMO".PadLeft(40));
+            Console.WriteLine(new string('=', 70));
+            Console.WriteLine();
+        }
+
         public static void RunSection(string title, Action action)
         {
-            Console.WriteLine($"\n{new string('-', 20)} {title} {new string('-', 20)}");
+            Console.WriteLine();
+            Console.WriteLine(new string('-', 70));
+            Console.WriteLine(title.ToUpper().PadLeft((70 + title.Length) / 2));
+            Console.WriteLine(new string('-', 70));
+            Console.WriteLine();
+
             action();
+
+            Console.WriteLine(); // spacing after section
+        }
+
+        public static void RunExample(Action example)
+        {
+            example();
+
+            Console.WriteLine();
+            Console.WriteLine(new string('.', 40));
+            Console.WriteLine();
         }
     }
 }
-
