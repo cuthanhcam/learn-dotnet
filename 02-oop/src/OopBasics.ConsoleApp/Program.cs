@@ -12,6 +12,7 @@ namespace OopBasics.ConsoleApp
             RunSection("Classes & Objects", static () =>
             {
                 ClassBasicsExample.Run();
+                PropertiesExample.Run();
             });
         }
 
