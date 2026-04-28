@@ -13,6 +13,10 @@ namespace OopBasics.ConsoleApp
                 RunExample(ClassBasicsExample.Run);
                 RunExample(PropertiesExample.Run);
                 RunExample(ObjectInitializerExample.Run);
+                RunExample(EncapsulationExample.Run);
+                RunExample(ImmutableObjectExample.Run);
+                RunExample(ValueObjectExample.Run);
+                
             });
 
             PrintFooter();
