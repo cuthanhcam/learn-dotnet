@@ -1,5 +1,6 @@
 ﻿using OopBasics.Examples.Classes;
 using OopBasics.Examples.Inheritance;
+using OopBasics.Examples.Polymorphism;
 
 namespace OopBasics.ConsoleApp
 {
@@ -25,6 +26,13 @@ namespace OopBasics.ConsoleApp
                 RunExample(InheritanceExample.Run);
                 RunExample(BaseConstructorExample.Run);
                 RunExample(SealedAndOverrideExample.Run);
+            });
+
+            RunSection("Polymorphism", static () => 
+            {
+                RunExample(InterfaceExample.Run);
+                RunExample(AbstractClassExample.Run);
+                RunExample(VirtualOverrideExample.Run);
             });
 
             PrintFooter();
