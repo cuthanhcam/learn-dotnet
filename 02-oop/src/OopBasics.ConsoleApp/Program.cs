@@ -1,4 +1,5 @@
 ﻿using OopBasics.Examples.Classes;
+using OopBasics.Examples.Inheritance;
 
 namespace OopBasics.ConsoleApp
 {
@@ -17,6 +18,13 @@ namespace OopBasics.ConsoleApp
                 RunExample(ImmutableObjectExample.Run);
                 RunExample(ValueObjectExample.Run);
                 
+            });
+
+            RunSection("Inheritance", static () => 
+            {
+                RunExample(InheritanceExample.Run);
+                RunExample(BaseConstructorExample.Run);
+                RunExample(SealedAndOverrideExample.Run);
             });
 
             PrintFooter();
