@@ -1,4 +1,6 @@
 ﻿using OopBasics.Examples.Classes;
+using OopBasics.Examples.Inheritance;
+using OopBasics.Examples.Polymorphism;
 
 namespace OopBasics.ConsoleApp
 {
@@ -6,19 +8,77 @@ namespace OopBasics.ConsoleApp
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine($"{new string('=',20)} C# OOP Demo Runner {new string('=', 20)}");
-            Console.WriteLine(new string('-', 60));
+            PrintHeader("C# OOP Demo Runner");
 
             RunSection("Classes & Objects", static () =>
             {
-                ClassBasicsExample.Run();
+                RunExample(ClassBasicsExample.Run);
+                RunExample(PropertiesExample.Run);
+                RunExample(ObjectInitializerExample.Run);
+                RunExample(EncapsulationExample.Run);
+                RunExample(ImmutableObjectExample.Run);
+                RunExample(ValueObjectExample.Run);
+                
             });
+
+            RunSection("Inheritance", static () => 
+            {
+                RunExample(InheritanceExample.Run);
+                RunExample(BaseConstructorExample.Run);
+                RunExample(SealedAndOverrideExample.Run);
+            });
+
+            RunSection("Polymorphism", static () => 
+            {
+                RunExample(InterfaceExample.Run);
+                RunExample(AbstractClassExample.Run);
+                RunExample(VirtualOverrideExample.Run);
+            });
+
+            PrintFooter();
+        }
+
+        // ===== Layout Helpers =====
+
+        public static void PrintHeader(string title)
+        {
+            Console.WriteLine();
+            Console.WriteLine(new string('=', 70));
+            Console.WriteLine(title.ToUpper().PadLeft((70 + title.Length) / 2));
+            Console.WriteLine(new string('=', 70));
+            Console.WriteLine();
+        }
+
+        public static void PrintFooter()
+        {
+            Console.WriteLine();
+            Console.WriteLine(new string('=', 70));
+            Console.WriteLine("END OF DEMO".PadLeft(40));
+            Console.WriteLine(new string('=', 70));
+            Console.WriteLine();
         }
 
         public static void RunSection(string title, Action action)
         {
-            Console.WriteLine($"\n{new string('-', 20)} {title} {new string('-', 20)}");
+            Console.WriteLine();
+            Console.WriteLine(new string('-', 70));
+            Console.WriteLine(title.ToUpper().PadLeft((70 + title.Length) / 2));
+            Console.WriteLine(new string('-', 70));
+            Console.WriteLine();
+
             action();
+
+            Console.WriteLine(); // spacing after section
+        }
+
+        public static void RunExample(Action example)
+        {
+            example();
+
+            // spacing between examples
+            Console.WriteLine();
+            Console.WriteLine(new string('.', 40));
+            Console.WriteLine();
         }
     }
 }
