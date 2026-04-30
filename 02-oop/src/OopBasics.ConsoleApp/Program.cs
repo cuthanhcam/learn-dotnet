@@ -1,5 +1,6 @@
 ﻿using OopBasics.Examples.AccessModifiers;
 using OopBasics.Examples.Classes;
+using OopBasics.Examples.Constructors;
 using OopBasics.Examples.Inheritance;
 using OopBasics.Examples.Polymorphism;
 
@@ -43,6 +44,13 @@ namespace OopBasics.ConsoleApp
                 RunExample(InternalAccessExample.Run);
                 RunExample(ProtectedInternalExample.Run);
                 RunExample(NestedTypesExample.Run);
+            });
+
+            RunSection("Constructors & Destructors", static () => 
+            {
+                RunExample(ConstructorsExample.Run);
+                RunExample(DestructorExample.Run);
+                RunExample(IDisposableExample.Run);
             });
 
             PrintFooter();
