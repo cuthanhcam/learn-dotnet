@@ -1,4 +1,5 @@
-﻿using OopBasics.Examples.Classes;
+﻿using OopBasics.Examples.AccessModifiers;
+using OopBasics.Examples.Classes;
 using OopBasics.Examples.Inheritance;
 using OopBasics.Examples.Polymorphism;
 
@@ -33,6 +34,11 @@ namespace OopBasics.ConsoleApp
                 RunExample(InterfaceExample.Run);
                 RunExample(AbstractClassExample.Run);
                 RunExample(VirtualOverrideExample.Run);
+            });
+
+            RunSection("Access Modifiers", static () => 
+            {
+                RunExample(AccessModifiersExample.Run);
             });
 
             PrintFooter();
