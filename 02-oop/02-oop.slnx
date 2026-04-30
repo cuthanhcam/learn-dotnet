@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/OopBasics.Benchmarks.csproj" />
+  </Folder>
   <Folder Name="/docs/">
     <File Path="docs/00-roadmap.md" />
     <File Path="docs/01-classes-objects.md" />
@@ -9,6 +12,9 @@
     <File Path="docs/06-static-members.md" />
     <File Path="docs/07-oop-patterns.md" />
     <File Path="docs/common-pitfalls.md" />
+  </Folder>
+  <Folder Name="/exercises/">
+    <Project Path="exercises/OopBasics.Exercises/OopBasics.Exercises.csproj" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/OopBasics.ConsoleApp/OopBasics.ConsoleApp.csproj" Id="0ae31efb-e655-444f-92d2-02e0a421dfda" />
