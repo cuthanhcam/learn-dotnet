@@ -39,6 +39,10 @@ namespace OopBasics.ConsoleApp
             RunSection("Access Modifiers", static () => 
             {
                 RunExample(AccessModifiersExample.Run);
+                RunExample(InheritanceAccessExample.Run);
+                RunExample(InternalAccessExample.Run);
+                RunExample(ProtectedInternalExample.Run);
+                RunExample(NestedTypesExample.Run);
             });
 
             PrintFooter();
