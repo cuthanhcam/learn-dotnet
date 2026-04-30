@@ -1,6 +1,9 @@
-﻿using OopBasics.Examples.Classes;
+﻿using OopBasics.Examples.AccessModifiers;
+using OopBasics.Examples.Classes;
+using OopBasics.Examples.Constructors;
 using OopBasics.Examples.Inheritance;
 using OopBasics.Examples.Polymorphism;
+using OopBasics.Examples.StaticMembers;
 
 namespace OopBasics.ConsoleApp
 {
@@ -33,6 +36,27 @@ namespace OopBasics.ConsoleApp
                 RunExample(InterfaceExample.Run);
                 RunExample(AbstractClassExample.Run);
                 RunExample(VirtualOverrideExample.Run);
+            });
+
+            RunSection("Access Modifiers", static () => 
+            {
+                RunExample(AccessModifiersExample.Run);
+                RunExample(InheritanceAccessExample.Run);
+                RunExample(InternalAccessExample.Run);
+                RunExample(ProtectedInternalExample.Run);
+                RunExample(NestedTypesExample.Run);
+            });
+
+            RunSection("Constructors & Destructors", static () => 
+            {
+                RunExample(ConstructorsExample.Run);
+                RunExample(DestructorExample.Run);
+                RunExample(IDisposableExample.Run);
+            });
+            
+            RunSection("Static Members", static () => 
+            {
+                RunExample(StaticMembersExample.Run);
             });
 
             PrintFooter();
