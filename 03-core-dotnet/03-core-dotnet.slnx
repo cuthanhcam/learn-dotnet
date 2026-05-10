@@ -1,6 +1,18 @@
 <Solution>
   <Folder Name="/benchmarks/" />
-  <Folder Name="/docs/" />
+  <Folder Name="/docs/">
+    <File Path="docs/00-roadmap.md" />
+    <File Path="docs/01-collections.md" />
+    <File Path="docs/02-generics.md" />
+    <File Path="docs/03-exception-handling.md" />
+    <File Path="docs/04-linq.md" />
+    <File Path="docs/05-delegates-events.md" />
+    <File Path="docs/06-file-io.md" />
+    <File Path="docs/07-datetime-timezone.md" />
+    <File Path="docs/08-attributes.md" />
+    <File Path="docs/09-nullable-reference-types.md" />
+    <File Path="docs/common-pitfalls.md" />
+  </Folder>
   <Folder Name="/exercises/" />
   <Folder Name="/src/">
     <Project Path="src/CoreDotNet.ConsoleApp/CoreDotNet.ConsoleApp.csproj" Id="79cf0766-c607-4e99-b1b8-6fde1b506916" />
