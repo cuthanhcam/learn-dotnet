@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/benchmarks/" />
+  <Folder Name="/docs/" />
+  <Folder Name="/exercises/" />
+  <Folder Name="/src/">
+    <Project Path="src/CoreDotNet.ConsoleApp/CoreDotNet.ConsoleApp.csproj" Id="79cf0766-c607-4e99-b1b8-6fde1b506916" />
+    <Project Path="src/CoreDotNet.Examples/CoreDotNet.Examples.csproj" Id="33f6176c-5201-4e7c-979d-4d7dde3fa7d8" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CoreDotNet.Tests/CoreDotNet.Tests.csproj" Id="cb692911-3413-4b33-a2b9-8c04c9e19031" />
+  </Folder>
+</Solution>
