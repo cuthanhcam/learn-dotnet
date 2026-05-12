@@ -20,11 +20,14 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Restore
-        run: dotnet restore
+      - name: Restore all solutions
+        run: |
+          find . -name "*.sln" -exec dotnet restore {} \;
 
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+      - name: Build all solutions
+        run: |
+          find . -name "*.sln" -exec dotnet build {} --configuration Release --no-restore \;
 
-      - name: Test
-        run: dotnet test --configuration Release --no-build --verbosity normal
+      - name: Test all solutions
+        run: |
+          find . -name "*.sln" -exec dotnet test {} --configuration Release --no-build --verbosity normal \;
