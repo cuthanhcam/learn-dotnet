@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CoreDotNet.Examples.Collections;
 
 namespace CoreDotNet.ConsoleApp
 {
@@ -12,9 +8,9 @@ namespace CoreDotNet.ConsoleApp
         {
             PrintHeader("C# Core Demo Runner");
 
-            RunSection("Something", static () =>
+            RunSection("Collections", static () =>
             {
-
+                RunExample(CollectionsExample.Run);
             });
 
             PrintFooter();

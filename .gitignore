@@ -27,7 +27,7 @@ ipch/
 
 # Visual Studio Code
 # GitHub Actions workflows
-.github/workflows/
+# .github/workflows/
 # (Allow .vscode/ to be tracked for recommended settings)
 
 # JetBrains Rider / IntelliJ
