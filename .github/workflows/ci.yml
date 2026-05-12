@@ -24,9 +24,11 @@ jobs:
         run: |
           find . -name "*.sln" -exec dotnet restore {} \;
 
-      - name: Build all solutions
+      - name: Build solutions (exclude legacy)
         run: |
-          find . -name "*.sln" -exec dotnet build {} --configuration Release --no-restore \;
+          find . -name "*.sln" \
+            -not -path "./legacy/*" \
+            -exec dotnet build {} --configuration Release --no-restore \;
 
       - name: Test all solutions
         run: |
