@@ -1,4 +1,5 @@
 ﻿using CoreDotNet.Examples.Collections;
+using CoreDotNet.Examples.Generics;
 
 namespace CoreDotNet.ConsoleApp
 {
@@ -11,6 +12,11 @@ namespace CoreDotNet.ConsoleApp
             RunSection("Collections", static () =>
             {
                 RunExample(CollectionsExample.Run);
+            });
+
+            RunSection("Generics", static () =>
+            {
+                RunExample(GenericsExample.Run);
             });
 
             PrintFooter();
