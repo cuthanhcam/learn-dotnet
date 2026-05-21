@@ -1,5 +1,6 @@
 ﻿using CoreDotNet.Examples.Collections;
 using CoreDotNet.Examples.Generics;
+using CoreDotNet.Examples.ExceptionHandling;
 
 namespace CoreDotNet.ConsoleApp
 {
@@ -17,6 +18,11 @@ namespace CoreDotNet.ConsoleApp
             RunSection("Generics", static () =>
             {
                 RunExample(GenericsExample.Run);
+            });
+
+            RunSection("Exception Handling", static () =>
+            {
+                RunExample(ExceptionHandlingExample.Run);
             });
 
             PrintFooter();
