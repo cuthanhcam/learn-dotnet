@@ -1,5 +1,12 @@
 ﻿using CoreDotNet.Examples.Collections;
 using CoreDotNet.Examples.Generics;
+using CoreDotNet.Examples.ExceptionHandling;
+using CoreDotNet.Examples.LINQ;
+using CoreDotNet.Examples.DelegatesAndEvents;
+using CoreDotNet.Examples.FileIO;
+using CoreDotNet.Examples.DateTimeAndTimeZone;
+using CoreDotNet.Examples.Attributes;
+using CoreDotNet.Examples.NullableReferenceTypes;
 
 namespace CoreDotNet.ConsoleApp
 {
@@ -17,6 +24,41 @@ namespace CoreDotNet.ConsoleApp
             RunSection("Generics", static () =>
             {
                 RunExample(GenericsExample.Run);
+            });
+
+            RunSection("Exception Handling", static () =>
+            {
+                RunExample(ExceptionHandlingExample.Run);
+            });
+
+            RunSection("LINQ", static () =>
+            {
+                RunExample(LINQExample.Run);
+            });
+
+            RunSection("Delegates & Events", static () =>
+            {
+                RunExample(DelegatesAndEventsExample.Run);
+            });
+
+            RunSection("File I/O", static () =>
+            {
+                RunExample(FileIOExample.Run);
+            });
+
+            RunSection("DateTime & TimeZone", static () =>
+            {
+                RunExample(DateTimeAndTimeZoneExample.Run);
+            });
+
+            RunSection("Attributes", static () =>
+            {
+                RunExample(AttributesExample.Run);
+            });
+
+            RunSection("Nullable Reference Types", static () =>
+            {
+                RunExample(NullableReferenceTypesExample.Run);
             });
 
             PrintFooter();
