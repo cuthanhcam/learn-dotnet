@@ -6,6 +6,7 @@ using CoreDotNet.Examples.DelegatesAndEvents;
 using CoreDotNet.Examples.FileIO;
 using CoreDotNet.Examples.DateTimeAndTimeZone;
 using CoreDotNet.Examples.Attributes;
+using CoreDotNet.Examples.NullableReferenceTypes;
 
 namespace CoreDotNet.ConsoleApp
 {
@@ -53,6 +54,11 @@ namespace CoreDotNet.ConsoleApp
             RunSection("Attributes", static () =>
             {
                 RunExample(AttributesExample.Run);
+            });
+
+            RunSection("Nullable Reference Types", static () =>
+            {
+                RunExample(NullableReferenceTypesExample.Run);
             });
 
             PrintFooter();
