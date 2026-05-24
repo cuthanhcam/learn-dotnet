@@ -2,6 +2,7 @@
 using CoreDotNet.Examples.Generics;
 using CoreDotNet.Examples.ExceptionHandling;
 using CoreDotNet.Examples.LINQ;
+using CoreDotNet.Examples.DelegatesAndEvents;
 
 namespace CoreDotNet.ConsoleApp
 {
@@ -29,6 +30,11 @@ namespace CoreDotNet.ConsoleApp
             RunSection("LINQ", static () =>
             {
                 RunExample(LINQExample.Run);
+            });
+
+            RunSection("Delegates & Events", static () =>
+            {
+                RunExample(DelegatesAndEventsExample.Run);
             });
 
             PrintFooter();
