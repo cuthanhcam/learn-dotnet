@@ -84,7 +84,7 @@
         private static void DemoPredicateFiltering()
         {
             Predicate<string> isLearningTopic = topic => topic.Contains(".") || topic.Contains("&");
-            var topics = new[] { "Collections", "File I/O", "Delegates & Events", "LINQ" };
+            string[] topics = new[] { "Collections", "File I/O", "Delegates & Events", "LINQ" };
             var selected = topics.Where(topic => isLearningTopic(topic)).ToList();
 
             Console.WriteLine($"Predicate-selected topics: {string.Join(", ", selected)}");
