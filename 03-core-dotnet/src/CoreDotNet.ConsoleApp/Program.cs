@@ -3,6 +3,7 @@ using CoreDotNet.Examples.Generics;
 using CoreDotNet.Examples.ExceptionHandling;
 using CoreDotNet.Examples.LINQ;
 using CoreDotNet.Examples.DelegatesAndEvents;
+using CoreDotNet.Examples.FileIO;
 
 namespace CoreDotNet.ConsoleApp
 {
@@ -35,6 +36,11 @@ namespace CoreDotNet.ConsoleApp
             RunSection("Delegates & Events", static () =>
             {
                 RunExample(DelegatesAndEventsExample.Run);
+            });
+
+            RunSection("File I/O", static () =>
+            {
+                RunExample(FileIOExample.Run);
             });
 
             PrintFooter();
