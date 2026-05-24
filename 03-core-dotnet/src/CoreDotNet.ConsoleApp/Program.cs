@@ -4,6 +4,7 @@ using CoreDotNet.Examples.ExceptionHandling;
 using CoreDotNet.Examples.LINQ;
 using CoreDotNet.Examples.DelegatesAndEvents;
 using CoreDotNet.Examples.FileIO;
+using CoreDotNet.Examples.DateTimeAndTimeZone;
 
 namespace CoreDotNet.ConsoleApp
 {
@@ -41,6 +42,11 @@ namespace CoreDotNet.ConsoleApp
             RunSection("File I/O", static () =>
             {
                 RunExample(FileIOExample.Run);
+            });
+
+            RunSection("DateTime & TimeZone", static () =>
+            {
+                RunExample(DateTimeAndTimeZoneExample.Run);
             });
 
             PrintFooter();
