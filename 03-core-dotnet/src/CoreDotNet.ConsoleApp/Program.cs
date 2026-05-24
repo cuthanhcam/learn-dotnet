@@ -1,6 +1,7 @@
 ﻿using CoreDotNet.Examples.Collections;
 using CoreDotNet.Examples.Generics;
 using CoreDotNet.Examples.ExceptionHandling;
+using CoreDotNet.Examples.LINQ;
 
 namespace CoreDotNet.ConsoleApp
 {
@@ -23,6 +24,11 @@ namespace CoreDotNet.ConsoleApp
             RunSection("Exception Handling", static () =>
             {
                 RunExample(ExceptionHandlingExample.Run);
+            });
+
+            RunSection("LINQ", static () =>
+            {
+                RunExample(LINQExample.Run);
             });
 
             PrintFooter();
