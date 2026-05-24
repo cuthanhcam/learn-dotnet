@@ -5,6 +5,7 @@ using CoreDotNet.Examples.LINQ;
 using CoreDotNet.Examples.DelegatesAndEvents;
 using CoreDotNet.Examples.FileIO;
 using CoreDotNet.Examples.DateTimeAndTimeZone;
+using CoreDotNet.Examples.Attributes;
 
 namespace CoreDotNet.ConsoleApp
 {
@@ -47,6 +48,11 @@ namespace CoreDotNet.ConsoleApp
             RunSection("DateTime & TimeZone", static () =>
             {
                 RunExample(DateTimeAndTimeZoneExample.Run);
+            });
+
+            RunSection("Attributes", static () =>
+            {
+                RunExample(AttributesExample.Run);
             });
 
             PrintFooter();
