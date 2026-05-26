@@ -20,4 +20,20 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CoreDotNet.Examples\CoreDotNet.Examples.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+    <Folder Include="Collections\" />
+    <Folder Include="DateTimeAndTimeZone\" />
+    <Folder Include="DelegatesAndEvents\" />
+    <Folder Include="ExceptionHandling\" />
+    <Folder Include="FileIO\" />
+    <Folder Include="Generics\" />
+    <Folder Include="LINQ\" />
+    <Folder Include="NullableReferenceTypes\" />
+  </ItemGroup>
+
 </Project>
