@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/benchmarks/" />
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/CoreDotNet.Benchmarks/CoreDotNet.Benchmarks.csproj" Id="6650061b-626d-4361-9584-ebffa0728c31" />
+  </Folder>
   <Folder Name="/docs/">
     <File Path="docs/00-roadmap.md" />
     <File Path="docs/01-collections.md" />
@@ -13,7 +15,6 @@
     <File Path="docs/09-nullable-reference-types.md" />
     <File Path="docs/common-pitfalls.md" />
   </Folder>
-  <Folder Name="/exercises/" />
   <Folder Name="/src/">
     <Project Path="src/CoreDotNet.ConsoleApp/CoreDotNet.ConsoleApp.csproj" Id="79cf0766-c607-4e99-b1b8-6fde1b506916" />
     <Project Path="src/CoreDotNet.Examples/CoreDotNet.Examples.csproj" Id="33f6176c-5201-4e7c-979d-4d7dde3fa7d8" />
