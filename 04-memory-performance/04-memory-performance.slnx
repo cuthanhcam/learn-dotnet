@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/benchmarks/" />
+  <Folder Name="/docs/" />
+  <Folder Name="/exercises/" />
+  <Folder Name="/src/">
+    <Project Path="src/MemoryPerformance.ConsoleApp/MemoryPerformance.ConsoleApp.csproj" />
+    <Project Path="src/MemoryPerformance.Examples/MemoryPerformance.Examples.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MemoryPerformance.Tests/MemoryPerformance.Tests.csproj" />
+  </Folder>
+</Solution>
