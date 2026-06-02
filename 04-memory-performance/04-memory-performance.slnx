@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/benchmarks/" />
+  <Folder Name="/docs/">
+    <File Path="docs/00-roadmap.md" />
+    <File Path="docs/01-memory-model.md" />
+    <File Path="docs/02-garbage-collection.md" />
+    <File Path="docs/03-allocation-patterns.md" />
+    <File Path="docs/04-span-memory-pooling.md" />
+    <File Path="docs/05-profiling-and-benchmarking.md" />
+    <File Path="docs/common-pitfalls.md" />
+  </Folder>
+  <Folder Name="/exercises/" />
+  <Folder Name="/src/">
+    <Project Path="src/MemoryPerformance.ConsoleApp/MemoryPerformance.ConsoleApp.csproj" />
+    <Project Path="src/MemoryPerformance.Examples/MemoryPerformance.Examples.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MemoryPerformance.Tests/MemoryPerformance.Tests.csproj" />
+  </Folder>
+</Solution>
