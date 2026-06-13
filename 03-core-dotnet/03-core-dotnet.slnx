@@ -13,6 +13,7 @@
     <File Path="docs/07-datetime-timezone.md" />
     <File Path="docs/08-attributes.md" />
     <File Path="docs/09-nullable-reference-types.md" />
+    <File Path="docs/performance-guidelines.md" />
     <File Path="docs/common-pitfalls.md" />
   </Folder>
   <Folder Name="/src/">
