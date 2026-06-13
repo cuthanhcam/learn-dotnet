@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/benchmarks/" />
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/MemoryPerformance.Benchmarks/MemoryPerformance.Benchmarks.csproj" />
+  </Folder>
   <Folder Name="/docs/">
     <File Path="docs/00-roadmap.md" />
     <File Path="docs/01-memory-model.md" />
@@ -9,7 +11,10 @@
     <File Path="docs/05-profiling-and-benchmarking.md" />
     <File Path="docs/common-pitfalls.md" />
   </Folder>
-  <Folder Name="/exercises/" />
+  <File Path="README.md" />
+  <Folder Name="/exercises/">
+    <Project Path="exercises/MemoryPerformance.Exercises/MemoryPerformance.Exercises.csproj" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/MemoryPerformance.ConsoleApp/MemoryPerformance.ConsoleApp.csproj" />
     <Project Path="src/MemoryPerformance.Examples/MemoryPerformance.Examples.csproj" />
