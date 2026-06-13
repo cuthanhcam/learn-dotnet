@@ -1,92 +1,153 @@
 # Memory Model
 
-## What This Chapter Covers
+## The Core Question
 
-This chapter explains how .NET stores data, how copies behave, and why the same type can behave differently depending on where it is used.
+When you write C#, you usually think in variables and objects. The runtime thinks in stack frames, references, object headers, arrays, fields, and reachable graphs. A good .NET developer does not need to memorize every runtime detail, but does need a practical model for copies, lifetime, and identity.
 
-You will see:
+This chapter answers:
 
-- stack frames and local values
-- heap objects and reference variables
-- value type copying
-- reference aliasing
-- why lifetime is about reachability, not just scope
+- What lives in a stack frame?
+- What lives on the managed heap?
+- What does assignment copy?
+- Why can value types still be inside heap objects?
+- Why is lifetime based on reachability rather than lexical scope alone?
 
-## Stack vs Heap
+## Stack Frames
 
-The stack stores method frames and short-lived local state. It is fast and predictable, and the runtime removes the frame automatically when the method returns.
-
-The managed heap stores objects whose lifetime can outlast the current method. Those objects are reclaimed later by the garbage collector.
+Each active method call has a frame containing temporary method state: parameters, local variables, return addresses, and bookkeeping data. Stack allocation is fast because frames are pushed and popped in a strict order.
 
 ```csharp
-int count = 5;
-var customer = new MemoryPerformanceExample.Customer("Ava", 3);
+public static int Add(int left, int right)
+{
+    int result = left + right;
+    return result;
+}
 ```
 
-`count` is a value. `customer` is a reference to a heap object.
+The local `result` has a very predictable lifetime. When the method returns, the frame is gone.
 
-## Value Types
+Important nuance: saying "local variable" does not always mean "stack only". A local can be captured by a lambda or async state machine, and then the compiler may move the required state into a heap object.
 
-Value types include `int`, `bool`, `double`, `struct`, and `record struct`. Copying a value type creates an independent value.
+## Managed Heap
+
+The managed heap stores objects controlled by the CLR garbage collector. Classes, arrays, strings, delegates, and boxed values are heap objects. Heap objects can outlive the method that created them as long as something can still reach them.
 
 ```csharp
-var first = new MemoryPerformanceExample.Point(2, 4);
+var customer = new Customer("Mina", 10);
+```
+
+The variable `customer` contains a reference. The object itself is on the managed heap.
+
+## Value Semantics
+
+Value types are copied by value. Common value types include:
+
+- primitive numeric types such as `int`, `double`, and `decimal`
+- `bool`, `char`, `DateTime`, `Guid`
+- `struct` and `record struct`
+
+```csharp
+var original = new Point(2, 4);
+var copy = original;
+copy = copy with { X = 99 };
+```
+
+`original` and `copy` are independent values. Mutating or replacing one does not change the other.
+
+The example `MemoryModelExample.ValueTypeCopyExample()` demonstrates this behavior.
+
+## Reference Semantics
+
+Reference types are copied by reference. The variable is copied, but the object is not duplicated.
+
+```csharp
+var first = new Customer("Mina", 10);
 var second = first;
+second.Name = "Updated";
 ```
 
-After the assignment, `first` and `second` are separate values. Updating one does not update the other.
+Both variables point to the same heap object. Mutating through `second` is visible through `first`.
 
-This is what `MemoryModelExample.ValueTypeCopyExample()` demonstrates in code: the copied value changes, but the original stays intact.
+The example `MemoryModelExample.ReferenceAliasExample()` demonstrates this behavior.
 
-## Reference Types
+## Value Type Does Not Mean Stack
 
-Reference types include classes, arrays, delegates, and strings. Copying the variable copies the reference, not the object.
+This is one of the most common .NET misconceptions.
+
+More accurate rules:
+
+- Value types are copied by value.
+- Reference types are copied by reference.
+- Storage location depends on where the value is contained.
+
+Examples:
 
 ```csharp
-var firstCustomer = new MemoryPerformanceExample.Customer("Mina", 1);
-var secondCustomer = firstCustomer;
-secondCustomer.Name = "Updated";
+int local = 42;                 // usually in the current frame or register
+int[] values = [1, 2, 3];       // array object on heap, ints inside array storage
+var customer = new Customer();  // customer object on heap, value-type fields inside it
+object boxed = 42;              // boxed int is a heap object
 ```
 
-Both variables refer to the same object, so the mutation is shared.
+The important habit is to ask: "When this value is assigned, passed, returned, captured, or boxed, what gets copied?"
 
-This is the behavior behind `MemoryModelExample.ReferenceAliasExample()`.
+## Passing Values
+
+By default, method arguments are passed by value.
+
+```csharp
+void Move(Point point)
+{
+    point = point with { X = point.X + 1 };
+}
+```
+
+The method receives a copy of `Point`.
+
+For large structs, copying can become measurable. C# offers `in`, `ref`, and `out` modifiers:
+
+- `in` passes by readonly reference
+- `ref` passes by writable reference
+- `out` is used for values assigned by the callee
+
+Use these carefully. They improve performance only when the copy cost matters and the API remains understandable.
 
 ## Object Lifetime
 
-An object remains alive while something still references it. Once the object becomes unreachable, it becomes eligible for collection.
+An object is alive while reachable from a root. Common GC roots include:
 
-Important detail: eligible does not mean immediately destroyed. The garbage collector decides when to reclaim memory.
+- active stack references
+- static fields
+- CPU registers tracked by the runtime
+- pending finalizer references
+- handles used by interop or runtime infrastructure
 
-## Copying Semantics In Practice
+When an object becomes unreachable, it is eligible for collection. Eligible does not mean immediately collected.
 
-The important question is not only “is this a value type or reference type?” The more useful question is “what happens when I assign, pass, or return this value?”
+```csharp
+Customer Create()
+{
+    return new Customer("Ava", 5);
+}
+```
 
-Examples to reason about:
+If the caller stores the returned customer, it remains reachable. If nobody stores it, it can be collected later.
 
-- passing a `Point` by value creates a copy
-- assigning a `Customer` variable creates another reference to the same object
-- returning a struct from a method copies the result
+## Why This Matters
 
-## Common Misconceptions
+Memory performance problems often start as semantic misunderstandings:
 
-The statement “value types always live on the stack” is too simple. Value types can also be embedded inside heap objects, arrays, closures, or other containers.
+- accidental aliasing causes shared mutation bugs
+- boxing creates hidden heap objects
+- large structs are copied more than expected
+- captured locals survive longer than expected
+- arrays and strings allocate even when their syntax is compact
 
-The more accurate rule is:
+The rest of this module builds on this model.
 
-- value types are copied by value
-- reference types are copied by reference
-- the storage location depends on where the containing object lives
+## Practice
 
-## Hands-On Checks
-
-Use the example methods to test your understanding:
-
-- `MemoryPerformanceExample.StackAllocationExample()` returns a simple local value result
-- `MemoryPerformanceExample.HeapAllocationExample()` returns a heap object
-- `MemoryModelExample.ValueTypeCopyExample()` shows independent values
-- `MemoryModelExample.ReferenceAliasExample()` shows shared mutation
-
-## Why It Matters
-
-This chapter is the foundation for the rest of the module. If you do not understand value and reference semantics, it becomes much harder to reason about GC pressure, boxing, pooling, and why certain optimizations work.
+1. Run `MemoryModelExample.Run()`.
+2. Predict which values are independent and which share identity.
+3. Change `Point` from `record struct` to class locally and observe how the mental model changes.
+4. Add a lambda that captures a local variable, then inspect allocation behavior in a benchmark.

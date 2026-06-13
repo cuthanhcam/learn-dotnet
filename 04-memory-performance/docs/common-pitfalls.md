@@ -1,19 +1,94 @@
 # Common Pitfalls
 
-1. Treating every allocation as a bug.
-2. Forcing garbage collection in normal application code.
-3. Confusing string interning with general string reuse.
-4. Boxing value types in loops without noticing.
-5. Returning pooled buffers instead of the result they contained.
-6. Using `Span<T>` after its source has gone out of scope.
-7. Optimizing before measuring the real workload.
-8. Prematurely replacing readable code with low-level tricks.
-9. Assuming a pooled buffer is always cheaper than a fresh array.
-10. Reading one benchmark result as if it were a final answer.
+## 1. Treating Every Allocation As A Bug
 
-## How To Avoid Them
+Allocations are normal in .NET. Optimize allocations that are frequent, large, long-lived, or proven expensive.
 
-- keep allocation changes tied to a real workload
-- prefer deterministic cleanup for resource ownership
-- treat spans as temporary views, not owned storage
-- use benchmarks to compare alternatives, not to justify a hunch
+Bad question:
+
+> Can I remove every allocation?
+
+Better question:
+
+> Is this allocation meaningful for this workload?
+
+## 2. Saying Value Types Always Live On The Stack
+
+Value types are copied by value. They can live inside heap objects, arrays, closures, and boxed objects.
+
+Use this rule instead:
+
+- value type means value-copy semantics
+- reference type means reference-copy semantics
+- storage depends on containment and compiler/runtime decisions
+
+## 3. Forgetting That Strings Are Immutable
+
+Repeated string concatenation in loops creates intermediate strings.
+
+Prefer:
+
+- `string.Join` for joining known sequences
+- `StringBuilder` for incremental construction
+- span-based parsing to avoid substring allocation
+
+## 4. Boxing Value Types Accidentally
+
+Common boxing triggers:
+
+- assigning value types to `object`
+- non-generic collections
+- some interface calls on structs
+- string formatting paths
+- params `object[]`
+
+Prefer generic APIs and type-specific overloads.
+
+## 5. Confusing GC With Dispose
+
+GC reclaims managed memory. `Dispose` releases resources at a predictable time.
+
+Use `using` for disposable resources:
+
+```csharp
+using var stream = File.OpenRead(path);
+```
+
+Do not wait for GC to close files, sockets, handles, or pooled ownership.
+
+## 6. Calling GC.Collect As A Fix
+
+`GC.Collect()` is rarely the right application-level solution. It can pause useful work and fight runtime heuristics.
+
+Use it for experiments, diagnostics, or rare controlled lifecycle boundaries.
+
+## 7. Returning Rented Buffers Too Late Or Too Early
+
+With `ArrayPool<T>`:
+
+- return arrays in `finally`
+- use only the requested slice
+- clear sensitive data
+- never use the array after return
+- never return the same array twice
+
+Pooling is ownership management. Treat it with care.
+
+## 8. Letting Benchmarks Lie
+
+Benchmark mistakes:
+
+- using Debug mode
+- measuring one run
+- using unrealistic data
+- ignoring allocations
+- benchmarking code that production does not execute
+- forgetting JIT warmup
+
+Use BenchmarkDotNet for serious comparisons.
+
+## 9. Making Hot Code Clever But Fragile
+
+Performance code still needs to be readable. A small speedup is not worth a maintenance trap unless the path is truly important.
+
+Prefer the simplest measured improvement that solves the real problem.

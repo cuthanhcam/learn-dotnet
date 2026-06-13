@@ -125,9 +125,7 @@ dotnet build
 dotnet run --project src/OopBasics.ConsoleApp
 dotnet run --project src/OopBasics.Playground
 dotnet test
-dotnet run -c Release --project benchmarks/StringBenchmark/StringBenchmark.csproj
-dotnet run -c Release --project benchmarks/MemoryBenchmarks/MemoryBenchmarks.csproj
-dotnet run -c Release --project benchmarks/CollectionsBenchmark/CollectionsBenchmark.csproj
+dotnet run -c Release --project benchmarks/OopBasics.Benchmarks.csproj
 ```
 
 ---
