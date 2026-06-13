@@ -1,70 +1,140 @@
-# Span and Memory Pooling
+# Span, Memory, and Pooling
 
-## What This Chapter Covers
+## Why These APIs Exist
 
-This chapter is about working with memory more directly while still staying in safe managed code.
+Many performance problems come from copying data just to look at part of it. `Span<T>` and `ReadOnlySpan<T>` let you work with a contiguous region of memory without owning or copying it.
 
-You will see:
+They are useful for:
 
-- how `Span<T>` gives you a temporary view over contiguous memory
-- when `ReadOnlySpan<T>` is the better API surface
-- why `stackalloc` is useful for small scratch buffers
-- when `ArrayPool<T>` helps and when it is just extra complexity
+- parsing text
+- slicing arrays
+- formatting into existing buffers
+- temporary scratch work
+- avoiding substring and array-copy allocations
 
-## Span<T>
+## Span Is a View
 
-`Span<T>` is a stack-only view over a contiguous region of memory. It lets you slice data without copying it.
-
-Use it when you need:
-
-- temporary processing of an array segment
-- parsing without extra allocations
-- stack-based scratch space
-
-The `MemoryPerformanceExample.SumWithSpan()` helper shows a simple read-only traversal with no extra copying.
-
-## ReadOnlySpan<T>
-
-Use `ReadOnlySpan<T>` when the caller should not modify the underlying data.
+`Span<T>` is a view over existing memory. It does not own the memory.
 
 ```csharp
-int total = MemoryPerformanceExample.SumWithSpan([1, 2, 3, 4]);
+int[] numbers = [1, 2, 3, 4];
+Span<int> middle = numbers.AsSpan(1, 2);
+middle[0] = 99;
 ```
 
-This is especially useful for APIs that accept arrays, slices, string-like data, or temporary buffers.
+The original array now contains `99` at index 1.
+
+`ReadOnlySpan<T>` is a readonly view. It prevents mutation through that view, but it does not make the underlying memory globally immutable.
+
+## Ref Struct Restrictions
+
+`Span<T>` is a `ref struct`, which means it is stack-only. This prevents spans from outliving the memory they point to.
+
+You cannot:
+
+- store `Span<T>` in a class field
+- capture it in a lambda
+- use it across `await`
+- box it
+- use it as a generic type argument in most ordinary generic APIs
+
+These restrictions are features. They protect lifetime safety.
+
+## Memory<T>
+
+`Memory<T>` and `ReadOnlyMemory<T>` are heap-friendly wrappers that can be stored and passed around more flexibly than spans.
+
+Use:
+
+- `Span<T>` for immediate synchronous work
+- `Memory<T>` when data must be stored or used with async APIs
+
+You can get a span from memory when doing actual work:
+
+```csharp
+Memory<byte> memory = new byte[1024];
+Span<byte> span = memory.Span;
+```
 
 ## stackalloc
 
-`stackalloc` creates a short-lived buffer on the stack.
+`stackalloc` creates a small temporary buffer in the current stack frame.
 
-This is ideal for small scratch buffers, but the lifetime is limited to the current method.
+```csharp
+Span<char> buffer = stackalloc char[32];
+```
 
-The memory-performance module uses `ToUpperWithStackalloc()` as an example of a transform where a short-lived stack buffer can be enough for modest input sizes.
+Good uses:
+
+- small fixed upper-bound buffers
+- formatting temporary values
+- parsing short inputs
+
+Avoid:
+
+- large buffers
+- user-controlled unbounded sizes
+- storing the span beyond the method
+
+The example `SpanMemoryPoolingExample.StackallocSum()` limits the size intentionally.
 
 ## ArrayPool<T>
 
-`ArrayPool<T>` helps reduce repeated array allocations by reusing buffers.
+`ArrayPool<T>` rents arrays so repeated workloads can reuse buffers.
 
-Use pooling for:
+```csharp
+byte[] rented = ArrayPool<byte>.Shared.Rent(size);
+try
+{
+    Span<byte> slice = rented.AsSpan(0, size);
+    // use slice
+}
+finally
+{
+    ArrayPool<byte>.Shared.Return(rented, clearArray: true);
+}
+```
 
-- repeated temporary arrays
-- high-throughput parsing
-- large buffers that are expensive to recreate
+Important rules:
 
-Do not pool when:
+- The rented array may be larger than requested.
+- Use only the slice you requested.
+- Return the array exactly once.
+- Do not use it after returning.
+- Clear it before returning if it contains sensitive data.
+- Do not assume rented arrays start empty.
 
-- the workload is tiny
-- the code becomes hard to reason about
-- the buffer is only used once
+Pooling improves repeated buffer-heavy workloads. It can make simple code more complex, so use it when measurement justifies it.
 
-The `SpanAndPoolingExample.RentArrayPoolAndSum()` helper shows the basic rent/fill/read/return pattern.
+## Formatting Without Intermediate Strings
 
-## Safety Notes
+Many APIs support span-based formatting:
 
-Pooling makes ownership less obvious, so be strict about returning the buffer in a `finally` block. That is the pattern used in the example code.
+```csharp
+Span<char> buffer = stackalloc char[16];
+value.TryFormat(buffer, out int written);
+```
 
-Avoid keeping a span around after the source goes out of scope. A span is a view, not an owner.
+C# and .NET also support interpolated string handlers for spans in modern versions:
 
-## Rule of Thumb
+```csharp
+buffer.TryWrite($"ORD-{id:000000}", out int written);
+```
 
-Prefer spans for temporary views and pools for repeated buffers. Use neither if a simple array or string is already good enough.
+This is useful for IDs, logs, protocols, and serialization paths where repeated temporary strings add pressure.
+
+## Common Mistakes
+
+- Returning a rented array to the pool and then reading from it later
+- Forgetting that the rented array may be larger than requested
+- Using pooling for tiny infrequent allocations
+- Creating spans but then calling `ToArray()` or `ToString()` too early
+- Using `stackalloc` with unbounded user input
+
+## Practice
+
+1. Read `SpanMemoryPoolingExample.ParseThreeNumbers()`.
+2. Compare span parsing with a `Split(',')` implementation.
+3. Change `NormalizeProductCode()` to preserve dashes and update tests.
+4. Use `ArrayPool<char>` for a longer normalization exercise.
+5. Benchmark before and after.

@@ -1,68 +1,162 @@
 # Allocation Patterns
 
-## What This Chapter Covers
+## Why Allocation Awareness Matters
 
-This chapter focuses on allocation sources you can miss during normal coding. Most of these patterns are small in isolation, but they add up in loops, parsers, API gateways, and other hot paths.
+Most allocations are fine. Clean business code should not be twisted into unreadable shapes just to avoid one tiny object. Performance work matters most when allocation happens frequently, on hot paths, under high concurrency, or with large buffers.
 
-You will see:
+Good allocation awareness helps you notice:
 
-- boxing and unboxing
-- temporary strings and string churn
-- hidden allocations from “simple” language features
-- how to choose a practical fix
+- repeated temporary objects
+- hidden boxing
+- string churn
+- closure captures
+- iterator and LINQ overhead
+- unnecessary materialization
+- large arrays created repeatedly
 
-## Boxing and Unboxing
+## Boxing
 
-Boxing happens when a value type is converted to `object` or an interface. That conversion allocates a new object on the heap.
+Boxing wraps a value type in an object on the heap.
 
 ```csharp
-int value = 12;
-object boxed = value;
-int unboxed = (int)boxed;
+int number = 42;
+object boxed = number;
 ```
 
-The allocation is small, but repeated boxing in a tight loop creates avoidable pressure. The `AllocationPatternsExample.BoxingExample()` helper exists to make this easy to demonstrate in tests and benchmarks.
+Unboxing extracts the value:
 
-## String Churn
+```csharp
+int copy = (int)boxed;
+```
 
-Strings are immutable. Every operation that changes the text creates a new string.
+Boxing often appears through non-generic APIs:
 
-Use the right tool for the workload:
+```csharp
+var values = new ArrayList();
+values.Add(42); // boxing
+```
 
-- `StringBuilder` for repeated concatenation
-- `Span<char>` for temporary transforms
-- buffer reuse when the same pattern repeats often
+Prefer generic APIs:
 
-The current module uses `ToUpperWithStackalloc()` as a simple example of a short-lived transform that avoids repeated heap allocations for small inputs.
+```csharp
+var values = new List<int>();
+values.Add(42); // no boxing
+```
 
-## Hidden Allocations
+`AllocationPatternsExample.SumBoxedNumbers()` intentionally boxes values so you can compare it with `SumGenericNumbers()`.
 
-Common hidden allocation sources include:
+## Strings
 
-- lambda captures
-- iterator blocks
-- interface boxing
-- temporary arrays for parsing or formatting
-- repeated substring creation
+`string` is immutable. Every operation that appears to modify a string actually creates a new string.
 
-That is why allocation review is partly about language features, not just explicit `new` expressions.
+Problem pattern:
 
-## A Useful Way To Think About It
+```csharp
+string result = "";
+for (int i = 0; i < count; i++)
+{
+    result += i;
+}
+```
 
-Ask two questions:
+Better options:
 
-- does this run once, or many times?
-- is the allocation on a cold path, or in the middle of a repeated workload?
+- `string.Join` when joining known values
+- `StringBuilder` for incremental construction
+- `string.Create` for advanced fixed-format creation
+- spans for parsing without substring allocation
 
-If the answer is “once” and “cold”, readability usually wins.
+Use `StringBuilder` when repeated concatenation creates many intermediate strings and the code path matters.
 
-## Choosing the Right Fix
+## Substrings and Parsing
 
-If the workload is not hot, the best optimization is often no optimization. Write the clear version first, measure it, and only then decide whether reducing allocations is worth the tradeoff.
+Modern .NET improved some string operations, but `Substring` still creates a new string.
 
-Practical priorities:
+Allocation-heavy parsing:
 
-1. remove obvious waste
-2. verify the hotspot is real
-3. keep the fix understandable
-4. only then consider lower-level techniques
+```csharp
+string first = text.Substring(0, commaIndex);
+int value = int.Parse(first);
+```
+
+Span-based parsing:
+
+```csharp
+ReadOnlySpan<char> first = text.AsSpan(0, commaIndex);
+int value = int.Parse(first);
+```
+
+This avoids creating a temporary string for the token.
+
+## Closures
+
+A lambda that captures local state may require a compiler-generated object to hold captured variables.
+
+```csharp
+int factor = 10;
+Func<int, int> multiply = value => value * factor;
+```
+
+Closures are not bad. They are expressive and often worth it. But in hot loops, repeated closure allocation can matter.
+
+Tips:
+
+- Use `static` lambdas when no capture is needed.
+- Avoid capturing large objects accidentally.
+- Be careful when storing captured delegates in long-lived objects.
+
+## Iterators
+
+Methods using `yield return` create a state machine object.
+
+```csharp
+IEnumerable<int> EvenNumbers(IEnumerable<int> numbers)
+{
+    foreach (int number in numbers)
+    {
+        if (number % 2 == 0)
+        {
+            yield return number;
+        }
+    }
+}
+```
+
+This is excellent for streaming and deferred execution. It is not allocation-free.
+
+## LINQ
+
+LINQ can allocate iterators, delegates, closures, groupings, lookup tables, and materialized collections. It can also make code dramatically clearer.
+
+Use LINQ freely in normal code. Inspect it more carefully when:
+
+- it runs per request at high volume
+- it runs inside nested loops
+- it repeatedly enumerates the same query
+- it creates large intermediate lists
+- it closes over expensive state
+
+## Defensive Copies
+
+APIs sometimes copy to protect ownership:
+
+```csharp
+public IReadOnlyList<int> Values => _values.ToList();
+```
+
+This is safe but allocates every access. Alternatives include:
+
+- return `IReadOnlyList<T>` backed by immutable data
+- return `ReadOnlyMemory<T>`
+- expose enumeration only
+- document ownership clearly
+
+Choose based on safety first, then measure.
+
+## Practice
+
+1. Compare boxed and generic summing in `AllocationPatternsExample`.
+2. Benchmark string concatenation against `StringBuilder`.
+3. Rewrite a substring parser using `ReadOnlySpan<char>`.
+4. Find one LINQ chain in earlier modules and identify what it allocates.
+5. Decide whether the allocation matters based on frequency and data size.

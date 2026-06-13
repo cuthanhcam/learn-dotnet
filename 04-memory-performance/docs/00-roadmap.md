@@ -1,116 +1,175 @@
 # Roadmap: Memory & Performance
 
-## Overview
+## Purpose
 
-This module starts with the memory model and ends with measurement. The goal is not to turn every allocation into a bug. The goal is to understand where allocations come from, which ones matter, and how to verify a memory optimization with evidence instead of instinct.
+This module teaches how to reason about memory and performance in modern .NET. It is not about making every method clever. It is about knowing where cost comes from, choosing the right tool, and validating the result.
 
-The learning path is intentionally practical:
+The learning path moves from mental model to measurement:
 
-- first, recognize where data lives and how it is copied
-- next, understand how the GC reclaims managed memory
-- then, identify hidden allocations in everyday code
-- after that, use spans and pooling to reduce copying in hot paths
-- finally, measure the result with targeted benchmarks
+1. Memory model
+2. Garbage collection
+3. Allocation patterns
+4. Span, memory, and pooling
+5. Profiling and benchmarking
 
 ## Phase 1: Memory Model
 
-**Focus**: stack frames, heap objects, value semantics, reference semantics, and lifetime.
+Focus:
 
-What to learn:
+- stack frames
+- managed heap objects
+- value semantics
+- reference semantics
+- object identity
+- lifetime and reachability
 
-- local values and call frames are short-lived and predictable
-- objects, arrays, and captured state live on the managed heap
-- copying a value type creates a new independent value
-- copying a reference type copies the reference, not the object
+Key idea:
+
+Value type vs reference type is about copy behavior. Stack vs heap is about storage. These are related but not the same thing.
 
 Expected outcomes:
 
-- explain why `ValueTypeCopyExample()` produces two independent values
-- explain why `ReferenceAliasExample()` mutates both variables
-- distinguish between storage location and type category
+- Explain why copying a `record struct` creates an independent value.
+- Explain why two class variables can point to the same object.
+- Avoid the phrase "value types always live on the stack."
+- Identify when `in`, `ref`, and `out` are about avoiding copies or communicating mutation.
+
+Matching code:
+
+- `MemoryModelExample.ValueTypeCopyExample()`
+- `MemoryModelExample.ReferenceAliasExample()`
+- `MemoryModelExample.DistanceFromOrigin()`
 
 ## Phase 2: Garbage Collection
 
-**Focus**: object reachability, generations, disposal, and allocation pressure.
+Focus:
 
-What to learn:
+- reachability
+- GC roots
+- Gen 0, Gen 1, Gen 2
+- object promotion
+- Large Object Heap
+- deterministic cleanup with `IDisposable`
 
-- Gen 0, Gen 1, and Gen 2 describe object age, not object kind
-- short-lived allocations are usually inexpensive but still measurable
-- `IDisposable` is for non-memory resources that need deterministic cleanup
-- forcing a GC is usually a diagnostic action, not a normal fix
+Key idea:
+
+The GC reclaims unreachable managed memory. It does not replace deterministic cleanup for external resources.
 
 Expected outcomes:
 
-- read `GC.CollectionCount()` as a trend signal
-- use `using` or `using var` when a type owns a disposable resource
-- explain why object promotion is a useful mental model for long-lived allocations
+- Read `GC.CollectionCount()` as a pressure signal.
+- Use `GC.GetAllocatedBytesForCurrentThread()` for allocation experiments.
+- Explain why `using` is still necessary for disposable resources.
+- Avoid using `GC.Collect()` as a routine fix.
+
+Matching code:
+
+- `GarbageCollectionExample.CaptureSnapshot()`
+- `GarbageCollectionExample.AllocateShortLivedObjects()`
+- `DisposableBuffer`
 
 ## Phase 3: Allocation Patterns
 
-**Focus**: boxing, strings, closures, and other common allocation triggers.
+Focus:
 
-What to learn:
+- boxing and unboxing
+- string immutability
+- `StringBuilder`
+- closures
+- iterators
+- LINQ allocation tradeoffs
+- defensive copies
 
-- boxing turns a value type into a heap object
-- repeated string concatenation creates temporary strings
-- lambdas and iterators can allocate even when the syntax looks simple
-- the best optimization is often not the cleverest one
+Key idea:
 
-Expected outcomes:
-
-- spot boxing in code review before it becomes a runtime issue
-- explain why `StringBuilder` or buffering can be better than repeated concatenation
-- know when the simpler readable version is still the right choice
-
-## Phase 4: Span and Pooling
-
-**Focus**: temporary slices, short-lived buffers, and reusable arrays.
-
-What to learn:
-
-- `Span<T>` and `ReadOnlySpan<T>` let you work on slices without copying
-- `stackalloc` is useful for small scratch buffers with a tight lifetime
-- `ArrayPool<T>` helps when repeated allocations dominate a workload
-- pooling is a tradeoff, not an automatic win
+Allocation is not automatically bad. Unnoticed repeated allocation in an important path is the problem.
 
 Expected outcomes:
 
-- choose span when you need a temporary view over existing memory
-- choose pooling when the workload repeatedly creates similar buffers
-- avoid leaking pooled buffers or using them after return
+- Spot boxing in common APIs.
+- Recognize string churn in loops.
+- Know that lambdas, iterators, and LINQ can allocate.
+- Decide whether readability or allocation reduction matters more in a given path.
+
+Matching code:
+
+- `AllocationPatternsExample.SumBoxedNumbers()`
+- `AllocationPatternsExample.SumGenericNumbers()`
+- `AllocationPatternsExample.BuildWithStringBuilder()`
+- `AllocationPatternsExample.CreateMultipliers()`
+
+## Phase 4: Span, Memory, and Pooling
+
+Focus:
+
+- `Span<T>`
+- `ReadOnlySpan<T>`
+- `Memory<T>`
+- `stackalloc`
+- `ArrayPool<T>`
+- span-based parsing and formatting
+
+Key idea:
+
+Spans are temporary views over memory. Pools are reusable ownership systems. Neither should be used casually without understanding lifetime.
+
+Expected outcomes:
+
+- Parse a slice without creating a substring.
+- Use `stackalloc` only for small bounded buffers.
+- Rent and return arrays safely.
+- Understand why `Span<T>` cannot be stored in a normal class field.
+
+Matching code:
+
+- `SpanMemoryPoolingExample.ParseThreeNumbers()`
+- `SpanMemoryPoolingExample.NormalizeProductCode()`
+- `SpanMemoryPoolingExample.RentFillAndSum()`
+- `SpanMemoryPoolingExample.FormatOrderId()`
 
 ## Phase 5: Profiling and Benchmarking
 
-**Focus**: verify changes with measurements.
+Focus:
 
-What to learn:
+- baseline measurement
+- allocation deltas
+- GC count deltas
+- `Stopwatch`
+- BenchmarkDotNet
+- interpreting noise and tradeoffs
 
-- `GC.GetAllocatedBytesForCurrentThread()` is useful for allocation deltas
-- `GC.CollectionCount()` shows whether a path is creating collection pressure
-- `Stopwatch` is fine for simple local comparisons
-- benchmark projects are better when you need repeatable comparison
+Key idea:
+
+Optimization is a change-management activity. You need a baseline, a hypothesis, a measurement, and a decision.
 
 Expected outcomes:
 
-- compare two code paths using the same workload
-- avoid drawing conclusions from a single run
-- know when a microbenchmark result is meaningful and when it is noise
+- Measure elapsed time and allocated bytes for a small code path.
+- Run BenchmarkDotNet in Release mode.
+- Read `Allocated`, `Mean`, `Gen0`, and `Ratio` columns.
+- Avoid drawing conclusions from a single run.
+
+Matching code:
+
+- `ProfilingExample.Measure()`
+- `benchmarks/MemoryPerformance.Benchmarks`
 
 ## Practice Sequence
 
-1. Run the memory model examples and predict the output before reading it.
-2. Inspect the GC example and note which values change after allocation pressure.
-3. Compare boxing and non-boxing code paths in the allocation examples.
-4. Rewrite a small parsing or normalization routine with `Span<T>`.
-5. Compare pooled and non-pooled buffer reuse in the benchmark runner.
-6. Use the tests to confirm the behavior stayed correct after refactoring.
+1. Run the console demo.
+2. Read one docs chapter at a time.
+3. Open the matching example file and trace each method.
+4. Run tests after changing an example.
+5. Run benchmarks in Release mode.
+6. Revisit modules 01-03 and identify at least five allocation patterns.
 
 ## Completion Criteria
 
 You are ready to move on when you can:
 
-- explain stack vs heap without mixing up storage and type
-- identify the main allocation triggers in a code review
-- choose spans or pooling only where they pay off
-- defend a performance change with measured evidence
+- explain value/reference semantics without mixing them with stack/heap storage
+- explain what makes an object reachable
+- identify boxing, string churn, closure captures, and iterator allocation
+- use span-based parsing for a simple text input
+- use `ArrayPool<T>` without leaking ownership
+- benchmark a before/after change and defend the result
