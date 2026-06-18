@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\exercises\Dsa.Exercises\Dsa.Exercises.csproj" />
     <ProjectReference Include="..\..\src\Dsa.Examples\Dsa.Examples.csproj" />
   </ItemGroup>
 
