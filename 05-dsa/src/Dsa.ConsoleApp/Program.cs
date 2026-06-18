@@ -2,8 +2,10 @@ namespace Dsa.ConsoleApp;
 
 using Dsa.Examples.ArraysStrings;
 using Dsa.Examples.Complexity;
+using Dsa.Examples.HashTables;
 using Dsa.Examples.LinkedLists;
 using Dsa.Examples.StacksQueues;
+using Dsa.Examples.TreesGraphs;
 
 public static class Program
 {
@@ -15,6 +17,8 @@ public static class Program
         RunSection("Arrays and Strings", ArraysStringsExample.Run);
         RunSection("Linked Lists", LinkedListsExample.Run);
         RunSection("Stacks and Queues", StacksQueuesExample.Run);
+        RunSection("Hash Tables", HashTablesExample.Run);
+        RunSection("Trees and Graphs", TreesGraphsExample.Run);
 
         PrintFooter();
     }

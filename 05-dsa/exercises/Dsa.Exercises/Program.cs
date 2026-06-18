@@ -5,3 +5,4 @@ Console.WriteLine($"Move zeroes: {string.Join(", ", ArraysStringsExercises.MoveZ
 Console.WriteLine($"Anagram: {ArraysStringsExercises.AreAnagrams("listen", "silent")}");
 Console.WriteLine($"Max window sum: {ArraysStringsExercises.MaxSubarraySumOfSizeK([2, 1, 5, 1, 3, 2], 3)}");
 Console.WriteLine($"Remove adjacent duplicates: {StacksQueuesExercises.RemoveAdjacentDuplicates("abbaca")}");
+Console.WriteLine($"Longest consecutive sequence: {HashTableExercises.LongestConsecutiveSequence([100, 4, 200, 1, 3, 2])}");
