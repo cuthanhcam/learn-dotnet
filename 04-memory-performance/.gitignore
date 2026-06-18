@@ -1,0 +1,106 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options directory
+.vs/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Rider
+.idea/
+*.sln.iml
+*.swp
+*.swo
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Local Environment files
+.env
+.env.local
+.env.*.local
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
+.nuget/
+
+# IDE specific files
+.DS_Store
+Thumbs.db
+*.DotSettings.user
+
+# Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# BenchmarkDotNet
+BenchmarkDotNet.Artifacts/
+
+# temporary files
+tmp/
+temp/
+*.tmp
+
+# Node modules (if using npm)
+node_modules/
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Visual Studio additional
+*.VisualState.xml
+*.psess
+*.vsp
+*.vspx
+*.sap
+*.str
+
+# Resharper
+_ReSharper*/
+reSharper/
+*.resharper
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# FxCop
+FxCop.Report.xml
+
+# dotTrace
+*.nettrace
+*.netcore
+*.nettrace
+
+# Code Coverage
+*.coverage
+
+# Ignore generated code
+[Gg]enerated/

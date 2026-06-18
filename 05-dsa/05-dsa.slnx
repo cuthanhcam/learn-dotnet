@@ -1,0 +1,28 @@
+<Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/Dsa.Benchmarks/Dsa.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/docs/">
+    <File Path="docs/00-roadmap.md" />
+    <File Path="docs/01-big-o-notation.md" />
+    <File Path="docs/02-arrays-and-strings.md" />
+    <File Path="docs/03-linked-lists.md" />
+    <File Path="docs/04-stacks-and-queues.md" />
+    <File Path="docs/05-hash-tables.md" />
+    <File Path="docs/06-trees-and-graphs.md" />
+    <File Path="docs/07-sorting-and-searching.md" />
+    <File Path="docs/08-recursion-and-backtracking.md" />
+    <File Path="docs/common-pitfalls.md" />
+  </Folder>
+  <File Path="README.md" />
+  <Folder Name="/exercises/">
+    <Project Path="exercises/Dsa.Exercises/Dsa.Exercises.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Dsa.ConsoleApp/Dsa.ConsoleApp.csproj" />
+    <Project Path="src/Dsa.Examples/Dsa.Examples.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Dsa.Tests/Dsa.Tests.csproj" />
+  </Folder>
+</Solution>
