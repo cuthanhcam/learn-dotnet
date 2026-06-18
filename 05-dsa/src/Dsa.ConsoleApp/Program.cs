@@ -4,6 +4,8 @@ using Dsa.Examples.ArraysStrings;
 using Dsa.Examples.Complexity;
 using Dsa.Examples.HashTables;
 using Dsa.Examples.LinkedLists;
+using Dsa.Examples.RecursionBacktracking;
+using Dsa.Examples.SortingSearching;
 using Dsa.Examples.StacksQueues;
 using Dsa.Examples.TreesGraphs;
 
@@ -19,6 +21,8 @@ public static class Program
         RunSection("Stacks and Queues", StacksQueuesExample.Run);
         RunSection("Hash Tables", HashTablesExample.Run);
         RunSection("Trees and Graphs", TreesGraphsExample.Run);
+        RunSection("Sorting and Searching", SortingSearchingExample.Run);
+        RunSection("Recursion and Backtracking", RecursionBacktrackingExample.Run);
 
         PrintFooter();
     }

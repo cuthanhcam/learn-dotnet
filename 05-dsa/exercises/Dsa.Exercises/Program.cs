@@ -6,3 +6,5 @@ Console.WriteLine($"Anagram: {ArraysStringsExercises.AreAnagrams("listen", "sile
 Console.WriteLine($"Max window sum: {ArraysStringsExercises.MaxSubarraySumOfSizeK([2, 1, 5, 1, 3, 2], 3)}");
 Console.WriteLine($"Remove adjacent duplicates: {StacksQueuesExercises.RemoveAdjacentDuplicates("abbaca")}");
 Console.WriteLine($"Longest consecutive sequence: {HashTableExercises.LongestConsecutiveSequence([100, 4, 200, 1, 3, 2])}");
+Console.WriteLine($"Search insert position: {SortingSearchingExercises.SearchInsertPosition([1, 3, 5, 6], 5)}");
+Console.WriteLine($"Generate parentheses: {string.Join(", ", RecursionBacktrackingExercises.GenerateParentheses(2))}");
