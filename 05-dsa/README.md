@@ -1,10 +1,12 @@
 # Data Structures & Algorithms (05-dsa)
 
-> A practical C# module for algorithmic thinking, complexity analysis, and interview-style problem solving.
+> A practical C# module for algorithmic thinking, complexity analysis, interview-style problem solving, and better backend design decisions.
 
 ## Overview
 
 This module focuses on learning how to reason about data shape, operation cost, trade-offs, and correctness. The goal is not to memorize solutions, but to recognize patterns and choose the right data structure or algorithm for the constraints in front of you.
+
+DSA is a bridge between "I know C# syntax" and "I can design reliable software." In .NET backend work, the same thinking appears in API pagination, indexing, caching, deduplication, scheduling, graph-like permissions, dependency traversal, query optimization, and performance reviews.
 
 You will learn:
 
@@ -84,6 +86,14 @@ dotnet run -c Release --project benchmarks/Dsa.Benchmarks
 | Sorting and searching      | Comparison sorting, binary search, stable sorting, boundary bugs        |
 | Recursion and backtracking | Base cases, call stack, choices, pruning, restore state                 |
 
+## Why This Phase Matters
+
+- It trains you to read constraints before writing code.
+- It turns performance from guesswork into explainable trade-offs.
+- It makes standard .NET collections feel predictable instead of magical.
+- It improves debugging because you can reason about invariants and state transitions.
+- It prepares you for interviews without separating interview practice from real engineering.
+
 ## Module Rules
 
 1. Every algorithm exposes deterministic methods that tests can verify.
@@ -91,6 +101,8 @@ dotnet run -c Release --project benchmarks/Dsa.Benchmarks
 3. Complexity notes live near the code and in the matching docs.
 4. Exercises favor small, focused problems over giant challenge dumps.
 5. Correctness comes before micro-optimization.
+6. Every solution should be explainable with a short invariant or proof idea.
+7. Every exercise should include edge cases before performance tuning.
 
 ## Study Order
 
@@ -100,6 +112,35 @@ dotnet run -c Release --project benchmarks/Dsa.Benchmarks
 4. Run tests after each topic.
 5. Re-implement exercise methods without looking at examples.
 6. Use benchmarks only after you understand the asymptotic difference.
+7. Capture mistakes in `docs/common-pitfalls.md` or your own notes.
+
+## Practice Loop
+
+Use this loop for every problem, even small ones:
+
+1. Restate the problem in your own words.
+2. Write down inputs, outputs, constraints, and edge cases.
+3. Start with the simplest correct solution.
+4. Identify the bottleneck.
+5. Choose a better data structure or pattern.
+6. Prove the key invariant.
+7. Implement in C#.
+8. Test empty, single-item, duplicate, sorted, reverse-sorted, and large cases when relevant.
+9. State time and space complexity.
+
+## .NET Collection Map
+
+| Need                           | Common .NET type                  | Typical cost model                         |
+| ------------------------------ | --------------------------------- | ------------------------------------------ |
+| Indexed contiguous data        | `T[]`, `List<T>`                  | O(1) index read/write, O(n) middle insert  |
+| Membership lookup              | `HashSet<T>`                      | Average O(1) add/contains/remove           |
+| Key-value lookup               | `Dictionary<TKey, TValue>`        | Average O(1) lookup/update                 |
+| FIFO processing                | `Queue<T>`                        | O(1) enqueue/dequeue                       |
+| LIFO processing                | `Stack<T>`                        | O(1) push/pop                              |
+| Sorted unique data             | `SortedSet<T>`                    | O(log n) add/contains/remove               |
+| Sorted key-value lookup        | `SortedDictionary<TKey, TValue>`  | O(log n) lookup/update                     |
+| Immutable read-mostly data     | `ImmutableArray<T>`, immutable collections | More allocation, safer sharing    |
+| Allocation-sensitive slicing   | `Span<T>`, `ReadOnlySpan<T>`      | Avoids copying, lifetime must stay scoped  |
 
 ## Key Mental Models
 
@@ -109,6 +150,8 @@ dotnet run -c Release --project benchmarks/Dsa.Benchmarks
 - Trees and graphs are mostly about traversal order plus visited-state rules.
 - Binary search is a boundary-management algorithm, not just "find middle".
 - Backtracking is disciplined trial, validation, recursion, and undo.
+- Invariants are promises that stay true while the algorithm runs.
+- Better algorithms usually come from changing the representation, not typing faster code.
 
 ## Documentation
 
@@ -123,4 +166,17 @@ dotnet run -c Release --project benchmarks/Dsa.Benchmarks
 | `06-trees-and-graphs.md`           | Hierarchical and network data traversal               |
 | `07-sorting-and-searching.md`      | Sorting trade-offs and binary search variants         |
 | `08-recursion-and-backtracking.md` | Recursive decomposition and search-space exploration  |
+| `09-practice-system.md`            | Daily/weekly practice cadence and review habits       |
+| `10-dotnet-dsa-reference.md`       | .NET collection and API reference for DSA choices     |
 | `common-pitfalls.md`               | Mistakes to catch during practice and review          |
+
+## Mastery Check
+
+You are ready to move beyond this phase when you can:
+
+- Solve easy problems without pattern hints.
+- Solve medium problems by reducing them to a known pattern.
+- Explain why a chosen data structure fits the dominant operation.
+- Write tests before polishing the implementation.
+- Compare a brute-force solution with an optimized solution using Big-O.
+- Connect algorithm choices back to .NET backend scenarios.
