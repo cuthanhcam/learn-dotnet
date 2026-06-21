@@ -45,3 +45,73 @@ Some operations are occasionally expensive but cheap on average over many calls.
 - Keep variable names meaningful: scanning `users` and `roles` is O(u + r), not always O(n).
 - Worst-case, average-case, and best-case can differ.
 - Big-O does not replace benchmarking for hot production paths.
+
+## How To Analyze A Method
+
+Use this order:
+
+1. Identify the input size or sizes.
+2. Find loops and recursive calls that grow with input.
+3. Count expensive operations inside those loops.
+4. Include helper calls if they are not O(1).
+5. Keep separate variables separate.
+6. Remove constants and lower-order terms.
+7. Analyze extra memory separately from input memory.
+
+Example:
+
+```csharp
+foreach (var user in users)
+{
+    foreach (var role in roles)
+    {
+        // compare user to role
+    }
+}
+```
+
+This is O(u * r), not automatically O(n^2). It becomes O(n^2) only when both inputs grow together and have roughly the same size.
+
+## Common .NET Cost Traps
+
+- `List<T>.Contains` is O(n); `HashSet<T>.Contains` is average O(1).
+- `Enumerable.Count()` can enumerate the whole sequence when the source is not a collection.
+- `OrderBy` is O(n log n) and allocates sorting buffers when materialized.
+- Repeated `string += value` in a loop can become O(n^2).
+- `Dictionary<TKey, TValue>` lookup is average O(1), not guaranteed O(1).
+- Copying with `ToList()` or `ToArray()` is O(n) time and O(n) space.
+
+## Complexity Review Questions
+
+Before accepting your own answer, ask:
+
+- What happens when input doubles?
+- Did I count the cost of sorting?
+- Did I count allocated helper collections?
+- Is this worst case, average case, or amortized?
+- Are there two independent input sizes?
+- Did a LINQ call hide a loop?
+
+## Backend Example
+
+Imagine an API endpoint receives 10,000 product IDs and must remove duplicates.
+
+Brute force with a list:
+
+```text
+for each id:
+    if result does not contain id:
+        add id
+```
+
+`result.Contains(id)` is O(n), so the whole process can become O(n^2).
+
+Using `HashSet<int>`:
+
+```text
+for each id:
+    if seen.Add(id):
+        add id to result
+```
+
+The average time becomes O(n), with O(n) extra space.
