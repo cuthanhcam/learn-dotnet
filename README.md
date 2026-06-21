@@ -17,12 +17,12 @@ This repository documents my **learning journey with C# and .NET**, starting fro
 
 The goal of this project is to:
 
-* Build a **strong C# foundation**
-* Master **Object-Oriented Programming (OOP)**
-* Understand **.NET internals and performance**
-* Practice **Data Structures & Algorithms (DSA)**
-* Learn **asynchronous and concurrent programming**
-* Build **production-ready backend services with ASP.NET Core**
+- Build a **strong C# foundation**
+- Master **Object-Oriented Programming (OOP)**
+- Understand **.NET internals and performance**
+- Practice **Data Structures & Algorithms (DSA)**
+- Learn **asynchronous and concurrent programming**
+- Build **production-ready backend services with ASP.NET Core**
 
 This repository is intended for **learning, practice, and long-term reference**, especially for backend engineers working with .NET.
 
@@ -32,6 +32,9 @@ This repository is intended for **learning, practice, and long-term reference**,
 
 The repository is organized progressively from **fundamentals → advanced → real-world backend development**.
 
+![.NET Learning Roadmap](images/dotnet-learning-roadmap.png)
+_Figure 1: Structured .NET Learning Journey from Fundamentals to Advanced System Design._
+
 ---
 
 ### **1. C# Fundamentals**
@@ -40,14 +43,14 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Learn the core syntax and behavior of C#
 
-* Overview of .NET ecosystem (CLR, JIT)
-* Variables & data types
-* `var` vs `dynamic`
-* Operators & control flow (`if`, `switch`, loops)
-* Methods & parameter modifiers (`ref`, `out`, `in`)
-* Arrays & basic collections
-* String handling (`string` vs `StringBuilder`)
-* Null handling & basic memory concepts
+- Overview of .NET ecosystem (CLR, JIT)
+- Variables & data types
+- `var` vs `dynamic`
+- Operators & control flow (`if`, `switch`, loops)
+- Methods & parameter modifiers (`ref`, `out`, `in`)
+- Arrays & basic collections
+- String handling (`string` vs `StringBuilder`)
+- Null handling & basic memory concepts
 
 ---
 
@@ -57,20 +60,20 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Master the core paradigm of C#
 
-* Classes & objects
-* Encapsulation
-* Inheritance
-* Polymorphism
-* Abstraction
-* Interfaces vs Abstract classes
-* Access modifiers
-* `Equals()`, `GetHashCode()`, `ToString()`
-* SOLID principles (introduction)
+- Classes & objects
+- Encapsulation
+- Inheritance
+- Polymorphism
+- Abstraction
+- Interfaces vs Abstract classes
+- Access modifiers
+- `Equals()`, `GetHashCode()`, `ToString()`
+- SOLID principles (introduction)
 
 ### Bonus
 
-* Records vs Classes
-* Immutability
+- Records vs Classes
+- Immutability
 
 ---
 
@@ -80,15 +83,15 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Understand how .NET works under the hood
 
-* Collections (`List<T>`, `Dictionary<TKey, TValue>`, `HashSet<T>`)
-* Generics
-* Exception handling
-* LINQ (core skill)
-* Delegates & Events
-* File I/O
-* DateTime & TimeZone
-* Attributes
-* Nullable reference types
+- Collections (`List<T>`, `Dictionary<TKey, TValue>`, `HashSet<T>`)
+- Generics
+- Exception handling
+- LINQ (core skill)
+- Delegates & Events
+- File I/O
+- DateTime & TimeZone
+- Attributes
+- Nullable reference types
 
 ---
 
@@ -98,12 +101,12 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Critical for writing efficient and scalable applications
 
-* Stack vs Heap
-* Value types vs Reference types
-* Garbage Collection (GC)
-* Boxing / Unboxing
-* `Span<T>`, `Memory<T>`
-* Performance optimization techniques
+- Stack vs Heap
+- Value types vs Reference types
+- Garbage Collection (GC)
+- Boxing / Unboxing
+- `Span<T>`, `Memory<T>`
+- Performance optimization techniques
 
 ---
 
@@ -113,14 +116,14 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Build problem-solving and algorithmic thinking
 
-* Big-O notation
-* Arrays & Strings
-* Linked Lists
-* Stacks & Queues
-* Hash tables
-* Trees & Graphs
-* Sorting & Searching
-* Recursion & Backtracking
+- Big-O notation
+- Arrays & Strings
+- Linked Lists
+- Stacks & Queues
+- Hash tables
+- Trees & Graphs
+- Sorting & Searching
+- Recursion & Backtracking
 
 ---
 
@@ -130,18 +133,18 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Essential for modern backend systems
 
-* `async/await`
-* `Task` and `Task<T>`
-* Threading basics
-* ThreadPool
-* Parallel programming
-* Synchronization (`lock`, `SemaphoreSlim`)
-* Deadlocks (common scenarios)
-* `ConfigureAwait(false)`
-* I/O-bound vs CPU-bound
-* `CancellationToken` (best practices)
-* Channels / Pipelines (advanced)
-* Concurrent collections
+- `async/await`
+- `Task` and `Task<T>`
+- Threading basics
+- ThreadPool
+- Parallel programming
+- Synchronization (`lock`, `SemaphoreSlim`)
+- Deadlocks (common scenarios)
+- `ConfigureAwait(false)`
+- I/O-bound vs CPU-bound
+- `CancellationToken` (best practices)
+- Channels / Pipelines (advanced)
+- Concurrent collections
 
 ---
 
@@ -151,12 +154,12 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Build modern web APIs with ASP.NET Core
 
-* Web API fundamentals
-* Controllers & routing
-* Dependency Injection
-* Middleware pipeline
-* Configuration & Logging
-* Model binding & validation
+- Web API fundamentals
+- Controllers & routing
+- Dependency Injection
+- Middleware pipeline
+- Configuration & Logging
+- Model binding & validation
 
 ---
 
@@ -166,18 +169,18 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Work with databases using Entity Framework Core
 
-* DbContext & DbSet
-* Migrations
-* Relationships
-* Query optimization
-* Transactions
-* Tracking vs No-Tracking
-* N+1 Query problem
-* Compiled queries
-* Indexing strategies
-* Raw SQL vs LINQ
-* Bulk operations
-* Performance profiling (EF logs)
+- DbContext & DbSet
+- Migrations
+- Relationships
+- Query optimization
+- Transactions
+- Tracking vs No-Tracking
+- N+1 Query problem
+- Compiled queries
+- Indexing strategies
+- Raw SQL vs LINQ
+- Bulk operations
+- Performance profiling (EF logs)
 
 ---
 
@@ -187,15 +190,15 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Secure backend systems
 
-* JWT Authentication
-* Role-based authorization
-* Policy-based authorization
-* Refresh Token flow
-* Token rotation
-* OAuth2 & OpenID Connect (concept)
-* API rate limiting
-* OWASP Top 10 basics
-* Secure password storage (hashing + salt)
+- JWT Authentication
+- Role-based authorization
+- Policy-based authorization
+- Refresh Token flow
+- Token rotation
+- OAuth2 & OpenID Connect (concept)
+- API rate limiting
+- OWASP Top 10 basics
+- Secure password storage (hashing + salt)
 
 ---
 
@@ -205,18 +208,18 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Write production-level code
 
-* Clean Architecture
-* Layered architecture
-* Repository pattern
-* Service pattern
-* DTOs & mapping
-* Validation strategies
-* Monolith vs Microservices
-* Modular monolith (recommended)
-* CQRS (basic)
-* Domain-driven design (intro)
-* API versioning
-* Feature-based structure
+- Clean Architecture
+- Layered architecture
+- Repository pattern
+- Service pattern
+- DTOs & mapping
+- Validation strategies
+- Monolith vs Microservices
+- Modular monolith (recommended)
+- CQRS (basic)
+- Domain-driven design (intro)
+- API versioning
+- Feature-based structure
 
 ---
 
@@ -226,15 +229,15 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Ensure code quality and reliability
 
-* Unit testing
-* Integration testing
-* xUnit / NUnit
-* Mocking
-* Testcontainers (real DB testing)
-* API testing automation
-* Test data management
-* Code coverage basics
-* Integration test best practices
+- Unit testing
+- Integration testing
+- xUnit / NUnit
+- Mocking
+- Testcontainers (real DB testing)
+- API testing automation
+- Test data management
+- Code coverage basics
+- Integration test best practices
 
 ---
 
@@ -246,10 +249,10 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 ### Suggested Projects
 
-* Sales Management API
-* Authentication Service (RBAC)
-* File Storage Service
-* Mini E-commerce API
+- Sales Management API
+- Authentication Service (RBAC)
+- File Storage Service
+- Mini E-commerce API
 
 ---
 
@@ -259,13 +262,13 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Learn how to package, deploy, and run applications in real environments
 
-* Docker (Dockerfile, multi-stage build)
-* Docker Compose
-* Environment configs (dev/staging/prod)
-* CI/CD (GitHub Actions)
-* Secret management
-* Logging setup (Serilog)
-* Deploy to cloud (basic: VPS / Azure / AWS)
+- Docker (Dockerfile, multi-stage build)
+- Docker Compose
+- Environment configs (dev/staging/prod)
+- CI/CD (GitHub Actions)
+- Secret management
+- Logging setup (Serilog)
+- Deploy to cloud (basic: VPS / Azure / AWS)
 
 ---
 
@@ -275,16 +278,16 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Develop the ability to design scalable and maintainable backend systems
 
-* Monolith vs Microservices (trade-offs)
-* Caching (Redis)
-* Message Queue (RabbitMQ / Kafka – basic)
-* Rate limiting strategies
-* API Gateway concept
-* Scalability:
+- Monolith vs Microservices (trade-offs)
+- Caching (Redis)
+- Message Queue (RabbitMQ / Kafka – basic)
+- Rate limiting strategies
+- API Gateway concept
+- Scalability:
+    - Horizontal vs Vertical
+    - Load balancing
 
-  * Horizontal vs Vertical
-  * Load balancing
-* Database scaling basics
+- Database scaling basics
 
 ---
 
@@ -294,12 +297,12 @@ The repository is organized progressively from **fundamentals → advanced → r
 
 > Understand how to monitor, debug, and maintain systems in production
 
-* Structured logging
-* Correlation ID
-* Distributed tracing (concept)
-* Metrics (Prometheus basics)
-* Monitoring (Grafana basics)
-* Alerting basics
+- Structured logging
+- Correlation ID
+- Distributed tracing (concept)
+- Metrics (Prometheus basics)
+- Monitoring (Grafana basics)
+- Alerting basics
 
 ---
 
@@ -357,57 +360,57 @@ module/
 
 ## 🎯 Learning Goals
 
-* Write **clean, maintainable, and scalable C# code**
-* Understand **how .NET works internally**
-* Be confident in building **backend APIs**
-* Apply **best practices and architecture patterns**
-* Prepare for **technical interviews and real-world projects**
+- Write **clean, maintainable, and scalable C# code**
+- Understand **how .NET works internally**
+- Be confident in building **backend APIs**
+- Apply **best practices and architecture patterns**
+- Prepare for **technical interviews and real-world projects**
 
 ---
 
 ## 🛠️ Tools & Technologies
 
-* **C# / .NET (latest LTS)**
-* **ASP.NET Core**
-* **Entity Framework Core**
-* **SQL Server / PostgreSQL**
-* **xUnit / NUnit**
-* **Git & GitHub**
-* IDE: Visual Studio / VS Code / Rider
+- **C# / .NET (latest LTS)**
+- **ASP.NET Core**
+- **Entity Framework Core**
+- **SQL Server / PostgreSQL**
+- **xUnit / NUnit**
+- **Git & GitHub**
+- IDE: Visual Studio / VS Code / Rider
 
 ---
 
 ## 🚀 Best Practices
 
-* Focus on **understanding concepts**, not just syntax
-* Write code with **real-world scenarios**
-* Refactor regularly
-* Keep notes in `/docs`
-* Apply what you learn to **actual projects**
+- Focus on **understanding concepts**, not just syntax
+- Write code with **real-world scenarios**
+- Refactor regularly
+- Keep notes in `/docs`
+- Apply what you learn to **actual projects**
 
 ---
 
 ## 📚 References & Resources
 
-* Official .NET Documentation
+- Official .NET Documentation
   [https://learn.microsoft.com/en-us/dotnet/](https://learn.microsoft.com/en-us/dotnet/)
 
-* ASP.NET Core Docs
+- ASP.NET Core Docs
   [https://learn.microsoft.com/en-us/aspnet/core/](https://learn.microsoft.com/en-us/aspnet/core/)
 
-* Entity Framework Core Docs
+- Entity Framework Core Docs
   [https://learn.microsoft.com/en-us/ef/core/](https://learn.microsoft.com/en-us/ef/core/)
 
-* C# Programming Guide
+- C# Programming Guide
   [https://learn.microsoft.com/en-us/dotnet/csharp/](https://learn.microsoft.com/en-us/dotnet/csharp/)
 
 ---
 
 ## 📝 Notes
 
-* This repository is **continuously updated**
-* Code examples prioritize **clarity over complexity**
-* Mistakes and refactoring are part of the learning process
+- This repository is **continuously updated**
+- Code examples prioritize **clarity over complexity**
+- Mistakes and refactoring are part of the learning process
 
 ---
 
