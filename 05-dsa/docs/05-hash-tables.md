@@ -41,6 +41,18 @@ Grouping:
 computed key -> list of original values
 ```
 
+Complement lookup:
+
+```text
+for each value:
+    needed = target - value
+    if needed has been seen:
+        answer found
+    remember value
+```
+
+This turns many pair-search problems from O(n^2) into average O(n).
+
 ## Equality In C#
 
 Hash tables rely on:
@@ -55,6 +67,23 @@ For strings, choose the comparer intentionally:
 - `StringComparer.OrdinalIgnoreCase`
 - Culture-aware comparers when the domain truly needs culture rules
 
+## Designing Keys
+
+Good hash keys are stable and represent identity clearly.
+
+Prefer:
+
+- Immutable values
+- Primitive IDs
+- Normalized strings with an explicit comparer
+- Records or structs with correct equality semantics
+
+Avoid:
+
+- Mutable objects whose fields can change after insertion
+- Floating-point values unless the domain has clear precision rules
+- Case-sensitive string keys for user-entered identifiers when the business rule is case-insensitive
+
 ## Backend Connections
 
 Hash-table thinking shows up in:
@@ -65,6 +94,9 @@ Hash-table thinking shows up in:
 - Grouping query results
 - Idempotency key lookup
 - Request correlation maps
+- Rate-limit counters
+- Permission lookup sets
+- Precomputed read models
 
 ## Pitfalls
 
@@ -72,4 +104,14 @@ Hash-table thinking shows up in:
 - Using case-sensitive string keys when the domain is case-insensitive.
 - Assuming dictionary iteration order is part of your business contract.
 - Forgetting memory cost when storing large values or many keys.
+- Calling `dictionary[key]` when the key may not exist; prefer `TryGetValue`.
+
+## Practice Problems To Master
+
+- Two sum with complement lookup.
+- First non-repeating character.
+- Group anagrams.
+- Detect duplicates.
+- Count frequencies.
+- Find intersection of two arrays.
 
