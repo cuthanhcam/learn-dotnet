@@ -1,3 +1,11 @@
+---
+title: "Garbage Collection"
+description: "Reachability, generations, promotion, the LOH, finalization, disposal, and GC trade-offs."
+phase: 4
+order: 2
+topics: [dotnet, garbage-collection, disposal]
+---
+
 # Garbage Collection
 
 ## What GC Solves

@@ -1,3 +1,11 @@
+---
+title: ".NET Memory Model"
+description: "Stack frames, managed objects, value/reference semantics, copying, and object lifetime."
+phase: 4
+order: 1
+topics: [dotnet, memory, stack, heap]
+---
+
 # Memory Model
 
 ## The Core Question

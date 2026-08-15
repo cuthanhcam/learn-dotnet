@@ -1,3 +1,11 @@
+---
+title: "Span, Memory, and Pooling"
+description: "Non-owning memory views, lifetime safety, stackalloc, Memory, and ArrayPool ownership."
+phase: 4
+order: 4
+topics: [dotnet, span, memory, arraypool]
+---
+
 # Span, Memory, and Pooling
 
 ## Why These APIs Exist

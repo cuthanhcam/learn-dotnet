@@ -1,3 +1,11 @@
+---
+title: "Common Memory and Performance Pitfalls"
+description: "Misleading memory models, unsafe pooling, invalid benchmarks, and premature optimization."
+phase: 4
+order: 6
+topics: [dotnet, performance, pitfalls]
+---
+
 # Common Pitfalls
 
 ## 1. Treating Every Allocation As A Bug
