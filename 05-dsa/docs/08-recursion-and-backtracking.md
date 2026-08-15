@@ -1,3 +1,11 @@
+---
+title: "Recursion and Backtracking"
+description: "Base cases, recursive state, choice exploration, pruning, restoration, and search-space complexity."
+phase: 5
+order: 8
+topics: [dsa, recursion, backtracking]
+---
+
 # Recursion and Backtracking
 
 Recursion solves a problem by reducing it to smaller versions of itself. Backtracking uses recursion to explore choices and undo them after each branch.

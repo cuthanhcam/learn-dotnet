@@ -1,3 +1,11 @@
+---
+title: "Hash Tables"
+description: "Hashing, equality, collisions, frequency maps, membership, grouping, and lookup trade-offs."
+phase: 5
+order: 5
+topics: [dsa, hashing, dictionaries, sets]
+---
+
 # Hash Tables
 
 A hash table maps a key to a bucket by using a hash code. In C#, the common hash-table-backed collections are `Dictionary<TKey, TValue>` and `HashSet<T>`.

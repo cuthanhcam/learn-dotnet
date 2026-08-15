@@ -1,3 +1,11 @@
+---
+title: "Arrays and Strings"
+description: "Contiguous data, two pointers, sliding windows, prefix sums, string costs, and boundary invariants."
+phase: 5
+order: 2
+topics: [dsa, arrays, strings]
+---
+
 # Arrays and Strings
 
 Arrays and strings are the first place where DSA becomes concrete. They are contiguous, indexable sequences, so many problems are about moving indexes carefully.

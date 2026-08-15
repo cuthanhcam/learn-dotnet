@@ -1,3 +1,11 @@
+---
+title: "Big-O Notation"
+description: "Growth rates, input models, time and space complexity, amortized analysis, and common reasoning traps."
+phase: 5
+order: 1
+topics: [dsa, complexity, big-o]
+---
+
 # Big-O Notation
 
 Big-O describes how resource usage grows as input size grows. It is a language for comparing algorithms when exact timings are too dependent on hardware, runtime, input distribution, and constant factors.

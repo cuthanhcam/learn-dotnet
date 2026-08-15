@@ -1,3 +1,11 @@
+---
+title: ".NET DSA Reference"
+description: "A selection guide for .NET collections, APIs, equality, sorting, and allocation-aware algorithms."
+phase: 5
+order: 10
+topics: [dsa, dotnet, collections, reference]
+---
+
 # .NET DSA Reference
 
 This page connects algorithmic ideas to the C# and .NET types you will use most often.

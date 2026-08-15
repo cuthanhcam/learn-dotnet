@@ -1,3 +1,11 @@
+---
+title: "DSA Learning Roadmap"
+description: "The ordered study path, checkpoints, and mastery criteria for Phase 05."
+phase: 5
+order: 0
+topics: [dsa, roadmap]
+---
+
 # DSA Roadmap
 
 ## Goal

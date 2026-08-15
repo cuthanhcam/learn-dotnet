@@ -1,3 +1,11 @@
+---
+title: "Trees and Graphs"
+description: "Representations, recursive and iterative DFS, BFS, visited state, cycles, and disconnected components."
+phase: 5
+order: 6
+topics: [dsa, trees, graphs, traversal]
+---
+
 # Trees and Graphs
 
 Trees and graphs represent relationships. A tree is hierarchical. A graph is more general and can contain cycles.
