@@ -75,12 +75,16 @@ dotnet run --project exercises/AsyncConcurrency.Exercises
 | Type | Concept |
 |---|---|
 | `AsyncBasicsExample` | Non-blocking waits and `Task.WhenAll` ordering |
+| `AsyncStreamOperators` | Streaming buffers, sequential transforms, cancellation, and bounded materialization |
 | `CancellationExample` | Cooperative cancellation and owned timeout translation |
 | `ThreadSafeCounter` | Atomic read-modify-write with `Interlocked` |
 | `BoundedExecutor` | `SemaphoreSlim`, ordered results, and release in `finally` |
 | `ChannelPipelineExample` | Bounded producer/consumer flow and writer completion |
 | `AsyncMap` | Exercise in bounded asynchronous transformation |
 | `AsyncRetry` | Selective retry with cancellation-aware delay |
+| `AsyncLock` | Async mutual exclusion with an idempotent ownership lease |
+| `ParallelAggregation` | Partition-local CPU aggregation with a single merge per partition |
+| `ChannelWorkPool` | Bounded multi-worker pipeline, ordered results, and failure propagation |
 
 ## Design Checklist
 

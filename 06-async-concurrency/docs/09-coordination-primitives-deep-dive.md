@@ -1,12 +1,16 @@
 ---
 title: ".NET Coordination Primitives: Choosing by Invariant"
 description: "A detailed comparison of Interlocked, Monitor, SemaphoreSlim, Semaphore, Mutex, reader-writer locks, signals, barriers, spinning, and async coordination."
+slug: dotnet-coordination-primitives
 phase: 6
 order: 9
 topics: [concurrency, synchronization, semaphore, locks, signals]
 article-type: deep-dive
 estimated-reading-minutes: 30
-prerequisites: [threads, task-based-asynchronous-pattern, race-conditions]
+prerequisites: [dotnet-deadlocks-context, dotnet-synchronization-shared-state]
+difficulty: advanced
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # .NET Coordination Primitives

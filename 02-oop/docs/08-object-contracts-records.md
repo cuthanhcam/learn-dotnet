@@ -6,7 +6,7 @@ phase: 2
 order: 8
 difficulty: intermediate
 article-type: deep-dive
-estimated-reading-minutes: 22
+estimated-reading-minutes: 28
 topics: [csharp, equality, records, immutability]
 prerequisites: [csharp-classes-objects-encapsulation, csharp-foundational-collections]
 status: maintained
@@ -109,6 +109,52 @@ An immutable type does not expose operations that change its observable state af
 
 Immutability simplifies reasoning and makes sharing safer, but copying large object graphs can be costly. Choose it where stable values and predictable behavior matter.
 
+## Normalization is part of equality
+
+A value object must define which representations mean the same value. Normalize once during
+construction when the rule is stable and domain-owned; do not scatter casing and trimming across
+every comparison.
+
+The included `Email` example preserves local-part casing and normalizes the domain to lowercase.
+That is an explicit teaching contract, not a claim to implement every syntax and delivery rule from
+the complete email RFC family. Production identity systems often choose even stricter product-level
+rules and may rely on verification rather than syntax alone.
+
+The same comparer semantics must be used consistently by:
+
+- `Equals(Email?)`;
+- `Equals(object?)`;
+- `GetHashCode()`;
+- `==` and `!=`; and
+- any ordering comparer if the type later supports ordering.
+
+If equality treats the domain case-insensitively but hashing uses a case-sensitive comparer, equal
+instances can land in different hash buckets and break lookup behavior.
+
+## Construction APIs and invalid state
+
+Throwing construction is appropriate when invalid input indicates a programming or boundary error.
+A `TryCreate` factory is convenient for expected user-input validation. Both paths should share one
+parser so their accepted value set cannot drift.
+
+Do not construct an invalid placeholder object and expect every later method to check it. A value
+object is most useful when successful construction proves its invariants for the remainder of its
+lifetime.
+
+## Value objects in collections
+
+Tests should use the type as a real key or set member, not merely call `Equals` once. Add equivalent
+instances to a `HashSet<T>`, retrieve dictionary values with a separately created equal key, and
+verify that comparer-distinct values remain separate. These tests exercise the complete equality and
+hash contract callers depend on.
+
+## Implementation map
+
+| Concern | Source | Tests |
+|---|---|---|
+| Validation, domain normalization, equality, hash, operators | `Classes/ValueObjectExample.cs` | `Classes/ValueObjectExampleTests.cs` |
+| Record copy syntax and shallow immutability | `Classes/ImmutableObjectExample.cs` | `Classes/ImmutableObjectExampleTests.cs` |
+
 ## Review questions
 
 1. Why must equal objects have equal hash codes?
@@ -119,7 +165,15 @@ Immutability simplifies reasoning and makes sharing safer, but copying large obj
 
 ## Practice
 
-Implement an immutable `EmailAddress` value object that normalizes its domain, rejects invalid input, provides value equality, and produces safe diagnostic text. Add tests for reflexivity, symmetry, equivalent casing rules, invalid input, and hash-set behavior.
+Extend the included `Email` value object with a privacy-safe display method that masks part of the
+local value. Then add dictionary lookup tests, JSON serialization policy, and explicit maximum-length
+rules without pretending the sample is a complete RFC validator.
+
+## Further reading
+
+- [Records](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/records)
+- [Equality comparisons](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/equality-comparisons)
+- [How to define value equality](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/how-to-define-value-equality-for-a-type)
 
 ## Navigation
 

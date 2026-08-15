@@ -1,9 +1,16 @@
 ---
 title: "Deadlocks, SynchronizationContext, and ConfigureAwait"
 description: "Circular waits, sync-over-async, context capture, thread-pool starvation, and deadlock prevention."
+slug: dotnet-deadlocks-context
 phase: 6
 order: 8
+difficulty: advanced
+article-type: deep-dive
+estimated-reading-minutes: 28
 topics: [deadlocks, synchronization-context, configureawait]
+prerequisites: [dotnet-concurrent-collections]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Deadlocks, SynchronizationContext, and ConfigureAwait

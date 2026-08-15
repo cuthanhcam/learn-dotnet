@@ -1,9 +1,16 @@
 ---
 title: "Common Async and Concurrency Pitfalls"
 description: "Unobserved tasks, async void, sync-over-async, lost cancellation, races, unbounded fan-out, and retry hazards."
+slug: dotnet-async-concurrency-pitfalls
 phase: 6
-order: 9
+order: 99
+difficulty: reference
+article-type: pitfalls
+estimated-reading-minutes: 22
 topics: [async, concurrency, pitfalls]
+prerequisites: [dotnet-production-concurrency-patterns]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Common Async and Concurrency Pitfalls

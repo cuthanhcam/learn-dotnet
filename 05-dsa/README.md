@@ -184,6 +184,11 @@ Use this loop for every problem, even small ones:
 | `13-dynamic-programming-greedy.md` | DP state design, memory compression, and greedy proof |
 | `common-pitfalls.md`               | Mistakes to catch during practice and review          |
 
+Advanced implementations include `AvlTree<T>`, `BinaryMinHeap<T>`, `PrefixTrie`, `FenwickTree`,
+`SegmentTree`, `DisjointSet`, Dijkstra shortest paths, Kahn topological sorting, Kruskal minimum
+spanning forests, and Tarjan strongly connected components. Each type is kept separate so its
+invariant, complexity, and boundary tests remain easy to study.
+
 ## Mastery Check
 
 You are ready to move beyond this phase when you can:

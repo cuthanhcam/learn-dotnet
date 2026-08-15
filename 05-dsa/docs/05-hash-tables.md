@@ -1,9 +1,16 @@
 ---
 title: "Hash Tables"
 description: "Hashing, equality, collisions, frequency maps, membership, grouping, and lookup trade-offs."
+slug: dsa-hash-tables
 phase: 5
 order: 5
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 28
 topics: [dsa, hashing, dictionaries, sets]
+prerequisites: [dsa-stacks-queues]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Hash Tables

@@ -1,9 +1,16 @@
 ---
 title: "Trees and Graphs"
 description: "Representations, recursive and iterative DFS, BFS, visited state, cycles, and disconnected components."
+slug: dsa-trees-graphs
 phase: 5
 order: 6
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 34
 topics: [dsa, trees, graphs, traversal]
+prerequisites: [dsa-hash-tables]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Trees and Graphs

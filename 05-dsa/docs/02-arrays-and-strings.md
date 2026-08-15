@@ -1,9 +1,16 @@
 ---
 title: "Arrays and Strings"
 description: "Contiguous data, two pointers, sliding windows, prefix sums, string costs, and boundary invariants."
+slug: dsa-arrays-strings
 phase: 5
 order: 2
+difficulty: beginner
+article-type: tutorial
+estimated-reading-minutes: 28
 topics: [dsa, arrays, strings]
+prerequisites: [dsa-big-o]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Arrays and Strings

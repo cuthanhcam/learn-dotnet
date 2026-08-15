@@ -1,12 +1,16 @@
 ---
 title: "Advanced Graph Algorithms: DAGs, Shortest Paths, MST, SCC, and Union-Find"
 description: "A correctness- and complexity-oriented guide to graph ordering, paths, connectivity, spanning trees, and components."
+slug: dsa-advanced-graph-algorithms
 phase: 5
 order: 12
 topics: [dsa, graphs, dijkstra, topological-sort, mst, scc, union-find]
 article-type: deep-dive
 estimated-reading-minutes: 25
-prerequisites: [bfs, dfs, priority-queues, complexity-analysis]
+prerequisites: [dsa-trees-graphs, dsa-advanced-tree-indexes, dsa-big-o]
+difficulty: advanced
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Advanced Graph Algorithms
@@ -50,9 +54,34 @@ Kruskal sorts all edges, then accepts an edge only if it joins different compone
 
 An MST minimizes total connection cost. It does not minimize distance from a source. Disconnected input produces a minimum spanning forest unless the API explicitly rejects it.
 
+The repository's Kruskal implementation accepts an explicit vertex set because isolated vertices
+cannot be inferred from an edge list. It validates unique vertices and known endpoints, then sorts
+edges by `(weight, input order)`. Input order is not required for correctness, but makes equal-weight
+choices deterministic for teaching, tests, and diagnostics.
+
+Negative edge weights are valid for a minimum spanning tree: adding a negative-cost connection can
+reduce the total. Self-loops are ignored because both endpoints already belong to the same component.
+Parallel edges are allowed; sorted processing naturally considers the cheapest useful edge first.
+
+For `V` vertices and `E` edges, sorting dominates at `O(E log E)`. Union-Find operations are almost
+constant amortized time. A connected tree selects exactly `V - 1` edges. A forest with `C` final
+components selects `V - C` edges—an effective invariant for tests.
+
 ## Strongly Connected Components
 
 In an SCC, every vertex can reach every other vertex. Kosaraju uses two DFS passes and a reversed graph. Tarjan uses discovery indexes, low-link values, and a stack in one traversal. SCC condensation turns a directed graph into a DAG and enables higher-level dependency analysis.
+
+Tarjan assigns each vertex a discovery index. Its low-link value is the smallest discovery index
+reachable through the active DFS region. When a vertex has `lowLink == discoveryIndex`, it is the
+root of one component; pop until that vertex is removed.
+
+The active-stack test is essential. An edge to a vertex in an already completed component must not
+lower the current low-link value. Self-loops remain valid and produce or participate in an SCC.
+Every destination must exist as a graph key so isolated and destination-only vertices are modeled
+consistently.
+
+Recursive DFS is concise, but a path with extreme depth can exhaust the call stack. Production code
+for adversarial graphs may require an explicit-frame iterative implementation.
 
 ## Union-Find Invariant
 
@@ -72,14 +101,18 @@ Each component is a rooted parent tree. Roots parent themselves. `Find` returns 
 
 - `TreesGraphs/WeightedGraphAlgorithms.cs`: Dijkstra and Kahn topological sorting.
 - `TreesGraphs/DisjointSet.cs`: path compression and union by size.
-- `AdvancedGraphAlgorithmsTests.cs`: correctness, invalid inputs, cycles, and connectivity.
+- `TreesGraphs/MinimumSpanningForest.cs`: stable Kruskal processing over connected or disconnected input.
+- `TreesGraphs/StronglyConnectedComponents.cs`: Tarjan discovery, low-link, and active-stack mechanics.
+- `AdvancedGraphAlgorithmsTests.cs`: shortest paths, topological cycles, and connectivity.
+- `MinimumSpanningForestTests.cs`: cycles, disconnected input, negative edges, self-loops, and validation.
+- `StronglyConnectedComponentsTests.cs`: multiple cycles, self-loops, empty input, and invalid destinations.
 
 ## Exercises
 
 1. Return predecessor data and reconstruct a Dijkstra shortest path.
 2. Implement Bellman-Ford and identify vertices affected by a negative cycle.
-3. Implement Kruskal with stable edge tie-breaking.
-4. Implement Tarjan SCC and build the condensation DAG.
+3. Extend Kruskal to return a clear error when a caller requires one connected tree.
+4. Use the Tarjan result to build and topologically order the condensation DAG.
 5. Implement multi-source BFS for nearest-service distance on a grid.
 
 ## Navigation

@@ -1,58 +1,89 @@
-﻿using System;
+namespace OopBasics.Examples.Classes;
 
-namespace OopBasics.Examples.Classes
+public static class ValueObjectExample
 {
-    /// <summary>
-    /// Demonstrates:
-    /// - Value Objects
-    /// - Encapsulating domain concepts
-    /// - Validation inside small types
-    /// </summary>
-    public class ValueObjectExample
+    public static void Run()
     {
-        public static void Run()
+        Console.WriteLine("ValueObjectExample: Encapsulating domain values");
+        var email = new Email("user@Example.COM");
+        Console.WriteLine($"Normalized email: {email}");
+
+        if (!Email.TryCreate("invalid-email", out _, out string? error))
         {
-            Console.WriteLine("ValueObjectExample: Encapsulating domain values");
+            Console.WriteLine($"Validation error: {error}");
+        }
 
-            var email = new Email("user@example.com");
+        Console.WriteLine("- Value objects enforce validation and normalization at creation.");
+        Console.WriteLine("- Equality follows the domain value rather than object identity.");
+    }
+}
 
-            Console.WriteLine($"Email: {email}");
+/// <summary>
+/// A deliberately small email-address value object for teaching equality and invariants.
+/// It is not intended to implement every address form allowed by the complete email RFCs.
+/// </summary>
+public sealed class Email : IEquatable<Email>
+{
+    public Email(string value)
+    {
+        (LocalPart, Domain) = Parse(value);
+        Value = $"{LocalPart}@{Domain}";
+    }
 
-            try
-            {
-                var invalid = new Email("invalid-email");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Validation error: {ex.Message}");
-            }
+    public string LocalPart { get; }
+    public string Domain { get; }
+    public string Value { get; }
 
-            Console.WriteLine("\nNotes:");
-            Console.WriteLine("- Value Objects represent concepts, not primitives.");
-            Console.WriteLine("- They enforce validation at creation.");
-            Console.WriteLine("- They improve type safety.");
+    public static bool TryCreate(string? value, out Email? email, out string? error)
+    {
+        try
+        {
+            email = new Email(value!);
+            error = null;
+            return true;
+        }
+        catch (ArgumentException exception)
+        {
+            email = null;
+            error = exception.Message;
+            return false;
         }
     }
 
-    public class Email
+    public bool Equals(Email? other) =>
+        other is not null &&
+        StringComparer.Ordinal.Equals(LocalPart, other.LocalPart) &&
+        StringComparer.OrdinalIgnoreCase.Equals(Domain, other.Domain);
+
+    public override bool Equals(object? obj) => obj is Email other && Equals(other);
+
+    public override int GetHashCode() => HashCode.Combine(
+        StringComparer.Ordinal.GetHashCode(LocalPart),
+        StringComparer.OrdinalIgnoreCase.GetHashCode(Domain));
+
+    public override string ToString() => Value;
+
+    public static bool operator ==(Email? left, Email? right) => Equals(left, right);
+    public static bool operator !=(Email? left, Email? right) => !Equals(left, right);
+
+    private static (string LocalPart, string Domain) Parse(string value)
     {
-        public string Value { get; }
-
-        public Email(string value)
+        ArgumentException.ThrowIfNullOrWhiteSpace(value);
+        if (value.Any(char.IsWhiteSpace))
         {
-            if (string.IsNullOrWhiteSpace(value) || !value.Contains("@"))
-                throw new ArgumentException("Invalid email format.");
-
-            Value = value;
+            throw new ArgumentException("An email address cannot contain whitespace.", nameof(value));
         }
 
-        public override string ToString() => Value;
-
-        public override bool Equals(object? obj)
+        int separator = value.IndexOf('@');
+        if (separator <= 0 ||
+            separator != value.LastIndexOf('@') ||
+            separator == value.Length - 1)
         {
-            return obj is Email other && Value == other.Value;
+            throw new ArgumentException(
+                "An email address must contain one non-edge '@' separator.",
+                nameof(value));
         }
 
-        public override int GetHashCode() => Value.GetHashCode();
+        return (value[..separator], value[(separator + 1)..].ToLowerInvariant());
     }
 }

@@ -108,6 +108,10 @@ dotnet run -c Release --project benchmarks/MemoryPerformance.Benchmarks
 4. Benchmarks compare realistic alternatives, not toy tricks alone.
 5. Optimization decisions should be backed by measurement.
 
+The pooling examples include both a direct `try/finally` rent pattern and `PooledBuffer<T>`, an
+`IMemoryOwner<T>` implementation that makes logical length, use-after-dispose behavior, idempotent
+return, and sensitive-data clearing policy explicit.
+
 ## Study Order
 
 1. Read `docs/00-roadmap.md`.

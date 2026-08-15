@@ -1,4 +1,5 @@
 using CSharpBasics.Examples.Variables;
+using System.Globalization;
 using Xunit;
 
 namespace CSharpBasics.Tests;
@@ -128,5 +129,39 @@ public class VariablesTests
         var s1 = VariablesExamples.PrimitiveSnapshot.Create(1, 2, 3m, 4.0, "a", true, 'A');
         var s2 = VariablesExamples.PrimitiveSnapshot.Create(1, 2, 3m, 4.0, "a", true, 'A');
         Assert.NotEqual(s1.Id, s2.Id);
+    }
+
+    [Fact]
+    public void TryParseAmount_UsesExplicitCultureAndRejectsCurrencySymbol()
+    {
+        CultureInfo german = CultureInfo.GetCultureInfo("de-DE");
+
+        Assert.True(NumericConversionExample.TryParseAmount("1.234,56", german, out decimal amount));
+        Assert.Equal(1234.56m, amount);
+        Assert.False(NumericConversionExample.TryParseAmount("€1.234,56", german, out _));
+    }
+
+    [Fact]
+    public void ToInt32Checked_RejectsNarrowingOverflow()
+    {
+        Assert.Equal(42, NumericConversionExample.ToInt32Checked(42));
+        Assert.Throws<OverflowException>(() =>
+            NumericConversionExample.ToInt32Checked((long)int.MaxValue + 1));
+    }
+
+    [Theory]
+    [InlineData((long)int.MinValue, true)]
+    [InlineData((long)int.MaxValue, true)]
+    [InlineData((long)int.MinValue - 1, false)]
+    [InlineData((long)int.MaxValue + 1, false)]
+    public void TryToInt32_HandlesBoundaries(long value, bool expectedSuccess)
+    {
+        bool success = NumericConversionExample.TryToInt32(value, out int result);
+
+        Assert.Equal(expectedSuccess, success);
+        if (success)
+        {
+            Assert.Equal((int)value, result);
+        }
     }
 }

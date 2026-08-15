@@ -1,9 +1,16 @@
 ---
 title: "DSA Practice System"
 description: "A repeatable problem-solving, review, spaced-repetition, and mistake-tracking workflow."
+slug: dsa-practice-system
 phase: 5
 order: 9
+difficulty: reference
+article-type: reference
+estimated-reading-minutes: 20
 topics: [dsa, practice, problem-solving]
+prerequisites: [dsa-recursion-backtracking]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # DSA Practice System
