@@ -7,6 +7,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Problem Details gives error responses a standard machine-readable shape instead of
 // returning ad-hoc strings that every client must interpret differently.
 builder.Services.AddProblemDetails();
+builder.Services.AddControllers();
 
 builder.Services
     .AddOptions<LearningOptions>()
@@ -18,6 +19,9 @@ builder.Services
 // persistence boundary without changing endpoint contracts or application-level behavior.
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
 builder.Services.AddScoped<ProductCatalog>();
+builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.OrderQuoteService>();
+builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.TenantContext>();
+builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.RequireTenantFilter>();
 builder.Services.AddSingleton(TimeProvider.System);
 
 WebApplication app = builder.Build();
@@ -30,6 +34,7 @@ app.MapGet("/health", () => TypedResults.Ok(new { Status = "healthy" }))
     .WithTags("Operations");
 
 app.MapProductEndpoints();
+app.MapControllers();
 
 app.Run();
 
