@@ -1,9 +1,16 @@
 ---
 title: "OOP Patterns and Composition"
 description: "Composition, strategy, factory, and observer as introductory object-design patterns."
+slug: oop-composition-and-patterns
 phase: 2
 order: 7
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 22
 topics: [oop, composition, design-patterns]
+prerequisites: [csharp-polymorphism-and-abstraction]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # OOP Patterns (Intro)

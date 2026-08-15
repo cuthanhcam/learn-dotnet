@@ -1,9 +1,16 @@
 ---
 title: "Date, Time, and Time Zones"
 description: "DateTime, DateTimeOffset, TimeSpan, time-zone conversion, parsing, formatting, and testable clocks."
+slug: dotnet-date-time-timezones
 phase: 3
 order: 7
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 26
 topics: [dotnet, datetime, timezones]
+prerequisites: [csharp-variables-and-types]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # 🕐 DateTime & TimeZone: Temporal Operations

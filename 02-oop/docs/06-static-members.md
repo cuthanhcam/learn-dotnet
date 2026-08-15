@@ -1,9 +1,16 @@
 ---
 title: "Static Members"
 description: "Static state, methods, properties, constructors, initialization, and testability trade-offs."
+slug: csharp-static-members-and-state
 phase: 2
 order: 6
+difficulty: intermediate
+article-type: concept
+estimated-reading-minutes: 14
 topics: [csharp, static-members]
+prerequisites: [csharp-classes-objects-encapsulation]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Static Members

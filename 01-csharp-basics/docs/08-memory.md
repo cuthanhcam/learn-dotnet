@@ -1,9 +1,16 @@
 ---
 title: "Memory Management and GC Fundamentals"
 description: "An introduction to value/reference semantics, the managed heap, garbage collection, and disposal."
+slug: dotnet-memory-fundamentals
 phase: 1
 order: 8
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 28
 topics: [dotnet, memory, garbage-collection]
+prerequisites: [csharp-variables-and-types, csharp-null-safety]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Memory Management & GC Fundamentals

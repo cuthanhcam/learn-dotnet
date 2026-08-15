@@ -1,9 +1,16 @@
 ---
 title: "Phase 02 Documentation Index"
 description: "An ordered index of the object-oriented programming lessons."
+slug: oop-documentation-index
 phase: 2
 order: -1
+difficulty: reference
+article-type: reference
+estimated-reading-minutes: 4
 topics: [oop, index]
+prerequisites: [csharp-fundamentals-roadmap]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # OOP Module Documentation

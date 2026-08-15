@@ -1,9 +1,16 @@
 ---
 title: "Common OOP Pitfalls"
 description: "Frequent object-design mistakes, their consequences, and safer alternatives."
+slug: oop-common-pitfalls
 phase: 2
 order: 10
+difficulty: intermediate
+article-type: pitfalls
+estimated-reading-minutes: 16
 topics: [oop, pitfalls, design]
+prerequisites: [solid-principles-practical-guide]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Common OOP Pitfalls

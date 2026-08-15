@@ -1,9 +1,16 @@
 ---
 title: "File I/O and Streams"
 description: "Paths, files, streams, encoding, buffering, disposal, atomicity, and safe filesystem boundaries."
+slug: dotnet-file-io-streams
 phase: 3
 order: 6
+difficulty: intermediate
+article-type: tutorial
+estimated-reading-minutes: 26
 topics: [dotnet, files, streams]
+prerequisites: [csharp-construction-finalization-disposal, dotnet-exception-handling]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # 💾 File I/O: Reading and Writing Files

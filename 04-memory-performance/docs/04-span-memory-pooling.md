@@ -1,9 +1,16 @@
 ---
 title: "Span, Memory, and Pooling"
 description: "Non-owning memory views, lifetime safety, stackalloc, Memory, and ArrayPool ownership."
+slug: dotnet-span-memory-pooling
 phase: 4
 order: 4
+difficulty: advanced
+article-type: deep-dive
+estimated-reading-minutes: 25
 topics: [dotnet, span, memory, arraypool]
+prerequisites: [dotnet-memory-model-deep-dive, dotnet-allocation-patterns]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Span, Memory, and Pooling

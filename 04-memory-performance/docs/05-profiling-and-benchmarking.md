@@ -1,9 +1,16 @@
 ---
 title: "Profiling and Benchmarking"
 description: "Baselines, allocation metrics, profilers, BenchmarkDotNet, and experimental discipline."
+slug: dotnet-profiling-and-benchmarking
 phase: 4
 order: 5
+difficulty: advanced
+article-type: tutorial
+estimated-reading-minutes: 24
 topics: [dotnet, profiling, benchmarking]
+prerequisites: [dotnet-allocation-patterns]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Profiling and Benchmarking

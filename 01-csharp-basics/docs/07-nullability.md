@@ -1,9 +1,16 @@
 ---
 title: "Null Safety and Nullability"
 description: "Nullable value and reference types, flow analysis, guards, and null-handling operators."
+slug: csharp-null-safety
 phase: 1
 order: 7
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 22
 topics: [csharp, nullability]
+prerequisites: [csharp-variables-and-types, csharp-methods-and-parameters]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Null Safety & Nullability

@@ -1,9 +1,16 @@
 ---
 title: "Classes and Objects in C#"
 description: "Classes, instances, state, behavior, properties, encapsulation, and invariants."
+slug: csharp-classes-objects-encapsulation
 phase: 2
 order: 1
+difficulty: beginner
+article-type: tutorial
+estimated-reading-minutes: 18
 topics: [oop, classes, encapsulation]
+prerequisites: [oop-learning-roadmap, csharp-methods-and-parameters]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Classes & Objects in C#

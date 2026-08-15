@@ -1,9 +1,16 @@
 ---
 title: "Delegates and Events"
 description: "Delegate types, lambdas, closures, multicast invocation, event contracts, and subscriber lifetime."
+slug: csharp-delegates-events-closures
 phase: 3
 order: 5
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 25
 topics: [csharp, delegates, events]
+prerequisites: [csharp-methods-and-parameters, csharp-classes-objects-encapsulation]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # 📢 Delegates & Events: Event-Driven Programming

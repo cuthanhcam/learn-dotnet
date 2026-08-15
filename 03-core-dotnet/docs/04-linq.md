@@ -1,9 +1,16 @@
 ---
 title: "LINQ — Language Integrated Query"
 description: "LINQ operators, deferred execution, materialization, composition, complexity, and query correctness."
+slug: linq-deferred-execution
 phase: 3
 order: 4
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 28
 topics: [dotnet, linq, queries]
+prerequisites: [dotnet-collections-deep-dive, csharp-generics-constraints-variance]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # ⚡ LINQ: Language-Integrated Queries

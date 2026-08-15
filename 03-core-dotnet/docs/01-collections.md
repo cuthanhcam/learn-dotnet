@@ -1,9 +1,16 @@
 ---
 title: "Collections in .NET"
 description: "Collection interfaces, concrete data structures, equality, complexity, and selection trade-offs."
+slug: dotnet-collections-deep-dive
 phase: 3
 order: 1
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 24
 topics: [dotnet, collections]
+prerequisites: [csharp-foundational-collections, csharp-object-contracts-records-immutability]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # 📦 Collections: Lists, Dictionaries, and Sets
