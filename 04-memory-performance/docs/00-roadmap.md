@@ -1,3 +1,11 @@
+---
+title: "Memory and Performance Roadmap"
+description: "The ordered study path and measurement workflow for Phase 04."
+phase: 4
+order: 0
+topics: [dotnet, memory, performance, roadmap]
+---
+
 # Roadmap: Memory & Performance
 
 ## Purpose

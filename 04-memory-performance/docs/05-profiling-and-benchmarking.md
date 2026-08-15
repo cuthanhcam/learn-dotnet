@@ -1,3 +1,11 @@
+---
+title: "Profiling and Benchmarking"
+description: "Baselines, allocation metrics, profilers, BenchmarkDotNet, and experimental discipline."
+phase: 4
+order: 5
+topics: [dotnet, profiling, benchmarking]
+---
+
 # Profiling and Benchmarking
 
 ## The Rule
