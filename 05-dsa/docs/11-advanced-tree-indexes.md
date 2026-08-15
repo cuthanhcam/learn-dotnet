@@ -1,12 +1,16 @@
 ---
 title: "Advanced Tree Indexes: AVL, Heaps, Tries, Fenwick, Segment, and B-Trees"
 description: "A comparison of balanced search trees, priority heaps, prefix tries, range-query trees, and storage-oriented B-tree families."
+slug: dsa-advanced-tree-indexes
 phase: 5
 order: 11
 topics: [dsa, avl, heap, trie, fenwick-tree, segment-tree, b-tree]
 article-type: deep-dive
 estimated-reading-minutes: 22
-prerequisites: [binary-trees, binary-search-trees, complexity-analysis]
+prerequisites: [dsa-trees-graphs, dsa-sorting-searching, dsa-big-o]
+difficulty: advanced
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Advanced Tree Indexes

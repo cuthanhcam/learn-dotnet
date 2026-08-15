@@ -1,9 +1,16 @@
 ---
 title: "Cancellation and Timeouts"
 description: "Cooperative cancellation, token ownership, linked sources, timeout policy, and cancellation contracts."
+slug: dotnet-cancellation-timeouts
 phase: 6
 order: 2
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 26
 topics: [async, cancellation, timeouts]
+prerequisites: [dotnet-async-await-task]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Cancellation and Timeouts

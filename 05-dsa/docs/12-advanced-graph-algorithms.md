@@ -1,12 +1,16 @@
 ---
 title: "Advanced Graph Algorithms: DAGs, Shortest Paths, MST, SCC, and Union-Find"
 description: "A correctness- and complexity-oriented guide to graph ordering, paths, connectivity, spanning trees, and components."
+slug: dsa-advanced-graph-algorithms
 phase: 5
 order: 12
 topics: [dsa, graphs, dijkstra, topological-sort, mst, scc, union-find]
 article-type: deep-dive
 estimated-reading-minutes: 25
-prerequisites: [bfs, dfs, priority-queues, complexity-analysis]
+prerequisites: [dsa-trees-graphs, dsa-advanced-tree-indexes, dsa-big-o]
+difficulty: advanced
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Advanced Graph Algorithms

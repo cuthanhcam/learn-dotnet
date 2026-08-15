@@ -1,9 +1,16 @@
 ---
 title: "Big-O Notation"
 description: "Growth rates, input models, time and space complexity, amortized analysis, and common reasoning traps."
+slug: dsa-big-o
 phase: 5
 order: 1
+difficulty: beginner
+article-type: concept
+estimated-reading-minutes: 24
 topics: [dsa, complexity, big-o]
+prerequisites: [dsa-roadmap]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Big-O Notation

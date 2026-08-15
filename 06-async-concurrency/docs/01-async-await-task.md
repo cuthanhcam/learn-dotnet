@@ -1,9 +1,16 @@
 ---
 title: "Async, Await, and Task"
 description: "Task states, async state machines, composition, exception flow, and sequential versus concurrent awaiting."
+slug: dotnet-async-await-task
 phase: 6
 order: 1
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 28
 topics: [async, await, task]
+prerequisites: [dotnet-async-concurrency-roadmap]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Async, Await, and Task

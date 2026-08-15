@@ -1,9 +1,16 @@
 ---
 title: "Recursion and Backtracking"
 description: "Base cases, recursive state, choice exploration, pruning, restoration, and search-space complexity."
+slug: dsa-recursion-backtracking
 phase: 5
 order: 8
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 30
 topics: [dsa, recursion, backtracking]
+prerequisites: [dsa-sorting-searching]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Recursion and Backtracking

@@ -1,12 +1,16 @@
 ---
 title: "Dynamic Programming and Greedy Algorithms"
 description: "How to recognize overlapping subproblems, design DP state and transitions, optimize memory, and prove greedy choices."
+slug: dsa-dynamic-programming-greedy
 phase: 5
 order: 13
 topics: [dsa, dynamic-programming, greedy, knapsack, subsequences]
 article-type: deep-dive
 estimated-reading-minutes: 28
-prerequisites: [recursion, complexity-analysis, binary-search]
+prerequisites: [dsa-recursion-backtracking, dsa-big-o, dsa-sorting-searching]
+difficulty: advanced
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Dynamic Programming and Greedy Algorithms

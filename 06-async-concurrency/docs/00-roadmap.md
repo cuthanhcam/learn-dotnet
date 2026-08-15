@@ -1,9 +1,16 @@
 ---
 title: "Async and Concurrency Roadmap"
 description: "The ordered learning path and practice loop for Phase 06."
+slug: dotnet-async-concurrency-roadmap
 phase: 6
 order: 0
+difficulty: intermediate
+article-type: roadmap
+estimated-reading-minutes: 12
 topics: [async, concurrency, roadmap]
+prerequisites: [dsa-common-pitfalls]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Async and Concurrency Roadmap

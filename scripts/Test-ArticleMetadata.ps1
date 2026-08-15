@@ -4,6 +4,8 @@ param(
         "02-oop/docs",
         "03-core-dotnet/docs",
         "04-memory-performance/docs",
+        "05-dsa/docs",
+        "06-async-concurrency/docs",
         "docs"
     )
 )

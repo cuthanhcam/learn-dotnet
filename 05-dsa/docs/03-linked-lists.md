@@ -1,9 +1,16 @@
 ---
 title: "Linked Lists"
 description: "Node-based sequences, reversal, merging, fast/slow pointers, cycle detection, and sentinel nodes."
+slug: dsa-linked-lists
 phase: 5
 order: 3
+difficulty: intermediate
+article-type: tutorial
+estimated-reading-minutes: 28
 topics: [dsa, linked-lists]
+prerequisites: [dsa-arrays-strings]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Linked Lists

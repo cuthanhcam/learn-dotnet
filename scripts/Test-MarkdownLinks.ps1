@@ -4,7 +4,9 @@ param(
         "01-csharp-basics",
         "02-oop",
         "03-core-dotnet",
-        "04-memory-performance"
+        "04-memory-performance",
+        "05-dsa",
+        "06-async-concurrency"
     )
 )
 
