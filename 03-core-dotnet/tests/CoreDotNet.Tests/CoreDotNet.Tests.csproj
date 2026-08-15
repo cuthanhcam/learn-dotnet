@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\exercises\CoreDotNet.Exercises\CoreDotNet.Exercises.csproj" />
     <ProjectReference Include="..\..\src\CoreDotNet.Examples\CoreDotNet.Examples.csproj" />
   </ItemGroup>
 
