@@ -322,4 +322,4 @@ Before keeping an optimization, ask:
 
 - Previous: [Span, memory, and pooling](04-span-memory-pooling.md)
 - Review: [Common memory and performance pitfalls](common-pitfalls.md)
-- Practice: [Phase 04 exercises](../exercises/README.md)
+- Practice: [Phase 04 exercises](../exercises/MemoryPerformance.Exercises/)
