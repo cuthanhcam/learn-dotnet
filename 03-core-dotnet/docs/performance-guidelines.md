@@ -1,3 +1,18 @@
+---
+title: "Core .NET Performance Guidelines"
+description: "Measurement-first guidance for collections, LINQ, files, reflection, exceptions, and allocations."
+slug: core-dotnet-performance-guidelines
+phase: 3
+order: 10
+difficulty: intermediate
+article-type: reference
+estimated-reading-minutes: 14
+topics: [dotnet, performance]
+prerequisites: [dotnet-collections-deep-dive, linq-deferred-execution, csharp-attributes-reflection]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Performance Guidelines
 
 ## Purpose

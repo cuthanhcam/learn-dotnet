@@ -1,3 +1,18 @@
+---
+title: "Generics in C#"
+description: "Generic types and methods, constraints, variance, type safety, and reusable API design."
+slug: csharp-generics-constraints-variance
+phase: 3
+order: 2
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 26
+topics: [csharp, generics, variance]
+prerequisites: [csharp-polymorphism-and-abstraction]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # 🔧 Generics: Reusable, Type-Safe Code
 
 ## Overview

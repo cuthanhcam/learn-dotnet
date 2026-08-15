@@ -1,3 +1,18 @@
+---
+title: "Strings"
+description: "String literals, comparison, formatting, common APIs, StringBuilder, and interning."
+slug: csharp-strings
+phase: 1
+order: 6
+difficulty: beginner
+article-type: deep-dive
+estimated-reading-minutes: 18
+topics: [csharp, strings]
+prerequisites: [csharp-methods-and-parameters]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Strings
 
 Strings are immutable sequences of characters.

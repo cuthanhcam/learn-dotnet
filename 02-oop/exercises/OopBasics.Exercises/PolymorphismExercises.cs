@@ -35,10 +35,15 @@ public static class PolymorphismExercises
 
     public static double SumAreas(IEnumerable<Shape> shapes)
     {
-        if (shapes == null) throw new ArgumentNullException(nameof(shapes));
+        ArgumentNullException.ThrowIfNull(shapes);
+
         double sum = 0;
-        foreach (var s in shapes)
-            sum += s.GetArea();
+        foreach (Shape shape in shapes)
+        {
+            // Calling through the abstract base type demonstrates runtime dispatch.
+            sum += shape.GetArea();
+        }
+
         return sum;
     }
 }

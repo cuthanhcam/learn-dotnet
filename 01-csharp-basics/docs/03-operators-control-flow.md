@@ -1,3 +1,18 @@
+---
+title: "Operators and Control Flow"
+description: "Operators, branching, loops, switch expressions, and pattern matching in C#."
+slug: csharp-operators-and-control-flow
+phase: 1
+order: 3
+difficulty: beginner
+article-type: tutorial
+estimated-reading-minutes: 18
+topics: [csharp, operators, control-flow]
+prerequisites: [csharp-variables-and-types]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Operators & Control Flow
 
 ## Arithmetic Operators

@@ -1,3 +1,18 @@
+---
+title: "Memory Management and GC Fundamentals"
+description: "An introduction to value/reference semantics, the managed heap, garbage collection, and disposal."
+slug: dotnet-memory-fundamentals
+phase: 1
+order: 8
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 28
+topics: [dotnet, memory, garbage-collection]
+prerequisites: [csharp-variables-and-types, csharp-null-safety]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Memory Management & GC Fundamentals
 
 Understanding how C# manages memory and the garbage collector.
@@ -6,12 +21,14 @@ Understanding how C# manages memory and the garbage collector.
 
 ### Stack Allocation
 
-The **stack** is a LIFO (Last-In-First-Out) data structure for storing value types:
+Each thread uses a **stack** for call frames, including return information and
+many method locals. The JIT may also keep values in registers. Value types are
+not defined by living on the stack; they can be embedded in heap objects:
 
 ```csharp
-int x = 42;              // Stack: immediate access, deallocated when scope ends
-double y = 3.14;        // Stack
-bool flag = true;       // Stack
+int x = 42;              // A local value; exact placement is a JIT decision
+double y = 3.14;
+bool flag = true;
 
 struct Point
 {
@@ -19,19 +36,21 @@ struct Point
     public int Y { get; set; }
 }
 
-Point p = new Point();   // Stack: struct values allocated directly on stack
+Point p = new Point();   // Value semantics; storage is context-dependent
 ```
 
 **Characteristics:**
-- Very fast allocation (pointer increment)
-- Automatic deallocation when out of scope
-- Limited size (typically ~1-8 MB per thread)
+- Call-frame allocation is typically very cheap
+- A frame is reclaimed when its method returns
+- Stack space is finite and excessive recursion can cause `StackOverflowException`
 - Predictable performance
 - No garbage collection
 
 ### Heap Allocation
 
-The **heap** is a large memory pool for storing reference types:
+The **managed heap** contains managed objects whose lifetimes are tracked by the
+garbage collector. Value-type fields and array elements may be stored inline as
+part of those objects:
 
 ```csharp
 string text = "Hello";        // Heap: string reference stored here
@@ -44,22 +63,22 @@ s1 = null;                     // text object still exists on heap
 ```
 
 **Characteristics:**
-- Slower allocation (fragmentation considerations)
+- Small-object allocation is usually fast, but creates future GC work
 - Requires garbage collection to free memory
 - Larger available size (~GB range)
 - Variables store references to heap objects
-- Performance depends on GC pressure
+- Performance depends on allocation rate, object lifetime, and GC pressure
 
 ### Value vs Reference Semantics
 
 ```csharp
-// VALUE SEMANTICS (Stack)
+// VALUE SEMANTICS (independent value copy)
 int a = 10;
 int b = a;
 b = 20;
 // a = 10 (unaffected)
 
-// REFERENCE SEMANTICS (Heap)
+// REFERENCE SEMANTICS (both variables refer to the same object)
 var list1 = new List<int> { 1, 2, 3 };
 var list2 = list1;
 list2.Add(4);

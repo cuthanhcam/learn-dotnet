@@ -1,3 +1,18 @@
+---
+title: "Common C# Pitfalls"
+description: "Common C# mistakes, their causes, repairs, and review questions."
+slug: csharp-fundamentals-common-pitfalls
+phase: 1
+order: 9
+difficulty: beginner
+article-type: pitfalls
+estimated-reading-minutes: 20
+topics: [csharp, pitfalls, debugging]
+prerequisites: [csharp-methods-and-parameters, csharp-foundational-collections, csharp-null-safety]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Common C# Pitfalls & Solutions
 
 Eight critical mistakes beginners and intermediate developers make in C#, with clear fixes.

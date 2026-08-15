@@ -1,3 +1,18 @@
+---
+title: ".NET Memory Model"
+description: "Stack frames, managed objects, value/reference semantics, copying, and object lifetime."
+slug: dotnet-memory-model-deep-dive
+phase: 4
+order: 1
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 22
+topics: [dotnet, memory, stack, heap]
+prerequisites: [dotnet-memory-fundamentals]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Memory Model
 
 ## The Core Question

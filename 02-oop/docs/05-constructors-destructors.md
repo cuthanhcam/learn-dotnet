@@ -1,3 +1,18 @@
+---
+title: "Construction, Finalization, and Disposal"
+description: "Valid construction, object lifetime, finalizers, IDisposable, and deterministic cleanup."
+slug: csharp-construction-finalization-disposal
+phase: 2
+order: 5
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 20
+topics: [oop, constructors, disposal]
+prerequisites: [csharp-classes-objects-encapsulation, dotnet-memory-fundamentals]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Constructors & Destructors
 
 ## Constructors

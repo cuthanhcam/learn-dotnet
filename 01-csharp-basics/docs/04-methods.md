@@ -1,3 +1,18 @@
+---
+title: "Methods"
+description: "Method declarations, parameters, ref/out/in, overloads, local functions, and recursion."
+slug: csharp-methods-and-parameters
+phase: 1
+order: 4
+difficulty: beginner
+article-type: tutorial
+estimated-reading-minutes: 20
+topics: [csharp, methods, parameters]
+prerequisites: [csharp-operators-and-control-flow]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Methods
 
 Methods are reusable blocks of code.

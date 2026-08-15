@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CSharpBasics.Examples.Variables
 {
     /// <summary>
-    /// Demostrates the tradeoffs between static typing and dynamic behavior in C#.
+    /// Demonstrates the trade-offs between static typing and dynamic behavior in C#.
     /// 
     /// This example is designed for learning purposes but follows
     /// real-world best practices used in .NET backend development.

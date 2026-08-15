@@ -1,3 +1,18 @@
+---
+title: "Stacks and Queues"
+description: "LIFO/FIFO invariants, balancing, monotonic stacks, two-stack queues, and breadth-first traversal."
+slug: dsa-stacks-queues
+phase: 5
+order: 4
+difficulty: intermediate
+article-type: tutorial
+estimated-reading-minutes: 26
+topics: [dsa, stacks, queues]
+prerequisites: [dsa-linked-lists]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Stacks and Queues
 
 Stacks and queues are restricted-access collections. Their value comes from making order explicit.

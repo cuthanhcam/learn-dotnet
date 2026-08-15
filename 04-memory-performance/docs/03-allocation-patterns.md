@@ -1,3 +1,18 @@
+---
+title: "Allocation Patterns"
+description: "Visible and hidden allocations from boxing, strings, closures, iterators, LINQ, and copies."
+slug: dotnet-allocation-patterns
+phase: 4
+order: 3
+difficulty: advanced
+article-type: deep-dive
+estimated-reading-minutes: 22
+topics: [dotnet, allocations, performance]
+prerequisites: [dotnet-garbage-collection-deep-dive, linq-deferred-execution]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Allocation Patterns
 
 ## Why Allocation Awareness Matters

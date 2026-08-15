@@ -1,3 +1,18 @@
+---
+title: "DSA Learning Roadmap"
+description: "The ordered study path, checkpoints, and mastery criteria for Phase 05."
+slug: dsa-roadmap
+phase: 5
+order: 0
+difficulty: beginner
+article-type: roadmap
+estimated-reading-minutes: 12
+topics: [dsa, roadmap]
+prerequisites: [dotnet-profiling-and-benchmarking]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # DSA Roadmap
 
 ## Goal

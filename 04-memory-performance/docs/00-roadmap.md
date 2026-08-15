@@ -1,3 +1,18 @@
+---
+title: "Memory and Performance Roadmap"
+description: "The ordered study path and measurement workflow for Phase 04."
+slug: dotnet-memory-performance-roadmap
+phase: 4
+order: 0
+difficulty: intermediate
+article-type: roadmap
+estimated-reading-minutes: 10
+topics: [dotnet, memory, performance, roadmap]
+prerequisites: [core-dotnet-performance-guidelines]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Roadmap: Memory & Performance
 
 ## Purpose

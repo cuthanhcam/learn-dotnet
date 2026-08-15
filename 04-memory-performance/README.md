@@ -1,3 +1,14 @@
+---
+title: "Phase 04 — Memory and Performance"
+description: "A measurement-first guide to .NET memory, garbage collection, allocation patterns, spans, pooling, profiling, and trustworthy benchmarking."
+phase: 4
+status: complete
+target-framework: net8.0
+prerequisites: [phase-03-core-dotnet]
+previous-phase: ../03-core-dotnet/README.md
+next-phase: ../05-dsa/README.md
+---
+
 # Memory & Performance (04-memory-performance)
 
 > A practical deep dive into .NET memory behavior, allocation costs, garbage collection, spans, pooling, and measurement.
@@ -14,6 +25,21 @@ You will learn:
 - `Span<T>`, `ReadOnlySpan<T>`, `Memory<T>`, `stackalloc`, and `ArrayPool<T>`
 - How to measure elapsed time, allocated bytes, and GC pressure
 - How to use benchmarks without over-reading noisy microbenchmark results
+
+## Learning Outcomes
+
+After completing this phase, you should be able to:
+
+- separate value/reference semantics from physical storage decisions;
+- explain stack frames, managed objects, object reachability, and lifetime;
+- describe generational GC, promotion, the large object heap, finalization, and compaction;
+- distinguish managed-memory reclamation from deterministic resource cleanup;
+- locate allocations caused by boxing, closures, iterators, LINQ, strings, and defensive copies;
+- use `Span<T>` and `ReadOnlySpan<T>` without violating their lifetime restrictions;
+- choose `Memory<T>` when a memory view must cross an asynchronous boundary;
+- rent and return pooled arrays with explicit ownership and data-clearing decisions;
+- measure elapsed time, allocated bytes, and collection counts without treating them as interchangeable;
+- design BenchmarkDotNet comparisons that preserve observable work and representative inputs.
 
 ## Setup
 
@@ -82,6 +108,10 @@ dotnet run -c Release --project benchmarks/MemoryPerformance.Benchmarks
 4. Benchmarks compare realistic alternatives, not toy tricks alone.
 5. Optimization decisions should be backed by measurement.
 
+The pooling examples include both a direct `try/finally` rent pattern and `PooledBuffer<T>`, an
+`IMemoryOwner<T>` implementation that makes logical length, use-after-dispose behavior, idempotent
+return, and sensitive-data clearing policy explicit.
+
 ## Study Order
 
 1. Read `docs/00-roadmap.md`.
@@ -140,4 +170,31 @@ dotnet run -c Release --project benchmarks/MemoryPerformance.Benchmarks
 - Does the optimized code still read clearly enough to maintain?
 - Did pooling introduce ownership or stale-data risks?
 - Are benchmark inputs representative of production data sizes?
+
+## Safety and Correctness Checklist
+
+- Does an optimization preserve every input, output, exception, and ordering contract?
+- Is a rented buffer returned in a `finally` block?
+- Is sensitive pooled data cleared before another consumer can observe it?
+- Does any span escape its valid lifetime or cross an `await` boundary?
+- Is a finalizer present only because the type directly owns unmanaged state?
+- Could a benchmarked result be removed because it is never observed?
+- Were Debug and Release behavior accidentally compared?
+- Is the simpler implementation retained when the measured benefit is irrelevant?
+
+## Completion Criteria
+
+- [ ] Explain why a value type is not synonymous with stack storage.
+- [ ] Draw a reachability graph and identify which objects can be collected.
+- [ ] Distinguish GC generations from object age guarantees.
+- [ ] Find at least five hidden allocation sources in ordinary C# code.
+- [ ] Implement a parsing operation over `ReadOnlySpan<char>`.
+- [ ] Use `ArrayPool<T>` with correct return behavior under exceptions.
+- [ ] Capture a baseline before optimizing an exercise.
+- [ ] Run the BenchmarkDotNet project in Release mode and interpret both time and allocation columns.
+- [ ] Pass `dotnet test 04-memory-performance.slnx`.
+
+## Next Phase
+
+Continue with [Phase 05 — Data Structures and Algorithms](../05-dsa/README.md) to apply complexity analysis and measurement to reusable problem-solving techniques.
 

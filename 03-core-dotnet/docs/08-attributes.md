@@ -1,3 +1,18 @@
+---
+title: "Attributes and Metadata"
+description: "Built-in and custom attributes, reflection, metadata contracts, and runtime inspection costs."
+slug: csharp-attributes-reflection
+phase: 3
+order: 8
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 24
+topics: [csharp, attributes, reflection]
+prerequisites: [csharp-classes-objects-encapsulation, csharp-generics-constraints-variance]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # 🏷️ Attributes: Metadata and Reflection
 
 ## Overview

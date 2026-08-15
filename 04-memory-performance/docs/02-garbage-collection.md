@@ -1,3 +1,18 @@
+---
+title: "Garbage Collection"
+description: "Reachability, generations, promotion, the LOH, finalization, disposal, and GC trade-offs."
+slug: dotnet-garbage-collection-deep-dive
+phase: 4
+order: 2
+difficulty: advanced
+article-type: deep-dive
+estimated-reading-minutes: 24
+topics: [dotnet, garbage-collection, disposal]
+prerequisites: [dotnet-memory-model-deep-dive]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Garbage Collection
 
 ## What GC Solves

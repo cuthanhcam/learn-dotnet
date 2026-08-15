@@ -44,6 +44,39 @@ public static class ProfilingExample
             Gen1Collections: GC.CollectionCount(1) - gen1Before,
             Gen2Collections: GC.CollectionCount(2) - gen2Before);
     }
+
+    /// <summary>
+    /// Produces a coarse measurement for asynchronous learning scenarios.
+    /// Unlike <see cref="Measure"/>, this method uses the runtime-wide allocation counter
+    /// because an async continuation is free to resume on a different thread. Other work in
+    /// the process can therefore contribute to the result; use BenchmarkDotNet or a profiler
+    /// when isolation and statistical confidence matter.
+    /// </summary>
+    public static async Task<MeasurementResult> MeasureAsync(
+        string name,
+        Func<CancellationToken, Task> action,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+        ArgumentNullException.ThrowIfNull(action);
+
+        long allocatedBefore = GC.GetTotalAllocatedBytes(precise: false);
+        int gen0Before = GC.CollectionCount(0);
+        int gen1Before = GC.CollectionCount(1);
+        int gen2Before = GC.CollectionCount(2);
+
+        var stopwatch = Stopwatch.StartNew();
+        await action(cancellationToken).ConfigureAwait(false);
+        stopwatch.Stop();
+
+        return new MeasurementResult(
+            Name: name,
+            Elapsed: stopwatch.Elapsed,
+            AllocatedBytes: GC.GetTotalAllocatedBytes(precise: false) - allocatedBefore,
+            Gen0Collections: GC.CollectionCount(0) - gen0Before,
+            Gen1Collections: GC.CollectionCount(1) - gen1Before,
+            Gen2Collections: GC.CollectionCount(2) - gen2Before);
+    }
 }
 
 public readonly record struct MeasurementResult(

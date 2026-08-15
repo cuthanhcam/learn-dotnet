@@ -1,3 +1,14 @@
+---
+title: "Phase 05 — Data Structures and Algorithms"
+description: "A practical C# curriculum for complexity analysis, core data structures, traversal, searching, sorting, recursion, backtracking, and deliberate problem-solving practice."
+phase: 5
+status: complete
+target-framework: net8.0
+prerequisites: [phase-04-memory-performance]
+previous-phase: ../04-memory-performance/README.md
+next-phase: ../06-async-concurrency/README.md
+---
+
 # Data Structures & Algorithms (05-dsa)
 
 > A practical C# module for algorithmic thinking, complexity analysis, interview-style problem solving, and better backend design decisions.
@@ -168,7 +179,15 @@ Use this loop for every problem, even small ones:
 | `08-recursion-and-backtracking.md` | Recursive decomposition and search-space exploration  |
 | `09-practice-system.md`            | Daily/weekly practice cadence and review habits       |
 | `10-dotnet-dsa-reference.md`       | .NET collection and API reference for DSA choices     |
+| `11-advanced-tree-indexes.md`      | AVL, heaps, tries, Fenwick/segment trees, and B-trees |
+| `12-advanced-graph-algorithms.md`  | DAGs, shortest paths, MST, SCC, and Union-Find        |
+| `13-dynamic-programming-greedy.md` | DP state design, memory compression, and greedy proof |
 | `common-pitfalls.md`               | Mistakes to catch during practice and review          |
+
+Advanced implementations include `AvlTree<T>`, `BinaryMinHeap<T>`, `PrefixTrie`, `FenwickTree`,
+`SegmentTree`, `DisjointSet`, Dijkstra shortest paths, Kahn topological sorting, Kruskal minimum
+spanning forests, and Tarjan strongly connected components. Each type is kept separate so its
+invariant, complexity, and boundary tests remain easy to study.
 
 ## Mastery Check
 
@@ -180,3 +199,30 @@ You are ready to move beyond this phase when you can:
 - Write tests before polishing the implementation.
 - Compare a brute-force solution with an optimized solution using Big-O.
 - Connect algorithm choices back to .NET backend scenarios.
+
+## Verification Matrix
+
+| Area | Correctness evidence | Complexity explanation |
+|---|---|---|
+| Arrays and strings | Boundary, duplicate, Unicode-aware caveat, and empty-input tests | Indexing, scanning, window, and prefix-sum costs |
+| Linked lists | Empty, one-node, reversal, merge, and cycle cases | Traversal versus known-node mutation |
+| Stacks and queues | Empty behavior, ordering, balancing, and two-stack queue tests | Amortized movement and LIFO/FIFO invariants |
+| Hash tables | Missing keys, duplicates, grouping, and complement lookup | Average and worst-case lookup plus memory trade-off |
+| Trees and graphs | Empty tree, traversal order, disconnected graph, and cycle tests | `O(V + E)` traversal and auxiliary state |
+| Sorting and searching | Sorted/reverse/duplicate inputs and boundary searches | Comparison lower bound and binary-search interval invariant |
+| Recursion and backtracking | Base case, restoration, duplicate choices, and pruning | Call-stack depth and search-space growth |
+
+## Completion Criteria
+
+- [ ] State the input size and dominant operation before giving Big-O.
+- [ ] Distinguish worst-case, average-case, and amortized complexity where relevant.
+- [ ] Explain the invariant for each implemented algorithm.
+- [ ] Solve at least one problem with two pointers, sliding window, prefix sums, hashing, BFS, DFS, binary search, and backtracking.
+- [ ] Compare a brute-force solution with an improved representation or data structure.
+- [ ] Test empty, singleton, duplicate, boundary, and adversarial inputs.
+- [ ] Run benchmarks only after predicting the asymptotic outcome.
+- [ ] Pass `dotnet test 05-dsa.slnx`.
+
+## Next Phase
+
+Continue with [Phase 06 — Async and Concurrency](../06-async-concurrency/README.md), where algorithmic reasoning is applied to scheduling, cancellation, synchronization, bounded work, and concurrent state.

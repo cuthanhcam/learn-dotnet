@@ -1,3 +1,18 @@
+---
+title: "OOP Learning Roadmap"
+description: "The study sequence, checkpoints, and completion path for Phase 02."
+slug: oop-learning-roadmap
+phase: 2
+order: 0
+difficulty: beginner
+article-type: roadmap
+estimated-reading-minutes: 8
+topics: [oop, roadmap]
+prerequisites: [csharp-fundamentals-common-pitfalls]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # OOP Module Roadmap
 
 Welcome to the OOP learning journey! This roadmap guides you from the basics to advanced OOP mastery, with checkpoints, practice, and interview prep.

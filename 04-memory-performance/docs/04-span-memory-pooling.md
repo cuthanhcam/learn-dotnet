@@ -1,4 +1,27 @@
+---
+title: "Span, Memory, and Pooling"
+description: "Non-owning memory views, lifetime safety, stackalloc, Memory, and ArrayPool ownership."
+slug: dotnet-span-memory-pooling
+phase: 4
+order: 4
+difficulty: advanced
+article-type: deep-dive
+estimated-reading-minutes: 32
+topics: [dotnet, span, memory, arraypool]
+prerequisites: [dotnet-memory-model-deep-dive, dotnet-allocation-patterns]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Span, Memory, and Pooling
+
+## Learning Objectives
+
+- Separate memory ownership from a temporary view over memory.
+- Choose `Span<T>`, `Memory<T>`, stack allocation, or pooled storage by lifetime.
+- Preserve the logical requested length when a pool returns a larger physical array.
+- return pooled storage exactly once under success, failure, and repeated disposal;
+- make data-clearing policy explicit for sensitive buffers.
 
 ## Why These APIs Exist
 
@@ -106,6 +129,67 @@ Important rules:
 
 Pooling improves repeated buffer-heavy workloads. It can make simple code more complex, so use it when measurement justifies it.
 
+## Ownership Is a Protocol
+
+A rented array has one logical owner at a time. The owner decides who may access it, which portion is
+initialized, when access ends, and who returns it. `Span<T>` and `Memory<T>` are views; they do not by
+themselves record or transfer ownership.
+
+When a method returns a `Memory<T>` backed by a rented array, returning the array before the consumer
+finishes creates use-after-return corruption: another pool user may overwrite the same storage. Either
+keep all use inside the rent/`finally` scope or return an owner whose disposal ends the lifetime.
+
+`IMemoryOwner<T>` expresses this pattern:
+
+```csharp
+using IMemoryOwner<byte> owner = new PooledBuffer<byte>(4096);
+Memory<byte> logicalBuffer = owner.Memory;
+await stream.ReadAsync(logicalBuffer, token);
+```
+
+The repository's `PooledBuffer<T>` is a reference type so passing the owner does not copy independent
+return state. Its `Dispose` atomically exchanges the rented array with `null`, making repeated disposal
+idempotent. Access after disposal throws instead of silently exposing storage that may belong to
+someone else.
+
+## Logical Length Versus Physical Capacity
+
+`Rent(1000)` promises an array of at least 1,000 elements, not exactly 1,000. The larger array may be a
+pool size class and may contain data from earlier use. Expose `array.AsMemory(0, requestedLength)` and
+track the number of initialized elements separately from capacity.
+
+This distinction appears in parsers and I/O loops:
+
+- capacity: how much storage is available;
+- requested length: how much the owner permits a caller to use;
+- written length: how much currently contains meaningful data;
+- consumed length: how much a downstream parser has processed.
+
+Confusing these values can expose stale data, append unwanted zeros, or parse beyond a valid message.
+
+## Clearing and Sensitive Data
+
+Returning an array does not normally clear it. Set `clearArray: true` when references must be released
+or when data such as credentials, cryptographic material, personal data, or request payloads must not
+remain available to a future renter.
+
+Clearing has a cost proportional to physical array length, which can exceed the logical length. For
+cryptographic secrets, also consider `CryptographicOperations.ZeroMemory` for explicit zeroing and
+recognize that immutable strings and earlier copies cannot be erased through the pooled buffer.
+
+Security policy takes priority over a microbenchmark. Document whether callers may store sensitive
+content and make the clearing choice at the owner boundary rather than relying on every use site.
+
+## Pooling Decision Checklist
+
+- Is allocation rate or GC pressure measured on an important path?
+- Are buffers large or frequent enough for reuse to matter?
+- Is one owner responsible for exactly one return?
+- Can any view, callback, task, or queued operation outlive the owner?
+- Are logical length and initialized length explicit?
+- Must content be cleared, and is clearing the whole rented array acceptable?
+- Would a simpler ordinary array be safer at an irrelevant cost?
+
 ## Formatting Without Intermediate Strings
 
 Many APIs support span-based formatting:
@@ -130,6 +214,17 @@ This is useful for IDs, logs, protocols, and serialization paths where repeated 
 - Using pooling for tiny infrequent allocations
 - Creating spans but then calling `ToArray()` or `ToString()` too early
 - Using `stackalloc` with unbounded user input
+- Returning an owner while an asynchronous operation still uses its memory
+- Storing the physical rented length as if every element were initialized
+- Implementing a pooled owner as a freely copyable struct with independent disposal state
+
+## Implementation and Test Map
+
+| Concern | Source | Tests |
+|---|---|---|
+| Span parsing, stack scratch, direct rent/return | `SpanMemoryPoolingExample.cs` | `SpanMemoryPoolingExampleTests.cs` |
+| Explicit pooled-memory ownership | `PooledBuffer.cs` | `PooledBufferTests.cs` |
+| Allocation comparison | `SpanAndPoolingBenchmarks.cs` | BenchmarkDotNet output |
 
 ## Practice
 
@@ -138,3 +233,14 @@ This is useful for IDs, logs, protocols, and serialization paths where repeated 
 3. Change `NormalizeProductCode()` to preserve dashes and update tests.
 4. Use `ArrayPool<char>` for a longer normalization exercise.
 5. Benchmark before and after.
+
+## Further Reading
+
+- [`Span<T>` and `Memory<T>` usage guidelines](https://learn.microsoft.com/en-us/dotnet/standard/memory-and-spans/memory-t-usage-guidelines)
+- [`ArrayPool<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1)
+- [`IMemoryOwner<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.buffers.imemoryowner-1)
+
+## Continue Learning
+
+- Previous: [Allocation patterns](03-allocation-patterns.md)
+- Next: [Profiling and benchmarking](05-profiling-and-benchmarking.md)

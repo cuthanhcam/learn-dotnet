@@ -1,8 +1,33 @@
+---
+title: "Date, Time, and Time Zones"
+description: "DateTime, DateTimeOffset, TimeSpan, time-zone conversion, parsing, formatting, and testable clocks."
+slug: dotnet-date-time-timezones
+phase: 3
+order: 7
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 26
+topics: [dotnet, datetime, timezones]
+prerequisites: [csharp-variables-and-types]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # 🕐 DateTime & TimeZone: Temporal Operations
 
 ## Overview
 
 Working with dates, times, and timezones requires careful consideration. This section covers DateTime operations, timezone handling, and common patterns.
+
+## Learning Objectives
+
+After completing this article, you should be able to:
+
+- distinguish an instant, a local wall-clock value, a calendar date, and a duration;
+- choose between `DateTime`, `DateTimeOffset`, `DateOnly`, `TimeOnly`, and `TimeSpan`;
+- convert instants for display without losing the original point on the timeline;
+- define daylight-saving and expiration boundary behavior explicitly; and
+- inject `TimeProvider` so time-dependent production code can be tested deterministically.
 
 ## Table of Contents
 
@@ -11,8 +36,9 @@ Working with dates, times, and timezones requires careful consideration. This se
 3. [TimeSpan](#timespan)
 4. [Timezone Handling](#timezone-handling)
 5. [Formatting and Parsing](#formatting-and-parsing)
-6. [Best Practices](#best-practices)
-7. [Common Pitfalls](#common-pitfalls)
+6. [Designing Testable Time-Dependent Code](#designing-testable-time-dependent-code)
+7. [Best Practices](#best-practices)
+8. [Common Pitfalls](#common-pitfalls)
 
 ## DateTime Basics
 
@@ -255,6 +281,54 @@ string invariant = date.ToString("O",
     System.Globalization.CultureInfo.InvariantCulture);
 ```
 
+## Designing Testable Time-Dependent Code
+
+Calling `DateTime.UtcNow` throughout domain code creates an implicit dependency on the
+machine clock. Tests then depend on the moment at which they execute, and boundary cases
+such as exact expiration are difficult to reproduce. .NET 8 introduced `TimeProvider` as
+the standard abstraction for obtaining time and creating timers.
+
+Inject the provider into the class that owns the temporal rule:
+
+```csharp
+public sealed class SubscriptionPolicy
+{
+    private readonly TimeProvider _timeProvider;
+
+    public SubscriptionPolicy(TimeProvider timeProvider)
+    {
+        _timeProvider = timeProvider;
+    }
+
+    // The subscription is inactive at the exact expiration instant.
+    public bool IsActive(DateTimeOffset expiresAt) =>
+        expiresAt > _timeProvider.GetUtcNow();
+}
+```
+
+Production composition uses `TimeProvider.System`. A unit test supplies a provider whose
+`GetUtcNow()` returns a fixed instant. This design keeps clock mechanics at the application
+boundary while leaving the business rule deterministic.
+
+### Temporal Modeling Checklist
+
+Before choosing a type or API, answer these questions:
+
+1. Is the value an exact instant, a user's local schedule, a calendar-only value, or a duration?
+2. If it is local, which time-zone identifier gives that wall-clock value meaning?
+3. What happens when daylight-saving time makes a local value invalid or ambiguous?
+4. Is an interval closed, open, or half-open at each boundary?
+5. Who supplies the current time, and how will tests control it?
+6. What wire format and precision does the persistence or API contract guarantee?
+
+### Implementation and Test Map
+
+| Concern | Repository example |
+|---|---|
+| Basic values, conversion, and DST checks | `DateTimeAndTimeZoneExample.cs` |
+| Clock injection and expiration boundaries | `TimeProviderExample.cs` |
+| Deterministic boundary tests | `TimeProviderExampleTests.cs` |
+
 ## Best Practices
 
 ### 1. Store UTC, Display Local
@@ -379,3 +453,16 @@ if (localAsUtc > utc) { }
 - Be aware of DateTime.MinValue/MaxValue
 - Document timezone expectations clearly
 - Test around DST transitions
+
+## Further Reading
+
+- [Choose between DateTime, DateOnly, DateTimeOffset, TimeSpan, and TimeZoneInfo](https://learn.microsoft.com/en-us/dotnet/standard/datetime/choosing-between-datetime)
+- [TimeProvider overview](https://learn.microsoft.com/en-us/dotnet/standard/datetime/timeprovider-overview)
+- [Convert times between time zones](https://learn.microsoft.com/en-us/dotnet/standard/datetime/converting-between-time-zones)
+- [How to resolve ambiguous times](https://learn.microsoft.com/en-us/dotnet/standard/datetime/resolve-ambiguous-times)
+
+## Continue Learning
+
+- Previous: [File I/O](06-file-io.md)
+- Next: [Attributes and reflection](08-attributes.md)
+- Practice: [Phase 03 exercises](../exercises/CoreDotNet.Exercises/)

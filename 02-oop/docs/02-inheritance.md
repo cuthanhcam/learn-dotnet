@@ -1,3 +1,18 @@
+---
+title: "Inheritance in C#"
+description: "Base and derived types, constructor chains, overriding, hiding, sealing, and substitutability."
+slug: csharp-inheritance-and-substitution
+phase: 2
+order: 2
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 18
+topics: [oop, inheritance]
+prerequisites: [csharp-classes-objects-encapsulation]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Inheritance in C#
 
 ## What is Inheritance?

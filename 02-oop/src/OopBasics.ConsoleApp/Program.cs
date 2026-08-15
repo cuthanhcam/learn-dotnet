@@ -3,6 +3,7 @@ using OopBasics.Examples.Classes;
 using OopBasics.Examples.Constructors;
 using OopBasics.Examples.Inheritance;
 using OopBasics.Examples.Polymorphism;
+using OopBasics.Examples.Patterns;
 using OopBasics.Examples.StaticMembers;
 
 namespace OopBasics.ConsoleApp
@@ -57,6 +58,11 @@ namespace OopBasics.ConsoleApp
             RunSection("Static Members", static () => 
             {
                 RunExample(StaticMembersExample.Run);
+            });
+
+            RunSection("Composition & Strategy", static () =>
+            {
+                RunExample(CompositionPatternsExample.Run);
             });
 
             PrintFooter();

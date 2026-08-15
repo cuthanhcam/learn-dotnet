@@ -1,3 +1,18 @@
+---
+title: "Polymorphism and Abstraction"
+description: "Interfaces, abstract classes, virtual dispatch, and choosing an abstraction boundary."
+slug: csharp-polymorphism-and-abstraction
+phase: 2
+order: 3
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 20
+topics: [oop, polymorphism, interfaces, abstraction]
+prerequisites: [csharp-inheritance-and-substitution]
+status: maintained
+last-reviewed: 2026-08-15
+---
+
 # Polymorphism in C#
 
 ## What is Polymorphism?
