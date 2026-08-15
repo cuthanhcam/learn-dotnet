@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="docs/00-roadmap.md" />
+    <File Path="docs/01-async-await-task.md" />
+    <File Path="docs/02-cancellation-timeouts.md" />
+    <File Path="docs/03-threading-threadpool.md" />
+    <File Path="docs/04-synchronization-shared-state.md" />
+    <File Path="docs/05-parallelism.md" />
+    <File Path="docs/06-channels-pipelines.md" />
+    <File Path="docs/07-concurrent-collections.md" />
+    <File Path="docs/08-deadlocks-context.md" />
+    <File Path="docs/common-pitfalls.md" />
+  </Folder>
+  <Folder Name="/exercises/">
+    <Project Path="exercises/AsyncConcurrency.Exercises/AsyncConcurrency.Exercises.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/AsyncConcurrency.ConsoleApp/AsyncConcurrency.ConsoleApp.csproj" />
+    <Project Path="src/AsyncConcurrency.Examples/AsyncConcurrency.Examples.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AsyncConcurrency.Tests/AsyncConcurrency.Tests.csproj" />
+  </Folder>
+</Solution>
