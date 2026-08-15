@@ -14,6 +14,9 @@
     <File Path="docs/08-recursion-and-backtracking.md" />
     <File Path="docs/09-practice-system.md" />
     <File Path="docs/10-dotnet-dsa-reference.md" />
+    <File Path="docs/11-advanced-tree-indexes.md" />
+    <File Path="docs/12-advanced-graph-algorithms.md" />
+    <File Path="docs/13-dynamic-programming-greedy.md" />
     <File Path="docs/common-pitfalls.md" />
   </Folder>
   <File Path="README.md" />

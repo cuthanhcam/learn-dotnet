@@ -179,6 +179,9 @@ Use this loop for every problem, even small ones:
 | `08-recursion-and-backtracking.md` | Recursive decomposition and search-space exploration  |
 | `09-practice-system.md`            | Daily/weekly practice cadence and review habits       |
 | `10-dotnet-dsa-reference.md`       | .NET collection and API reference for DSA choices     |
+| `11-advanced-tree-indexes.md`      | AVL, heaps, tries, Fenwick/segment trees, and B-trees |
+| `12-advanced-graph-algorithms.md`  | DAGs, shortest paths, MST, SCC, and Union-Find        |
+| `13-dynamic-programming-greedy.md` | DP state design, memory compression, and greedy proof |
 | `common-pitfalls.md`               | Mistakes to catch during practice and review          |
 
 ## Mastery Check
