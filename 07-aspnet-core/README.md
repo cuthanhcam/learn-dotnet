@@ -3,7 +3,7 @@ title: "Phase 07 — ASP.NET Core"
 description: "A production-oriented path through hosting, middleware, dependency injection, configuration, routing, validation, HTTP semantics, logging, and API testing."
 phase: 7
 status: in-progress
-target-framework: net8.0
+target-framework: net10.0
 prerequisites: [phase-06-async-concurrency]
 previous-phase: ../06-async-concurrency/README.md
 next-phase: ../08-ef-core/README.md

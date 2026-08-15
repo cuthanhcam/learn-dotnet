@@ -4,6 +4,8 @@
     <File Path="docs/01-hosting-request-pipeline.md" />
     <File Path="docs/02-dependency-injection-configuration.md" />
     <File Path="docs/03-routing-validation-problem-details.md" />
+    <File Path="docs/04-http-semantics-pagination-concurrency.md" />
+    <File Path="docs/05-controllers-model-validation-filters.md" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Learning.Api/Learning.Api.csproj" />
