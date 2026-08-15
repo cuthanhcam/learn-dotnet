@@ -32,6 +32,7 @@ and integration testing.
 | 5 | [Controllers, validation, and filters](docs/05-controllers-model-validation-filters.md) | ApiController conventions and scoped filters |
 | 6 | [OpenAPI contracts with ASP.NET Core 10](docs/06-openapi-contracts-dotnet-10.md) | OpenAPI 3.1 JSON/YAML and contract verification |
 | 7 | [Errors, observability, and health checks](docs/07-errors-observability-health-checks.md) | safe failures, liveness, readiness, and correlation |
+| 8 | [CORS, compression, and rate limiting](docs/08-cors-compression-rate-limiting.md) | explicit browser and traffic policies |
 
 Additional slices will cover controllers, filters, OpenAPI, logging, caching, rate limiting, CORS,
 health checks, resilience boundaries, background services, security integration points, and advanced
@@ -94,6 +95,7 @@ Content-Type: application/json
 | Controller and filter example | `Features/OrderQuotes/` |
 | Generated contract specifications | `tests/Learning.Api.Tests/OpenApiTests.cs` |
 | Operational boundaries and probes | `Operations/` and `tests/Learning.Api.Tests/OperationalEndpointsTests.cs` |
+| Traffic policy examples | `Operations/TrafficPolicyEndpoints.cs` and `tests/Learning.Api.Tests/TrafficPolicyTests.cs` |
 
 ## Design Rules
 
