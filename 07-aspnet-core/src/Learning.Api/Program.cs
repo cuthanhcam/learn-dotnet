@@ -1,12 +1,22 @@
 using Learning.Api.Configuration;
 using Learning.Api.Features.Products;
 using Learning.Api.Middleware;
+using Learning.Api.Operations;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Problem Details gives error responses a standard machine-readable shape instead of
 // returning ad-hoc strings that every client must interpret differently.
-builder.Services.AddProblemDetails();
+builder.Services.AddProblemDetails(options =>
+{
+    // traceId is safe operational context. Exception messages and stack traces are deliberately
+    // excluded because error bodies cross the application's trust boundary.
+    options.CustomizeProblemDetails = context =>
+        context.ProblemDetails.Extensions["traceId"] = context.HttpContext.TraceIdentifier;
+});
+builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
@@ -24,11 +34,16 @@ builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.OrderQuoteService>(
 builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.TenantContext>();
 builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.RequireTenantFilter>();
 builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddHealthChecks()
+    .AddCheck<CatalogReadinessHealthCheck>(
+        "product-catalog",
+        failureStatus: HealthStatus.Unhealthy,
+        tags: ["ready"]);
 
 WebApplication app = builder.Build();
 
-app.UseExceptionHandler();
 app.UseMiddleware<CorrelationIdMiddleware>();
+app.UseExceptionHandler();
 
 // The document endpoint is a development-time diagnostic surface. Publishing it publicly is an
 // explicit product/security decision because it exposes the complete reachable API contract.
@@ -39,9 +54,23 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi("/openapi/{documentName}.yaml");
 }
 
-app.MapGet("/health", () => TypedResults.Ok(new { Status = "healthy" }))
-    .WithName("Health")
-    .WithTags("Operations");
+// Liveness answers only whether this process can serve HTTP. Readiness additionally checks the
+// dependencies required for useful work, allowing an orchestrator to stop routing traffic safely.
+app.MapHealthChecks("/health/live", new HealthCheckOptions
+{
+    Predicate = _ => false,
+    ResponseWriter = HealthResponseWriter.WriteAsync
+}).WithName("Liveness").WithTags("Operations");
+
+app.MapHealthChecks("/health/ready", new HealthCheckOptions
+{
+    Predicate = registration => registration.Tags.Contains("ready"),
+    ResponseWriter = HealthResponseWriter.WriteAsync
+}).WithName("Readiness").WithTags("Operations");
+
+// Preserve the introductory endpoint as a compatibility alias while making its semantics explicit.
+app.MapGet("/health", () => TypedResults.Redirect("/health/live", permanent: false))
+    .ExcludeFromDescription();
 
 app.MapProductEndpoints();
 app.MapControllers();

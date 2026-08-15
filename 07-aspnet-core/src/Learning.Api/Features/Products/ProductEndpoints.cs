@@ -50,24 +50,24 @@ public static class ProductEndpoints
     }
 
     private static async Task<IResult> ListAsync(
-        int page,
-        int pageSize,
+        int? page,
+        int? pageSize,
         ProductCatalog catalog,
         IOptions<LearningOptions> options,
         CancellationToken cancellationToken)
     {
-        // Query binding supplies zero for omitted integers. Translate that representation into
-        // documented defaults while still rejecting explicit negative values.
-        page = page == 0 ? 1 : page;
-        pageSize = pageSize == 0 ? DefaultPageSize : pageSize;
+        // Nullable query parameters distinguish omission from an explicit zero. ASP.NET Core 10
+        // treats non-nullable handler parameters as required and rejects a missing value at binding.
+        int resolvedPage = page ?? 1;
+        int resolvedPageSize = pageSize ?? DefaultPageSize;
 
         var errors = new Dictionary<string, string[]>(StringComparer.Ordinal);
-        if (page < 1)
+        if (resolvedPage < 1)
         {
             errors[nameof(page)] = ["Page must be greater than zero."];
         }
 
-        if (pageSize < 1 || pageSize > options.Value.MaximumPageSize)
+        if (resolvedPageSize < 1 || resolvedPageSize > options.Value.MaximumPageSize)
         {
             errors[nameof(pageSize)] =
             [$"Page size must be between 1 and {options.Value.MaximumPageSize}."];
@@ -75,7 +75,7 @@ public static class ProductEndpoints
 
         return errors.Count > 0
             ? Results.ValidationProblem(errors)
-            : Results.Ok(await catalog.ListAsync(page, pageSize, cancellationToken));
+            : Results.Ok(await catalog.ListAsync(resolvedPage, resolvedPageSize, cancellationToken));
     }
 
     private static async Task<IResult> GetAsync(
