@@ -1,3 +1,11 @@
+---
+title: "Common C# Pitfalls"
+description: "Common C# mistakes, their causes, repairs, and review questions."
+phase: 1
+order: 9
+topics: [csharp, pitfalls, debugging]
+---
+
 # Common C# Pitfalls & Solutions
 
 Eight critical mistakes beginners and intermediate developers make in C#, with clear fixes.

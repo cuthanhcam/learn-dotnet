@@ -1,3 +1,11 @@
+---
+title: "Null Safety and Nullability"
+description: "Nullable value and reference types, flow analysis, guards, and null-handling operators."
+phase: 1
+order: 7
+topics: [csharp, nullability]
+---
+
 # Null Safety & Nullability
 
 Understanding and handling null values safely.
@@ -280,23 +288,25 @@ public string GetName()
 }
 ```
 
-## Stack vs Heap (Brief Overview)
+## Value and Reference Semantics (Brief Overview)
 
-Value types allocated on stack:
+Value types copy their contained value. These locals are commonly represented in
+a stack frame or registers, but value types can also live inline in heap objects:
 ```csharp
-int x = 10;        // Stack: fixed location, immediate access
+int x = 10;        // Local value; exact storage is a runtime detail
 struct Point { int x; int y; }
-Point p = new Point();  // Stack
+Point p = new Point();  // Value-type local; not a guaranteed storage location
 
 // Can't be null
 int? nullable = null;  // Wrapped in Nullable<int>
 ```
 
-Reference types allocated on heap:
+Reference-type variables copy a reference. The referenced object normally lives
+on the managed heap:
 ```csharp
-string text = "Hello";  // Heap: variable location, accessed via reference
-Person person = new Person();  // Heap
-List<int> list = new List<int>();  // Heap
+string text = "Hello";              // Reference to an immutable string object
+Person person = new Person();       // Reference to a class instance
+List<int> list = new List<int>();   // Reference to a list object
 
 // Can be null
 string? maybeNull = null;

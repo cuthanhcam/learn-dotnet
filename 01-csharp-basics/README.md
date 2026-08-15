@@ -1,371 +1,320 @@
-# C# Fundamentals (01-csharp-basics)
+---
+title: "Phase 01 — C# Fundamentals"
+description: "A detailed foundation in the .NET execution model, C# syntax, types, control flow, methods, collections, strings, nullability, and introductory memory concepts."
+phase: 1
+status: complete
+target-framework: net8.0
+prerequisites: [terminal-basics, git-basics]
+next-phase: ../02-oop/README.md
+---
 
-> Reference documentation for C# core concepts and best practices
+# C# Fundamentals
 
-## Overview
+> Build a precise mental model of C# and .NET before moving into object-oriented design and higher-level framework APIs.
 
-Comprehensive guide covering:
-- .NET ecosystem (CLR, JIT, assemblies)
-- Variables, types, type system
-- Control flow and operators
-- Methods and parameter modifiers
-- Collections (arrays, lists, dictionaries, sets)
-- String handling and StringBuilder
-- Null handling and memory concepts
-- Common pitfalls and debugging
+This phase is both a guided course and a long-term reference. It combines detailed reading, small runnable examples, progressive exercises, automated tests, and optional performance labs. The examples favor clarity and observable behavior. Deeper runtime and optimization topics are introduced here, then developed fully in [Phase 04 — Memory & Performance](../04-memory-performance/README.md).
 
-## Setup
+## Learning outcomes
 
-```bash
-# Prerequisites
-dotnet --version  # 8.0 or later
+After completing this phase, you should be able to:
 
-# Commands
-dotnet build
-dotnet run --project src/CSharpBasics.ConsoleApp
-dotnet test
-```
+- distinguish C#, the .NET SDK, the runtime, CLR, IL, JIT compilation, assemblies, namespaces, and the Base Class Library;
+- select appropriate built-in types and explain value semantics versus reference semantics;
+- explain why `var` remains statically typed and when `dynamic` moves checks to runtime;
+- use operators, branching, loops, pattern matching, and guard clauses clearly;
+- design methods with explicit inputs, outputs, validation, and error behavior;
+- use `ref`, `out`, `in`, optional parameters, named arguments, overloads, and tuples intentionally;
+- choose among arrays, `List<T>`, `Dictionary<TKey, TValue>`, `HashSet<T>`, and `IEnumerable<T>`;
+- compare and normalize strings correctly and use `StringBuilder` when repeated mutation justifies it;
+- use nullable annotations and flow analysis to express null contracts;
+- explain managed memory, garbage collection, disposal, boxing, and allocation at an introductory level;
+- validate behavior with tests and interpret a microbenchmark cautiously.
 
-## 🏗️ Project Structure
+## Prerequisites and SDK policy
 
-```
+- Basic terminal and Git familiarity.
+- The SDK selected by the repository-level [`global.json`](../global.json).
+- An editor with C# support: Visual Studio, VS Code with C# Dev Kit, or JetBrains Rider.
+
+The projects target .NET 8 so the learning material remains usable on the current long-term-support baseline. The SDK may be newer because it can build earlier target frameworks. Do not confuse the installed SDK version with a project's target framework.
+
+## Recommended learning path
+
+| Step | Topic | Main questions | Practice |
+|---:|---|---|---|
+| 0 | [Module roadmap](docs/00-roadmap.md) | How should this phase be studied? | Choose a schedule and verify the toolchain |
+| 1 | [.NET ecosystem](docs/01-dotnet-ecosystem.md) | What turns C# source into a running process? | Build and inspect the produced assembly |
+| 2 | [Variables and types](docs/02-variables-types.md) | What is known at compile time and runtime? | `VariablesExample`, `DynamicVsTypedExample` |
+| 3 | [Operators and control flow](docs/03-operators-control-flow.md) | How should decisions and repetition be expressed? | If/else, switch, loops, patterns |
+| 4 | [Methods](docs/04-methods.md) | How do method signatures communicate contracts? | Parameters, overloads, tuples, validation |
+| 5 | [Collections](docs/05-collections.md) | Which access pattern does each collection optimize? | Arrays, lists, dictionaries, sets, enumeration |
+| 6 | [Strings](docs/06-strings.md) | How do immutability, comparison, and formatting interact? | String APIs and `StringBuilder` |
+| 7 | [Nullability](docs/07-nullability.md) | How can null intent be made explicit? | Annotations, operators, guards, flow analysis |
+| 8 | [Memory fundamentals](docs/08-memory.md) | What are value/reference semantics, GC, and disposal? | Memory examples and optional labs |
+| 9 | [Common pitfalls](docs/common-pitfalls.md) | Which beginner assumptions create subtle defects? | Review, explain, and repair each example |
+
+## How to study each topic
+
+Use the same loop for every lesson:
+
+1. Read the topic document and write down the mental model in your own words.
+2. Open the matching source example and predict its output before running it.
+3. Run the example, then change one assumption or boundary value.
+4. Read the tests as executable specifications. Add a boundary case of your own.
+5. Solve the related exercise without copying the existing implementation.
+6. Revisit the common-pitfalls guide and explain the trade-off, not merely the rule.
+
+The goal is not to memorize syntax. It is to understand what the compiler guarantees, what the runtime decides, and what contract another developer can infer from the code.
+
+## Project structure
+
+```text
 01-csharp-basics/
-│
-├── 01-csharp-basics.sln                # Main solution file (Visual Studio / dotnet)
-├── 01-csharp-basics.slnx               # Alternative solution format
-├── global.json                         # .NET version lock
-├── .gitignore                          # Git ignore rules
-│
-├── src/                                # Main source code
-│   │
-│   ├── CSharpBasics.ConsoleApp/        # Entry point for demos
-│   │   ├── Program.cs                  # Main demonstration app
-│   │   └── CSharpBasics.ConsoleApp.csproj
-│   │
-│   ├── CSharpBasics.Examples/          # Organized code examples
+├── docs/
+│   ├── 00-roadmap.md
+│   ├── 01-dotnet-ecosystem.md
+│   ├── 02-variables-types.md
+│   ├── 03-operators-control-flow.md
+│   ├── 04-methods.md
+│   ├── 05-collections.md
+│   ├── 06-strings.md
+│   ├── 07-nullability.md
+│   ├── 08-memory.md
+│   └── common-pitfalls.md
+├── src/
+│   ├── CSharpBasics.Examples/
 │   │   ├── Variables/
-│   │   │   ├── VariablesExample.cs         # var, int, string, etc.
-│   │   │   └── DynamicVsTypedExample.cs    # dynamic vs var
-│   │   │
 │   │   ├── ControlFlow/
-│   │   │   ├── IfElseExample.cs            # if, else if, else
-│   │   │   ├── SwitchExample.cs            # switch expressions & statements
-│   │   │   └── LoopsExample.cs             # for, while, do-while, foreach
-│   │   │
 │   │   ├── Methods/
-│   │   │   ├── MethodBasicsExample.cs      # method declaration, return types
-│   │   │   ├── ParamModifiersExample.cs    # ref, out, in parameters
-│   │   │   ├── OverloadingExample.cs       # method overloading
-│   │   │   └── OptionalParametersExample.cs # default values, named args
-│   │   │
 │   │   ├── Collections/
-│   │   │   ├── ArraysExample.cs            # arrays, jagged arrays
-│   │   │   ├── ListExample.cs              # List<T>, Add, Remove, etc.
-│   │   │   ├── DictionaryExample.cs        # Dictionary<K,V>
-│   │   │   ├── HashSetExample.cs           # HashSet<T>
-│   │   │   └── EnumerableExample.cs        # IEnumerable, foreach
-│   │   │
 │   │   ├── Strings/
-│   │   │   ├── StringBasicsExample.cs      # string literals, interpolation
-│   │   │   ├── StringBuilderExample.cs     # StringBuilder for performance
-│   │   │   ├── StringMethodsExample.cs     # Split, Join, Contains, etc.
-│   │   │   └── StringPerformanceExample.cs # string vs StringBuilder comparison
-│   │   │
 │   │   ├── Nullability/
-│   │   │   └── NullabilityExample.cs       # null safety, ?., ??, pattern matching
-│   │   │
-│   │   ├── Memory/
-│   │   │   └── MemoryConceptsExample.cs    # Stack vs Heap, GC, IDisposable
-│   │   │
-│   │   └── CSharpBasics.Examples.csproj
-│   │
-│   └── CSharpBasics.Playground/        # Quick testing environment
-│       ├── Program.cs                  # Playground program
-│       └── CSharpBasics.Playground.csproj
-│
-├── exercises/                          # Practice problems (structured by difficulty)
-│   │
-│   ├── Easy/
-│   │   ├── SumNumbers/
-│   │   │   ├── SumNumbers.cs
-│   │   │   └── README.md
-│   │   │
-│   │   ├── MaxOfThree/
-│   │   │   ├── MaxOfThree.cs
-│   │   │   └── README.md
-│   │   │
-│   │   ├── SimpleLoop/
-│   │   │   ├── SimpleLoop.cs
-│   │   │   └── README.md
-│   │   │
-│   │   └── VariableTypes/
-│   │       ├── VariableTypes.cs
-│   │       └── README.md
-│   │
-│   ├── Medium/
-│   │   ├── ReverseString/
-│   │   │   ├── ReverseString.cs
-│   │   │   └── README.md
-│   │   │
-│   │   ├── CountWords/
-│   │   │   ├── CountWords.cs
-│   │   │   └── README.md
-│   │   │
-│   │   ├── FibonacciSequence/
-│   │   │   ├── FibonacciSequence.cs
-│   │   │   └── README.md
-│   │   │
-│   │   └── PrimeNumbers/
-│   │       ├── PrimeNumbers.cs
-│   │       └── README.md
-│   │
-│   └── Hard/
-│       ├── BasicCalculator/
-│       │   ├── BasicCalculator.cs
-│       │   └── README.md
-│       │
-│       └── NestedCollections/
-│           ├── NestedCollections.cs
-│           └── README.md
-│
-├── tests/                              # Unit tests
-│   └── CSharpBasics.Tests/
-│       ├── VariablesTests.cs
-│       ├── StringsTests.cs
-│       ├── CollectionsTests.cs
-│       ├── ControlFlowTests.cs
-│       ├── MethodsTests.cs
-│       ├── NullabilityTests.cs
-│       ├── MemoryTests.cs
-│       ├── ExamplesRunSmokeTests.cs
-│       └── CSharpBasics.Tests.csproj
-│
-├── benchmarks/                         # Performance benchmarking (optional)
+│   │   └── Memory/
+│   ├── CSharpBasics.ConsoleApp/   # Runs the curated examples
+│   └── CSharpBasics.Playground/   # Disposable experiments
+├── exercises/
+│   └── CSharpBasics.Exercises/
+│       ├── Easy/
+│       ├── Medium/
+│       └── Hard/
+├── tests/CSharpBasics.Tests/
+├── benchmarks/
 │   ├── StringBenchmark/
-│   │   ├── Program.cs                  # Benchmark entry point
-│   │   ├── StringBenchmark.cs          # String operation benchmarks
-│   │   └── StringBenchmark.csproj
-│   ├── MemoryBenchmarks/
-│       ├── Program.cs                  # Benchmark entry point
-│       ├── MemoryBenchmarks.cs         # Memory allocation & GC benchmarks
-│       └── MemoryBenchmarks.csproj
-│   └── CollectionsBenchmark/
-│       ├── Program.cs                  # Benchmark entry point
-│       ├── CollectionsBenchmark.cs     # Array/List/HashSet/Dictionary benchmarks
-│       └── CollectionsBenchmark.csproj
-│
-├── docs/                               # Module documentation & notes
-│   ├── 00-roadmap.md                   # Learning path for this module
-│   ├── 01-dotnet-ecosystem.md          # CLR, JIT, assemblies explained
-│   ├── 02-variables-types.md           # In-depth type system
-│   ├── 03-operators-control-flow.md    # All operators and control structures
-│   ├── 04-methods.md                   # Method patterns and best practices
-│   ├── 05-collections.md               # Arrays, Lists, Dictionaries, etc.
-│   ├── 06-strings.md                   # String handling and performance
-│   ├── 07-nullability.md               # Null handling, nullable ref types
-│   ├── 08-memory.md                    # Stack/Heap, GC, disposal patterns
-│   ├── common-pitfalls.md              # Common mistakes and how to avoid them
-│
-└── README.md                           # This file
+│   ├── CollectionsBenchmark/
+│   └── MemoryBenchmarks/
+├── 01-csharp-basics.slnx
+└── README.md
 ```
 
----
+The older `.sln` file is retained for compatibility. The `.slnx` file is the canonical solution used by the commands in this guide.
 
-## 🎬 What's Inside
+## Build, run, and test
 
-| Topic | Focus |
-|-------|-------|
-| **.NET Ecosystem** | CLR, JIT, Assemblies, Namespaces |
-| **Variables & Types** | var, dynamic, type inference, constants |
-| **Operators & Control Flow** | if, switch, for, while, foreach |
-| **Methods** | Declarations, ref/out/in, overloading, parameters |
-| **Collections** | Arrays, List<T>, Dictionary, HashSet |
-| **Strings** | Interpolation, StringBuilder, methods |
-| **Nullability** | Nullable types, ?., ??, pattern matching, guard clauses |
-| **Memory Concepts** | Stack vs Heap, GC, value/reference types, IDisposable |
-| **Benchmark Labs** | String, memory, and collections micro-benchmarks |
+Run these commands from `01-csharp-basics`:
 
-**👉 Deep dives** are in [`docs/`](docs/) — this README is your **entry point**, not a textbook.
+```powershell
+# Restore all NuGet dependencies in the phase.
+dotnet restore 01-csharp-basics.slnx
 
----
+# Compile examples, exercises, tests, and benchmark projects.
+dotnet build 01-csharp-basics.slnx --no-restore
 
-## 🏛️ Design Principles
+# Execute the automated behavior checks.
+dotnet test 01-csharp-basics.slnx --no-build
 
-This module follows:
-
-- **Small, focused examples** - One concept per file
-- **Runnable code** - All examples compile and execute
-- **Clear naming** - Self-documenting code
-- **Avoid magic** - Explicit > implicit (except for `var`)
-- **Testing mindset** - Examples are testable, exercises have tests
-
----
-
-## 📋 Module Rules
-
-1. Each example has a `Run()` method or `Main()`
-2. Playground = experimentation zone (no business logic)
-3. Exercises = self-contained problems
-4. Tests = verify learning outcomes
-5. Benchmarks = performance investigation (optional labs)
-
----
-
-## 💡 Skills Covered
-
-```
-✅ C# Syntax & Semantics
-✅ Type System Understanding
-✅ Control Flow Mastery
-✅ Method Design Patterns
-✅ Collections & Data Handling
-✅ String Performance Optimization
-✅ Memory & Null Safety Concepts
-✅ Debugging & Problem Solving
-✅ Testing Fundamentals
-```
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- **.NET 8 LTS** (or later)
-  - Download: https://dotnet.microsoft.com/download
-- **C# IDE**:
-  - Visual Studio 2022+
-  - VS Code + C# Dev Kit
-  - JetBrains Rider
-- **Git** (basic familiarity)
-
-### Setup
-
-```bash
-# 1. Clone/navigate to this folder
-cd 01-csharp-basics
-
-# 2. Verify .NET version
-dotnet --version           # Should be 8.0 or later
-
-# 3. Restore packages & build
-dotnet build
-
-# 4. Run main demo app
+# Run the curated demonstration sequence.
 dotnet run --project src/CSharpBasics.ConsoleApp
 
-# 5. Run specific playground
+# Run completed exercise implementations with sample inputs.
+dotnet run --project exercises/CSharpBasics.Exercises
+
+# Use the playground for temporary experiments.
 dotnet run --project src/CSharpBasics.Playground
-
-# 6. Run all tests
-dotnet test
-
-# 7. Run benchmarks (optional)
-dotnet run -c Release --project benchmarks/StringBenchmark/StringBenchmark.csproj
-dotnet run -c Release --project benchmarks/MemoryBenchmarks/MemoryBenchmarks.csproj
-dotnet run -c Release --project benchmarks/CollectionsBenchmark/CollectionsBenchmark.csproj
 ```
 
+You can also run the commands from the repository root by prefixing project and solution paths with `01-csharp-basics/`.
 
+## Topic map
 
+### 1. The .NET execution model
 
+The first lesson separates language, toolchain, and runtime responsibilities. It follows the path from C# source through Roslyn compilation to IL in an assembly, then through runtime loading and JIT compilation to native instructions. This vocabulary becomes essential when diagnosing build, deployment, compatibility, and performance problems later.
 
----
+Key distinctions:
 
-## 📚 Documentation Structure
+- C# is a language; .NET is a platform and runtime ecosystem.
+- An SDK provides build tooling and can target compatible earlier frameworks.
+- A target framework declares the APIs and runtime contract expected by a project.
+- An assembly contains IL and metadata; it is not merely a renamed native executable.
+- The CLR provides services such as type safety, exception handling, garbage collection, and JIT compilation.
 
-All detailed learning content lives in `docs/`:
+### 2. Variables and the type system
 
-| File | Purpose |
-|------|---------|
-| `01-dotnet-ecosystem.md` | CLR, JIT, assemblies explained |
-| `02-variables-types.md` | Deep type system knowledge |
-| `03-operators-control-flow.md` | Complete operator reference |
-| `04-methods.md` | Method patterns & best practices |
-| `05-collections.md` | Collections internals |
-| `06-strings.md` | String performance & techniques |
-| `07-nullability.md` | Null safety mechanisms |
-| `08-memory.md` | Memory management, GC, and disposal |
-| `common-pitfalls.md` | **Must read** — avoid 80% of bugs |
-| `00-roadmap.md` | Suggested study sequence |
+This section covers numeric types, `bool`, `char`, `string`, arrays, enums, structs, classes, nullable value types, constants, conversions, type inference, and runtime type inspection.
 
----
+Important mental models:
 
-## ⚠️ Common Pitfalls
+- `var` asks the compiler to infer a concrete static type; it does not make a variable dynamic.
+- `dynamic` delays member binding until runtime and therefore changes when errors are detected.
+- A value type has value-copy semantics. Its storage location depends on context and runtime optimization; “value type means stack” is not a reliable rule.
+- A reference-type variable contains a reference that may identify an object on the managed heap or be `null`.
+- `decimal` is usually suitable for base-10 financial arithmetic; `double` is usually suitable for scientific and general floating-point calculations.
 
-**Quick fixes** (see `docs/common-pitfalls.md` for full details):
+### 3. Operators and control flow
 
-❌ **Using `dynamic` unnecessarily**
-```csharp
-dynamic var = GetInput();  // Runtime errors possible
+The examples progress from arithmetic and comparison through short-circuit logic, null-coalescing operators, branching, loops, switch expressions, relational patterns, property patterns, and guard clauses.
+
+Prefer control flow that makes boundary conditions visible. A compact expression is useful only when its intent remains obvious. Exhaustive enum handling and explicit fallback behavior often communicate more than a clever chain of conditions.
+
+### 4. Methods and parameter design
+
+Method signatures are contracts. The material covers return types, validation, optional and named arguments, overload resolution, `params`, local functions, recursion, tuple returns, and the `ref` family.
+
+Use parameter modifiers deliberately:
+
+- `ref` exposes caller-owned storage for reading and writing;
+- `out` represents an additional output and is common in the `Try...` pattern;
+- `in` passes a readonly reference and is mainly useful after measurement for sufficiently large structs;
+- tuples work well for small, local groups of results, while a named type communicates a reusable domain concept better.
+
+### 5. Collections
+
+Collection choice should follow access patterns:
+
+| Need | Typical starting point | Important cost |
+|---|---|---|
+| Fixed-size indexed data | Array | Resizing requires another container |
+| Ordered, resizable sequence | `List<T>` | Insert/remove near the front shifts elements |
+| Lookup by unique key | `Dictionary<TKey, TValue>` | Requires stable equality and hash behavior |
+| Unique values or membership tests | `HashSet<T>` | Does not represent sequence order as a contract |
+| Read-only iteration contract | `IEnumerable<T>` | May be lazy and may enumerate more than once |
+
+Complexity describes growth, not an exact duration. Input size, allocation, locality, comparer cost, and runtime behavior still matter.
+
+### 6. Strings
+
+Strings are immutable sequences of UTF-16 code units. The lessons cover literals, interpolation, escaping, common transformations, comparison modes, parsing, splitting, joining, interning, and repeated construction.
+
+Specify comparison semantics explicitly at system boundaries. `StringComparison.Ordinal` and `OrdinalIgnoreCase` are common for identifiers and protocol-like values; culture-aware comparisons are appropriate for human-language text. Use `StringBuilder` for sufficiently large or repeated mutation, but keep simple interpolation or a small fixed concatenation when it is clearer.
+
+### 7. Nullability
+
+Nullable reference types add compile-time annotations and flow analysis; they do not change the runtime representation of reference types. The examples cover `?`, `?.`, `?[]`, `??`, `??=`, pattern matching, guards, `TryParse`, and the null-forgiving operator.
+
+Treat `!` as an assertion to the compiler, not a runtime null check. Prefer APIs whose signatures communicate whether absence is expected, and validate untrusted input at boundaries.
+
+### 8. Memory and lifetime fundamentals
+
+This phase introduces value/reference semantics, stack frames, the managed heap, garbage collection, boxing, string interning, and deterministic disposal. These concepts are intentionally revisited with more rigor in Phase 04.
+
+Avoid two common oversimplifications:
+
+- value types are not guaranteed to live on the stack; they can be fields inside heap objects, array elements, boxed values, or optimized into registers;
+- garbage collection manages memory, while `IDisposable` represents deterministic release of resources or other lifetime-sensitive state.
+
+## Exercises
+
+Exercises are grouped by difficulty, but difficulty is secondary to the concept being practiced.
+
+### Easy
+
+- `SumNumbers`: iteration and `params`;
+- `MaxOfThree`: conditional reasoning and boundaries;
+- `MethodBasics`: method input and fallback behavior;
+- `EvenOdd`: arithmetic predicates;
+- `TemperatureConverter`: numeric conversion;
+- `SimpleLoop`: validated range generation;
+- `VariableTypes`: runtime type information.
+
+### Medium
+
+- `ReverseString`: array conversion and reversal;
+- `Palindrome`: normalization and two-pointer comparison;
+- `CountWords`: tokenization and dictionary counting;
+- `FibonacciSequence`: iterative sequence construction;
+- `PrimeNumbers`: sieve-based filtering;
+- `RemoveDuplicates`: set semantics through LINQ;
+- `NullDisplay`: nullable input and normalization.
+
+### Hard
+
+- `BasicCalculator`: switch expressions, validation, and error contracts;
+- `NestedCollections`: flattening, uniqueness, and ordering;
+- `StudentReport`: collections plus nullable values;
+- `MemoryBucket`: value-copy and shared-reference behavior.
+
+For deliberate practice, hide the implementation, preserve the public method signature, write at least one boundary test, and then compare approaches. Passing the existing tests is the baseline, not proof that every possible input has been specified.
+
+## Tests as executable documentation
+
+The test project covers examples and exercises. Read a test using Arrange–Act–Assert:
+
+- Arrange describes the relevant initial state and input.
+- Act performs one observable behavior.
+- Assert states the contract in a form future changes must preserve.
+
+Good additions include empty input, a single element, duplicate values, numeric boundaries, invalid arguments, and null when the signature permits it. Avoid testing implementation details that callers cannot observe.
+
+## Benchmark labs
+
+The benchmark folders are optional learning labs. Run them in Release mode on an otherwise quiet machine:
+
+```powershell
+dotnet run -c Release --project benchmarks/StringBenchmark
+dotnet run -c Release --project benchmarks/CollectionsBenchmark
+dotnet run -c Release --project benchmarks/MemoryBenchmarks
 ```
 
-✅ **Use `var` with type inference**
-```csharp
-var value = GetInput();    // Compiler knows the type
+Treat a stopwatch demo as a demonstration, not statistically rigorous evidence. Warm-up, tiered JIT compilation, dead-code elimination, GC activity, CPU frequency, and background processes can all affect results. Phase 04 introduces BenchmarkDotNet and a more disciplined measurement workflow.
+
+## Code and documentation conventions
+
+- One focused concept per example file.
+- Public teaching methods expose behavior that tests can verify.
+- Comments explain intent, surprising runtime behavior, or educational trade-offs; they do not repeat self-explanatory syntax.
+- Examples may show a deliberately inferior approach when comparison is the lesson, but the trade-off must be labeled.
+- Nullable annotations remain enabled repository-wide.
+- Warnings are treated as errors during normal builds.
+- Markdown lessons use YAML front matter with `title`, `description`, `phase`, `order`, and `topics`.
+- Relative links must work when rendered on GitHub.
+
+Before committing changes to this phase:
+
+```powershell
+dotnet format 01-csharp-basics.slnx --verify-no-changes
+dotnet build 01-csharp-basics.slnx
+dotnet test 01-csharp-basics.slnx --no-build
 ```
 
----
+## Common pitfalls checklist
 
-❌ **String concatenation in loops**
-```csharp
-string result = "";
-for (int i = 0; i < 1000; i++)
-    result += i;  // Creates 1000 objects!
-```
+Before moving on, make sure you can explain why each item can fail:
 
-✅ **Use StringBuilder**
-```csharp
-var sb = new StringBuilder();
-for (int i = 0; i < 1000; i++)
-    sb.Append(i);
-```
+- using `dynamic` when the shape is known at compile time;
+- assuming every value type is stored on the stack;
+- relying on default string comparison semantics at a boundary;
+- repeatedly concatenating a growing string in a large loop;
+- modifying a collection during `foreach` enumeration;
+- using an unstable `GetHashCode()` implementation for dictionary keys;
+- ignoring nullable warnings or suppressing them with `!` without proof;
+- catching `Exception` without a recovery strategy;
+- treating one benchmark run as a general performance conclusion;
+- assuming GC also provides timely release of files, sockets, or handles.
 
----
+See [Common C# Pitfalls](docs/common-pitfalls.md) for worked examples and repairs.
 
-❌ **Not checking nulls**
-```csharp
-string text = GetValue();
-int len = text.Length;  // NullReferenceException?
-```
+## Completion checklist
 
-✅ **Use safe operators**
-```csharp
-string? text = GetValue();
-int len = text?.Length ?? 0;
-```
+- [ ] Read every topic document in order and answer its review questions.
+- [ ] Run the console app and predict the major output sections.
+- [ ] Reimplement at least one Easy, one Medium, and one Hard exercise.
+- [ ] Add at least three meaningful boundary tests.
+- [ ] Explain `var` versus `dynamic` without using the phrase “both infer a type.”
+- [ ] Explain value versus reference semantics without equating them directly to stack versus heap.
+- [ ] Choose a collection for three different access patterns and justify the choice.
+- [ ] Explain the difference between garbage collection and deterministic disposal.
+- [ ] Run the complete phase test suite successfully.
 
-👉 **Many more in `docs/common-pitfalls.md`** — review it early!
+## Next phase
 
-
-
----
-
-## 🔧 Code Style
-
-This project follows **consistent C# standards** via `.editorconfig`:
-
-```bash
-# Format code automatically
-dotnet format
-```
-
-Before committing:
-```bash
-dotnet format
-dotnet build
-dotnet test
-git add .
-git commit -m "feat: [description]"
-```
-
----
-
-## 🎯 Tips for Success
-
-1. **Code along** - Don't just read, type every example
-2. **Experiment** - Break things intentionally
-3. **Test frequently** - `dotnet test` after changes
-4. **Read docs** - Don't skip documentation files
-5. **Refactor** - Revisit old code with new knowledge
-6. **Teach others** - Explain concepts to solidify them
+Continue with [Phase 02 — Object-Oriented Programming](../02-oop/README.md), where these language fundamentals are used to design types that protect invariants and expose clear behavior.

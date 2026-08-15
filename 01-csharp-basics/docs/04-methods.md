@@ -1,3 +1,11 @@
+---
+title: "Methods"
+description: "Method declarations, parameters, ref/out/in, overloads, local functions, and recursion."
+phase: 1
+order: 4
+topics: [csharp, methods, parameters]
+---
+
 # Methods
 
 Methods are reusable blocks of code.
