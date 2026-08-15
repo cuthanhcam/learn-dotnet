@@ -12,11 +12,39 @@ public static class ProductEndpoints
     {
         RouteGroupBuilder group = endpoints.MapGroup("/api/products").WithTags("Products");
 
-        group.MapGet("/", ListAsync).WithName("ListProducts");
-        group.MapGet("/{id:guid}", GetAsync).WithName("GetProduct");
-        group.MapPost("/", CreateAsync).WithName("CreateProduct");
-        group.MapPut("/{id:guid}", UpdateAsync).WithName("UpdateProduct");
-        group.MapDelete("/{id:guid}", DeleteAsync).WithName("DeleteProduct");
+        group.MapGet("/", ListAsync)
+            .WithName("ListProducts")
+            .WithSummary("List products using bounded page-number pagination")
+            .Produces<PagedResponse<Product>>()
+            .ProducesValidationProblem();
+        group.MapGet("/{id:guid}", GetAsync)
+            .WithName("GetProduct")
+            .WithSummary("Get a product and its current strong ETag")
+            .Produces<Product>()
+            .ProducesProblem(StatusCodes.Status404NotFound);
+        group.MapPost("/", CreateAsync)
+            .WithName("CreateProduct")
+            .WithSummary("Create a uniquely named product")
+            .Produces<Product>(StatusCodes.Status201Created)
+            .ProducesValidationProblem()
+            .ProducesProblem(StatusCodes.Status409Conflict);
+        group.MapPut("/{id:guid}", UpdateAsync)
+            .WithName("UpdateProduct")
+            .WithSummary("Replace a product when its If-Match precondition succeeds")
+            .Produces<Product>()
+            .ProducesValidationProblem()
+            .ProducesProblem(StatusCodes.Status404NotFound)
+            .ProducesProblem(StatusCodes.Status409Conflict)
+            .ProducesProblem(StatusCodes.Status412PreconditionFailed)
+            .ProducesProblem(StatusCodes.Status428PreconditionRequired);
+        group.MapDelete("/{id:guid}", DeleteAsync)
+            .WithName("DeleteProduct")
+            .WithSummary("Delete a product when its If-Match precondition succeeds")
+            .Produces(StatusCodes.Status204NoContent)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status404NotFound)
+            .ProducesProblem(StatusCodes.Status412PreconditionFailed)
+            .ProducesProblem(StatusCodes.Status428PreconditionRequired);
 
         return endpoints;
     }

@@ -8,6 +8,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // returning ad-hoc strings that every client must interpret differently.
 builder.Services.AddProblemDetails();
 builder.Services.AddControllers();
+builder.Services.AddOpenApi();
 
 builder.Services
     .AddOptions<LearningOptions>()
@@ -28,6 +29,15 @@ WebApplication app = builder.Build();
 
 app.UseExceptionHandler();
 app.UseMiddleware<CorrelationIdMiddleware>();
+
+// The document endpoint is a development-time diagnostic surface. Publishing it publicly is an
+// explicit product/security decision because it exposes the complete reachable API contract.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    // ASP.NET Core 10 can serialize the same generated contract as YAML without a UI dependency.
+    app.MapOpenApi("/openapi/{documentName}.yaml");
+}
 
 app.MapGet("/health", () => TypedResults.Ok(new { Status = "healthy" }))
     .WithName("Health")
