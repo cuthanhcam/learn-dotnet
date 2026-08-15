@@ -1,3 +1,11 @@
+---
+title: "Exception Handling in .NET"
+description: "Exception taxonomy, propagation, filters, cleanup, custom exceptions, and resilient error boundaries."
+phase: 3
+order: 3
+topics: [dotnet, exceptions, error-handling]
+---
+
 # ⚠️ Exception Handling: Building Robust Applications
 
 ## Overview

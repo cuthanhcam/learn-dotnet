@@ -1,3 +1,11 @@
+---
+title: "Collections in .NET"
+description: "Collection interfaces, concrete data structures, equality, complexity, and selection trade-offs."
+phase: 3
+order: 1
+topics: [dotnet, collections]
+---
+
 # 📦 Collections: Lists, Dictionaries, and Sets
 
 ## Overview

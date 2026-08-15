@@ -1,3 +1,11 @@
+---
+title: "LINQ — Language Integrated Query"
+description: "LINQ operators, deferred execution, materialization, composition, complexity, and query correctness."
+phase: 3
+order: 4
+topics: [dotnet, linq, queries]
+---
+
 # ⚡ LINQ: Language-Integrated Queries
 
 ## Overview

@@ -1,3 +1,11 @@
+---
+title: "Common Core .NET Pitfalls"
+description: "Frequent Standard Library mistakes, observable consequences, and safer alternatives."
+phase: 3
+order: 11
+topics: [dotnet, pitfalls, debugging]
+---
+
 # ⚠️ Common Pitfalls: What to Avoid
 
 This document summarizes common mistakes across all Core .NET topics and how to avoid them.

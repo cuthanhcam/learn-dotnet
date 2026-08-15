@@ -1,3 +1,11 @@
+---
+title: "File I/O and Streams"
+description: "Paths, files, streams, encoding, buffering, disposal, atomicity, and safe filesystem boundaries."
+phase: 3
+order: 6
+topics: [dotnet, files, streams]
+---
+
 # 💾 File I/O: Reading and Writing Files
 
 ## Overview
