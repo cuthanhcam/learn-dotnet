@@ -28,6 +28,7 @@ and integration testing.
 | 1 | [Hosting and request pipeline](docs/01-hosting-request-pipeline.md) | `WebApplication`, middleware, correlation |
 | 2 | [DI, configuration, and options](docs/02-dependency-injection-configuration.md) | lifetimes and startup validation |
 | 3 | [Routing, validation, and Problem Details](docs/03-routing-validation-problem-details.md) | product endpoints and HTTP contracts |
+| 4 | [HTTP semantics, pagination, and concurrency](docs/04-http-semantics-pagination-concurrency.md) | bounded reads, ETags, and conditional writes |
 
 Additional slices will cover controllers, filters, OpenAPI, logging, caching, rate limiting, CORS,
 health checks, resilience boundaries, background services, security integration points, and advanced
@@ -81,9 +82,12 @@ Content-Type: application/json
 | Typed, startup-validated configuration | `Configuration/LearningOptions.cs` |
 | Structured request correlation | `Middleware/CorrelationIdMiddleware.cs` |
 | Minimal API route group and typed results | `Features/Products/ProductEndpoints.cs` |
+| Application orchestration | `Features/Products/ProductCatalog.cs` |
+| Request, resource, and pagination contracts | `Features/Products/ProductContracts.cs` |
 | Persistence boundary | `IProductRepository.cs` |
 | Concurrent learning implementation | `InMemoryProductRepository.cs` |
 | In-process HTTP specifications | `tests/Learning.Api.Tests/ProductApiTests.cs` |
+| Conditional-request specifications | `tests/Learning.Api.Tests/ProductLifecycleTests.cs` |
 
 ## Design Rules
 
