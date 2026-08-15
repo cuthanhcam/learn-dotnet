@@ -49,6 +49,7 @@ namespace CoreDotNet.ConsoleApp
             RunSection("DateTime & TimeZone", static () =>
             {
                 RunExample(DateTimeAndTimeZoneExample.Run);
+                RunExample(TimeProviderExample.Run);
             });
 
             RunSection("Attributes", static () =>
