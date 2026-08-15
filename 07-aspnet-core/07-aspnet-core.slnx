@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="docs/00-roadmap.md" />
+    <File Path="docs/01-hosting-request-pipeline.md" />
+    <File Path="docs/02-dependency-injection-configuration.md" />
+    <File Path="docs/03-routing-validation-problem-details.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Learning.Api/Learning.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Learning.Api.Tests/Learning.Api.Tests.csproj" />
+  </Folder>
+</Solution>
