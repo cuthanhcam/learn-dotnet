@@ -1,3 +1,11 @@
+---
+title: "OOP Patterns and Composition"
+description: "Composition, strategy, factory, and observer as introductory object-design patterns."
+phase: 2
+order: 7
+topics: [oop, composition, design-patterns]
+---
+
 # OOP Patterns (Intro)
 
 OOP patterns are reusable solutions to common design problems.

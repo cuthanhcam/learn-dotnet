@@ -1,3 +1,11 @@
+---
+title: "Phase 02 Documentation Index"
+description: "An ordered index of the object-oriented programming lessons."
+phase: 2
+order: -1
+topics: [oop, index]
+---
+
 # OOP Module Documentation
 
 This folder will contain deep-dive documentation for each OOP topic:
@@ -9,5 +17,7 @@ This folder will contain deep-dive documentation for each OOP topic:
 - 04-access-modifiers.md: public, private, protected, internal
 - 05-constructors-destructors.md: Object lifecycle
 - 06-static-members.md: Static fields, methods, properties
-- 07-oop-patterns.md: Intro to OOP design patterns
-- common-pitfalls.md: Common OOP mistakes
+- 07-oop-patterns.md: Composition and introductory design patterns
+- 08-object-contracts-records.md: Equality, hashing, diagnostic text, records, and immutability
+- 09-solid-principles.md: Practical SOLID principles and trade-offs
+- common-pitfalls.md: Common OOP mistakes and safer alternatives

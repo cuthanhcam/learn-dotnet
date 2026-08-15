@@ -1,3 +1,11 @@
+---
+title: "Common OOP Pitfalls"
+description: "Frequent object-design mistakes, their consequences, and safer alternatives."
+phase: 2
+order: 10
+topics: [oop, pitfalls, design]
+---
+
 # Common OOP Pitfalls
 
 ## 1. Forgetting to Use Access Modifiers
@@ -10,7 +18,10 @@ Exposing fields directly breaks encapsulation. Use properties to control access 
 Deep inheritance hierarchies are hard to maintain. Prefer composition for code reuse.
 
 ## 4. Not Implementing IDisposable
-If your class uses unmanaged resources (files, DB), always implement IDisposable for cleanup.
+Implement `IDisposable` when the type owns a disposable resource or other state
+that requires deterministic cleanup. A database itself is external; owning a
+database connection or stream is the relevant lifetime responsibility. Do not
+add an empty `IDisposable` implementation to every class that merely uses one.
 
 ## 5. Not Using Interfaces for Abstraction
 Interfaces allow flexible, testable code. Don’t hardcode dependencies on concrete classes.

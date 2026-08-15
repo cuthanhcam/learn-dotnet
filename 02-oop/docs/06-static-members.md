@@ -1,3 +1,11 @@
+---
+title: "Static Members"
+description: "Static state, methods, properties, constructors, initialization, and testability trade-offs."
+phase: 2
+order: 6
+topics: [csharp, static-members]
+---
+
 # Static Members
 
 Static members belong to the class itself, not to any object instance.

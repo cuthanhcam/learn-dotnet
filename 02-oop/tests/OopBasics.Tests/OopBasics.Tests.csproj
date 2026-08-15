@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\exercises\OopBasics.Exercises\OopBasics.Exercises.csproj" />
     <ProjectReference Include="..\..\src\OopBasics.Examples\OopBasics.Examples.csproj" />
   </ItemGroup>
 
