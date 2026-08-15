@@ -185,8 +185,9 @@ Use this loop for every problem, even small ones:
 | `common-pitfalls.md`               | Mistakes to catch during practice and review          |
 
 Advanced implementations include `BinaryMinHeap<T>`, `PrefixTrie`, `FenwickTree`,
-`SegmentTree`, `DisjointSet`, Dijkstra shortest paths, and Kahn topological sorting. Each type is
-kept separate so its invariant, complexity, and boundary tests remain easy to study.
+`SegmentTree`, `DisjointSet`, Dijkstra shortest paths, Kahn topological sorting, Kruskal minimum
+spanning forests, and Tarjan strongly connected components. Each type is kept separate so its
+invariant, complexity, and boundary tests remain easy to study.
 
 ## Mastery Check
 
