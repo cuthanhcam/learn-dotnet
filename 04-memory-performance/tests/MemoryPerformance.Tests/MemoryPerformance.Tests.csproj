@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\exercises\MemoryPerformance.Exercises\MemoryPerformance.Exercises.csproj" />
     <ProjectReference Include="..\..\src\MemoryPerformance.Examples\MemoryPerformance.Examples.csproj" />
   </ItemGroup>
 
