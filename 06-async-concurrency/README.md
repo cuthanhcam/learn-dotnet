@@ -75,6 +75,7 @@ dotnet run --project exercises/AsyncConcurrency.Exercises
 | Type | Concept |
 |---|---|
 | `AsyncBasicsExample` | Non-blocking waits and `Task.WhenAll` ordering |
+| `AsyncStreamOperators` | Streaming buffers, sequential transforms, cancellation, and bounded materialization |
 | `CancellationExample` | Cooperative cancellation and owned timeout translation |
 | `ThreadSafeCounter` | Atomic read-modify-write with `Interlocked` |
 | `BoundedExecutor` | `SemaphoreSlim`, ordered results, and release in `finally` |
