@@ -39,6 +39,19 @@ public sealed class ProductApiTests : IClassFixture<WebApplicationFactory<Progra
     }
 
     [Fact]
+    public async Task CorrelationId_InvalidCallerValueIsNotReflected()
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Get, "/health");
+        request.Headers.TryAddWithoutValidation(CorrelationIdMiddleware.HeaderName, "unsafe value");
+
+        using HttpResponseMessage response = await _client.SendAsync(request);
+        string returned = response.Headers.GetValues(CorrelationIdMiddleware.HeaderName).Single();
+
+        Assert.NotEqual("unsafe value", returned);
+        Assert.Matches("^[a-f0-9]{32}$", returned);
+    }
+
+    [Fact]
     public async Task CreateThenGet_RoundTripsResourceAndLocation()
     {
         using HttpResponseMessage createdResponse = await _client.PostAsJsonAsync(
