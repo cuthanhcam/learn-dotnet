@@ -1,9 +1,16 @@
 ---
 title: "Collections"
 description: "Arrays, foundational generic collections, and practical selection criteria."
+slug: csharp-foundational-collections
 phase: 1
 order: 5
+difficulty: beginner
+article-type: tutorial
+estimated-reading-minutes: 17
 topics: [csharp, collections]
+prerequisites: [csharp-methods-and-parameters]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Collections

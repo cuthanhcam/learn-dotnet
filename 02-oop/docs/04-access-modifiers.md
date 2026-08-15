@@ -1,9 +1,16 @@
 ---
 title: "Access Modifiers in C#"
 description: "Accessibility rules and their role in protecting implementation details and invariants."
+slug: csharp-accessibility-and-api-surface
 phase: 2
 order: 4
+difficulty: intermediate
+article-type: reference
+estimated-reading-minutes: 14
 topics: [csharp, accessibility, encapsulation]
+prerequisites: [csharp-classes-objects-encapsulation]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Access Modifiers in C#

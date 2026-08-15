@@ -1,9 +1,16 @@
 ---
 title: "Object Contracts, Equality, Records, and Immutability"
 description: "Reference identity, value equality, Equals, GetHashCode, ToString, records, and immutable type design."
+slug: csharp-object-contracts-records-immutability
 phase: 2
 order: 8
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 22
 topics: [csharp, equality, records, immutability]
+prerequisites: [csharp-classes-objects-encapsulation, csharp-foundational-collections]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Object Contracts, Equality, Records, and Immutability

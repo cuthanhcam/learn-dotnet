@@ -1,9 +1,16 @@
 ---
 title: "Common Core .NET Pitfalls"
 description: "Frequent Standard Library mistakes, observable consequences, and safer alternatives."
+slug: core-dotnet-common-pitfalls
 phase: 3
 order: 11
+difficulty: intermediate
+article-type: pitfalls
+estimated-reading-minutes: 22
 topics: [dotnet, pitfalls, debugging]
+prerequisites: [nullable-reference-types-api-design, core-dotnet-performance-guidelines]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # ⚠️ Common Pitfalls: What to Avoid

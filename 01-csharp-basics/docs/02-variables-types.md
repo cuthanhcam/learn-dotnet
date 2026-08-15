@@ -1,9 +1,16 @@
 ---
 title: "Variables and Types"
 description: "The C# type system, type inference, dynamic binding, conversions, constants, and nullable value types."
+slug: csharp-variables-and-types
 phase: 1
 order: 2
+difficulty: beginner
+article-type: tutorial
+estimated-reading-minutes: 16
 topics: [csharp, types, variables]
+prerequisites: [dotnet-ecosystem-fundamentals]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Variables & Types

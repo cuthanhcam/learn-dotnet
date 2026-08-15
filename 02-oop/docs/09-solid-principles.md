@@ -1,9 +1,16 @@
 ---
 title: "SOLID Principles"
 description: "A practical introduction to five object-design heuristics, their trade-offs, and common misuse."
+slug: solid-principles-practical-guide
 phase: 2
 order: 9
+difficulty: intermediate
+article-type: deep-dive
+estimated-reading-minutes: 24
 topics: [oop, solid, design]
+prerequisites: [oop-composition-and-patterns, csharp-object-contracts-records-immutability]
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # SOLID Principles
