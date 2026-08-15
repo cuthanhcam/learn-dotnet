@@ -7,6 +7,7 @@
     <File Path="docs/04-http-semantics-pagination-concurrency.md" />
     <File Path="docs/05-controllers-model-validation-filters.md" />
     <File Path="docs/06-openapi-contracts-dotnet-10.md" />
+    <File Path="docs/07-errors-observability-health-checks.md" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Learning.Api/Learning.Api.csproj" />
