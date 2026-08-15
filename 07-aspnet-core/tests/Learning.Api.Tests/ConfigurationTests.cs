@@ -22,6 +22,7 @@ public sealed class ConfigurationTests : IClassFixture<WebApplicationFactory<Pro
 
         Assert.Equal("Learn .NET Catalog", options.CatalogName);
         Assert.Equal(100, options.MaximumPageSize);
+        Assert.Equal(["https://learn-dotnet.example"], options.AllowedOrigins);
     }
 
     [Fact]

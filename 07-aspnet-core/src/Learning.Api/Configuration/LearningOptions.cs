@@ -11,4 +11,7 @@ public sealed class LearningOptions
 
     [Range(1, 500)]
     public int MaximumPageSize { get; init; } = 100;
+
+    [MinLength(1)]
+    public string[] AllowedOrigins { get; init; } = [];
 }
