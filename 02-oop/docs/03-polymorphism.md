@@ -1,3 +1,11 @@
+---
+title: "Polymorphism and Abstraction"
+description: "Interfaces, abstract classes, virtual dispatch, and choosing an abstraction boundary."
+phase: 2
+order: 3
+topics: [oop, polymorphism, interfaces, abstraction]
+---
+
 # Polymorphism in C#
 
 ## What is Polymorphism?

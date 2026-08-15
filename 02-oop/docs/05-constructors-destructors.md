@@ -1,3 +1,11 @@
+---
+title: "Construction, Finalization, and Disposal"
+description: "Valid construction, object lifetime, finalizers, IDisposable, and deterministic cleanup."
+phase: 2
+order: 5
+topics: [oop, constructors, disposal]
+---
+
 # Constructors & Destructors
 
 ## Constructors

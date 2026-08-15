@@ -1,3 +1,11 @@
+---
+title: "Classes and Objects in C#"
+description: "Classes, instances, state, behavior, properties, encapsulation, and invariants."
+phase: 2
+order: 1
+topics: [oop, classes, encapsulation]
+---
+
 # Classes & Objects in C#
 
 ## What is a Class?

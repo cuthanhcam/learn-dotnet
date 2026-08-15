@@ -1,3 +1,11 @@
+---
+title: "OOP Learning Roadmap"
+description: "The study sequence, checkpoints, and completion path for Phase 02."
+phase: 2
+order: 0
+topics: [oop, roadmap]
+---
+
 # OOP Module Roadmap
 
 Welcome to the OOP learning journey! This roadmap guides you from the basics to advanced OOP mastery, with checkpoints, practice, and interview prep.

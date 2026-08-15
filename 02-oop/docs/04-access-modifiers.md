@@ -1,3 +1,11 @@
+---
+title: "Access Modifiers in C#"
+description: "Accessibility rules and their role in protecting implementation details and invariants."
+phase: 2
+order: 4
+topics: [csharp, accessibility, encapsulation]
+---
+
 # Access Modifiers in C#
 
 Access modifiers control the visibility and accessibility of classes, methods, and members.

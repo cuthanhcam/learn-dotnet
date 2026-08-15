@@ -1,3 +1,11 @@
+---
+title: "Inheritance in C#"
+description: "Base and derived types, constructor chains, overriding, hiding, sealing, and substitutability."
+phase: 2
+order: 2
+topics: [oop, inheritance]
+---
+
 # Inheritance in C#
 
 ## What is Inheritance?
