@@ -30,7 +30,9 @@ After this phase, you should be able to explain task lifecycles, compose indepen
 | 6 | [Channels and pipelines](docs/06-channels-pipelines.md) | Producer/consumer backpressure |
 | 7 | [Concurrent collections](docs/07-concurrent-collections.md) | Atomic collection operations |
 | 8 | [Deadlocks and context](docs/08-deadlocks-context.md) | Blocking cycles and `ConfigureAwait` |
-| 9 | [Common pitfalls](docs/common-pitfalls.md) | Review failure patterns |
+| 9 | [Coordination primitives](docs/09-coordination-primitives-deep-dive.md) | Choose by invariant and ownership |
+| 10 | [Production patterns](docs/10-production-concurrency-patterns.md) | Coalescing, retry, pipelines, shutdown |
+| 11 | [Common pitfalls](docs/common-pitfalls.md) | Review failure patterns |
 
 ## Structure
 
