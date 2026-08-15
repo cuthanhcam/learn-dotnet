@@ -1,3 +1,11 @@
+---
+title: "Core .NET Performance Guidelines"
+description: "Measurement-first guidance for collections, LINQ, files, reflection, exceptions, and allocations."
+phase: 3
+order: 10
+topics: [dotnet, performance]
+---
+
 # Performance Guidelines
 
 ## Purpose

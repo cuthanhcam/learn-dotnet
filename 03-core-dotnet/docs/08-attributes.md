@@ -1,3 +1,11 @@
+---
+title: "Attributes and Metadata"
+description: "Built-in and custom attributes, reflection, metadata contracts, and runtime inspection costs."
+phase: 3
+order: 8
+topics: [csharp, attributes, reflection]
+---
+
 # 🏷️ Attributes: Metadata and Reflection
 
 ## Overview

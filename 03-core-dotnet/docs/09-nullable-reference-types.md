@@ -1,3 +1,11 @@
+---
+title: "Nullable Reference Types"
+description: "Nullable annotations, flow analysis, API contracts, migration, and suppression hazards."
+phase: 3
+order: 9
+topics: [csharp, nullability, api-design]
+---
+
 # ✅ Nullable Reference Types: Null Safety
 
 ## Overview

@@ -1,3 +1,11 @@
+---
+title: "Date, Time, and Time Zones"
+description: "DateTime, DateTimeOffset, TimeSpan, time-zone conversion, parsing, formatting, and testable clocks."
+phase: 3
+order: 7
+topics: [dotnet, datetime, timezones]
+---
+
 # 🕐 DateTime & TimeZone: Temporal Operations
 
 ## Overview

@@ -1,3 +1,11 @@
+---
+title: "Generics in C#"
+description: "Generic types and methods, constraints, variance, type safety, and reusable API design."
+phase: 3
+order: 2
+topics: [csharp, generics, variance]
+---
+
 # 🔧 Generics: Reusable, Type-Safe Code
 
 ## Overview

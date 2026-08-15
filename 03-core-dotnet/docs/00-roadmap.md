@@ -1,3 +1,11 @@
+---
+title: "Core .NET Learning Roadmap"
+description: "The ordered study path, checkpoints, and practice workflow for Phase 03."
+phase: 3
+order: 0
+topics: [dotnet, standard-library, roadmap]
+---
+
 # 📋 Roadmap: Core .NET & Standard Library Learning Path
 
 ## Overview
