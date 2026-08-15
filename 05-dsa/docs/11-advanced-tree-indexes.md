@@ -58,6 +58,15 @@ Insertion or deletion updates heights while returning toward the root. A balance
 
 A rotation must preserve BST ordering while changing local height. AVL trees enforce strict balance and therefore give excellent lookup height, at the cost of more update bookkeeping.
 
+The included `AvlTree<T>` is an ordered set: comparer-equal values are duplicates and do not
+increase `Count`. Each recursive insert or delete rebalances while returning toward the root.
+Deletion handles leaf, one-child, and two-child nodes; the two-child case copies the in-order
+successor and removes it from the right subtree before updating height.
+
+Rotation update order matters. After a right rotation, update the demoted former root first, then
+the promoted pivot whose height depends on it. Tests cover all four insertion shapes, sorted input,
+and deletion-triggered rebalancing without asserting one exact internal shape.
+
 Red-black trees use coloring constraints to guarantee height at most proportional to `log n` with a looser balance. Many general ordered maps prefer this update/search compromise. In application code, use `SortedSet<T>` or `SortedDictionary<TKey,TValue>` unless implementing the tree is the learning or product requirement.
 
 ## Binary Heaps and `PriorityQueue`
@@ -133,12 +142,14 @@ B+ trees keep records or record pointers in leaves, while internal nodes guide n
 ## Implementation Map
 
 - `TreesGraphs/BinarySearchTree.cs`: unbalanced ordered-set mechanics.
+- `TreesGraphs/AvlTree.cs`: balanced insertion, lookup, deletion, and four rotation shapes.
 - `TreesGraphs/BinaryMinHeap.cs`: bottom-up heapify, insertion, peek, and removal.
 - `TreesGraphs/PrefixTrie.cs`: prefix insertion, lookup, enumeration, and safe pruning.
 - `TreesGraphs/FenwickTree.cs`: point assignment and prefix/range sums.
 - `TreesGraphs/SegmentTree.cs`: iterative half-open range sums and point assignment.
 - `BinaryMinHeapTests.cs`: duplicates, custom comparison, empty-state, and ordering tests.
 - `SegmentTreeTests.cs`: empty ranges, full/partial queries, updates, and invalid boundaries.
+- `AvlTreeTests.cs`: four rotation shapes, sorted insertion, deletion cases, and comparer semantics.
 - `AdvancedTreeIndexTests.cs`: trie and Fenwick semantics and boundaries.
 
 ## Common Pitfalls
@@ -154,7 +165,7 @@ B+ trees keep records or record pointers in leaves, while internal nodes guide n
 
 ## Exercises
 
-1. Implement an AVL tree and assert its balance and ordering invariants after every permutation of a small input.
+1. Add an internal AVL invariant validator and run it after every permutation of a small input.
 2. Extend `BinaryMinHeap<T>` with replace-min and a stable priority wrapper using an insertion sequence.
 3. Extend `PrefixTrie` with prefix deletion and define its return contract.
 4. Implement a generic segment tree over an associative combine function and identity.
