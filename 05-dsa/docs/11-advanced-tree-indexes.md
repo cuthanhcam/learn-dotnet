@@ -74,6 +74,11 @@ In a min-heap every parent priority is no greater than its children. Insert at t
 
 .NET provides `PriorityQueue<TElement,TPriority>`. Equal priorities do not promise stable FIFO ordering; include a sequence value in the priority when stability is required.
 
+The repository also implements `BinaryMinHeap<T>` to expose mechanics hidden by
+`PriorityQueue`. Its collection constructor uses bottom-up heapify: leaves already satisfy the
+invariant, so only internal nodes sift downward. Repeated removal is a useful executable check of
+the invariant because it must produce nondecreasing output, including duplicate values.
+
 ## Prefix Tries
 
 A trie stores a path per key prefix. Each node needs an explicit terminal marker because `car` and `cart` can both be valid keys. Search, insertion, and deletion are `O(k)` in key length, independent of the number of stored keys, assuming child lookup is effectively constant.
@@ -100,7 +105,16 @@ Fenwick trees work best when the aggregate has an inverse suitable for subtracti
 
 A segment tree recursively partitions an interval and stores an aggregate for each segment. A query visits only segments that exactly cover the requested range. Point updates change one leaf and recompute ancestors.
 
-Typical costs are `O(n)` build, `O(log n)` point update, `O(log n)` range query, and around `O(4n)` simple array storage. Lazy propagation defers range updates by recording pending work at internal nodes, but substantially increases correctness complexity.
+Typical costs are `O(n)` build, `O(log n)` point update, and `O(log n)` range query. A recursive
+implementation often reserves around `4n` slots for convenience. The included iterative
+`SegmentTree` instead rounds leaf capacity to a power of two and uses a flat array twice that
+capacity. Lazy propagation defers range updates by recording pending work at internal nodes, but
+substantially increases correctness complexity.
+
+The public API uses half-open ranges `[startInclusive, endExclusive)`, matching .NET slicing and
+allowing an empty range when both boundaries are equal. During an iterative query, an odd left
+boundary contributes its current node before moving right, while an odd exclusive-right boundary
+moves left before contributing. Both boundaries then move to their parents.
 
 Before implementation, define:
 
@@ -119,9 +133,13 @@ B+ trees keep records or record pointers in leaves, while internal nodes guide n
 ## Implementation Map
 
 - `TreesGraphs/BinarySearchTree.cs`: unbalanced ordered-set mechanics.
+- `TreesGraphs/BinaryMinHeap.cs`: bottom-up heapify, insertion, peek, and removal.
 - `TreesGraphs/PrefixTrie.cs`: prefix insertion, lookup, enumeration, and safe pruning.
 - `TreesGraphs/FenwickTree.cs`: point assignment and prefix/range sums.
-- `AdvancedTreeIndexTests.cs`: shared-prefix deletion, prefix semantics, update, range, and boundary tests.
+- `TreesGraphs/SegmentTree.cs`: iterative half-open range sums and point assignment.
+- `BinaryMinHeapTests.cs`: duplicates, custom comparison, empty-state, and ordering tests.
+- `SegmentTreeTests.cs`: empty ranges, full/partial queries, updates, and invalid boundaries.
+- `AdvancedTreeIndexTests.cs`: trie and Fenwick semantics and boundaries.
 
 ## Common Pitfalls
 
@@ -137,7 +155,7 @@ B+ trees keep records or record pointers in leaves, while internal nodes guide n
 ## Exercises
 
 1. Implement an AVL tree and assert its balance and ordering invariants after every permutation of a small input.
-2. Implement a stable priority queue by combining priority and insertion sequence.
+2. Extend `BinaryMinHeap<T>` with replace-min and a stable priority wrapper using an insertion sequence.
 3. Extend `PrefixTrie` with prefix deletion and define its return contract.
 4. Implement a generic segment tree over an associative combine function and identity.
 5. Add a Fenwick `Add(index, delta)` operation and property-based comparisons against a plain array.
