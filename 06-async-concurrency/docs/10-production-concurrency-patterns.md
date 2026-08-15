@@ -1,12 +1,16 @@
 ---
 title: "Production Concurrency Patterns in .NET"
 description: "Bounded fan-out, async memoization, producer-consumer pipelines, retries, idempotency, graceful shutdown, and deterministic testing."
+slug: dotnet-production-concurrency-patterns
 phase: 6
 order: 10
 topics: [concurrency, channels, caching, retries, graceful-shutdown]
 article-type: deep-dive
 estimated-reading-minutes: 26
-prerequisites: [tasks, cancellation, channels, concurrent-collections]
+prerequisites: [dotnet-concurrent-collections]
+difficulty: advanced
+status: maintained
+last-reviewed: 2026-08-15
 ---
 
 # Production Concurrency Patterns in .NET
@@ -25,7 +29,7 @@ Concurrent callers requesting the same expensive key can share one in-flight tas
 
 `AsyncMemoizer<TKey,TValue>` stores `Lazy<Task<TValue>>` with `ExecutionAndPublication`, so the selected lazy instance starts one factory. Faulted or canceled tasks are removed with key-and-value matching to avoid permanently poisoning the cache or deleting a newer replacement.
 
-Cancellation is subtle: if many callers share work, one caller's token should not necessarily cancel it for everyone. Separate shared-operation lifetime from individual caller wait cancellation according to product semantics.
+Cancellation is subtle: if many callers share work, one caller's token should not cancel it for everyone. The implementation uses a cache-owned token for shared work and `WaitAsync(callerToken)` for each caller. This also means shared work may outlive all current waiters, so eviction and service shutdown remain explicit owner responsibilities.
 
 ## Producer-Consumer Pipelines
 
@@ -75,7 +79,10 @@ Measure queue length, active workers, wait duration, processing duration, throug
 
 - `Collections/AsyncMemoizer.cs`: concurrent request coalescing and failure eviction.
 - `Channels/ChannelPipelineExample.cs`: bounded single-stage flow.
+- `Channels/ChannelWorkPool.cs`: bounded multi-worker flow and sibling cancellation.
 - `Synchronization/BoundedExecutor.cs`: ordered bounded fan-out.
+- `Synchronization/AsyncLock.cs`: async mutual exclusion through lease ownership.
+- `Parallelism/ParallelAggregation.cs`: partition-local CPU aggregation.
 - `Exercises/AsyncRetry.cs`: selective retry baseline.
 - `AsyncMemoizerTests.cs`: single execution and recovery after failure.
 

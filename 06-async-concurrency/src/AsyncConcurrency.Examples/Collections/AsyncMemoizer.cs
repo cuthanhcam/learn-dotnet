@@ -2,10 +2,19 @@ using System.Collections.Concurrent;
 
 namespace AsyncConcurrency.Examples.Collections;
 
-public sealed class AsyncMemoizer<TKey, TValue>(IEqualityComparer<TKey>? comparer = null)
+public sealed class AsyncMemoizer<TKey, TValue>
     where TKey : notnull
 {
-    private readonly ConcurrentDictionary<TKey, Lazy<Task<TValue>>> _entries = new(comparer);
+    private readonly ConcurrentDictionary<TKey, Lazy<Task<TValue>>> _entries;
+    private readonly CancellationToken _sharedLifetimeToken;
+
+    public AsyncMemoizer(
+        IEqualityComparer<TKey>? comparer = null,
+        CancellationToken sharedLifetimeToken = default)
+    {
+        _entries = new ConcurrentDictionary<TKey, Lazy<Task<TValue>>>(comparer);
+        _sharedLifetimeToken = sharedLifetimeToken;
+    }
 
     public int Count => _entries.Count;
 
@@ -17,26 +26,36 @@ public sealed class AsyncMemoizer<TKey, TValue>(IEqualityComparer<TKey>? compare
         ArgumentNullException.ThrowIfNull(factory);
 
         Lazy<Task<TValue>> candidate = new(
-            () => factory(key, cancellationToken),
+            // The operation belongs to the cache, not to whichever caller wins insertion.
+            // Its lifetime is therefore controlled separately from an individual caller wait.
+            () => factory(key, _sharedLifetimeToken),
             LazyThreadSafetyMode.ExecutionAndPublication);
 
         Lazy<Task<TValue>> selected = _entries.GetOrAdd(key, candidate);
-        try
-        {
-            // A caller token participates in factory creation only when this
-            // caller wins insertion. Shared cancellation semantics must be a
-            // deliberate application decision; one caller should not silently
-            // cancel work already shared by unrelated callers.
-            return await selected.Value.ConfigureAwait(false);
-        }
-        catch
-        {
-            // Do not poison the cache permanently with a faulted or canceled
-            // task. KeyValuePair removal ensures a newer entry is not removed.
-            _entries.TryRemove(new KeyValuePair<TKey, Lazy<Task<TValue>>>(key, selected));
-            throw;
-        }
+        Task<TValue> sharedTask = selected.Value;
+
+        // Cleanup belongs to shared-task completion rather than to one waiter's outcome.
+        // ExecuteSynchronously runs the tiny removal inline when safe and avoids another queued task.
+        _ = sharedTask.ContinueWith(
+            static (_, state) =>
+            {
+                var cleanup = (CleanupState)state!;
+                cleanup.Entries.TryRemove(
+                    new KeyValuePair<TKey, Lazy<Task<TValue>>>(cleanup.Key, cleanup.Entry));
+            },
+            new CleanupState(_entries, key, selected),
+            CancellationToken.None,
+            TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.NotOnRanToCompletion,
+            TaskScheduler.Default);
+
+        // WaitAsync cancels only this caller's wait. Other callers continue observing the shared task.
+        return await sharedTask.WaitAsync(cancellationToken).ConfigureAwait(false);
     }
 
     public bool TryRemove(TKey key) => _entries.TryRemove(key, out _);
+
+    private sealed record CleanupState(
+        ConcurrentDictionary<TKey, Lazy<Task<TValue>>> Entries,
+        TKey Key,
+        Lazy<Task<TValue>> Entry);
 }

@@ -54,6 +54,60 @@ public sealed class AsyncMemoizerTests
         Assert.Equal(2, calls);
     }
 
+    [Fact]
+    public async Task CancelingOneWaiterDoesNotCancelSharedOperation()
+    {
+        var memoizer = new AsyncMemoizer<string, int>();
+        var releaseFactory = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        using var callerCancellation = new CancellationTokenSource();
+        int factoryCalls = 0;
+
+        Task<int> canceledWait = memoizer.GetOrAddAsync(
+            "shared",
+            async (_, operationToken) =>
+            {
+                Interlocked.Increment(ref factoryCalls);
+                await releaseFactory.Task.WaitAsync(operationToken);
+                return 42;
+            },
+            callerCancellation.Token);
+
+        Task<int> survivingWait = memoizer.GetOrAddAsync(
+            "shared",
+            (_, _) => Task.FromResult(-1));
+
+        await WaitUntilAsync(() => Volatile.Read(ref factoryCalls) == 1);
+        callerCancellation.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => canceledWait);
+
+        releaseFactory.SetResult();
+
+        Assert.Equal(42, await survivingWait);
+        Assert.Equal(1, factoryCalls);
+        Assert.Equal(1, memoizer.Count);
+    }
+
+    [Fact]
+    public async Task SharedLifetimeCancellationCancelsAndEvictsOperation()
+    {
+        using var lifetime = new CancellationTokenSource();
+        var memoizer = new AsyncMemoizer<string, int>(sharedLifetimeToken: lifetime.Token);
+
+        Task<int> operation = memoizer.GetOrAddAsync(
+            "key",
+            async (_, token) =>
+            {
+                await Task.Delay(Timeout.InfiniteTimeSpan, token);
+                return 1;
+            });
+
+        lifetime.Cancel();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => operation);
+        await WaitUntilAsync(() => memoizer.Count == 0);
+
+        Assert.Equal(0, memoizer.Count);
+    }
+
     private static async Task WaitUntilAsync(Func<bool> condition)
     {
         using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(5));
