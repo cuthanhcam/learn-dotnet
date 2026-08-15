@@ -47,13 +47,13 @@ public static class MemoryConceptsExample
     // PUBLIC TEACHING METHODS
 
     /// <summary>
-    /// Allocates a simple value type on stack.
-    /// Stack allocation is fastest, automatic cleanup.
+    /// Returns a value-type local to demonstrate value semantics.
+    /// The JIT decides whether the local uses a register or stack slot.
     /// </summary>
     public static int StackAllocationExample()
     {
-        int value = 42;  // Allocated on stack
-        return value;    // Automatically cleaned up when scope exits
+        int value = 42;
+        return value;
     }
 
     /// <summary>
@@ -105,16 +105,17 @@ public static class MemoryConceptsExample
     /// - Shared across threads
     /// - Garbage collected
     /// - Much larger size (GB+)
-    /// - Slower access than stack
+    /// - Access cost depends on locality and workload; benchmark the real path
     /// </summary>
     private static void DemoStackVsHeap()
     {
-        // Stack allocation: small, fixed-size data
-        int x = 10;              // 4 bytes on stack
-        double y = 3.14;         // 8 bytes on stack
-        bool flag = true;        // 1 byte on stack
+        // These are value-type locals. The JIT can place them in registers or
+        // stack-frame slots, so source code alone does not prove their location.
+        int x = 10;
+        double y = 3.14;
+        bool flag = true;
 
-        Console.WriteLine("Stack allocations (immediate cleanup on exit):");
+        Console.WriteLine("Value-type locals (independent values):");
         Console.WriteLine($"  x (int) = {x}");
         Console.WriteLine($"  y (double) = {y}");
         Console.WriteLine($"  flag (bool) = {flag}");

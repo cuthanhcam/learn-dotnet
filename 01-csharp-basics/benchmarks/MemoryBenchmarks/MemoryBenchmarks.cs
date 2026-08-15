@@ -28,21 +28,22 @@ public static class MemoryBenchmarks
     }
 
     /// <summary>
-    /// Benchmarks allocation speed of value types on stack.
-    /// Expected: Very fast (~microseconds)
+    /// Measures arithmetic on value-type locals. This is not an allocation
+    /// benchmark because the JIT may keep these values in registers or remove
+    /// work whose result cannot be observed.
     /// </summary>
     private static void BenchmarkValueTypeAllocation()
     {
-        Console.WriteLine("\n--- VALUE TYPE ALLOCATION (Stack) ---");
+        Console.WriteLine("\n--- VALUE-TYPE LOCAL OPERATIONS ---");
 
         const int iterations = 10_000_000;
         var sw = Stopwatch.StartNew();
 
         for (int i = 0; i < iterations; i++)
         {
-            int value = i;              // Stack allocation
-            double d = i * 1.5;         // Stack allocation
-            bool flag = i % 2 == 0;     // Stack allocation
+            int value = i;
+            double d = i * 1.5;
+            bool flag = i % 2 == 0;
         }
 
         sw.Stop();
@@ -55,7 +56,7 @@ public static class MemoryBenchmarks
 
     /// <summary>
     /// Benchmarks allocation speed of reference types on heap.
-    /// Expected: ~100-1000x slower than value types
+    /// The observed ratio is environment-specific and must not be generalized.
     /// </summary>
     private static void BenchmarkReferenceTypeAllocation()
     {
@@ -146,8 +147,9 @@ public static class MemoryBenchmarks
     }
 
     /// <summary>
-    /// Compares performance of stack allocation vs heap allocation.
-    /// Demonstrates why stack is preferred for small, short-lived values.
+    /// Contrasts operations on a struct local with creation of class instances.
+    /// The loops perform different work, so this is an exploratory demo rather
+    /// than proof of a universal "stack versus heap" performance ratio.
     /// </summary>
     private static void BenchmarkStackVsHeapPerformance()
     {
@@ -156,7 +158,7 @@ public static class MemoryBenchmarks
         const int iterations = 100_000_000;
 
         // Stack test: Value type
-        Console.WriteLine("Stack allocation (value type - struct):");
+        Console.WriteLine("Struct local operations:");
         var sw1 = Stopwatch.StartNew();
         for (int i = 0; i < iterations; i++)
         {
