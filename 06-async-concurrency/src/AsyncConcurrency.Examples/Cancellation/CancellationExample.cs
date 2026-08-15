@@ -43,5 +43,12 @@ public static class CancellationExample
         {
             throw new TimeoutException($"The operation exceeded the timeout of {timeout}.");
         }
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            // The dependency observed the linked token. Re-throw through the caller token so the
+            // public boundary identifies the cancellation authority promised by this API.
+            cancellationToken.ThrowIfCancellationRequested();
+            throw; // Required for definite control flow; ThrowIfCancellationRequested always throws here.
+        }
     }
 }

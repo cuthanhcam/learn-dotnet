@@ -40,6 +40,57 @@ public sealed class AsyncExamplesTests
     }
 
     [Fact]
+    public async Task WithTimeoutAsync_ReturnsSuccessfulResult()
+    {
+        int result = await CancellationExample.WithTimeoutAsync(
+            _ => Task.FromResult(42),
+            TimeSpan.FromSeconds(1));
+
+        Assert.Equal(42, result);
+    }
+
+    [Fact]
+    public async Task WithTimeoutAsync_PreservesCallerCancellation()
+    {
+        using var callerCancellation = new CancellationTokenSource();
+        callerCancellation.Cancel();
+
+        OperationCanceledException exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+            CancellationExample.WithTimeoutAsync(
+                async token =>
+                {
+                    await Task.Delay(Timeout.InfiniteTimeSpan, token);
+                    return 42;
+                },
+                TimeSpan.FromSeconds(30),
+                callerCancellation.Token));
+
+        Assert.Equal(callerCancellation.Token, exception.CancellationToken);
+    }
+
+    [Fact]
+    public async Task WithTimeoutAsync_DoesNotTranslateDependencyFailure()
+    {
+        IOException exception = await Assert.ThrowsAsync<IOException>(() =>
+            CancellationExample.WithTimeoutAsync<int>(
+                _ => Task.FromException<int>(new IOException("dependency failed")),
+                TimeSpan.FromSeconds(1)));
+
+        Assert.Equal("dependency failed", exception.Message);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public async Task WithTimeoutAsync_RejectsNonPositiveTimeout(int milliseconds)
+    {
+        await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
+            CancellationExample.WithTimeoutAsync(
+                _ => Task.FromResult(1),
+                TimeSpan.FromMilliseconds(milliseconds)));
+    }
+
+    [Fact]
     public async Task ThreadSafeCounter_DoesNotLoseConcurrentUpdates()
     {
         var counter = new ThreadSafeCounter();
