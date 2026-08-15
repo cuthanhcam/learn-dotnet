@@ -20,5 +20,11 @@ topics: [async, concurrency, pitfalls]
 - Using arbitrary delays to test scheduling behavior.
 - Completing a channel only on success, leaving consumers waiting after failure.
 - Holding a lock while invoking callbacks or unknown code.
+- Releasing a semaphore when `WaitAsync` failed or was canceled before acquisition.
+- Treating `SemaphoreSlim` as ownership-aware: any code with access can release it.
+- Double-releasing a permit through copied or repeatedly disposed releasers.
+- Disposing a coordination primitive while workers still use it.
+- Running `TaskCompletionSource` continuations inline on a sensitive signaling thread.
+- Assuming canceling `WaitAsync` cancels an underlying non-cancelable operation.
 
 During review, trace success, failure, cancellation, and shutdown separately. Every path must terminate and release what it owns.

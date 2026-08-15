@@ -100,3 +100,36 @@ The return value is usually `dummy.Next`.
 - Creating new nodes when the algorithm should relink existing nodes.
 - Returning the dummy node instead of `dummy.Next`.
 
+## Structure Variants
+
+- A singly linked list stores only `Next`; forward traversal is cheap and node overhead is small.
+- A doubly linked list stores `Next` and `Previous`; removal of a known node is convenient but every mutation must preserve two directions.
+- A circular list points the tail back to the head and is useful for repeated round-robin traversal. Every traversal needs an explicit stopping condition.
+
+`LinkedList<T>` in the BCL is doubly linked. A custom node type is used in this phase because pointer invariants are the learning objective.
+
+## Floyd Cycle Detection
+
+Move `slow` by one edge and `fast` by two. If the list is acyclic, `fast` reaches `null`. If they meet, reset one pointer to the head and move both one edge at a time; their next meeting is the cycle entry. Walking once around the cycle gives its length.
+
+The algorithm uses `O(n)` time and `O(1)` auxiliary space. Comparison must use node identity, not node value: distinct nodes may contain equal data.
+
+See `LinkedListAlgorithms.FindCycleEntry` and `GetCycleLength` for a complete implementation and proof-oriented comments.
+
+## Intersection of Acyclic Lists
+
+Two singly linked lists intersect only when they share the same node objects from some point onward. Align the two pointers by advancing the longer list by the length difference, then move both together until their references match.
+
+This is `O(n + m)` time and `O(1)` extra space. The implementation rejects cyclic input because intersection among cyclic lists needs a more specific definition: cycles may be shared with different apparent entry nodes.
+
+## Kth Node from the End
+
+Keep a lead pointer `k` nodes ahead of a follow pointer. When lead reaches the tail, follow identifies the node before the target. A sentinel node removes the special case for deleting the original head. Validate `k > 0` and reject a position longer than the list.
+
+## Advanced Review Questions
+
+1. Why does Floyd's reset step find the cycle entry?
+2. Why is value equality incorrect for list intersection?
+3. Which invariants must a doubly linked removal preserve?
+4. How does a sentinel simplify head insertion and deletion?
+5. What changes when both intersecting lists contain cycles?
