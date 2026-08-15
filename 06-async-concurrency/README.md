@@ -108,4 +108,4 @@ dotnet run --project exercises/AsyncConcurrency.Exercises
 
 ## Next Phase
 
-Continue with [Phase 07 — ASP.NET Core](../07-aspnet-core/README.md), where cancellation, dependency injection, logging, configuration, and concurrent request handling become application-level concerns.
+Continue with [Phase 07 — ASP.NET Core on the repository roadmap](../README.md#7-aspnet-core), where cancellation, dependency injection, logging, configuration, and concurrent request handling become application-level concerns. The phase-local link will replace this roadmap link when Phase 07 is implemented.
