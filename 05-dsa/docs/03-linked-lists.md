@@ -1,3 +1,11 @@
+---
+title: "Linked Lists"
+description: "Node-based sequences, reversal, merging, fast/slow pointers, cycle detection, and sentinel nodes."
+phase: 5
+order: 3
+topics: [dsa, linked-lists]
+---
+
 # Linked Lists
 
 A linked list stores values in nodes. Each node points to the next node. Unlike arrays, nodes do not need to live beside each other in memory.

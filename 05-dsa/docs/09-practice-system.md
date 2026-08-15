@@ -1,3 +1,11 @@
+---
+title: "DSA Practice System"
+description: "A repeatable problem-solving, review, spaced-repetition, and mistake-tracking workflow."
+phase: 5
+order: 9
+topics: [dsa, practice, problem-solving]
+---
+
 # DSA Practice System
 
 DSA improves through repetition with feedback. Reading explanations helps, but fluency comes from solving, testing, forgetting a little, and solving again.

@@ -1,3 +1,11 @@
+---
+title: "Sorting and Searching"
+description: "Sorting trade-offs, stability, comparison bounds, binary-search intervals, and boundary variants."
+phase: 5
+order: 7
+topics: [dsa, sorting, searching, binary-search]
+---
+
 # Sorting and Searching
 
 Sorting changes the shape of a problem. Once data is ordered, binary search, two pointers, range queries, and duplicate handling become much easier.

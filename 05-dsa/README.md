@@ -1,3 +1,14 @@
+---
+title: "Phase 05 — Data Structures and Algorithms"
+description: "A practical C# curriculum for complexity analysis, core data structures, traversal, searching, sorting, recursion, backtracking, and deliberate problem-solving practice."
+phase: 5
+status: complete
+target-framework: net8.0
+prerequisites: [phase-04-memory-performance]
+previous-phase: ../04-memory-performance/README.md
+next-phase: ../06-async-concurrency/README.md
+---
+
 # Data Structures & Algorithms (05-dsa)
 
 > A practical C# module for algorithmic thinking, complexity analysis, interview-style problem solving, and better backend design decisions.
@@ -180,3 +191,30 @@ You are ready to move beyond this phase when you can:
 - Write tests before polishing the implementation.
 - Compare a brute-force solution with an optimized solution using Big-O.
 - Connect algorithm choices back to .NET backend scenarios.
+
+## Verification Matrix
+
+| Area | Correctness evidence | Complexity explanation |
+|---|---|---|
+| Arrays and strings | Boundary, duplicate, Unicode-aware caveat, and empty-input tests | Indexing, scanning, window, and prefix-sum costs |
+| Linked lists | Empty, one-node, reversal, merge, and cycle cases | Traversal versus known-node mutation |
+| Stacks and queues | Empty behavior, ordering, balancing, and two-stack queue tests | Amortized movement and LIFO/FIFO invariants |
+| Hash tables | Missing keys, duplicates, grouping, and complement lookup | Average and worst-case lookup plus memory trade-off |
+| Trees and graphs | Empty tree, traversal order, disconnected graph, and cycle tests | `O(V + E)` traversal and auxiliary state |
+| Sorting and searching | Sorted/reverse/duplicate inputs and boundary searches | Comparison lower bound and binary-search interval invariant |
+| Recursion and backtracking | Base case, restoration, duplicate choices, and pruning | Call-stack depth and search-space growth |
+
+## Completion Criteria
+
+- [ ] State the input size and dominant operation before giving Big-O.
+- [ ] Distinguish worst-case, average-case, and amortized complexity where relevant.
+- [ ] Explain the invariant for each implemented algorithm.
+- [ ] Solve at least one problem with two pointers, sliding window, prefix sums, hashing, BFS, DFS, binary search, and backtracking.
+- [ ] Compare a brute-force solution with an improved representation or data structure.
+- [ ] Test empty, singleton, duplicate, boundary, and adversarial inputs.
+- [ ] Run benchmarks only after predicting the asymptotic outcome.
+- [ ] Pass `dotnet test 05-dsa.slnx`.
+
+## Next Phase
+
+Continue with [Phase 06 — Async and Concurrency](../06-async-concurrency/README.md), where algorithmic reasoning is applied to scheduling, cancellation, synchronization, bounded work, and concurrent state.

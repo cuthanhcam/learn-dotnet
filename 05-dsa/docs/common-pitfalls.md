@@ -1,3 +1,11 @@
+---
+title: "Common DSA Pitfalls"
+description: "Complexity mistakes, broken invariants, boundary errors, recursion hazards, and weak testing patterns."
+phase: 5
+order: 11
+topics: [dsa, pitfalls, debugging]
+---
+
 # Common DSA Pitfalls
 
 ## Complexity
