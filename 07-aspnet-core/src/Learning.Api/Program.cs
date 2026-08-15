@@ -17,6 +17,7 @@ builder.Services
 // The repository is intentionally in-memory for this hosting phase. Phase 08 replaces the
 // persistence boundary without changing endpoint contracts or application-level behavior.
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
+builder.Services.AddScoped<ProductCatalog>();
 builder.Services.AddSingleton(TimeProvider.System);
 
 WebApplication app = builder.Build();
