@@ -1,3 +1,11 @@
+---
+title: "Strings"
+description: "String literals, comparison, formatting, common APIs, StringBuilder, and interning."
+phase: 1
+order: 6
+topics: [csharp, strings]
+---
+
 # Strings
 
 Strings are immutable sequences of characters.

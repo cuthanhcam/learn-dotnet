@@ -1,10 +1,20 @@
+---
+title: "Variables and Types"
+description: "The C# type system, type inference, dynamic binding, conversions, constants, and nullable value types."
+phase: 1
+order: 2
+topics: [csharp, types, variables]
+---
+
 # Variables & Types
 
 Understanding C#'s type system is fundamental.
 
 ## Primitive Types
 
-C# has value types that are allocated on the stack:
+C# has built-in value types. Value types have value-copy semantics; their storage
+depends on context. A local may be held in a stack frame or register, while a
+value-type field or array element can live inline inside a managed heap object:
 
 ```csharp
 // Integer types
@@ -27,7 +37,9 @@ char c = 'A';
 
 ## Reference Types
 
-Reference types are allocated on the heap and accessed by reference:
+Variables of reference type hold references. Class instances and arrays normally
+live on the managed heap, while the variable containing the reference may be a
+local, field, array element, or register:
 
 ```csharp
 string text = "Hello";     // String
@@ -221,8 +233,9 @@ private string _internalState;
 
 ## Key Takeaways
 
-- Value types (int, bool, double) live on the stack
-- Reference types (string, object, arrays) live on the heap
+- Value types (`int`, `bool`, `double`, custom structs) use value-copy semantics
+- Reference types (`string`, `object`, arrays, classes) use reference-copy semantics
+- Storage location follows context and runtime optimization, not a simple type-category rule
 - var provides type inference; compiler still knows the type
 - dynamic bypasses compile-time checking; avoid in most cases
 - Explicit casts required for narrowing conversions

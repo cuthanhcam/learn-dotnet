@@ -108,7 +108,8 @@ namespace CSharpBasics.Examples.Variables
         ///  Represents an immutable snapshot of primitive values.
         ///  
         /// Why record struct?
-        /// - Value type (stack allocation where possible)
+        /// - Value type with value-copy semantics. Storage is an implementation
+        ///   detail: a value can live inline, on the stack, or inside a heap object.
         /// - Immutable by default (good for data transfer objects)
         /// - Value equality semantics (compares by value, not reference)
         /// - Support 'with' expressions for easy copying with modifications

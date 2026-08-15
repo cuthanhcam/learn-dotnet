@@ -1,3 +1,11 @@
+---
+title: "Collections"
+description: "Arrays, foundational generic collections, and practical selection criteria."
+phase: 1
+order: 5
+topics: [csharp, collections]
+---
+
 # Collections
 
 C# provides various collection types for organizing data.

@@ -1,3 +1,11 @@
+---
+title: ".NET Ecosystem Fundamentals"
+description: "The relationship among C#, the SDK, CLR, IL, JIT, assemblies, namespaces, and the BCL."
+phase: 1
+order: 1
+topics: [dotnet, clr, jit, assemblies]
+---
+
 # 🌍 .NET Ecosystem Fundamentals
 
 > Understand how C# and .NET work together, and why this matters

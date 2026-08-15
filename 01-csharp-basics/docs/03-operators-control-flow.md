@@ -1,3 +1,11 @@
+---
+title: "Operators and Control Flow"
+description: "Operators, branching, loops, switch expressions, and pattern matching in C#."
+phase: 1
+order: 3
+topics: [csharp, operators, control-flow]
+---
+
 # Operators & Control Flow
 
 ## Arithmetic Operators

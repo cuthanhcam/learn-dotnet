@@ -1,3 +1,11 @@
+---
+title: "C# Fundamentals Learning Roadmap"
+description: "The study order, documentation-to-code map, and completion workflow for Phase 01."
+phase: 1
+order: 0
+topics: [csharp, roadmap]
+---
+
 # Learning Roadmap for C# Fundamentals
 
 This is your reference guide for navigating the C# fundamentals module.
