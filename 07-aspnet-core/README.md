@@ -30,6 +30,7 @@ and integration testing.
 | 3 | [Routing, validation, and Problem Details](docs/03-routing-validation-problem-details.md) | product endpoints and HTTP contracts |
 | 4 | [HTTP semantics, pagination, and concurrency](docs/04-http-semantics-pagination-concurrency.md) | bounded reads, ETags, and conditional writes |
 | 5 | [Controllers, validation, and filters](docs/05-controllers-model-validation-filters.md) | ApiController conventions and scoped filters |
+| 6 | [OpenAPI contracts with ASP.NET Core 10](docs/06-openapi-contracts-dotnet-10.md) | OpenAPI 3.1 JSON/YAML and contract verification |
 
 Additional slices will cover controllers, filters, OpenAPI, logging, caching, rate limiting, CORS,
 health checks, resilience boundaries, background services, security integration points, and advanced
@@ -90,6 +91,7 @@ Content-Type: application/json
 | In-process HTTP specifications | `tests/Learning.Api.Tests/ProductApiTests.cs` |
 | Conditional-request specifications | `tests/Learning.Api.Tests/ProductLifecycleTests.cs` |
 | Controller and filter example | `Features/OrderQuotes/` |
+| Generated contract specifications | `tests/Learning.Api.Tests/OpenApiTests.cs` |
 
 ## Design Rules
 
