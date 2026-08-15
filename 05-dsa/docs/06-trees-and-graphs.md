@@ -158,3 +158,26 @@ Database indexes commonly use B-trees or B+ trees because high branching factors
 ## Tree Problem Checklist
 
 State whether the tree is binary, ordered, balanced, complete, or arbitrary. Decide whether recursion depth is safe. Identify whether parent pointers, duplicate keys, mutation, or order statistics are part of the contract. Then write the traversal invariant before implementation.
+
+## Directed Acyclic Graphs and Topological Order
+
+A topological order places every prerequisite before each dependent vertex. Kahn's algorithm counts incoming edges, repeatedly removes zero-in-degree vertices, and decrements their outgoing neighbors. If fewer than `V` vertices are emitted, a directed cycle prevents an ordering.
+
+The algorithm is `O(V + E)` time and `O(V)` auxiliary space beyond the graph. Common applications include build plans, course prerequisites, migrations, and dependency scheduling. A topological order is generally not unique.
+
+## Weighted Shortest Paths
+
+- BFS solves shortest paths in an unweighted graph or when every edge has equal cost.
+- Dijkstra uses a min-priority queue and requires non-negative weights. With an adjacency list and binary heap it runs in `O((V + E) log V)`.
+- Bellman-Ford supports negative edges and can detect a reachable negative cycle, at `O(VE)` cost.
+- Floyd-Warshall computes all-pairs distances in `O(V³)` time and `O(V²)` space.
+
+The provided Dijkstra implementation allows duplicate priority-queue entries and skips stale ones. This avoids requiring a decrease-key operation while retaining the expected complexity.
+
+## Minimum Spanning Trees and Union-Find
+
+A minimum spanning tree connects every vertex of a connected undirected weighted graph with minimum total edge weight. Kruskal sorts edges and accepts an edge only when Union-Find says its endpoints are currently disconnected. Prim grows one tree through a priority queue.
+
+Union-Find (disjoint-set union) supports connectivity queries. Path compression plus union by size/rank gives nearly constant amortized operations, conventionally written `O(α(n))`, where the inverse Ackermann function grows extremely slowly.
+
+Do not confuse an MST with shortest paths: an MST minimizes total tree weight, while a shortest-path tree minimizes distance from one source.
