@@ -81,6 +81,9 @@ dotnet run --project exercises/AsyncConcurrency.Exercises
 | `ChannelPipelineExample` | Bounded producer/consumer flow and writer completion |
 | `AsyncMap` | Exercise in bounded asynchronous transformation |
 | `AsyncRetry` | Selective retry with cancellation-aware delay |
+| `AsyncLock` | Async mutual exclusion with an idempotent ownership lease |
+| `ParallelAggregation` | Partition-local CPU aggregation with a single merge per partition |
+| `ChannelWorkPool` | Bounded multi-worker pipeline, ordered results, and failure propagation |
 
 ## Design Checklist
 
