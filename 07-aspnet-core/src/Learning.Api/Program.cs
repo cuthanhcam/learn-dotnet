@@ -22,6 +22,12 @@ builder.Services.AddProblemDetails(options =>
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+builder.Services.AddOutputCache(options =>
+{
+    options.AddPolicy(TrafficPolicyNames.ProductCollectionCache, policy => policy
+        .Expire(TimeSpan.FromSeconds(30))
+        .Tag(TrafficPolicyNames.ProductCacheTag));
+});
 builder.Services.AddResponseCompression(options =>
 {
     options.EnableForHttps = true;
@@ -96,6 +102,7 @@ app.UseExceptionHandler();
 app.UseResponseCompression();
 app.UseCors();
 app.UseRateLimiter();
+app.UseOutputCache();
 
 // The document endpoint is a development-time diagnostic surface. Publishing it publicly is an
 // explicit product/security decision because it exposes the complete reachable API contract.

@@ -11,7 +11,14 @@ public sealed class CorrelationIdMiddleware(
     public async Task InvokeAsync(HttpContext context)
     {
         string correlationId = ResolveCorrelationId(context.Request.Headers[HeaderName]);
-        context.Response.Headers[HeaderName] = correlationId;
+        // Add the header immediately before response headers are sent. Output caching can then store
+        // the reusable representation without persisting one request's correlation ID and replaying
+        // it to another caller.
+        context.Response.OnStarting(() =>
+        {
+            context.Response.Headers[HeaderName] = correlationId;
+            return Task.CompletedTask;
+        });
 
         // A logging scope enriches every structured log written during the remaining pipeline.
         // It avoids passing correlation IDs through every method signature as business data.

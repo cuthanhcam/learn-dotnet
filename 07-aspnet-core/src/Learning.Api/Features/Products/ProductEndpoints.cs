@@ -1,6 +1,8 @@
 using Learning.Api.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
+using Microsoft.AspNetCore.OutputCaching;
+using Learning.Api.Operations;
 
 namespace Learning.Api.Features.Products;
 
@@ -16,7 +18,8 @@ public static class ProductEndpoints
             .WithName("ListProducts")
             .WithSummary("List products using bounded page-number pagination")
             .Produces<PagedResponse<Product>>()
-            .ProducesValidationProblem();
+            .ProducesValidationProblem()
+            .CacheOutput(TrafficPolicyNames.ProductCollectionCache);
         group.MapGet("/{id:guid}", GetAsync)
             .WithName("GetProduct")
             .WithSummary("Get a product and its current strong ETag")
@@ -97,6 +100,7 @@ public static class ProductEndpoints
     private static async Task<IResult> CreateAsync(
         CreateProductRequest request,
         ProductCatalog catalog,
+        IOutputCacheStore cacheStore,
         HttpResponse response,
         CancellationToken cancellationToken)
     {
@@ -113,6 +117,7 @@ public static class ProductEndpoints
         }
 
         response.Headers.ETag = ProductEntityTag.Format(product.Version);
+        await cacheStore.EvictByTagAsync(TrafficPolicyNames.ProductCacheTag, cancellationToken);
         return Results.CreatedAtRoute("GetProduct", new { id = product.Id }, product);
     }
 
@@ -120,6 +125,7 @@ public static class ProductEndpoints
         Guid id,
         UpdateProductRequest request,
         ProductCatalog catalog,
+        IOutputCacheStore cacheStore,
         HttpRequest httpRequest,
         HttpResponse response,
         CancellationToken cancellationToken)
@@ -143,12 +149,14 @@ public static class ProductEndpoints
         }
 
         response.Headers.ETag = ProductEntityTag.Format(result.Product!.Version);
+        await cacheStore.EvictByTagAsync(TrafficPolicyNames.ProductCacheTag, cancellationToken);
         return Results.Ok(result.Product);
     }
 
     private static async Task<IResult> DeleteAsync(
         Guid id,
         ProductCatalog catalog,
+        IOutputCacheStore cacheStore,
         HttpRequest request,
         CancellationToken cancellationToken)
     {
@@ -158,9 +166,13 @@ public static class ProductEndpoints
         }
 
         ProductMutationResult result = await catalog.DeleteAsync(id, expectedVersion, cancellationToken);
-        return result.Status == ProductMutationStatus.Success
-            ? Results.NoContent()
-            : ProductProblem.FromMutation(id, name: string.Empty, result);
+        if (result.Status != ProductMutationStatus.Success)
+        {
+            return ProductProblem.FromMutation(id, name: string.Empty, result);
+        }
+
+        await cacheStore.EvictByTagAsync(TrafficPolicyNames.ProductCacheTag, cancellationToken);
+        return Results.NoContent();
     }
 }
 

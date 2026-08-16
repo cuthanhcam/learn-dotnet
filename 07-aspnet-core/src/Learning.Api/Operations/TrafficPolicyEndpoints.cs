@@ -6,6 +6,8 @@ public static class TrafficPolicyNames
 {
     public const string BrowserClient = "browser-client";
     public const string DemoRateLimit = "demo-rate-limit";
+    public const string ProductCollectionCache = "product-collection-cache";
+    public const string ProductCacheTag = "products";
 }
 
 public static class TrafficPolicyEndpoints
