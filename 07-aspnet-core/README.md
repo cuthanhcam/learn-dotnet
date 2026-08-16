@@ -34,6 +34,7 @@ and integration testing.
 | 7 | [Errors, observability, and health checks](docs/07-errors-observability-health-checks.md) | safe failures, liveness, readiness, and correlation |
 | 8 | [CORS, compression, and rate limiting](docs/08-cors-compression-rate-limiting.md) | explicit browser and traffic policies |
 | 9 | [Output caching and invalidation](docs/09-output-caching-invalidation.md) | bounded caching, tags, and mutation eviction |
+| 10 | [Hosted services and graceful shutdown](docs/10-hosted-services-graceful-shutdown.md) | bounded queues, scoped jobs, draining, and backpressure |
 
 Additional slices will cover controllers, filters, OpenAPI, logging, caching, rate limiting, CORS,
 health checks, resilience boundaries, background services, security integration points, and advanced
@@ -98,6 +99,7 @@ Content-Type: application/json
 | Operational boundaries and probes | `Operations/` and `tests/Learning.Api.Tests/OperationalEndpointsTests.cs` |
 | Traffic policy examples | `Operations/TrafficPolicyEndpoints.cs` and `tests/Learning.Api.Tests/TrafficPolicyTests.cs` |
 | Cache correctness specifications | `tests/Learning.Api.Tests/OutputCacheTests.cs` |
+| Background job lifecycle | `BackgroundJobs/` and `tests/Learning.Api.Tests/BackgroundJobTests.cs` |
 
 ## Design Rules
 
