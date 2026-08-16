@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="docs/00-roadmap.md" />
+    <File Path="docs/01-hosting-request-pipeline.md" />
+    <File Path="docs/02-dependency-injection-configuration.md" />
+    <File Path="docs/03-routing-validation-problem-details.md" />
+    <File Path="docs/04-http-semantics-pagination-concurrency.md" />
+    <File Path="docs/05-controllers-model-validation-filters.md" />
+    <File Path="docs/06-openapi-contracts-dotnet-10.md" />
+    <File Path="docs/07-errors-observability-health-checks.md" />
+    <File Path="docs/08-cors-compression-rate-limiting.md" />
+    <File Path="docs/09-output-caching-invalidation.md" />
+    <File Path="docs/10-hosted-services-graceful-shutdown.md" />
+    <File Path="docs/11-advanced-integration-testing.md" />
+    <File Path="docs/12-completion-audit.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Learning.Api/Learning.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Learning.Api.Tests/Learning.Api.Tests.csproj" />
+  </Folder>
+</Solution>
