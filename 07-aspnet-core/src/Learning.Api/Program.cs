@@ -1,4 +1,5 @@
 using Learning.Api.Configuration;
+using Learning.Api.BackgroundJobs;
 using Learning.Api.Features.Products;
 using Learning.Api.Middleware;
 using Learning.Api.Operations;
@@ -89,6 +90,11 @@ builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.OrderQuoteService>(
 builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.TenantContext>();
 builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.RequireTenantFilter>();
 builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton<Learning.Api.BackgroundJobs.BackgroundJobQueue>();
+builder.Services.AddSingleton<Learning.Api.BackgroundJobs.BackgroundJobStore>();
+builder.Services.AddScoped<Learning.Api.BackgroundJobs.IBackgroundJobProcessor,
+    Learning.Api.BackgroundJobs.DemonstrationJobProcessor>();
+builder.Services.AddHostedService<Learning.Api.BackgroundJobs.BackgroundJobWorker>();
 builder.Services.AddHealthChecks()
     .AddCheck<CatalogReadinessHealthCheck>(
         "product-catalog",
@@ -133,6 +139,7 @@ app.MapGet("/health", () => TypedResults.Redirect("/health/live", permanent: fal
 
 app.MapProductEndpoints();
 app.MapTrafficPolicyEndpoints();
+app.MapBackgroundJobEndpoints();
 app.MapControllers();
 
 app.Run();
