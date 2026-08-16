@@ -9,6 +9,7 @@
     <File Path="docs/06-openapi-contracts-dotnet-10.md" />
     <File Path="docs/07-errors-observability-health-checks.md" />
     <File Path="docs/08-cors-compression-rate-limiting.md" />
+    <File Path="docs/09-output-caching-invalidation.md" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Learning.Api/Learning.Api.csproj" />
