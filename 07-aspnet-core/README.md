@@ -2,7 +2,7 @@
 title: "Phase 07 — ASP.NET Core"
 description: "A production-oriented path through hosting, middleware, dependency injection, configuration, routing, validation, HTTP semantics, logging, and API testing."
 phase: 7
-status: in-progress
+status: completed
 target-framework: net10.0
 prerequisites: [phase-06-async-concurrency]
 previous-phase: ../06-async-concurrency/README.md
@@ -35,10 +35,12 @@ and integration testing.
 | 8 | [CORS, compression, and rate limiting](docs/08-cors-compression-rate-limiting.md) | explicit browser and traffic policies |
 | 9 | [Output caching and invalidation](docs/09-output-caching-invalidation.md) | bounded caching, tags, and mutation eviction |
 | 10 | [Hosted services and graceful shutdown](docs/10-hosted-services-graceful-shutdown.md) | bounded queues, scoped jobs, draining, and backpressure |
+| 11 | [Advanced integration testing](docs/11-advanced-integration-testing.md) | isolated hosts, cancellation, lifecycle, and metrics |
+| 12 | [Completion audit](docs/12-completion-audit.md) | coverage matrix, deferred boundaries, and Phase 08 handoff |
 
-Additional slices will cover controllers, filters, OpenAPI, logging, caching, rate limiting, CORS,
-health checks, resilience boundaries, background services, security integration points, and advanced
-testing. Authentication and authorization receive their dedicated deep phase later in the roadmap.
+The phase now covers the complete planned ASP.NET Core foundation through executable vertical slices.
+Authentication and authorization retain their dedicated deep phase later in the roadmap; durable
+database persistence begins in Phase 08.
 
 ## Structure
 
@@ -69,7 +71,7 @@ dotnet run --project src/Learning.Api
 Example requests:
 
 ```http
-GET /health
+GET /health/live
 
 POST /api/products
 Content-Type: application/json
@@ -80,7 +82,7 @@ Content-Type: application/json
 }
 ```
 
-## Initial Code Map
+## Code Map
 
 | Concern | Implementation |
 |---|---|
@@ -100,6 +102,8 @@ Content-Type: application/json
 | Traffic policy examples | `Operations/TrafficPolicyEndpoints.cs` and `tests/Learning.Api.Tests/TrafficPolicyTests.cs` |
 | Cache correctness specifications | `tests/Learning.Api.Tests/OutputCacheTests.cs` |
 | Background job lifecycle | `BackgroundJobs/` and `tests/Learning.Api.Tests/BackgroundJobTests.cs` |
+| Reusable test infrastructure | `tests/Learning.Api.Tests/Infrastructure/` |
+| Low-cardinality custom metrics | `Operations/LearningMetrics.cs` and `tests/Learning.Api.Tests/MetricsTests.cs` |
 
 ## Design Rules
 
@@ -114,16 +118,16 @@ Content-Type: application/json
 
 ## Completion Criteria
 
-- [ ] Explain request and response flow through ordered middleware.
-- [ ] Select transient, scoped, and singleton lifetimes with captive-dependency awareness.
-- [ ] Describe configuration-provider precedence and validate required options at startup.
-- [ ] Implement route groups, constraints, named routes, and typed results.
-- [ ] Return stable validation and exception contracts through Problem Details.
-- [ ] Add OpenAPI descriptions without exposing internal implementation details.
-- [ ] Apply logging scopes and safe correlation identifiers.
-- [ ] Configure CORS, rate limiting, caching, and health checks by explicit policy.
-- [ ] Test success, validation, missing resources, failure, cancellation, and middleware behavior.
-- [ ] Pass the complete Phase 07 test suite.
+- [x] Explain request and response flow through ordered middleware.
+- [x] Select transient, scoped, and singleton lifetimes with captive-dependency awareness.
+- [x] Describe configuration-provider precedence and validate required options at startup.
+- [x] Implement route groups, constraints, named routes, and typed results.
+- [x] Return stable validation and exception contracts through Problem Details.
+- [x] Add OpenAPI descriptions without exposing internal implementation details.
+- [x] Apply logging scopes and safe correlation identifiers.
+- [x] Configure CORS, rate limiting, caching, and health checks by explicit policy.
+- [x] Test success, validation, missing resources, failure, cancellation, and middleware behavior.
+- [x] Pass the complete Phase 07 test suite.
 
 ## Previous Phase
 
