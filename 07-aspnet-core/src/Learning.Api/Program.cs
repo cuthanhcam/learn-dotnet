@@ -8,6 +8,8 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.IO.Compression;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -90,6 +92,7 @@ builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.OrderQuoteService>(
 builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.TenantContext>();
 builder.Services.AddScoped<Learning.Api.Features.OrderQuotes.RequireTenantFilter>();
 builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton<LearningMetrics>();
 builder.Services.AddSingleton<Learning.Api.BackgroundJobs.BackgroundJobQueue>();
 builder.Services.AddSingleton<Learning.Api.BackgroundJobs.BackgroundJobStore>();
 builder.Services.AddScoped<Learning.Api.BackgroundJobs.IBackgroundJobProcessor,
@@ -105,6 +108,22 @@ WebApplication app = builder.Build();
 
 app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseExceptionHandler();
+app.UseStatusCodePages(async context =>
+{
+    // Routing, method selection, content-type rejection, and some binding failures can produce an
+    // empty 4xx without throwing. Normalize those framework-generated boundaries as Problem Details.
+    IProblemDetailsService problemDetails =
+        context.HttpContext.RequestServices.GetRequiredService<IProblemDetailsService>();
+    await problemDetails.TryWriteAsync(new ProblemDetailsContext
+    {
+        HttpContext = context.HttpContext,
+        ProblemDetails = new ProblemDetails
+        {
+            Status = context.HttpContext.Response.StatusCode,
+            Title = ReasonPhrases.GetReasonPhrase(context.HttpContext.Response.StatusCode)
+        }
+    });
+});
 app.UseResponseCompression();
 app.UseCors();
 app.UseRateLimiter();

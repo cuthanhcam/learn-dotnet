@@ -101,6 +101,7 @@ public static class ProductEndpoints
         CreateProductRequest request,
         ProductCatalog catalog,
         IOutputCacheStore cacheStore,
+        LearningMetrics metrics,
         HttpResponse response,
         CancellationToken cancellationToken)
     {
@@ -118,6 +119,7 @@ public static class ProductEndpoints
 
         response.Headers.ETag = ProductEntityTag.Format(product.Version);
         await cacheStore.EvictByTagAsync(TrafficPolicyNames.ProductCacheTag, cancellationToken);
+        metrics.ProductCreated();
         return Results.CreatedAtRoute("GetProduct", new { id = product.Id }, product);
     }
 

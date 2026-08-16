@@ -1,5 +1,7 @@
 namespace Learning.Api.BackgroundJobs;
 
+using Learning.Api.Operations;
+
 public static class BackgroundJobEndpoints
 {
     public static IEndpointRouteBuilder MapBackgroundJobEndpoints(this IEndpointRouteBuilder endpoints)
@@ -22,7 +24,8 @@ public static class BackgroundJobEndpoints
     private static IResult Submit(
         SubmitBackgroundJobRequest request,
         BackgroundJobQueue queue,
-        BackgroundJobStore store)
+        BackgroundJobStore store,
+        LearningMetrics metrics)
     {
         int descriptionLength = request.Description?.Trim().Length ?? 0;
         if (descriptionLength is < 3 or > 200)
@@ -37,12 +40,14 @@ public static class BackgroundJobEndpoints
         if (!queue.TryEnqueue(job))
         {
             store.Remove(job.Id);
+            metrics.BackgroundJobSubmitted("rejected");
             return Results.Problem(
                 statusCode: StatusCodes.Status503ServiceUnavailable,
                 title: "The background job queue is full.",
                 detail: "Retry later; the service does not accept unbounded queued work.");
         }
 
+        metrics.BackgroundJobSubmitted("accepted");
         return Results.AcceptedAtRoute("GetBackgroundJob", new { id = job.Id }, store.Find(job.Id));
     }
 
