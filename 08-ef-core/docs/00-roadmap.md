@@ -60,3 +60,4 @@ test layer. It does not use EF Core InMemory as a substitute for a relational da
 
 - Previous: [Phase 07 — ASP.NET Core](../../07-aspnet-core/README.md)
 - Next: [DbContext, modeling, and unit of work](01-dbcontext-modeling-unit-of-work.md)
+- Completion: [Phase 08 completion audit](10-completion-audit.md)

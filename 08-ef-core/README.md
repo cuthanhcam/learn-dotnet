@@ -2,7 +2,7 @@
 title: "Phase 08 — Entity Framework Core"
 description: "A relational-data learning path through EF Core 10 modeling, querying, change tracking, migrations, transactions, concurrency, and performance."
 phase: 8
-status: in-progress
+status: completed
 target-framework: net10.0
 prerequisites: [phase-07-aspnet-core]
 previous-phase: ../07-aspnet-core/README.md
@@ -35,10 +35,11 @@ and cartesian explosion, use set-based updates, and test against appropriate dat
 | 7 | [Transactions, savepoints, retries, and outbox](docs/07-transactions-savepoints-retries-outbox.md) | atomic publication, idempotency, rollback, and side-effect boundaries |
 | 8 | [Set-based updates, raw SQL, and interceptors](docs/08-set-based-operations-raw-sql-interceptors.md) | bulk writes, tracker staleness, parameterization, and command inspection |
 | 9 | [Compiled queries, safe diagnostics, and provider-accurate testing](docs/09-compiled-queries-diagnostics-provider-testing.md) | measured hot paths, telemetry boundaries, pooling, and real-provider suites |
+| 10 | [Completion audit](docs/10-completion-audit.md) | coverage matrix, provider boundary, verification, and Phase 09 handoff |
 
-Planned slices cover migrations, change tracking, query translation and projection, loading
-strategies, concurrency, transactions, performance diagnostics, bulk operations, raw SQL, interceptors,
-provider-specific integration testing, and a completion audit.
+The completed phase covers modeling, migrations, tracking, translation, graph loading, concurrency,
+transactions, performance diagnostics, bulk operations, raw SQL, compiled queries, and a deliberately
+explicit production-provider testing boundary.
 
 ## Structure
 
@@ -90,6 +91,7 @@ dotnet test 08-ef-core.slnx --configuration Release --no-build
 | Transaction and outbox specifications | `tests/Learning.Persistence.Tests/TransactionTests.cs` |
 | Bulk operations and raw SQL specifications | `tests/Learning.Persistence.Tests/BulkOperationsAndRawSqlTests.cs` |
 | Compiled-query and diagnostics specifications | `tests/Learning.Persistence.Tests/CompiledQueriesAndDiagnosticsTests.cs` |
+| Finalized model contract | `tests/Learning.Persistence.Tests/ModelMetadataTests.cs` |
 
 ## Design Rules
 
@@ -104,16 +106,16 @@ dotnet test 08-ef-core.slnx --configuration Release --no-build
 
 ## Completion Criteria
 
-- [ ] Explain `DbContext` lifetime, identity map, tracking, and unit-of-work semantics.
-- [ ] Configure keys, indexes, value generation, precision, relationships, and delete behavior.
-- [ ] Create, review, script, apply, and roll back migrations safely.
-- [ ] Compare tracking, no-tracking, identity resolution, projection, and compiled queries.
-- [ ] Detect N+1, cartesian explosion, client evaluation, and inefficient pagination.
-- [ ] Implement optimistic concurrency and translate conflicts intentionally.
-- [ ] Use implicit and explicit transactions, savepoints, execution strategies, and idempotency.
-- [ ] Apply `ExecuteUpdate`/`ExecuteDelete` and raw SQL with safe parameterization.
-- [ ] Test relational behavior and production-provider-specific behavior at the correct levels.
-- [ ] Pass the complete Phase 08 suite and content audit.
+- [x] Explain `DbContext` lifetime, identity map, tracking, and unit-of-work semantics.
+- [x] Configure keys, indexes, value generation, precision, relationships, and delete behavior.
+- [x] Create, review, script, apply, and roll back migrations safely.
+- [x] Compare tracking, no-tracking, identity resolution, projection, and compiled queries.
+- [x] Detect N+1, cartesian explosion, client evaluation, and inefficient pagination.
+- [x] Implement optimistic concurrency and translate conflicts intentionally.
+- [x] Use implicit and explicit transactions, savepoints, execution strategies, and idempotency.
+- [x] Apply `ExecuteUpdate`/`ExecuteDelete` and raw SQL with safe parameterization.
+- [x] Separate fast relational specifications from the mandatory live-provider application gate.
+- [x] Pass the complete Phase 08 suite and content audit.
 
 ## Previous Phase
 
