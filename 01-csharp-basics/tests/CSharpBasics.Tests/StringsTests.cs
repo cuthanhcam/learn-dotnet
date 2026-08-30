@@ -32,7 +32,12 @@ public class StringsTests
         string[] values = ["a", "b", "c"];
         Assert.Equal("a,b,c", StringBuilderExample.BuildCsvLineNaive(values));
         Assert.Equal("a,b,c", StringBuilderExample.BuildCsvLineOptimal(values));
-        Assert.Equal(@"C:\Users\cam", StringBuilderExample.BuildPath("C:", "Users", "cam"));
+        // Path.DirectorySeparatorChar is '\\' on Windows and '/' on Unix-like systems.
+        // Build the expectation from the same platform contract instead of encoding a
+        // Windows-only separator, so this learning example remains valid in Linux CI.
+        string separator = Path.DirectorySeparatorChar.ToString();
+        string expectedPath = string.Join(separator, "C:", "Users", "cam");
+        Assert.Equal(expectedPath, StringBuilderExample.BuildPath("C:", "Users", "cam"));
         Assert.Equal("<tr><td>A</td><td>B</td></tr>", StringBuilderExample.BuildTableRow("A", "B"));
         Assert.Equal("hi-hi-hi", StringBuilderExample.RepeatWord("hi", 3, "-"));
         Assert.Equal("", StringBuilderExample.RepeatWord("", 3));
