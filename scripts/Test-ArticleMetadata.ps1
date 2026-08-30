@@ -7,6 +7,7 @@ param(
         "05-dsa/docs",
         "06-async-concurrency/docs",
         "07-aspnet-core/docs",
+        "08-ef-core/docs",
         "docs"
     )
 )
