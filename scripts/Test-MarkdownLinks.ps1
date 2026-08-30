@@ -7,7 +7,8 @@ param(
         "04-memory-performance",
         "05-dsa",
         "06-async-concurrency",
-        "07-aspnet-core"
+        "07-aspnet-core",
+        "08-ef-core"
     )
 )
 
