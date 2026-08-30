@@ -5,6 +5,7 @@
     <File Path="docs/02-migrations-schema-evolution.md" />
     <File Path="docs/03-change-tracking-disconnected-updates.md" />
     <File Path="docs/04-querying-loading-performance.md" />
+    <File Path="docs/05-relationships-graph-loading.md" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Learning.Persistence/Learning.Persistence.csproj" />
