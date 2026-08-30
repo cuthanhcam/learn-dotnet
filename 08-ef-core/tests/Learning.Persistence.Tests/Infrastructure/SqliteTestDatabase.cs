@@ -1,5 +1,6 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Learning.Persistence.Tests.Infrastructure;
 
@@ -18,13 +19,17 @@ public sealed class SqliteTestDatabase : IAsyncDisposable
         await context.Database.MigrateAsync();
     }
 
-    public LearningDbContext CreateContext()
+    public LearningDbContext CreateContext(params IInterceptor[] interceptors)
     {
-        var options = new DbContextOptionsBuilder<LearningDbContext>()
+        DbContextOptionsBuilder<LearningDbContext> builder = new DbContextOptionsBuilder<LearningDbContext>()
             .UseSqlite(_connection)
-            .EnableDetailedErrors()
-            .Options;
-        return new LearningDbContext(options);
+            .EnableDetailedErrors();
+        if (interceptors.Length > 0)
+        {
+            builder.AddInterceptors(interceptors);
+        }
+
+        return new LearningDbContext(builder.Options);
     }
 
     public async ValueTask DisposeAsync() => await _connection.DisposeAsync();

@@ -49,6 +49,7 @@ public sealed class CourseQueries(LearningDbContext dbContext)
     public Task<CourseDetails?> FindAsync(Guid id, CancellationToken cancellationToken) =>
         dbContext.Courses
             .AsNoTracking()
+            .TagWith("CourseQueries.FindById")
             .Where(course => course.Id == id)
             .Select(course => new CourseDetails(
                 course.Id,
@@ -62,4 +63,33 @@ public sealed class CourseQueries(LearningDbContext dbContext)
                     .Select(module => new CourseModuleDetails(module.Id, module.Order, module.Title))
                     .ToArray()))
             .SingleOrDefaultAsync(cancellationToken);
+
+    public async Task<IReadOnlyList<CourseListItem>> ListAfterSlugAsync(
+        string? afterSlug,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(take, 1);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(take, 100);
+
+        IQueryable<Domain.Course> query = dbContext.Courses.AsNoTracking();
+        if (!string.IsNullOrWhiteSpace(afterSlug))
+        {
+            string cursor = afterSlug.Trim().ToLowerInvariant();
+            query = query.Where(course => string.Compare(course.Slug, cursor) > 0);
+        }
+
+        return await query
+            .TagWith("CourseQueries.ListAfterSlug")
+            .OrderBy(course => course.Slug)
+            .Take(take)
+            .Select(course => new CourseListItem(
+                course.Id,
+                course.Title,
+                course.Slug,
+                course.Price,
+                course.Category.Name,
+                course.Modules.Count))
+            .ToArrayAsync(cancellationToken);
+    }
 }
