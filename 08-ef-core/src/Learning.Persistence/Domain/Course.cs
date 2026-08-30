@@ -29,6 +29,8 @@ public sealed class Course
     public decimal Price { get; private set; }
     public DateTimeOffset CreatedAt { get; private set; }
     public long Version { get; private set; } = 1;
+    public bool IsPublished { get; private set; }
+    public DateTimeOffset? PublishedAt { get; private set; }
     public Category Category { get; private set; } = null!;
     public IReadOnlyCollection<CourseModule> Modules => _modules.AsReadOnly();
     public IReadOnlyCollection<CourseTag> CourseTags => _courseTags.AsReadOnly();
@@ -86,5 +88,22 @@ public sealed class Course
         // Conflict resolution is explicit application behavior. EF does not automatically increment
         // application-managed concurrency tokens when a retry adopts newer database state.
         Version = checked(persistedVersion + 1);
+    }
+
+    public void Publish(DateTimeOffset publishedAt)
+    {
+        if (IsPublished)
+        {
+            throw new InvalidOperationException("The course is already published.");
+        }
+
+        if (_modules.Count == 0)
+        {
+            throw new InvalidOperationException("A course must contain at least one module before publication.");
+        }
+
+        IsPublished = true;
+        PublishedAt = publishedAt;
+        IncrementVersion();
     }
 }

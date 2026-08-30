@@ -17,9 +17,10 @@ public sealed class MigrationTests
         string[] applied = (await context.Database.GetAppliedMigrationsAsync()).ToArray();
         string[] pending = (await context.Database.GetPendingMigrationsAsync()).ToArray();
 
-        Assert.Equal(2, applied.Length);
+        Assert.Equal(3, applied.Length);
         Assert.Contains(applied, migration => migration.EndsWith("_InitialCreate", StringComparison.Ordinal));
         Assert.Contains(applied, migration => migration.EndsWith("_AddCourseTags", StringComparison.Ordinal));
+        Assert.Contains(applied, migration => migration.EndsWith("_AddPublishingOutbox", StringComparison.Ordinal));
         Assert.Empty(pending);
     }
 

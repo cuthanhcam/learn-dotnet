@@ -10,6 +10,7 @@ public sealed class LearningDbContext(DbContextOptions<LearningDbContext> option
     public DbSet<CourseModule> CourseModules => Set<CourseModule>();
     public DbSet<Tag> Tags => Set<Tag>();
     public DbSet<CourseTag> CourseTags => Set<CourseTag>();
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

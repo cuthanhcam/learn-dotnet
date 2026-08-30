@@ -15,6 +15,7 @@ public sealed class CourseConfiguration : IEntityTypeConfiguration<Course>
         builder.Property(course => course.Price).HasPrecision(18, 2);
         builder.Property(course => course.Version).IsConcurrencyToken();
         builder.HasIndex(course => course.Slug).IsUnique();
+        builder.HasIndex(course => new { course.IsPublished, course.PublishedAt });
 
         builder.HasOne(course => course.Category)
             .WithMany(category => category.Courses)
