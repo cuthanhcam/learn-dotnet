@@ -37,7 +37,7 @@ jobs:
         run: dotnet tool restore
 
       - name: Restore maintained projects
-        run: dotnet restore learn-dotnet.slnx --nologo
+        run: dotnet restore learn-dotnet.slnx --locked-mode --nologo
 
       - name: Verify formatting
         run: dotnet format whitespace learn-dotnet.slnx --verify-no-changes --no-restore --verbosity diagnostic

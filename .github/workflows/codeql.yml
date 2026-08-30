@@ -41,7 +41,7 @@ jobs:
           build-mode: manual
 
       - name: Restore maintained projects
-        run: dotnet restore learn-dotnet.slnx --nologo
+        run: dotnet restore learn-dotnet.slnx --locked-mode --nologo
 
       - name: Build maintained projects
         run: dotnet build learn-dotnet.slnx --configuration Release --no-restore --nologo
