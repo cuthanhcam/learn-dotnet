@@ -27,6 +27,7 @@ and cartesian explosion, use set-based updates, and test against appropriate dat
 |---:|---|---|
 | 0 | [Roadmap](docs/00-roadmap.md) | Scope, provider strategy, and progressive workflow |
 | 1 | [DbContext, modeling, and unit of work](docs/01-dbcontext-modeling-unit-of-work.md) | relational model, constraints, relationships, and SQLite tests |
+| 2 | [Migrations and schema evolution](docs/02-migrations-schema-evolution.md) | pinned tooling, generated history, scripts, and deployment safety |
 
 Planned slices cover migrations, change tracking, query translation and projection, loading
 strategies, concurrency, transactions, performance diagnostics, bulk operations, raw SQL, interceptors,
