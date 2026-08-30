@@ -9,7 +9,11 @@ param(
         "06-async-concurrency/docs",
         "07-aspnet-core/docs",
         "08-ef-core/docs",
-        "docs"
+        "docs",
+        "README.md",
+        "CONTRIBUTING.md",
+        "SECURITY.md",
+        "CHANGELOG.md"
     )
 )
 
@@ -24,8 +28,15 @@ foreach ($root in $Roots) {
         continue
     }
 
-    foreach ($file in Get-ChildItem -LiteralPath $absoluteRoot -Recurse -File -Filter "*.md" |
-        Where-Object { $_.FullName -notmatch '[\\/](bin|obj|artifacts)[\\/]' }) {
+    $markdownFiles = if (Test-Path -LiteralPath $absoluteRoot -PathType Leaf) {
+        @(Get-Item -LiteralPath $absoluteRoot)
+    }
+    else {
+        Get-ChildItem -LiteralPath $absoluteRoot -Recurse -File -Filter "*.md" |
+            Where-Object { $_.FullName -notmatch '[\\/](bin|obj|artifacts)[\\/]' }
+    }
+
+    foreach ($file in $markdownFiles) {
         $checkedFiles++
         $lines = Get-Content -LiteralPath $file.FullName -Encoding utf8
         $relativePath = $file.FullName.Substring($repositoryRoot.Length).TrimStart('\', '/')

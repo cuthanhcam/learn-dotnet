@@ -1,5 +1,6 @@
-# Normalize line endings
-* text=auto
+# Normalize text to LF in the repository and working tree on every platform. This matches
+# `.editorconfig` and prevents formatter-only diffs between Windows and Linux CI.
+* text=auto eol=lf
 
 # C# source
 *.cs text diff=csharp
@@ -20,7 +21,7 @@
 
 # Scripts
 *.sh text eol=lf
-*.ps1 text eol=crlf
+*.ps1 text eol=lf
 
 # Binary files
 *.png binary

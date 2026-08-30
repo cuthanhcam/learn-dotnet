@@ -8,7 +8,12 @@ param(
         "05-dsa",
         "06-async-concurrency",
         "07-aspnet-core",
-        "08-ef-core"
+        "08-ef-core",
+        "docs",
+        "README.md",
+        "CONTRIBUTING.md",
+        "SECURITY.md",
+        "CHANGELOG.md"
     )
 )
 
@@ -24,8 +29,13 @@ foreach ($root in $Roots) {
         continue
     }
 
-    $markdownFiles = Get-ChildItem -LiteralPath $absoluteRoot -Recurse -File -Filter "*.md" |
-        Where-Object { $_.FullName -notmatch '[\\/](bin|obj|artifacts|BenchmarkDotNet\.Artifacts)[\\/]' }
+    $markdownFiles = if (Test-Path -LiteralPath $absoluteRoot -PathType Leaf) {
+        @(Get-Item -LiteralPath $absoluteRoot)
+    }
+    else {
+        Get-ChildItem -LiteralPath $absoluteRoot -Recurse -File -Filter "*.md" |
+            Where-Object { $_.FullName -notmatch '[\\/](bin|obj|artifacts|BenchmarkDotNet\.Artifacts)[\\/]' }
+    }
     foreach ($file in $markdownFiles) {
         $lineNumber = 0
         foreach ($line in Get-Content -LiteralPath $file.FullName -Encoding utf8) {
