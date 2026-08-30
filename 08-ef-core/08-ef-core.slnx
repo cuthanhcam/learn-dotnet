@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/docs/">
+    <File Path="docs/00-roadmap.md" />
+    <File Path="docs/01-dbcontext-modeling-unit-of-work.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Learning.Persistence/Learning.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Learning.Persistence.Tests/Learning.Persistence.Tests.csproj" />
+  </Folder>
+</Solution>
