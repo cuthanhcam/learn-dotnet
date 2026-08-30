@@ -33,6 +33,7 @@ and cartesian explosion, use set-based updates, and test against appropriate dat
 | 5 | [Advanced relationships and graph loading](docs/05-relationships-graph-loading.md) | join entities, cascades, split queries, and fixup pitfalls |
 | 6 | [Optimistic concurrency and conflict resolution](docs/06-optimistic-concurrency-conflict-resolution.md) | version predicates, database values, merge policies, and stale deletes |
 | 7 | [Transactions, savepoints, retries, and outbox](docs/07-transactions-savepoints-retries-outbox.md) | atomic publication, idempotency, rollback, and side-effect boundaries |
+| 8 | [Set-based updates, raw SQL, and interceptors](docs/08-set-based-operations-raw-sql-interceptors.md) | bulk writes, tracker staleness, parameterization, and command inspection |
 
 Planned slices cover migrations, change tracking, query translation and projection, loading
 strategies, concurrency, transactions, performance diagnostics, bulk operations, raw SQL, interceptors,
@@ -86,6 +87,7 @@ dotnet test 08-ef-core.slnx --configuration Release --no-build
 | Relationship and graph specifications | `tests/Learning.Persistence.Tests/RelationshipLoadingTests.cs` |
 | Concurrency specifications | `tests/Learning.Persistence.Tests/ConcurrencyTests.cs` |
 | Transaction and outbox specifications | `tests/Learning.Persistence.Tests/TransactionTests.cs` |
+| Bulk operations and raw SQL specifications | `tests/Learning.Persistence.Tests/BulkOperationsAndRawSqlTests.cs` |
 
 ## Design Rules
 

@@ -8,6 +8,7 @@
     <File Path="docs/05-relationships-graph-loading.md" />
     <File Path="docs/06-optimistic-concurrency-conflict-resolution.md" />
     <File Path="docs/07-transactions-savepoints-retries-outbox.md" />
+    <File Path="docs/08-set-based-operations-raw-sql-interceptors.md" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Learning.Persistence/Learning.Persistence.csproj" />
