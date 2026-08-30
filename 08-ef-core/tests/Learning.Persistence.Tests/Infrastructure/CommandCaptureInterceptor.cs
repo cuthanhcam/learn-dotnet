@@ -7,15 +7,27 @@ namespace Learning.Persistence.Tests.Infrastructure;
 public sealed class CommandCaptureInterceptor : DbCommandInterceptor
 {
     private readonly ConcurrentQueue<string> _commands = new();
+    private readonly ConcurrentQueue<CommandSnapshot> _snapshots = new();
 
     public IReadOnlyList<string> Commands => _commands.ToArray();
+    public IReadOnlyList<CommandSnapshot> Snapshots => _snapshots.ToArray();
+
+    private void Capture(DbCommand command)
+    {
+        _commands.Enqueue(command.CommandText);
+        _snapshots.Enqueue(new CommandSnapshot(
+            command.CommandText,
+            command.Parameters.Cast<DbParameter>()
+                .Select(parameter => new CommandParameterSnapshot(parameter.ParameterName, parameter.Value))
+                .ToArray()));
+    }
 
     public override InterceptionResult<DbDataReader> ReaderExecuting(
         DbCommand command,
         CommandEventData eventData,
         InterceptionResult<DbDataReader> result)
     {
-        _commands.Enqueue(command.CommandText);
+        Capture(command);
         return result;
     }
 
@@ -25,7 +37,7 @@ public sealed class CommandCaptureInterceptor : DbCommandInterceptor
         InterceptionResult<DbDataReader> result,
         CancellationToken cancellationToken = default)
     {
-        _commands.Enqueue(command.CommandText);
+        Capture(command);
         return ValueTask.FromResult(result);
     }
 
@@ -34,7 +46,7 @@ public sealed class CommandCaptureInterceptor : DbCommandInterceptor
         CommandEventData eventData,
         InterceptionResult<object> result)
     {
-        _commands.Enqueue(command.CommandText);
+        Capture(command);
         return result;
     }
 
@@ -44,7 +56,7 @@ public sealed class CommandCaptureInterceptor : DbCommandInterceptor
         InterceptionResult<object> result,
         CancellationToken cancellationToken = default)
     {
-        _commands.Enqueue(command.CommandText);
+        Capture(command);
         return ValueTask.FromResult(result);
     }
 
@@ -53,7 +65,7 @@ public sealed class CommandCaptureInterceptor : DbCommandInterceptor
         CommandEventData eventData,
         InterceptionResult<int> result)
     {
-        _commands.Enqueue(command.CommandText);
+        Capture(command);
         return result;
     }
 
@@ -63,7 +75,13 @@ public sealed class CommandCaptureInterceptor : DbCommandInterceptor
         InterceptionResult<int> result,
         CancellationToken cancellationToken = default)
     {
-        _commands.Enqueue(command.CommandText);
+        Capture(command);
         return ValueTask.FromResult(result);
     }
 }
+
+public sealed record CommandSnapshot(
+    string CommandText,
+    IReadOnlyList<CommandParameterSnapshot> Parameters);
+
+public sealed record CommandParameterSnapshot(string Name, object? Value);
