@@ -25,7 +25,7 @@ public static class NullabilityExample
     public static void Run()
     {
         Console.WriteLine($"{new string('=', 5)} Nullability Examples {new string('=', 5)}");
-        
+
         PrintSection("NULLABLE VALUE TYPES");
         DemoNullableValueTypes();
 

@@ -20,37 +20,37 @@ Welcome to the OOP learning journey! This roadmap guides you from the basics to 
 ## 🛣️ Learning Path
 
 1. **Classes & Objects**
-	- What is a class? What is an object?
-	- Fields, properties, methods
-	- Object creation, object initializers
-	- Encapsulation basics
+   - What is a class? What is an object?
+   - Fields, properties, methods
+   - Object creation, object initializers
+   - Encapsulation basics
 2. **Encapsulation & Properties**
-	- Access modifiers (public, private, protected, internal)
-	- Getters/setters, auto-properties
-	- Data hiding, information security
+   - Access modifiers (public, private, protected, internal)
+   - Getters/setters, auto-properties
+   - Data hiding, information security
 3. **Inheritance**
-	- Base and derived classes
-	- Constructors in inheritance
-	- Sealed classes, hiding vs overriding
+   - Base and derived classes
+   - Constructors in inheritance
+   - Sealed classes, hiding vs overriding
 4. **Polymorphism**
-	- Interfaces, abstract classes
-	- Virtual/override, dynamic dispatch
-	- Real-world analogies
+   - Interfaces, abstract classes
+   - Virtual/override, dynamic dispatch
+   - Real-world analogies
 5. **Access Modifiers Deep Dive**
-	- Accessibility in inheritance
-	- Internal, protected internal, private protected
-	- Best practices
+   - Accessibility in inheritance
+   - Internal, protected internal, private protected
+   - Best practices
 6. **Constructors & Destructors**
-	- Object lifecycle
-	- IDisposable, finalizers
+   - Object lifecycle
+   - IDisposable, finalizers
 7. **Static Members**
-	- Static fields, methods, properties
-	- Static constructors
+   - Static fields, methods, properties
+   - Static constructors
 8. **OOP Patterns (Intro)**
-	- Encapsulation, inheritance, polymorphism, composition
-	- Simple design patterns (Singleton, Factory, etc.)
+   - Encapsulation, inheritance, polymorphism, composition
+   - Simple design patterns (Singleton, Factory, etc.)
 9. **Common Pitfalls & Pro Tips**
-	- What to avoid, best practices
+   - What to avoid, best practices
 
 ## 🏆 Checkpoints
 

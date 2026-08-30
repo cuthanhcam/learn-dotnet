@@ -25,7 +25,7 @@ public static class MemoryConceptsExample
     public static void Run()
     {
         Console.WriteLine($"{new string('=', 5)} Memory Concepts Examples {new string('=', 5)}");
-        
+
         PrintSection("STACK VS HEAP");
         DemoStackVsHeap();
 

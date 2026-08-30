@@ -22,24 +22,24 @@ namespace OopBasics.ConsoleApp
                 RunExample(EncapsulationExample.Run);
                 RunExample(ImmutableObjectExample.Run);
                 RunExample(ValueObjectExample.Run);
-                
+
             });
 
-            RunSection("Inheritance", static () => 
+            RunSection("Inheritance", static () =>
             {
                 RunExample(InheritanceExample.Run);
                 RunExample(BaseConstructorExample.Run);
                 RunExample(SealedAndOverrideExample.Run);
             });
 
-            RunSection("Polymorphism", static () => 
+            RunSection("Polymorphism", static () =>
             {
                 RunExample(InterfaceExample.Run);
                 RunExample(AbstractClassExample.Run);
                 RunExample(VirtualOverrideExample.Run);
             });
 
-            RunSection("Access Modifiers", static () => 
+            RunSection("Access Modifiers", static () =>
             {
                 RunExample(AccessModifiersExample.Run);
                 RunExample(InheritanceAccessExample.Run);
@@ -48,14 +48,14 @@ namespace OopBasics.ConsoleApp
                 RunExample(NestedTypesExample.Run);
             });
 
-            RunSection("Constructors & Destructors", static () => 
+            RunSection("Constructors & Destructors", static () =>
             {
                 RunExample(ConstructorsExample.Run);
                 RunExample(DestructorExample.Run);
                 RunExample(IDisposableExample.Run);
             });
-            
-            RunSection("Static Members", static () => 
+
+            RunSection("Static Members", static () =>
             {
                 RunExample(StaticMembersExample.Run);
             });

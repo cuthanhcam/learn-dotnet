@@ -7,6 +7,7 @@ param(
         "05-dsa/docs",
         "06-async-concurrency/docs",
         "07-aspnet-core/docs",
+        "08-ef-core/docs",
         "docs"
     )
 )
@@ -85,10 +86,55 @@ foreach ($root in $Roots) {
             $errors.Add("$($file.FullName): last-reviewed must use YYYY-MM-DD")
         }
 
+        foreach ($numericKey in @("phase", "order", "estimated-reading-minutes")) {
+            $numericValue = 0
+            if ($metadata.ContainsKey($numericKey) -and
+                -not [int]::TryParse($metadata[$numericKey], [ref]$numericValue)) {
+                $errors.Add("$($file.FullName): '$numericKey' must be an integer")
+            }
+        }
+
+        $phaseNumber = 0
+        if ($metadata.ContainsKey("phase") -and
+            [int]::TryParse($metadata["phase"], [ref]$phaseNumber) -and
+            $phaseNumber -lt 0) {
+            $errors.Add("$($file.FullName): phase must be non-negative")
+        }
+
+        if ($metadata.ContainsKey("estimated-reading-minutes")) {
+            $readingMinutes = 0
+            if ([int]::TryParse($metadata["estimated-reading-minutes"], [ref]$readingMinutes) -and
+                $readingMinutes -lt 1) {
+                $errors.Add("$($file.FullName): estimated-reading-minutes must be at least 1")
+            }
+        }
+
+        if ($metadata.ContainsKey("last-reviewed") -and
+            $metadata["last-reviewed"] -match '^\d{4}-\d{2}-\d{2}$') {
+            $reviewedDate = [datetime]::MinValue
+            $validDate = [datetime]::TryParseExact(
+                $metadata["last-reviewed"],
+                "yyyy-MM-dd",
+                [Globalization.CultureInfo]::InvariantCulture,
+                [Globalization.DateTimeStyles]::None,
+                [ref]$reviewedDate)
+            if (-not $validDate) {
+                $errors.Add("$($file.FullName): last-reviewed is not a valid calendar date")
+            }
+        }
+
+        foreach ($arrayKey in @("topics", "prerequisites")) {
+            if ($metadata.ContainsKey($arrayKey) -and $metadata[$arrayKey] -notmatch '^\[.*\]$') {
+                $errors.Add("$($file.FullName): '$arrayKey' must use an inline YAML array")
+            }
+        }
+
         $articles.Add([pscustomobject]@{
             Path = $file.FullName
             Slug = $metadata["slug"]
             Prerequisites = $metadata["prerequisites"]
+            Phase = $metadata["phase"]
+            Order = $metadata["order"]
         })
     }
 }
@@ -98,6 +144,12 @@ $articles |
     Group-Object Slug |
     Where-Object Count -gt 1 |
     ForEach-Object { $errors.Add("Duplicate slug '$($_.Name)'") }
+
+$articles |
+    Where-Object { $_.Phase -ne $null -and $_.Order -ne $null } |
+    Group-Object { "$($_.Phase):$($_.Order)" } |
+    Where-Object Count -gt 1 |
+    ForEach-Object { $errors.Add("Duplicate phase/order '$($_.Name)'") }
 
 $knownSlugs = @{}
 foreach ($article in $articles | Where-Object Slug) {
@@ -119,9 +171,49 @@ foreach ($article in $articles) {
     }
 }
 
+# Detect prerequisite cycles so a future blog can topologically order the learning graph.
+$dependenciesBySlug = @{}
+foreach ($article in $articles | Where-Object Slug) {
+    $dependenciesBySlug[$article.Slug] = @()
+    if ($article.Prerequisites -and $article.Prerequisites -ne "[]") {
+        $dependenciesBySlug[$article.Slug] = @(
+            $article.Prerequisites.Trim('[', ']') -split ',' |
+                ForEach-Object { $_.Trim().Trim('"', "'") } |
+                Where-Object { $_ }
+        )
+    }
+}
+
+$visitState = @{}
+function Visit-Prerequisite([string]$slug, [System.Collections.Generic.List[string]]$path) {
+    if ($visitState[$slug] -eq 2) {
+        return
+    }
+    if ($visitState[$slug] -eq 1) {
+        $cycle = @($path) + $slug
+        $errors.Add("Prerequisite cycle detected: $($cycle -join ' -> ')")
+        return
+    }
+
+    $visitState[$slug] = 1
+    $path.Add($slug)
+    foreach ($dependency in $dependenciesBySlug[$slug]) {
+        if ($dependenciesBySlug.ContainsKey($dependency)) {
+            Visit-Prerequisite $dependency $path
+        }
+    }
+    $path.RemoveAt($path.Count - 1)
+    $visitState[$slug] = 2
+}
+
+foreach ($slug in $dependenciesBySlug.Keys) {
+    Visit-Prerequisite $slug ([System.Collections.Generic.List[string]]::new())
+}
+
 if ($errors.Count -gt 0) {
     $errors | Sort-Object | ForEach-Object { Write-Error $_ }
     exit 1
 }
 
 Write-Output "Validated $($articles.Count) article metadata files."
+$global:LASTEXITCODE = 0

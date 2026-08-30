@@ -4,6 +4,8 @@
 ![.NET 8 | 10](https://img.shields.io/badge/.NET-8%20%7C%2010-blueviolet?logo=dotnet&logoColor=white)
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET-Core-blueviolet?logo=dotnet&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![CI](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/codeql.yml/badge.svg?branch=develop)](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/codeql.yml)
 
 ---
 
@@ -25,6 +27,52 @@ The goal of this project is to:
 - Build **production-ready backend services with ASP.NET Core**
 
 This repository is intended for **learning, practice, and long-term reference**, especially for backend engineers working with .NET.
+
+---
+
+## Repository Status
+
+| Phase | Topic | Status | Runtime |
+|---:|---|---|---|
+| 01 | [C# Fundamentals](01-csharp-basics/README.md) | Completed | .NET 8 |
+| 02 | [Object-Oriented Programming](02-oop/README.md) | Completed | .NET 8 |
+| 03 | [Core .NET and Standard Library](03-core-dotnet/README.md) | Completed | .NET 8 |
+| 04 | [Memory and Performance](04-memory-performance/README.md) | Completed | .NET 8 |
+| 05 | [Data Structures and Algorithms](05-dsa/README.md) | Completed | .NET 8 |
+| 06 | [Async and Concurrency](06-async-concurrency/README.md) | Completed | .NET 8 |
+| 07 | [ASP.NET Core](07-aspnet-core/README.md) | Completed | .NET 10 |
+| 08 | [Entity Framework Core](08-ef-core/README.md) | Completed | .NET 10 |
+| 09–15 | Security, architecture, testing, projects, DevOps, system design, observability | Planned | To be defined |
+
+The maintained workspace currently contains 37 projects, 93 publishable articles, and 422 executable
+tests. `legacy/` preserves historical code for comparison but is excluded from the maintained solution
+and quality gates.
+
+---
+
+## 🧩 Open the Complete Workspace
+
+Use the root solution to browse every active project from Phases 01–08 in one Visual Studio window:
+
+```text
+learn-dotnet.slnx
+```
+
+The solution groups projects by phase and then by responsibility (`src`, `tests`, `exercises`, and
+`benchmarks`). Historical projects under `legacy/` remain intentionally separate from the maintained
+learning path.
+
+From PowerShell, open the solution with Visual Studio or validate it with the .NET CLI:
+
+```powershell
+start learn-dotnet.slnx
+dotnet tool restore
+dotnet restore learn-dotnet.slnx
+dotnet build learn-dotnet.slnx --configuration Release --no-restore
+dotnet test learn-dotnet.slnx --configuration Release --no-build
+```
+
+Individual phase solutions remain available when a smaller and more focused workspace is preferable.
 
 ---
 
@@ -310,35 +358,19 @@ _Figure 1: Structured .NET Learning Journey from Fundamentals to Advanced System
 
 ```text
 learn-dotnet/
-│
-├── 01-csharp-basics/
-├── 02-oop/
-├── 03-core-dotnet/
-├── 04-memory-performance/
-├── 05-dsa/
-├── 06-async-concurrency/
-├── 07-aspnet-core/
-├── 08-ef-core/
-├── 09-auth/
-├── 10-architecture/
-├── 11-testing/
-├── 12-projects/
-├── 13-devops/
-├── 14-system-design/
-├── 15-observability/
-│
-├── shared/
-│   ├── utilities/
-│   ├── extensions/
-│   └── helpers/
-│
-├── docs/
-│   ├── notes/
-│   ├── diagrams/
-│   └── cheatsheets/
-│
-├── README.md
-└── .gitignore
+├── 01-csharp-basics/ ... 08-ef-core/  # Maintained learning phases
+│   ├── docs/                          # Publishable articles
+│   ├── src/                           # Runnable examples and implementations
+│   ├── exercises/                     # Practice projects where applicable
+│   ├── benchmarks/                    # BenchmarkDotNet projects where applicable
+│   └── tests/                         # Executable specifications
+├── docs/                              # Repository-wide publishing contracts
+├── scripts/                           # Cross-platform quality gates
+├── .github/                           # CI, security, and contribution automation
+├── legacy/                            # Historical, non-maintained code
+├── Directory.Build.props              # Shared compiler policy
+├── Directory.Packages.props           # Central NuGet versions
+└── learn-dotnet.slnx                  # Maintained master solution
 ```
 
 ---
@@ -351,9 +383,11 @@ Each module should include:
 
 ```text
 module/
-├── README.md     # Theory & notes
-├── examples/     # Code examples
-├── exercises/    # Practice problems
+├── README.md     # Entry point, outcomes, and navigation
+├── docs/         # Article-ready theory and operational guidance
+├── src/          # Production-oriented examples
+├── tests/        # Executable specifications
+└── exercises/    # Practice problems where appropriate
 ```
 
 ---
@@ -370,11 +404,11 @@ module/
 
 ## 🛠️ Tools & Technologies
 
-- **C# / .NET (latest LTS)**
+- **C# / .NET 8 and .NET 10**
 - **ASP.NET Core**
 - **Entity Framework Core**
-- **SQL Server / PostgreSQL**
-- **xUnit / NUnit**
+- **SQLite for the fast EF Core relational suite; production-provider gates are documented separately**
+- **xUnit**
 - **Git & GitHub**
 - IDE: Visual Studio / VS Code / Rider
 

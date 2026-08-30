@@ -67,10 +67,10 @@ public static class MemoryBenchmarks
 
         for (int i = 0; i < iterations; i++)
         {
-            var person = new MemoryConceptsExample.Person 
-            { 
-                Name = $"Person{i}", 
-                Age = i % 100 
+            var person = new MemoryConceptsExample.Person
+            {
+                Name = $"Person{i}",
+                Age = i % 100
             };
         }
 
@@ -215,8 +215,8 @@ public static class MemoryBenchmarks
         var objects = new object[10_000];
         for (int i = 0; i < objects.Length; i++)
         {
-            objects[i] = new MemoryConceptsExample.Person 
-            { 
+            objects[i] = new MemoryConceptsExample.Person
+            {
                 Name = $"Person{i}",
                 Age = i % 100
             };
