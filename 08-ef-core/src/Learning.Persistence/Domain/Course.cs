@@ -73,4 +73,18 @@ public sealed class Course
     }
 
     public void IncrementVersion() => Version = checked(Version + 1);
+
+    public void AdvanceVersionFrom(long persistedVersion)
+    {
+        if (persistedVersion < Version)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(persistedVersion),
+                "The persisted version cannot be older than the entity version.");
+        }
+
+        // Conflict resolution is explicit application behavior. EF does not automatically increment
+        // application-managed concurrency tokens when a retry adopts newer database state.
+        Version = checked(persistedVersion + 1);
+    }
 }

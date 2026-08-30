@@ -47,4 +47,23 @@ public sealed class CommandCaptureInterceptor : DbCommandInterceptor
         _commands.Enqueue(command.CommandText);
         return ValueTask.FromResult(result);
     }
+
+    public override InterceptionResult<int> NonQueryExecuting(
+        DbCommand command,
+        CommandEventData eventData,
+        InterceptionResult<int> result)
+    {
+        _commands.Enqueue(command.CommandText);
+        return result;
+    }
+
+    public override ValueTask<InterceptionResult<int>> NonQueryExecutingAsync(
+        DbCommand command,
+        CommandEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = default)
+    {
+        _commands.Enqueue(command.CommandText);
+        return ValueTask.FromResult(result);
+    }
 }

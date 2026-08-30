@@ -41,7 +41,8 @@ public sealed class CourseWorkflowTests
                     seeded.FirstCourseId,
                     "ASP.NET Core Architecture",
                     "aspnet-core-architecture",
-                    60m),
+                    60m,
+                    ExpectedVersion: 1),
                 CancellationToken.None);
 
             Assert.Equal(UpdateCourseStatus.Updated, result.Status);
@@ -66,7 +67,7 @@ public sealed class CourseWorkflowTests
         var editor = new CourseEditor(context);
 
         UpdateCourseResult result = await editor.UpdateAsync(
-            new UpdateCourseCommand(Guid.NewGuid(), "Missing", "missing", 1m),
+            new UpdateCourseCommand(Guid.NewGuid(), "Missing", "missing", 1m, ExpectedVersion: 1),
             CancellationToken.None);
 
         Assert.Equal(UpdateCourseStatus.NotFound, result.Status);
