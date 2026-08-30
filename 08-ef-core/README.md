@@ -29,6 +29,7 @@ and cartesian explosion, use set-based updates, and test against appropriate dat
 | 1 | [DbContext, modeling, and unit of work](docs/01-dbcontext-modeling-unit-of-work.md) | relational model, constraints, relationships, and SQLite tests |
 | 2 | [Migrations and schema evolution](docs/02-migrations-schema-evolution.md) | pinned tooling, generated history, scripts, and deployment safety |
 | 3 | [Change tracking and disconnected updates](docs/03-change-tracking-disconnected-updates.md) | identity map, read models, state conflicts, and safe commands |
+| 4 | [Querying, loading, and performance](docs/04-querying-loading-performance.md) | N+1, projections, SQL capture, and keyset pagination |
 
 Planned slices cover migrations, change tracking, query translation and projection, loading
 strategies, concurrency, transactions, performance diagnostics, bulk operations, raw SQL, interceptors,
@@ -78,6 +79,7 @@ dotnet test 08-ef-core.slnx --configuration Release --no-build
 | Constraint and persistence specifications | `tests/Learning.Persistence.Tests/ModelAndUnitOfWorkTests.cs` |
 | Read and write use cases | `Courses/CourseQueries.cs`, `Courses/CourseEditor.cs` |
 | Change-tracker specifications | `tests/Learning.Persistence.Tests/ChangeTrackingTests.cs` |
+| Query round-trip instrumentation | `tests/Learning.Persistence.Tests/Infrastructure/CommandCaptureInterceptor.cs` |
 
 ## Design Rules
 
