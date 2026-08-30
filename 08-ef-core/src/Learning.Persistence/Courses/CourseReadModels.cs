@@ -17,7 +17,8 @@ public sealed record CourseDetails(
     decimal Price,
     long Version,
     string CategoryName,
-    IReadOnlyList<CourseModuleDetails> Modules);
+    IReadOnlyList<CourseModuleDetails> Modules,
+    IReadOnlyList<string> Tags);
 
 public sealed record CoursePage(
     IReadOnlyList<CourseListItem> Items,

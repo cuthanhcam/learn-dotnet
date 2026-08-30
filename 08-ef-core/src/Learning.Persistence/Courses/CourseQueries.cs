@@ -61,6 +61,10 @@ public sealed class CourseQueries(LearningDbContext dbContext)
                 course.Modules
                     .OrderBy(module => module.Order)
                     .Select(module => new CourseModuleDetails(module.Id, module.Order, module.Title))
+                    .ToArray(),
+                course.CourseTags
+                    .OrderBy(link => link.Tag.Name)
+                    .Select(link => link.Tag.Name)
                     .ToArray()))
             .SingleOrDefaultAsync(cancellationToken);
 

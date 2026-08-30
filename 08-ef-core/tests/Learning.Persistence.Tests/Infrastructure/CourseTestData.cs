@@ -17,7 +17,12 @@ public static class CourseTestData
         var second = new Course(
             category.Id, "Entity Framework Core", "ef-core", 50m, DateTimeOffset.Parse("2026-08-30T00:00:00Z"));
         second.AddModule("DbContext");
-        context.AddRange(category, first, second);
+        var dotnet = new Tag("dotnet");
+        var backend = new Tag("backend");
+        first.AddTag(dotnet.Id);
+        first.AddTag(backend.Id);
+        second.AddTag(dotnet.Id);
+        context.AddRange(category, first, second, dotnet, backend);
         await context.SaveChangesAsync();
         return new SeededCourses(category.Id, first.Id, second.Id);
     }

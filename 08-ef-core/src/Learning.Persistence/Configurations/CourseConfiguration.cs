@@ -23,5 +23,7 @@ public sealed class CourseConfiguration : IEntityTypeConfiguration<Course>
 
         builder.Navigation(course => course.Modules)
             .UsePropertyAccessMode(PropertyAccessMode.Field);
+        builder.Navigation(course => course.CourseTags)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

@@ -23,6 +23,7 @@ public sealed class CourseWorkflowTests
         Assert.Equal("Entity Framework Core", item.Title);
         Assert.Equal(1, item.ModuleCount);
         Assert.Equal([1, 2], details!.Modules.Select(module => module.Order));
+        Assert.Equal(["backend", "dotnet"], details.Tags);
         Assert.Empty(context.ChangeTracker.Entries());
     }
 

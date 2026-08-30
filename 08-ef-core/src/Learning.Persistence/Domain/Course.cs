@@ -3,6 +3,7 @@ namespace Learning.Persistence.Domain;
 public sealed class Course
 {
     private readonly List<CourseModule> _modules = [];
+    private readonly List<CourseTag> _courseTags = [];
 
     private Course()
     {
@@ -30,6 +31,7 @@ public sealed class Course
     public long Version { get; private set; } = 1;
     public Category Category { get; private set; } = null!;
     public IReadOnlyCollection<CourseModule> Modules => _modules.AsReadOnly();
+    public IReadOnlyCollection<CourseTag> CourseTags => _courseTags.AsReadOnly();
 
     public void UpdateDetails(string title, string slug, decimal price)
     {
@@ -51,6 +53,23 @@ public sealed class Course
         var module = new CourseModule(Id, _modules.Count + 1, title.Trim());
         _modules.Add(module);
         return module;
+    }
+
+    public CourseTag AddTag(Guid tagId)
+    {
+        if (tagId == Guid.Empty)
+        {
+            throw new ArgumentException("Tag identifier is required.", nameof(tagId));
+        }
+
+        if (_courseTags.Any(link => link.TagId == tagId))
+        {
+            throw new InvalidOperationException("The course already contains this tag.");
+        }
+
+        var link = new CourseTag(Id, tagId);
+        _courseTags.Add(link);
+        return link;
     }
 
     public void IncrementVersion() => Version = checked(Version + 1);

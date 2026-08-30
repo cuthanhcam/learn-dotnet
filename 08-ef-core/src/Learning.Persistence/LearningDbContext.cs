@@ -8,6 +8,8 @@ public sealed class LearningDbContext(DbContextOptions<LearningDbContext> option
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Course> Courses => Set<Course>();
     public DbSet<CourseModule> CourseModules => Set<CourseModule>();
+    public DbSet<Tag> Tags => Set<Tag>();
+    public DbSet<CourseTag> CourseTags => Set<CourseTag>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
