@@ -120,6 +120,10 @@ package-lock.json
 # ---------------------------------------------------------------------------
 
 migrations/
+# Phase 08 treats EF migration source as versioned schema history. Keep legacy/generated migration
+# folders ignored while explicitly tracking this learning phase's reviewed migration chain.
+!08-ef-core/src/Learning.Persistence/Migrations/
+!08-ef-core/src/Learning.Persistence/Migrations/**
 *.db
 *.sqlite
 *.mdf

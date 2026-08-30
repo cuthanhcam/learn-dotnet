@@ -13,7 +13,9 @@ public sealed class SqliteTestDatabase : IAsyncDisposable
         // owner connection open lets multiple short-lived DbContext units of work share one schema.
         await _connection.OpenAsync();
         await using LearningDbContext context = CreateContext();
-        await context.Database.EnsureCreatedAsync();
+        // Exercise the same migration chain that deployment will apply. EnsureCreated bypasses
+        // migration history and therefore cannot prove that incremental schema evolution works.
+        await context.Database.MigrateAsync();
     }
 
     public LearningDbContext CreateContext()
