@@ -24,7 +24,8 @@ foreach ($root in $Roots) {
         continue
     }
 
-    $markdownFiles = Get-ChildItem -LiteralPath $absoluteRoot -Recurse -File -Filter "*.md"
+    $markdownFiles = Get-ChildItem -LiteralPath $absoluteRoot -Recurse -File -Filter "*.md" |
+        Where-Object { $_.FullName -notmatch '[\\/](bin|obj|artifacts|BenchmarkDotNet\.Artifacts)[\\/]' }
     foreach ($file in $markdownFiles) {
         $lineNumber = 0
         foreach ($line in Get-Content -LiteralPath $file.FullName -Encoding utf8) {
@@ -67,3 +68,4 @@ if ($failures.Count -gt 0) {
 }
 
 Write-Host "Validated $checkedLinks local Markdown links."
+$global:LASTEXITCODE = 0

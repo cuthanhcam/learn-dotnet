@@ -1,0 +1,38 @@
+name: External links
+
+on:
+  schedule:
+    - cron: "41 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    name: Check external documentation links
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check links
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --config lychee.toml
+            --no-progress
+            "./**/*.md"
+          fail: true
+
+      - name: Create or update failure issue
+        if: failure()
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Scheduled external-link audit failed
+          content-filepath: ./lychee/out.md
+          labels: documentation, automated

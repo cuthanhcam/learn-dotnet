@@ -63,6 +63,14 @@ jobs:
         shell: pwsh
         run: ./scripts/Test-MarkdownLinks.ps1
 
+      - name: Validate Markdown structure
+        shell: pwsh
+        run: ./scripts/Test-MarkdownQuality.ps1
+
+      - name: Validate master solution inventory
+        shell: pwsh
+        run: ./scripts/Test-SolutionInventory.ps1
+
       - name: Audit NuGet vulnerabilities
         shell: pwsh
         run: ./scripts/Test-PackageVulnerabilities.ps1

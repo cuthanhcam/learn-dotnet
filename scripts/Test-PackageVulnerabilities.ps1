@@ -24,3 +24,4 @@ if ($output -match "has the following vulnerable packages") {
 }
 
 Write-Output "Validated NuGet dependency graph: no known vulnerabilities reported."
+$global:LASTEXITCODE = 0

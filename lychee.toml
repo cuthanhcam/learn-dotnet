@@ -1,0 +1,12 @@
+cache = true
+max_cache_age = "1d"
+max_retries = 3
+retry_wait_time = 2
+timeout = 20
+accept = [200, 204, 206, 429]
+exclude_path = ["legacy", "bin", "obj", "artifacts"]
+exclude = [
+  "^https?://localhost",
+  "^https?://127\\.0\\.0\\.1",
+  "^mailto:"
+]
