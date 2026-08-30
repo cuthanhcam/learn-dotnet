@@ -1,0 +1,125 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="global.json" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Phase 01 - CSharp Basics/">
+    <File Path="01-csharp-basics/README.md" />
+  </Folder>
+  <Folder Name="/Phase 01 - CSharp Basics/benchmarks/">
+    <Project Path="01-csharp-basics/benchmarks/CollectionsBenchmark/CollectionsBenchmark.csproj" />
+    <Project Path="01-csharp-basics/benchmarks/MemoryBenchmarks/MemoryBenchmarks.csproj" />
+    <Project Path="01-csharp-basics/benchmarks/StringBenchmark/StringBenchmark.csproj" />
+  </Folder>
+  <Folder Name="/Phase 01 - CSharp Basics/exercises/">
+    <Project Path="01-csharp-basics/exercises/CSharpBasics.Exercises/CSharpBasics.Exercises.csproj" />
+  </Folder>
+  <Folder Name="/Phase 01 - CSharp Basics/src/">
+    <Project Path="01-csharp-basics/src/CSharpBasics.ConsoleApp/CSharpBasics.ConsoleApp.csproj" />
+    <Project Path="01-csharp-basics/src/CSharpBasics.Examples/CSharpBasics.Examples.csproj" />
+    <Project Path="01-csharp-basics/src/CSharpBasics.Playground/CSharpBasics.Playground.csproj" />
+  </Folder>
+  <Folder Name="/Phase 01 - CSharp Basics/tests/">
+    <Project Path="01-csharp-basics/tests/CSharpBasics.Tests/CSharpBasics.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Phase 02 - Object-Oriented Programming/">
+    <File Path="02-oop/README.md" />
+  </Folder>
+  <Folder Name="/Phase 02 - Object-Oriented Programming/benchmarks/">
+    <Project Path="02-oop/benchmarks/OopBasics.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/Phase 02 - Object-Oriented Programming/exercises/">
+    <Project Path="02-oop/exercises/OopBasics.Exercises/OopBasics.Exercises.csproj" />
+  </Folder>
+  <Folder Name="/Phase 02 - Object-Oriented Programming/src/">
+    <Project Path="02-oop/src/OopBasics.ConsoleApp/OopBasics.ConsoleApp.csproj" />
+    <Project Path="02-oop/src/OopBasics.Examples/OopBasics.Examples.csproj" />
+    <Project Path="02-oop/src/OopBasics.Playground/OopBasics.Playground.csproj" />
+  </Folder>
+  <Folder Name="/Phase 02 - Object-Oriented Programming/tests/">
+    <Project Path="02-oop/tests/OopBasics.Tests/OopBasics.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Phase 03 - Core DotNet/">
+    <File Path="03-core-dotnet/README.md" />
+  </Folder>
+  <Folder Name="/Phase 03 - Core DotNet/benchmarks/">
+    <Project Path="03-core-dotnet/benchmarks/CoreDotNet.Benchmarks/CoreDotNet.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/Phase 03 - Core DotNet/exercises/">
+    <Project Path="03-core-dotnet/exercises/CoreDotNet.Exercises/CoreDotNet.Exercises.csproj" />
+  </Folder>
+  <Folder Name="/Phase 03 - Core DotNet/src/">
+    <Project Path="03-core-dotnet/src/CoreDotNet.ConsoleApp/CoreDotNet.ConsoleApp.csproj" />
+    <Project Path="03-core-dotnet/src/CoreDotNet.Examples/CoreDotNet.Examples.csproj" />
+  </Folder>
+  <Folder Name="/Phase 03 - Core DotNet/tests/">
+    <Project Path="03-core-dotnet/tests/CoreDotNet.Tests/CoreDotNet.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Phase 04 - Memory and Performance/">
+    <File Path="04-memory-performance/README.md" />
+  </Folder>
+  <Folder Name="/Phase 04 - Memory and Performance/benchmarks/">
+    <Project Path="04-memory-performance/benchmarks/MemoryPerformance.Benchmarks/MemoryPerformance.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/Phase 04 - Memory and Performance/exercises/">
+    <Project Path="04-memory-performance/exercises/MemoryPerformance.Exercises/MemoryPerformance.Exercises.csproj" />
+  </Folder>
+  <Folder Name="/Phase 04 - Memory and Performance/src/">
+    <Project Path="04-memory-performance/src/MemoryPerformance.ConsoleApp/MemoryPerformance.ConsoleApp.csproj" />
+    <Project Path="04-memory-performance/src/MemoryPerformance.Examples/MemoryPerformance.Examples.csproj" />
+  </Folder>
+  <Folder Name="/Phase 04 - Memory and Performance/tests/">
+    <Project Path="04-memory-performance/tests/MemoryPerformance.Tests/MemoryPerformance.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Phase 05 - Data Structures and Algorithms/">
+    <File Path="05-dsa/README.md" />
+  </Folder>
+  <Folder Name="/Phase 05 - Data Structures and Algorithms/benchmarks/">
+    <Project Path="05-dsa/benchmarks/Dsa.Benchmarks/Dsa.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/Phase 05 - Data Structures and Algorithms/exercises/">
+    <Project Path="05-dsa/exercises/Dsa.Exercises/Dsa.Exercises.csproj" />
+  </Folder>
+  <Folder Name="/Phase 05 - Data Structures and Algorithms/src/">
+    <Project Path="05-dsa/src/Dsa.ConsoleApp/Dsa.ConsoleApp.csproj" />
+    <Project Path="05-dsa/src/Dsa.Examples/Dsa.Examples.csproj" />
+  </Folder>
+  <Folder Name="/Phase 05 - Data Structures and Algorithms/tests/">
+    <Project Path="05-dsa/tests/Dsa.Tests/Dsa.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Phase 06 - Async and Concurrency/">
+    <File Path="06-async-concurrency/README.md" />
+  </Folder>
+  <Folder Name="/Phase 06 - Async and Concurrency/exercises/">
+    <Project Path="06-async-concurrency/exercises/AsyncConcurrency.Exercises/AsyncConcurrency.Exercises.csproj" />
+  </Folder>
+  <Folder Name="/Phase 06 - Async and Concurrency/src/">
+    <Project Path="06-async-concurrency/src/AsyncConcurrency.ConsoleApp/AsyncConcurrency.ConsoleApp.csproj" />
+    <Project Path="06-async-concurrency/src/AsyncConcurrency.Examples/AsyncConcurrency.Examples.csproj" />
+  </Folder>
+  <Folder Name="/Phase 06 - Async and Concurrency/tests/">
+    <Project Path="06-async-concurrency/tests/AsyncConcurrency.Tests/AsyncConcurrency.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Phase 07 - ASP.NET Core/">
+    <File Path="07-aspnet-core/README.md" />
+  </Folder>
+  <Folder Name="/Phase 07 - ASP.NET Core/src/">
+    <Project Path="07-aspnet-core/src/Learning.Api/Learning.Api.csproj" />
+  </Folder>
+  <Folder Name="/Phase 07 - ASP.NET Core/tests/">
+    <Project Path="07-aspnet-core/tests/Learning.Api.Tests/Learning.Api.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Phase 08 - Entity Framework Core/">
+    <File Path="08-ef-core/README.md" />
+  </Folder>
+  <Folder Name="/Phase 08 - Entity Framework Core/src/">
+    <Project Path="08-ef-core/src/Learning.Persistence/Learning.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/Phase 08 - Entity Framework Core/tests/">
+    <Project Path="08-ef-core/tests/Learning.Persistence.Tests/Learning.Persistence.Tests.csproj" />
+  </Folder>
+</Solution>

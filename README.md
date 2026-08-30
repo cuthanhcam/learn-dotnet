@@ -28,6 +28,29 @@ This repository is intended for **learning, practice, and long-term reference**,
 
 ---
 
+## 🧩 Open the Complete Workspace
+
+Use the root solution to browse every active project from Phases 01–08 in one Visual Studio window:
+
+```text
+learn-dotnet.slnx
+```
+
+The solution groups projects by phase and then by responsibility (`src`, `tests`, `exercises`, and
+`benchmarks`). Historical projects under `legacy/` remain intentionally separate from the maintained
+learning path.
+
+From PowerShell, open the solution with Visual Studio or validate it with the .NET CLI:
+
+```powershell
+start learn-dotnet.slnx
+dotnet build learn-dotnet.slnx --configuration Release
+```
+
+Individual phase solutions remain available when a smaller and more focused workspace is preferable.
+
+---
+
 ## 🧭 Learning Roadmap
 
 The repository is organized progressively from **fundamentals → advanced → real-world backend development**.
