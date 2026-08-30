@@ -28,6 +28,7 @@ and cartesian explosion, use set-based updates, and test against appropriate dat
 | 0 | [Roadmap](docs/00-roadmap.md) | Scope, provider strategy, and progressive workflow |
 | 1 | [DbContext, modeling, and unit of work](docs/01-dbcontext-modeling-unit-of-work.md) | relational model, constraints, relationships, and SQLite tests |
 | 2 | [Migrations and schema evolution](docs/02-migrations-schema-evolution.md) | pinned tooling, generated history, scripts, and deployment safety |
+| 3 | [Change tracking and disconnected updates](docs/03-change-tracking-disconnected-updates.md) | identity map, read models, state conflicts, and safe commands |
 
 Planned slices cover migrations, change tracking, query translation and projection, loading
 strategies, concurrency, transactions, performance diagnostics, bulk operations, raw SQL, interceptors,
@@ -75,6 +76,8 @@ dotnet test 08-ef-core.slnx --configuration Release --no-build
 | Table and relationship mapping | `Configurations/` |
 | Relational test database lifetime | `tests/Learning.Persistence.Tests/Infrastructure/SqliteTestDatabase.cs` |
 | Constraint and persistence specifications | `tests/Learning.Persistence.Tests/ModelAndUnitOfWorkTests.cs` |
+| Read and write use cases | `Courses/CourseQueries.cs`, `Courses/CourseEditor.cs` |
+| Change-tracker specifications | `tests/Learning.Persistence.Tests/ChangeTrackingTests.cs` |
 
 ## Design Rules
 

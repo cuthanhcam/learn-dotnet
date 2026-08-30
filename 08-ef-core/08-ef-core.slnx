@@ -3,6 +3,7 @@
     <File Path="docs/00-roadmap.md" />
     <File Path="docs/01-dbcontext-modeling-unit-of-work.md" />
     <File Path="docs/02-migrations-schema-evolution.md" />
+    <File Path="docs/03-change-tracking-disconnected-updates.md" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Learning.Persistence/Learning.Persistence.csproj" />
