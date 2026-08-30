@@ -9,6 +9,7 @@
     <File Path="docs/06-optimistic-concurrency-conflict-resolution.md" />
     <File Path="docs/07-transactions-savepoints-retries-outbox.md" />
     <File Path="docs/08-set-based-operations-raw-sql-interceptors.md" />
+    <File Path="docs/09-compiled-queries-diagnostics-provider-testing.md" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Learning.Persistence/Learning.Persistence.csproj" />
