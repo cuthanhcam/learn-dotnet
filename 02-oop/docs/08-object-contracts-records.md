@@ -173,7 +173,7 @@ rules without pretending the sample is a complete RFC validator.
 
 - [Records](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/records)
 - [Equality comparisons](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/equality-comparisons)
-- [How to define value equality](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/how-to-define-value-equality-for-a-type)
+- [Implement equality for a custom type](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/expressions/equality#implement-equality-yourself-when-a-type-cant-be-a-record)
 
 ## Navigation
 

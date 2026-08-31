@@ -94,7 +94,7 @@ A constructor with many unrelated dependencies often signals too many responsibi
 
 - [C# object-oriented programming](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/tutorials/oop)
 - [Inheritance and polymorphism](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/inheritance)
-- [Implement equality](https://learn.microsoft.com/en-us/dotnet/standard/base-types/how-to-define-value-equality-for-a-type)
+- [Implement equality for a custom type](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/expressions/equality#implement-equality-yourself-when-a-type-cant-be-a-record)
 Learn and apply SOLID for maintainable OOP code.
 
 ---
