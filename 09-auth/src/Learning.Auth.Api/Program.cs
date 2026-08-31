@@ -4,6 +4,7 @@ using System.Text;
 using Learning.Auth.Application.Abstractions;
 using Learning.Auth.Application.Identity;
 using Learning.Auth.Infrastructure.Identity;
+using Learning.Auth.Infrastructure.Sessions;
 using Learning.Auth.Infrastructure.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -19,9 +20,12 @@ builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<IUserAccountRepository, InMemoryUserAccountRepository>();
 builder.Services.AddSingleton<IPasswordHashService, AspNetCorePasswordHashService>();
 builder.Services.AddSingleton<IAccessTokenIssuer, JwtAccessTokenIssuer>();
+builder.Services.AddSingleton<IRefreshTokenService, CryptographicRefreshTokenService>();
+builder.Services.AddSingleton<IRefreshSessionStore, InMemoryRefreshSessionStore>();
 builder.Services.AddTransient<RegistrationService>();
 builder.Services.AddTransient<CredentialSignInService>();
 builder.Services.AddTransient<SessionSignInService>();
+builder.Services.AddTransient<RefreshSessionService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -78,10 +82,28 @@ app.MapPost("/auth/sign-in", async (SignInRequest request, SessionSignInService 
         request.Email, request.Password, cancellationToken);
 
     // Unknown identities, wrong credentials, and unavailable accounts share one public response.
-    return result.AccessToken is null
+    return result.Tokens is null
         ? Results.Json(new { message = "Invalid credentials." }, statusCode: StatusCodes.Status401Unauthorized)
-        : Results.Ok(new AccessTokenResponse(
-            "Bearer", result.AccessToken.Value, result.AccessToken.ExpiresAt));
+        : Results.Ok(TokenResponse.From(result.Tokens));
+}).AllowAnonymous();
+
+app.MapPost("/auth/refresh", async (RefreshTokenRequest request, RefreshSessionService refresh,
+    CancellationToken cancellationToken) =>
+{
+    RefreshResult result = await refresh.RefreshAsync(request.RefreshToken, cancellationToken);
+    // Replay details are security telemetry, not a distinction exposed to an untrusted caller.
+    return result.Tokens is null
+        ? Results.Json(new { message = "The refresh credential is invalid." },
+            statusCode: StatusCodes.Status401Unauthorized)
+        : Results.Ok(TokenResponse.From(result.Tokens));
+}).AllowAnonymous();
+
+app.MapPost("/auth/revoke", async (RefreshTokenRequest request, RefreshSessionService refresh,
+    CancellationToken cancellationToken) =>
+{
+    await refresh.RevokeAsync(request.RefreshToken, cancellationToken);
+    // Idempotent success prevents this endpoint from becoming a token-validity oracle.
+    return Results.NoContent();
 }).AllowAnonymous();
 
 app.MapGet("/auth/me", (ClaimsPrincipal principal) => Results.Ok(new
@@ -95,7 +117,13 @@ app.Run();
 
 public sealed record RegisterRequest(string Email, string Password);
 public sealed record SignInRequest(string Email, string Password);
-public sealed record AccessTokenResponse(string TokenType, string AccessToken, DateTimeOffset ExpiresAt);
+public sealed record RefreshTokenRequest(string RefreshToken);
+public sealed record TokenResponse(string TokenType, string AccessToken, DateTimeOffset AccessTokenExpiresAt,
+    string RefreshToken, DateTimeOffset RefreshTokenExpiresAt)
+{
+    public static TokenResponse From(SessionTokens tokens) => new("Bearer", tokens.AccessToken.Value,
+        tokens.AccessToken.ExpiresAt, tokens.RefreshToken, tokens.RefreshTokenExpiresAt);
+}
 
 // WebApplicationFactory discovers this type when running integration tests.
 public partial class Program;

@@ -110,4 +110,4 @@ claim remapping is a frequent source of authorization bugs and confusing tests.
 ## Navigation
 
 - Previous: [Identity and credential storage](02-identity-credential-storage.md)
-- Next: Refresh-token lifecycle (planned)
+- Next: [Refresh-token rotation, replay detection, and revocation](04-refresh-token-rotation-replay.md)

@@ -7,6 +7,7 @@ public sealed class JwtOptions
     public required string Audience { get; init; }
     public required string SigningKey { get; init; }
     public int AccessTokenMinutes { get; init; } = 10;
+    public int RefreshTokenDays { get; init; } = 14;
 
     public void Validate()
     {
@@ -18,5 +19,7 @@ public sealed class JwtOptions
             throw new InvalidOperationException("Jwt:SigningKey must contain at least 256 bits of key material.");
         if (AccessTokenMinutes is < 1 or > 60)
             throw new InvalidOperationException("Jwt:AccessTokenMinutes must be between 1 and 60.");
+        if (RefreshTokenDays is < 1 or > 30)
+            throw new InvalidOperationException("Jwt:RefreshTokenDays must be between 1 and 30.");
     }
 }

@@ -19,7 +19,7 @@ public sealed class AuthenticationFlowTests : IClassFixture<AuthApiFactory>
             "/auth/register", new RegisterRequest(email, "correct horse battery staple"));
         Assert.Equal(HttpStatusCode.Created, registration.StatusCode);
 
-        AccessTokenResponse token = (await SignInAsync(email, "correct horse battery staple"))!;
+        TokenResponse token = (await SignInAsync(email, "correct horse battery staple"))!;
         using var request = new HttpRequestMessage(HttpMethod.Get, "/auth/me");
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
         using HttpResponseMessage response = await _client.SendAsync(request);
@@ -39,7 +39,7 @@ public sealed class AuthenticationFlowTests : IClassFixture<AuthApiFactory>
     {
         string email = $"learner-{Guid.NewGuid():N}@example.com";
         await _client.PostAsJsonAsync("/auth/register", new RegisterRequest(email, "correct horse battery staple"));
-        AccessTokenResponse token = (await SignInAsync(email, "correct horse battery staple"))!;
+        TokenResponse token = (await SignInAsync(email, "correct horse battery staple"))!;
         string tampered = token.AccessToken[..^1] + (token.AccessToken[^1] == 'a' ? 'b' : 'a');
 
         using var request = new HttpRequestMessage(HttpMethod.Get, "/auth/me");
@@ -59,11 +59,54 @@ public sealed class AuthenticationFlowTests : IClassFixture<AuthApiFactory>
         Assert.Equal("{\"message\":\"Invalid credentials.\"}", await response.Content.ReadAsStringAsync());
     }
 
-    private async Task<AccessTokenResponse?> SignInAsync(string email, string password)
+    [Fact]
+    public async Task Refresh_RotatesOnceAndReplayRevokesReplacementFamily()
+    {
+        string email = $"learner-{Guid.NewGuid():N}@example.com";
+        await _client.PostAsJsonAsync("/auth/register", new RegisterRequest(email, "correct horse battery staple"));
+        TokenResponse original = (await SignInAsync(email, "correct horse battery staple"))!;
+
+        using HttpResponseMessage rotatedResponse = await _client.PostAsJsonAsync(
+            "/auth/refresh", new RefreshTokenRequest(original.RefreshToken));
+        TokenResponse? rotated = await rotatedResponse.Content.ReadFromJsonAsync<TokenResponse>();
+        Assert.Equal(HttpStatusCode.OK, rotatedResponse.StatusCode);
+        Assert.NotNull(rotated);
+        Assert.NotEqual(original.RefreshToken, rotated.RefreshToken);
+        Assert.NotEqual(original.AccessToken, rotated.AccessToken);
+
+        using HttpResponseMessage replay = await _client.PostAsJsonAsync(
+            "/auth/refresh", new RefreshTokenRequest(original.RefreshToken));
+        Assert.Equal(HttpStatusCode.Unauthorized, replay.StatusCode);
+
+        using HttpResponseMessage familyRevoked = await _client.PostAsJsonAsync(
+            "/auth/refresh", new RefreshTokenRequest(rotated.RefreshToken));
+        Assert.Equal(HttpStatusCode.Unauthorized, familyRevoked.StatusCode);
+    }
+
+    [Fact]
+    public async Task Revoke_IsIdempotentAndPreventsRefresh()
+    {
+        string email = $"learner-{Guid.NewGuid():N}@example.com";
+        await _client.PostAsJsonAsync("/auth/register", new RegisterRequest(email, "correct horse battery staple"));
+        TokenResponse tokens = (await SignInAsync(email, "correct horse battery staple"))!;
+
+        using HttpResponseMessage first = await _client.PostAsJsonAsync(
+            "/auth/revoke", new RefreshTokenRequest(tokens.RefreshToken));
+        using HttpResponseMessage second = await _client.PostAsJsonAsync(
+            "/auth/revoke", new RefreshTokenRequest(tokens.RefreshToken));
+        using HttpResponseMessage refresh = await _client.PostAsJsonAsync(
+            "/auth/refresh", new RefreshTokenRequest(tokens.RefreshToken));
+
+        Assert.Equal(HttpStatusCode.NoContent, first.StatusCode);
+        Assert.Equal(HttpStatusCode.NoContent, second.StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, refresh.StatusCode);
+    }
+
+    private async Task<TokenResponse?> SignInAsync(string email, string password)
     {
         using HttpResponseMessage response = await _client.PostAsJsonAsync(
             "/auth/sign-in", new SignInRequest(email, password));
         response.EnsureSuccessStatusCode();
-        return await response.Content.ReadFromJsonAsync<AccessTokenResponse>();
+        return await response.Content.ReadFromJsonAsync<TokenResponse>();
     }
 }
