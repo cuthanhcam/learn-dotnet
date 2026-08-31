@@ -37,9 +37,13 @@ public sealed partial class RequireTenantFilter(
         }
 
         tenantContext.SetTenant(values[0]);
+
+        // The tenant regex excludes line separators. Sanitizing again at the logging sink keeps
+        // that security guarantee intact even if accepted tenant characters evolve later.
+        string logSafeTenantId = values[0].ReplaceLineEndings("_");
         using IDisposable? scope = logger.BeginScope(new Dictionary<string, object>
         {
-            ["TenantId"] = values[0]
+            ["TenantId"] = logSafeTenantId
         });
         await next();
     }
