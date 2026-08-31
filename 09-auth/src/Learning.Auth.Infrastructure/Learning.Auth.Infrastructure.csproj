@@ -8,4 +8,7 @@
     <ProjectReference Include="..\Learning.Auth.Application\Learning.Auth.Application.csproj" />
     <ProjectReference Include="..\Learning.Auth.Domain\Learning.Auth.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 </Project>

@@ -101,6 +101,13 @@
       },
       "learning.auth.domain": {
         "type": "Project"
+      },
+      "learning.auth.infrastructure": {
+        "type": "Project",
+        "dependencies": {
+          "Learning.Auth.Application": "[1.0.0, )",
+          "Learning.Auth.Domain": "[1.0.0, )"
+        }
       }
     }
   }

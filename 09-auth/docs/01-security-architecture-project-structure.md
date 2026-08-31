@@ -96,4 +96,4 @@ approach with layered, clean, vertical-slice, and modular-monolith alternatives.
 ## Navigation
 
 - Previous: [Authentication and authorization roadmap](00-roadmap.md)
-- Next: Identity and credential storage (planned)
+- Next: [Identity and credential storage](02-identity-credential-storage.md)

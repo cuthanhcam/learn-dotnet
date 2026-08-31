@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Learning.Auth.Application\Learning.Auth.Application.csproj" />
     <ProjectReference Include="..\..\src\Learning.Auth.Domain\Learning.Auth.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Learning.Auth.Infrastructure\Learning.Auth.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Using Include="Xunit" />
