@@ -127,4 +127,17 @@
   <Folder Name="/08 - Entity Framework Core/tests/">
     <Project Path="08-ef-core/tests/Learning.Persistence.Tests/Learning.Persistence.Tests.csproj" />
   </Folder>
+  <Folder Name="/09 - Authentication and Authorization/">
+    <File Path="09-auth/README.md" />
+  </Folder>
+  <Folder Name="/09 - Authentication and Authorization/src/">
+    <Project Path="09-auth/src/Learning.Auth.Api/Learning.Auth.Api.csproj" />
+    <Project Path="09-auth/src/Learning.Auth.Application/Learning.Auth.Application.csproj" />
+    <Project Path="09-auth/src/Learning.Auth.Domain/Learning.Auth.Domain.csproj" />
+    <Project Path="09-auth/src/Learning.Auth.Infrastructure/Learning.Auth.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/09 - Authentication and Authorization/tests/">
+    <Project Path="09-auth/tests/Learning.Auth.IntegrationTests/Learning.Auth.IntegrationTests.csproj" />
+    <Project Path="09-auth/tests/Learning.Auth.UnitTests/Learning.Auth.UnitTests.csproj" />
+  </Folder>
 </Solution>
