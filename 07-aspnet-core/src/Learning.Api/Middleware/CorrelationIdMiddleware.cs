@@ -22,9 +22,13 @@ public sealed class CorrelationIdMiddleware(
 
         // A logging scope enriches every structured log written during the remaining pipeline.
         // It avoids passing correlation IDs through every method signature as business data.
+        // ResolveCorrelationId already applies a strict allowlist. ReplaceLineEndings is an
+        // additional sink-side defense: if the validation contract changes later, request data
+        // still cannot inject a forged line into text log exporters.
+        string logSafeCorrelationId = correlationId.ReplaceLineEndings("_");
         using (logger.BeginScope(new Dictionary<string, object>
         {
-            ["CorrelationId"] = correlationId
+            ["CorrelationId"] = logSafeCorrelationId
         }))
         {
             await next(context).ConfigureAwait(false);
