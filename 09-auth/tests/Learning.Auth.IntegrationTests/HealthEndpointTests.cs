@@ -1,13 +1,13 @@
 using System.Net;
-using Microsoft.AspNetCore.Mvc.Testing;
+using Learning.Auth.IntegrationTests.Infrastructure;
 
 namespace Learning.Auth.IntegrationTests;
 
-public sealed class HealthEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public sealed class HealthEndpointTests : IClassFixture<AuthApiFactory>
 {
     private readonly HttpClient _client;
 
-    public HealthEndpointTests(WebApplicationFactory<Program> factory) =>
+    public HealthEndpointTests(AuthApiFactory factory) =>
         _client = factory.CreateClient();
 
     [Fact]

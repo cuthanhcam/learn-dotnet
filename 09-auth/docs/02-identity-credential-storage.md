@@ -127,4 +127,4 @@ usable unless the system adds online revocation or a security-stamp check.
 ## Navigation
 
 - Previous: [Security architecture and project structure](01-security-architecture-project-structure.md)
-- Next: Authentication schemes and JWT validation (planned)
+- Next: [Authentication schemes and JWT bearer validation](03-authentication-schemes-jwt.md)

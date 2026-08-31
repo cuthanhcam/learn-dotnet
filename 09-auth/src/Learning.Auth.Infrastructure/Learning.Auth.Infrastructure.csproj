@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Learning.Auth.Application\Learning.Auth.Application.csproj" />
     <ProjectReference Include="..\Learning.Auth.Domain\Learning.Auth.Domain.csproj" />
   </ItemGroup>

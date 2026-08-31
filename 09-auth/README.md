@@ -28,7 +28,7 @@ claim, policy, and resource-based authorization, and test both successful and ad
 | 0 | [Roadmap](docs/00-roadmap.md) | threat model, trust boundaries, and study sequence |
 | 1 | [Security architecture and project structure](docs/01-security-architecture-project-structure.md) | dependency direction and security ownership |
 | 2 | [Identity and credential storage](docs/02-identity-credential-storage.md) | normalized identity, password hashing, and enumeration resistance |
-| 3 | Authentication schemes and JWT validation | bearer handler, issuer, audience, lifetime, and signing keys |
+| 3 | [Authentication schemes and JWT validation](docs/03-authentication-schemes-jwt.md) | bearer handler, issuer, audience, lifetime, and signing keys |
 | 4 | Refresh-token lifecycle | hashed storage, rotation, replay detection, and family revocation |
 | 5 | Claims, roles, and policies | least privilege and explicit requirements |
 | 6 | Resource-based authorization | owner and administrator decisions after resource loading |
@@ -75,6 +75,6 @@ dotnet test 09-auth.slnx --configuration Release --no-build
 
 ## Status
 
-The project boundary, credential model, adaptive password hashing, atomic registration contract, and
-enumeration-resistant sign-in verification are implemented. Token and authorization slices follow in
-curriculum order so each security concept has focused implementation and tests.
+The project boundary, credential model, adaptive password hashing, atomic registration contract,
+enumeration-resistant sign-in, short-lived JWT issuance, and strict bearer validation are implemented.
+Refresh-token and authorization slices follow in curriculum order.
