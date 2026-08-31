@@ -411,4 +411,4 @@ list.Add(42);                       // ❌ Boxing
 
 - [C# Pitfalls Guide](https://learn.microsoft.com/en-us/dotnet/csharp/)
 - [String Performance](https://learn.microsoft.com/en-us/dotnet/standard/base-types/stringbuilder)
-- [Nullable Reference Types](https://learn.microsoft.com/en-us/dotnet/csharp/concepts/nullable-reference-types)
+- [Nullable Reference Types](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/null-safety/nullable-reference-types)
