@@ -9,6 +9,10 @@ permissions:
   contents: read
   issues: write
 
+concurrency:
+  group: external-links-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   check:
     name: Check external documentation links
@@ -29,10 +33,28 @@ jobs:
             "./**/*.md"
           fail: true
 
+      - name: Find the existing audit issue
+        if: failure()
+        id: existing-issue
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const title = "Scheduled external-link audit failed";
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: "automated",
+              per_page: 100
+            });
+            const existing = issues.find(issue => !issue.pull_request && issue.title === title);
+            core.setOutput("issue-number", existing?.number ?? "");
+
       - name: Create or update failure issue
         if: failure()
         uses: peter-evans/create-issue-from-file@v6
         with:
+          issue-number: ${{ steps.existing-issue.outputs.issue-number }}
           title: Scheduled external-link audit failed
           content-filepath: ./lychee/out.md
           labels: documentation, automated
