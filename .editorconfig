@@ -26,6 +26,6 @@ indent_size = 2
 [*.md]
 trim_trailing_whitespace = false
 
-# XML (csproj, props, targets)
-[*.{csproj,props,targets,xml}]
+# XML project and solution formats
+[*.{csproj,props,targets,xml,slnx}]
 indent_size = 2

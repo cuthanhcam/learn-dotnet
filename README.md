@@ -75,6 +75,10 @@ dotnet test learn-dotnet.slnx --configuration Release --no-build
 
 Individual phase solutions remain available when a smaller and more focused workspace is preferable.
 
+VS Code opens the same root solution through the tracked `.vscode/settings.json`. Recommended
+extensions and reusable tasks are included under `.vscode/`; run `Repository: Validate all` from
+**Terminal → Run Task** to execute the maintained local quality gates.
+
 ---
 
 ## 🧭 Learning Roadmap
