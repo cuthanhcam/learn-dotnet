@@ -31,12 +31,11 @@ claim, policy, and resource-based authorization, and test both successful and ad
 | 3 | [Authentication schemes and JWT validation](docs/03-authentication-schemes-jwt.md) | bearer handler, issuer, audience, lifetime, and signing keys |
 | 4 | [Refresh-token lifecycle](docs/04-refresh-token-rotation-replay.md) | hashed storage, rotation, replay detection, and family revocation |
 | 5 | [Claims, roles, policies, and resource authorization](docs/05-roles-claims-policies-resource-authorization.md) | least privilege, explicit requirements, owner/admin decisions |
-| 6 | Resource authorization practice | delegated access, existence disclosure, and background commands |
-| 7 | OAuth 2.0 and OpenID Connect | protocol roles, flows, PKCE, and provider selection |
-| 8 | Browser security | cookies, CSRF, CORS boundaries, and token storage |
-| 9 | Abuse resistance and account lifecycle | throttling, lockout, reset, verification, and audit events |
-| 10 | Security testing and operations | negative tests, key rotation, secrets, telemetry, and incident response |
-| 11 | Completion audit | coverage matrix and Phase 10 handoff |
+| 6 | [OAuth 2.0, OpenID Connect, and provider boundaries](docs/06-oauth2-openid-connect-provider-boundaries.md) | protocol roles, flows, PKCE, and provider selection |
+| 7 | [Browser security: cookies, CSRF, CORS, and token storage](docs/07-browser-security-cookies-csrf-token-storage.md) | BFF, hardened cookies, antiforgery, origins, and browser storage |
+| 8 | Abuse resistance and account lifecycle | throttling, lockout, reset, verification, and audit events |
+| 9 | Security testing and operations | negative tests, key rotation, secrets, telemetry, and incident response |
+| 10 | Completion audit | coverage matrix and Phase 10 handoff |
 
 ## Structure
 
@@ -78,4 +77,5 @@ dotnet test 09-auth.slnx --configuration Release --no-build
 The project boundary, credential model, adaptive password hashing, atomic registration contract,
 enumeration-resistant sign-in, short-lived JWT issuance, strict bearer validation, and refresh-token
 rotation with replay-driven family revocation, named permission and role policies, and resource-based
-owner/administrator decisions are implemented. Protocol and operational-hardening slices follow.
+owner/administrator decisions are implemented. OAuth/OIDC provider boundaries and browser security
+tradeoffs are documented; abuse resistance and operational-hardening slices follow.

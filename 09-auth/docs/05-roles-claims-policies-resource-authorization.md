@@ -159,4 +159,4 @@ policy clarity.
 ## Navigation
 
 - Previous: [Refresh-token rotation, replay detection, and revocation](04-refresh-token-rotation-replay.md)
-- Next: OAuth 2.0 and OpenID Connect (planned)
+- Next: [OAuth 2.0, OpenID Connect, and provider boundaries](06-oauth2-openid-connect-provider-boundaries.md)
