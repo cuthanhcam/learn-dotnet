@@ -3,7 +3,10 @@ name: Dependency review
 on:
   pull_request:
     branches: [main, develop]
-  workflow_dispatch:
+
+# Native prerequisite: Settings > Advanced Security > Dependency Graph must be enabled.
+# This action currently declares Node 20 internally, but GitHub-hosted runners execute it on Node 24.
+# Do not opt back into the end-of-life Node runtime with ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION.
 
 permissions:
   contents: read

@@ -10,7 +10,7 @@ estimated-reading-minutes: 14
 topics: [github-actions, automation, supply-chain-security, maintenance]
 prerequisites: [article-metadata-schema]
 status: maintained
-last-reviewed: 2026-08-31
+last-reviewed: 2026-09-02
 ---
 
 # Repository Automation and Security Gates
@@ -51,6 +51,18 @@ Dependency Review blocks only newly introduced vulnerabilities rated high or cri
 severity findings remain visible without preventing educational maintenance. The existing NuGet audit
 still checks the resolved maintained dependency graph.
 
+Dependency Review requires GitHub's native Dependency Graph to be enabled under **Settings → Advanced
+Security**. The workflow remains blocking when that repository capability is unavailable because
+silently skipping the action would present a green supply-chain gate that performed no review. It runs
+only for pull requests: invoking the action manually without explicit base and head revisions is not a
+valid dependency comparison.
+
+GitHub-hosted runners use Node 24 for JavaScript actions during the Node 20 retirement window. Some
+actions can still declare `node20` in their internal metadata and therefore produce a migration notice;
+do not set `ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION`. Keep the action on its current supported major
+version and let the hosted runner apply the secure runtime until the action publishes native Node 24
+metadata.
+
 External-link failures do not affect every PR because remote sites are transient and rate-limit
 automation. The scheduled workflow updates one open issue instead of creating weekly duplicates.
 
@@ -78,10 +90,12 @@ development session keys separately from committed credentials.
 6. Do not make a scheduled network audit a required PR check.
 7. Review repository rules on GitHub because branch protection and native secret scanning are settings,
    not files that workflows can fully enforce.
+8. Keep Dependency Graph enabled; Dependabot alerts and Dependency Review depend on that native graph.
 
 ## References
 
 - [Dependency Review Action](https://github.com/actions/dependency-review-action)
+- [Enabling the dependency graph](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/enable-dependency-graph)
 - [GitHub Labeler Action](https://github.com/actions/labeler)
 - [Gitleaks Action](https://github.com/gitleaks/gitleaks-action)
 - [OpenSSF Scorecard Action](https://github.com/ossf/scorecard-action)
