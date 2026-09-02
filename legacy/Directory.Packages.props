@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <!--
+      Legacy projects retain the package versions recorded in their own project files. They are an
+      archive, not members of the maintained workspace governed by the root central package catalog.
+      This nearest Directory.Packages.props prevents NuGet from applying root CPM during repository-
+      wide dependency discovery, including GitHub Automatic Dependency Submission.
+    -->
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+</Project>
