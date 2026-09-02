@@ -8,6 +8,7 @@ param(
         "06-async-concurrency/docs",
         "07-aspnet-core/docs",
         "08-ef-core/docs",
+        "09-auth/docs",
         "docs"
     )
 )

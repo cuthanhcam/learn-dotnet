@@ -5,10 +5,26 @@
     "files.insertFinalNewline": true,
     "files.exclude": {
         "**/bin": true,
-        "**/obj": true
+        "**/obj": true,
+        "**/TestResults": true,
+        "artifacts": true
+    },
+    "files.watcherExclude": {
+        "**/bin/**": true,
+        "**/obj/**": true,
+        "**/TestResults/**": true,
+        "artifacts/**": true
+    },
+    "search.exclude": {
+        "**/bin": true,
+        "**/obj": true,
+        "**/TestResults": true,
+        "artifacts": true,
+        "legacy": true
     },
     "[csharp]": {
-        "editor.defaultFormatter": "ms-dotnettools.csharp"
+        "editor.defaultFormatter": "ms-dotnettools.csharp",
+        "editor.formatOnSave": true
     },
-    "dotnet.defaultSolution": "01-csharp-basics/01-csharp-basics.sln"
+    "dotnet.defaultSolution": "learn-dotnet.slnx"
 }

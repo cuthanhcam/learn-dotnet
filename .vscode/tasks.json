@@ -1,0 +1,111 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": ".NET: Restore master solution",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["restore", "learn-dotnet.slnx", "--locked-mode", "--nologo"],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": ".NET: Verify formatting",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "format",
+        "whitespace",
+        "learn-dotnet.slnx",
+        "--verify-no-changes",
+        "--no-restore"
+      ],
+      "dependsOn": ".NET: Restore master solution",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": ".NET: Build master solution (Release)",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "learn-dotnet.slnx",
+        "--configuration",
+        "Release",
+        "--no-restore",
+        "--nologo"
+      ],
+      "dependsOn": ".NET: Restore master solution",
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": ".NET: Test master solution (Release)",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "learn-dotnet.slnx",
+        "--configuration",
+        "Release",
+        "--no-build",
+        "--no-restore",
+        "--nologo"
+      ],
+      "dependsOn": ".NET: Build master solution (Release)",
+      "problemMatcher": "$msCompile",
+      "group": "test"
+    },
+    {
+      "label": "Repository: Article metadata",
+      "type": "process",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-File", "scripts/Test-ArticleMetadata.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Repository: Markdown quality",
+      "type": "process",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-File", "scripts/Test-MarkdownQuality.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Repository: Local Markdown links",
+      "type": "process",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-File", "scripts/Test-MarkdownLinks.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Repository: Solution inventory",
+      "type": "process",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-File", "scripts/Test-SolutionInventory.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Repository: Package vulnerabilities",
+      "type": "process",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-File", "scripts/Test-PackageVulnerabilities.ps1"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Repository: Validate all",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        ".NET: Verify formatting",
+        ".NET: Test master solution (Release)",
+        "Repository: Article metadata",
+        "Repository: Markdown quality",
+        "Repository: Local Markdown links",
+        "Repository: Solution inventory",
+        "Repository: Package vulnerabilities"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

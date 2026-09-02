@@ -1,0 +1,34 @@
+name: Dependency review
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+# Native prerequisite: Settings > Advanced Security > Dependency Graph must be enabled.
+# This action currently declares Node 20 internally, but GitHub-hosted runners execute it on Node 24.
+# Do not opt back into the end-of-life Node runtime with ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION.
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependency-review-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    name: Review dependency changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Reject newly introduced high-risk dependencies
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          show-patched-versions: true
+          show-openssf-scorecard: true
+          warn-on-openssf-scorecard-level: 3

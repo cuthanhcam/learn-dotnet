@@ -42,6 +42,17 @@ Run repository quality gates:
 ./scripts/Test-PackageVulnerabilities.ps1
 ```
 
+## VS Code Workspace
+
+Opening the repository folder in VS Code loads `learn-dotnet.slnx` as the C# Dev Kit default. Use
+**Terminal → Run Task** for the tracked restore, formatting, Release build, test, documentation,
+inventory, and package-vulnerability checks. `Repository: Validate all` mirrors the local pull-request
+gate in a deterministic sequence.
+
+The repository intentionally has no default launch configuration. Several phases contain runnable
+applications with different learning purposes, so select the relevant startup project explicitly
+instead of silently debugging whichever project happened to be configured first.
+
 ## Dependency Changes
 
 Package versions belong in `Directory.Packages.props`; individual project files declare package usage

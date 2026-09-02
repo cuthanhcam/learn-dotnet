@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$Solution = "learn-dotnet.slnx",
+    [string]$WorkspaceSettings = ".vscode/settings.json",
     [string[]]$Roots = @(
         "01-csharp-basics",
         "02-oop",
@@ -9,16 +10,27 @@ param(
         "05-dsa",
         "06-async-concurrency",
         "07-aspnet-core",
-        "08-ef-core"
+        "08-ef-core",
+        "09-auth"
     )
 )
 
 $ErrorActionPreference = "Stop"
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $solutionPath = Join-Path $repositoryRoot $Solution
+$workspaceSettingsPath = Join-Path $repositoryRoot $WorkspaceSettings
 
 if (-not (Test-Path -LiteralPath $solutionPath)) {
     throw "Master solution does not exist: $Solution"
+}
+
+if (-not (Test-Path -LiteralPath $workspaceSettingsPath)) {
+    throw "VS Code workspace settings do not exist: $WorkspaceSettings"
+}
+
+$workspaceConfiguration = Get-Content -LiteralPath $workspaceSettingsPath -Raw -Encoding utf8 | ConvertFrom-Json
+if ($workspaceConfiguration.'dotnet.defaultSolution' -ne $Solution) {
+    throw "VS Code dotnet.defaultSolution must reference the master solution '$Solution'."
 }
 
 $expected = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
@@ -51,5 +63,5 @@ if ($missing.Count -gt 0 -or $unexpected.Count -gt 0) {
     exit 1
 }
 
-Write-Output "Validated master solution inventory: $($actual.Count) maintained projects."
+Write-Output "Validated master solution inventory and VS Code default: $($actual.Count) maintained projects."
 $global:LASTEXITCODE = 0

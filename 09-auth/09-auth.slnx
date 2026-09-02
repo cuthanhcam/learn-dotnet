@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Learning.Auth.Api/Learning.Auth.Api.csproj" />
+    <Project Path="src/Learning.Auth.Application/Learning.Auth.Application.csproj" />
+    <Project Path="src/Learning.Auth.Domain/Learning.Auth.Domain.csproj" />
+    <Project Path="src/Learning.Auth.Infrastructure/Learning.Auth.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Learning.Auth.IntegrationTests/Learning.Auth.IntegrationTests.csproj" />
+    <Project Path="tests/Learning.Auth.UnitTests/Learning.Auth.UnitTests.csproj" />
+  </Folder>
+</Solution>

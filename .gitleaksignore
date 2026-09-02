@@ -1,0 +1,4 @@
+# Historical documentation sample preserved in Git history. The fingerprint suppresses only this
+# exact finding; new values at the same path or rule remain detectable. If this value was ever used
+# outside documentation, it must be revoked because ignoring a scanner finding does not rotate it.
+21aeecef0510f9488a8ba1e4a71cee29ed7cecac:DevForge/README.md:generic-api-key:258
