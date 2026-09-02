@@ -12,6 +12,7 @@ public enum AccountStatus
 public sealed class UserAccount
 {
     private readonly HashSet<string> _roles = new(StringComparer.OrdinalIgnoreCase);
+    private readonly HashSet<string> _permissions = new(StringComparer.Ordinal);
 
     private UserAccount(Guid id, EmailAddress email, string passwordHash, DateTimeOffset createdAt)
     {
@@ -21,6 +22,7 @@ public sealed class UserAccount
         CreatedAt = createdAt;
         Status = AccountStatus.Active;
         _roles.Add(RoleNames.Member);
+        _permissions.Add(PermissionNames.ProfileRead);
     }
 
     public Guid Id { get; }
@@ -34,6 +36,8 @@ public sealed class UserAccount
     public AccountStatus Status { get; private set; }
 
     public IReadOnlySet<string> Roles => _roles;
+
+    public IReadOnlySet<string> Permissions => _permissions;
 
     public static UserAccount Register(
         Guid id,
@@ -58,6 +62,25 @@ public sealed class UserAccount
     }
 
     public void Disable() => Status = AccountStatus.Disabled;
+
+    public void GrantRole(string role)
+    {
+        if (role is not (RoleNames.Member or RoleNames.Administrator))
+            throw new ArgumentOutOfRangeException(nameof(role), "Role is not part of the application vocabulary.");
+        _roles.Add(role);
+    }
+
+    public void GrantPermission(string permission)
+    {
+        if (permission is not PermissionNames.ProfileRead)
+            throw new ArgumentOutOfRangeException(nameof(permission), "Permission is not part of the application vocabulary.");
+        _permissions.Add(permission);
+    }
+}
+
+public static class PermissionNames
+{
+    public const string ProfileRead = "profile.read";
 }
 
 public static class RoleNames

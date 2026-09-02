@@ -45,7 +45,7 @@ This repository is intended for **learning, practice, and long-term reference**,
 | 09 | [Authentication and Authorization](09-auth/README.md) | In progress | .NET 10 |
 | 10–15 | Architecture, testing, projects, DevOps, system design, observability | Planned | To be defined |
 
-The maintained workspace currently contains 43 projects, 99 publishable articles, and 444 executable
+The maintained workspace currently contains 43 projects, 100 publishable articles, and 448 executable
 tests. `legacy/` preserves historical code for comparison but is excluded from the maintained solution
 and quality gates.
 

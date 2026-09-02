@@ -147,4 +147,4 @@ metadata if required, minimize device data, and document privacy retention.
 ## Navigation
 
 - Previous: [Authentication schemes and JWT bearer validation](03-authentication-schemes-jwt.md)
-- Next: Claims, roles, and policy-based authorization (planned)
+- Next: [Roles, claims, policies, and resource-based authorization](05-roles-claims-policies-resource-authorization.md)

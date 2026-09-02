@@ -24,6 +24,7 @@ public sealed class JwtAccessTokenIssuer(JwtOptions options, TimeProvider timePr
             new(JwtRegisteredClaimNames.Iat, issuedAt.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
         };
         claims.AddRange(account.Roles.Select(role => new Claim(JwtClaimNames.Role, role)));
+        claims.AddRange(account.Permissions.Select(permission => new Claim(JwtClaimNames.Scope, permission)));
 
         var descriptor = new SecurityTokenDescriptor
         {
@@ -46,4 +47,5 @@ public sealed class JwtAccessTokenIssuer(JwtOptions options, TimeProvider timePr
 public static class JwtClaimNames
 {
     public const string Role = "role";
+    public const string Scope = "scope";
 }

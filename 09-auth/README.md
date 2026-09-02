@@ -30,8 +30,8 @@ claim, policy, and resource-based authorization, and test both successful and ad
 | 2 | [Identity and credential storage](docs/02-identity-credential-storage.md) | normalized identity, password hashing, and enumeration resistance |
 | 3 | [Authentication schemes and JWT validation](docs/03-authentication-schemes-jwt.md) | bearer handler, issuer, audience, lifetime, and signing keys |
 | 4 | [Refresh-token lifecycle](docs/04-refresh-token-rotation-replay.md) | hashed storage, rotation, replay detection, and family revocation |
-| 5 | Claims, roles, and policies | least privilege and explicit requirements |
-| 6 | Resource-based authorization | owner and administrator decisions after resource loading |
+| 5 | [Claims, roles, policies, and resource authorization](docs/05-roles-claims-policies-resource-authorization.md) | least privilege, explicit requirements, owner/admin decisions |
+| 6 | Resource authorization practice | delegated access, existence disclosure, and background commands |
 | 7 | OAuth 2.0 and OpenID Connect | protocol roles, flows, PKCE, and provider selection |
 | 8 | Browser security | cookies, CSRF, CORS boundaries, and token storage |
 | 9 | Abuse resistance and account lifecycle | throttling, lockout, reset, verification, and audit events |
@@ -77,4 +77,5 @@ dotnet test 09-auth.slnx --configuration Release --no-build
 
 The project boundary, credential model, adaptive password hashing, atomic registration contract,
 enumeration-resistant sign-in, short-lived JWT issuance, strict bearer validation, and refresh-token
-rotation with replay-driven family revocation are implemented. Authorization slices follow next.
+rotation with replay-driven family revocation, named permission and role policies, and resource-based
+owner/administrator decisions are implemented. Protocol and operational-hardening slices follow.
