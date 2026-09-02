@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Keep archived projects isolated from maintained-workspace compiler and lock-file policy. -->
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
+  </PropertyGroup>
+</Project>

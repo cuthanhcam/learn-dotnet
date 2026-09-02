@@ -63,6 +63,12 @@ do not set `ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION`. Keep the action on its cur
 version and let the hosted runner apply the secure runtime until the action publishes native Node 24
 metadata.
 
+GitHub Automatic Dependency Submission discovers supported manifests across the entire repository,
+including the historical `legacy/` archive. The archive has its own `Directory.Packages.props` and
+`Directory.Build.props` boundaries so discovery can restore explicit historical package versions
+without inheriting root Central Package Management or generating maintained lock files. The resulting
+inventory does not make legacy projects part of `learn-dotnet.slnx` or the CI build/test contract.
+
 External-link failures do not affect every PR because remote sites are transient and rate-limit
 automation. The scheduled workflow updates one open issue instead of creating weekly duplicates.
 
