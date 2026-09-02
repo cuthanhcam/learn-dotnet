@@ -1,0 +1,59 @@
+phase-01:
+  - changed-files:
+      - any-glob-to-any-file: "01-csharp-basics/**"
+phase-02:
+  - changed-files:
+      - any-glob-to-any-file: "02-oop/**"
+phase-03:
+  - changed-files:
+      - any-glob-to-any-file: "03-core-dotnet/**"
+phase-04:
+  - changed-files:
+      - any-glob-to-any-file: "04-memory-performance/**"
+phase-05:
+  - changed-files:
+      - any-glob-to-any-file: "05-dsa/**"
+phase-06:
+  - changed-files:
+      - any-glob-to-any-file: "06-async-concurrency/**"
+phase-07:
+  - changed-files:
+      - any-glob-to-any-file: "07-aspnet-core/**"
+phase-08:
+  - changed-files:
+      - any-glob-to-any-file: "08-ef-core/**"
+phase-09:
+  - changed-files:
+      - any-glob-to-any-file: "09-auth/**"
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.md"
+          - "images/**"
+tests:
+  - changed-files:
+      - any-glob-to-any-file: "**/tests/**"
+benchmarks:
+  - changed-files:
+      - any-glob-to-any-file: "**/benchmarks/**"
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.csproj"
+          - "**/packages.lock.json"
+          - "Directory.Packages.props"
+github-actions:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
+          - ".github/dependabot.yml"
+          - ".github/labeler.yml"
+security:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "09-auth/**"
+          - "SECURITY.md"
+          - ".github/workflows/codeql.yml"
+          - ".github/workflows/dependency-review.yml"
+          - ".github/workflows/secret-scanning.yml"
+          - ".github/workflows/scorecard.yml"

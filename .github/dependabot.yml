@@ -19,6 +19,12 @@ updates:
         patterns:
           - Microsoft.AspNetCore.*
           - Microsoft.EntityFrameworkCore.*
+        exclude-patterns:
+          - Microsoft.AspNetCore.Authentication.*
+      identity-security:
+        patterns:
+          - Microsoft.AspNetCore.Authentication.*
+          - System.IdentityModel.Tokens.*
     labels: [dependencies, dotnet]
 
   - package-ecosystem: github-actions

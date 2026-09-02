@@ -32,9 +32,15 @@ unsafe pattern remain in scope even when the original example is historical.
 
 - Maintained NuGet versions are centralized in `Directory.Packages.props`.
 - CI rejects dependency graphs with known NuGet vulnerabilities.
+- Dependency Review rejects pull requests that introduce high or critical vulnerable dependencies.
 - CodeQL analyzes maintained C# code on changes and on a weekly schedule.
+- Gitleaks scans pull requests, protected branches, and repository history for credential patterns.
+- OpenSSF Scorecard audits repository and workflow security posture without blocking ordinary PRs.
 - Secrets must not be committed to `appsettings` files. Use user-secrets, environment variables, or a
   managed secret store and rotate any credential that is accidentally exposed.
+
+Automation ownership, permission boundaries, blocking behavior, and the narrow historical Gitleaks
+baseline are documented in [Repository Automation and Security Gates](docs/repository-automation.md).
 
 GitHub advisories and dependency updates do not replace manual review of authentication,
 authorization, cryptography, data exposure, and operational configuration.

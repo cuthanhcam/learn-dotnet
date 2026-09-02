@@ -1,0 +1,31 @@
+name: Dependency review
+
+on:
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependency-review-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    name: Review dependency changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Reject newly introduced high-risk dependencies
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+          show-patched-versions: true
+          show-openssf-scorecard: true
+          warn-on-openssf-scorecard-level: 3

@@ -1,0 +1,29 @@
+name: Pull request labeler
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+# pull_request_target has access to the base repository token. This workflow deliberately does not
+# checkout, build, or execute pull-request code; it only evaluates changed-file metadata.
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: labeler-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  label:
+    name: Apply path labels
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Label pull request
+        uses: actions/labeler@v7
+        with:
+          configuration-path: .github/labeler.yml
+          sync-labels: true

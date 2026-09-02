@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Learning.Auth.Application\Learning.Auth.Application.csproj" />
+    <ProjectReference Include="..\Learning.Auth.Infrastructure\Learning.Auth.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

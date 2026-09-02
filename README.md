@@ -42,9 +42,10 @@ This repository is intended for **learning, practice, and long-term reference**,
 | 06 | [Async and Concurrency](06-async-concurrency/README.md) | Completed | .NET 8 |
 | 07 | [ASP.NET Core](07-aspnet-core/README.md) | Completed | .NET 10 |
 | 08 | [Entity Framework Core](08-ef-core/README.md) | Completed | .NET 10 |
-| 09–15 | Security, architecture, testing, projects, DevOps, system design, observability | Planned | To be defined |
+| 09 | [Authentication and Authorization](09-auth/README.md) | Completed | .NET 10 |
+| 10–15 | Architecture, testing, projects, DevOps, system design, observability | Planned | To be defined |
 
-The maintained workspace currently contains 37 projects, 93 publishable articles, and 422 executable
+The maintained workspace currently contains 43 projects, 105 publishable articles, and 451 executable
 tests. `legacy/` preserves historical code for comparison but is excluded from the maintained solution
 and quality gates.
 
@@ -52,7 +53,7 @@ and quality gates.
 
 ## 🧩 Open the Complete Workspace
 
-Use the root solution to browse every active project from Phases 01–08 in one Visual Studio window:
+Use the root solution to browse every active project from Phases 01–09 in one Visual Studio window:
 
 ```text
 learn-dotnet.slnx
@@ -358,7 +359,7 @@ _Figure 1: Structured .NET Learning Journey from Fundamentals to Advanced System
 
 ```text
 learn-dotnet/
-├── 01-csharp-basics/ ... 08-ef-core/  # Maintained learning phases
+├── 01-csharp-basics/ ... 09-auth/     # Maintained learning phases
 │   ├── docs/                          # Publishable articles
 │   ├── src/                           # Runnable examples and implementations
 │   ├── exercises/                     # Practice projects where applicable
