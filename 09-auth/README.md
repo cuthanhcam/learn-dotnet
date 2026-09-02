@@ -33,7 +33,7 @@ claim, policy, and resource-based authorization, and test both successful and ad
 | 5 | [Claims, roles, policies, and resource authorization](docs/05-roles-claims-policies-resource-authorization.md) | least privilege, explicit requirements, owner/admin decisions |
 | 6 | [OAuth 2.0, OpenID Connect, and provider boundaries](docs/06-oauth2-openid-connect-provider-boundaries.md) | protocol roles, flows, PKCE, and provider selection |
 | 7 | [Browser security: cookies, CSRF, CORS, and token storage](docs/07-browser-security-cookies-csrf-token-storage.md) | BFF, hardened cookies, antiforgery, origins, and browser storage |
-| 8 | Abuse resistance and account lifecycle | throttling, lockout, reset, verification, and audit events |
+| 8 | [Abuse resistance and account lifecycle](docs/08-abuse-resistance-account-lifecycle.md) | partitioned throttling, atomic lockout, recovery, proxy trust, and audit events |
 | 9 | Security testing and operations | negative tests, key rotation, secrets, telemetry, and incident response |
 | 10 | Completion audit | coverage matrix and Phase 10 handoff |
 
@@ -77,5 +77,6 @@ dotnet test 09-auth.slnx --configuration Release --no-build
 The project boundary, credential model, adaptive password hashing, atomic registration contract,
 enumeration-resistant sign-in, short-lived JWT issuance, strict bearer validation, and refresh-token
 rotation with replay-driven family revocation, named permission and role policies, and resource-based
-owner/administrator decisions are implemented. OAuth/OIDC provider boundaries and browser security
-tradeoffs are documented; abuse resistance and operational-hardening slices follow.
+owner/administrator decisions, atomic account lockout, and endpoint-specific rate limiting are
+implemented. OAuth/OIDC provider boundaries, browser security, recovery invariants, and proxy trust
+are documented; security operations and the completion audit follow.

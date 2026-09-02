@@ -4,6 +4,7 @@ using System.Text;
 using Learning.Auth.Application.Abstractions;
 using Learning.Auth.Application.Identity;
 using Learning.Auth.Api.Authorization;
+using Learning.Auth.Api.Security;
 using Learning.Auth.Domain.Documents;
 using Learning.Auth.Infrastructure.Documents;
 using Learning.Auth.Infrastructure.Identity;
@@ -18,8 +19,14 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 JwtOptions jwtOptions = builder.Configuration.GetRequiredSection(JwtOptions.SectionName)
     .Get<JwtOptions>() ?? throw new InvalidOperationException("The Jwt configuration section is required.");
 jwtOptions.Validate();
+SignInSecurityOptions signInSecurityOptions = builder.Configuration
+    .GetRequiredSection(SignInSecurityOptions.SectionName)
+    .Get<SignInSecurityOptions>() ?? throw new InvalidOperationException(
+        "The SignInSecurity configuration section is required.");
+signInSecurityOptions.Validate();
 
 builder.Services.AddSingleton(jwtOptions);
+builder.Services.AddSingleton(signInSecurityOptions);
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<IUserAccountRepository, InMemoryUserAccountRepository>();
 builder.Services.AddSingleton<IPasswordHashService, AspNetCorePasswordHashService>();
@@ -54,8 +61,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
 builder.Services.AddAuthorization(AuthorizationPolicies.AddLearningPolicies);
+builder.Services.AddRateLimiter(AuthRateLimitPolicies.AddAuthRateLimiting);
 
 WebApplication app = builder.Build();
+app.UseRouting();
+app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -79,7 +89,7 @@ app.MapPost("/auth/register", async (RegisterRequest request, RegistrationServic
             [exception.ParamName ?? "request"] = [exception.Message]
         });
     }
-}).AllowAnonymous();
+}).AllowAnonymous().RequireRateLimiting(AuthRateLimitPolicies.Credential);
 
 app.MapPost("/auth/sign-in", async (SignInRequest request, SessionSignInService signIn,
     CancellationToken cancellationToken) =>
@@ -91,7 +101,7 @@ app.MapPost("/auth/sign-in", async (SignInRequest request, SessionSignInService 
     return result.Tokens is null
         ? Results.Json(new { message = "Invalid credentials." }, statusCode: StatusCodes.Status401Unauthorized)
         : Results.Ok(TokenResponse.From(result.Tokens));
-}).AllowAnonymous();
+}).AllowAnonymous().RequireRateLimiting(AuthRateLimitPolicies.Credential);
 
 app.MapPost("/auth/refresh", async (RefreshTokenRequest request, RefreshSessionService refresh,
     CancellationToken cancellationToken) =>
@@ -102,7 +112,7 @@ app.MapPost("/auth/refresh", async (RefreshTokenRequest request, RefreshSessionS
         ? Results.Json(new { message = "The refresh credential is invalid." },
             statusCode: StatusCodes.Status401Unauthorized)
         : Results.Ok(TokenResponse.From(result.Tokens));
-}).AllowAnonymous();
+}).AllowAnonymous().RequireRateLimiting(AuthRateLimitPolicies.Session);
 
 app.MapPost("/auth/revoke", async (RefreshTokenRequest request, RefreshSessionService refresh,
     CancellationToken cancellationToken) =>
@@ -110,7 +120,7 @@ app.MapPost("/auth/revoke", async (RefreshTokenRequest request, RefreshSessionSe
     await refresh.RevokeAsync(request.RefreshToken, cancellationToken);
     // Idempotent success prevents this endpoint from becoming a token-validity oracle.
     return Results.NoContent();
-}).AllowAnonymous();
+}).AllowAnonymous().RequireRateLimiting(AuthRateLimitPolicies.Session);
 
 app.MapGet("/auth/me", (ClaimsPrincipal principal) => Results.Ok(new
 {

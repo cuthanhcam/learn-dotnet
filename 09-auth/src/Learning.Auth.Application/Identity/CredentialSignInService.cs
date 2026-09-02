@@ -14,7 +14,9 @@ public sealed record SignInResult(SignInStatus Status, UserAccount? Account = nu
 
 public sealed class CredentialSignInService(
     IUserAccountRepository accounts,
-    IPasswordHashService passwords)
+    IPasswordHashService passwords,
+    TimeProvider timeProvider,
+    SignInSecurityOptions securityOptions)
 {
     public async Task<SignInResult> VerifyAsync(
         string email,
@@ -46,19 +48,24 @@ public sealed class CredentialSignInService(
         PasswordVerification verification = passwords.Verify(account.PasswordHash, password);
         if (verification == PasswordVerification.Failed)
         {
+            account.RecordFailedSignIn(timeProvider.GetUtcNow(), securityOptions.MaxFailedAttempts,
+                securityOptions.LockoutDuration);
+            await accounts.UpdateAsync(account, cancellationToken).ConfigureAwait(false);
             return new SignInResult(SignInStatus.InvalidCredentials);
         }
 
-        if (account.Status != AccountStatus.Active)
+        DateTimeOffset now = timeProvider.GetUtcNow();
+        if (account.Status != AccountStatus.Active || account.IsLockedOut(now))
         {
             return new SignInResult(SignInStatus.AccountUnavailable);
         }
 
+        // A correct credential outside an active lockout begins a clean failure sequence. Persist this
+        // together with a potential password rehash in one repository update.
+        account.RecordSuccessfulSignIn();
         if (verification == PasswordVerification.SucceededRehashNeeded)
-        {
             account.ReplacePasswordHash(passwords.Hash(password));
-            await accounts.UpdateAsync(account, cancellationToken).ConfigureAwait(false);
-        }
+        await accounts.UpdateAsync(account, cancellationToken).ConfigureAwait(false);
 
         return new SignInResult(SignInStatus.Succeeded, account);
     }

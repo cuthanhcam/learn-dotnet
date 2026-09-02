@@ -166,4 +166,4 @@ on a shared parent domain.
 ## Navigation
 
 - Previous: [OAuth 2.0, OpenID Connect, and provider boundaries](06-oauth2-openid-connect-provider-boundaries.md)
-- Next: Abuse resistance and account lifecycle (planned)
+- Next: [Abuse resistance and account lifecycle](08-abuse-resistance-account-lifecycle.md)
