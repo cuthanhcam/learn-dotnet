@@ -183,4 +183,4 @@ environment with realistic topology.
 ## Navigation
 
 - Previous: [Abuse resistance and account lifecycle](08-abuse-resistance-account-lifecycle.md)
-- Next: Phase 09 completion audit (planned)
+- Next: [Phase 09 completion audit](10-completion-audit.md)

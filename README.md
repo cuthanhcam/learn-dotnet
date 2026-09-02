@@ -42,10 +42,10 @@ This repository is intended for **learning, practice, and long-term reference**,
 | 06 | [Async and Concurrency](06-async-concurrency/README.md) | Completed | .NET 8 |
 | 07 | [ASP.NET Core](07-aspnet-core/README.md) | Completed | .NET 10 |
 | 08 | [Entity Framework Core](08-ef-core/README.md) | Completed | .NET 10 |
-| 09 | [Authentication and Authorization](09-auth/README.md) | In progress | .NET 10 |
+| 09 | [Authentication and Authorization](09-auth/README.md) | Completed | .NET 10 |
 | 10–15 | Architecture, testing, projects, DevOps, system design, observability | Planned | To be defined |
 
-The maintained workspace currently contains 43 projects, 104 publishable articles, and 451 executable
+The maintained workspace currently contains 43 projects, 105 publishable articles, and 451 executable
 tests. `legacy/` preserves historical code for comparison but is excluded from the maintained solution
 and quality gates.
 

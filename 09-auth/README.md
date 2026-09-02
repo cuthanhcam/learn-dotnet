@@ -2,7 +2,7 @@
 title: "Phase 09 — Authentication and Authorization"
 description: "A security-first learning path through identity, credentials, tokens, sessions, authorization policies, and operational defenses in ASP.NET Core 10."
 phase: 9
-status: in-progress
+status: completed
 target-framework: net10.0
 prerequisites: [phase-08-entity-framework-core]
 previous-phase: ../08-ef-core/README.md
@@ -35,7 +35,7 @@ claim, policy, and resource-based authorization, and test both successful and ad
 | 7 | [Browser security: cookies, CSRF, CORS, and token storage](docs/07-browser-security-cookies-csrf-token-storage.md) | BFF, hardened cookies, antiforgery, origins, and browser storage |
 | 8 | [Abuse resistance and account lifecycle](docs/08-abuse-resistance-account-lifecycle.md) | partitioned throttling, atomic lockout, recovery, proxy trust, and audit events |
 | 9 | [Security testing, operations, and incident response](docs/09-security-testing-operations-incident-response.md) | negative tests, safe audit events, key rotation, telemetry, and response playbooks |
-| 10 | Completion audit | coverage matrix and Phase 10 handoff |
+| 10 | [Completion audit](docs/10-completion-audit.md) | coverage matrix, verification evidence, production boundaries, and Phase 10 handoff |
 
 ## Structure
 
@@ -79,4 +79,5 @@ enumeration-resistant sign-in, short-lived JWT issuance, strict bearer validatio
 rotation with replay-driven family revocation, named permission and role policies, and resource-based
 owner/administrator decisions, atomic account lockout, and endpoint-specific rate limiting are
 implemented. OAuth/OIDC provider boundaries, browser security, recovery invariants, proxy trust, safe
-audit telemetry, key rotation, and incident response are documented; the completion audit follows.
+audit telemetry, key rotation, and incident response are documented. All Phase 09 exit gates pass; see
+the completion audit for evidence and deliberately external production concerns.
