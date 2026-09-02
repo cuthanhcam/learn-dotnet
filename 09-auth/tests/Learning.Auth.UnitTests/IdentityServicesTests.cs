@@ -1,3 +1,4 @@
+using Learning.Auth.Application.Abstractions;
 using Learning.Auth.Application.Identity;
 using Learning.Auth.Domain.Users;
 using Learning.Auth.Infrastructure.Identity;
@@ -9,6 +10,7 @@ public sealed class IdentityServicesTests
     private static readonly SignInSecurityOptions SecurityOptions = new();
     private readonly InMemoryUserAccountRepository _accounts = new();
     private readonly AspNetCorePasswordHashService _passwords = new();
+    private readonly RecordingSecurityEventSink _securityEvents = new();
 
     [Fact]
     public async Task Register_ConcurrentEquivalentEmailsCreatesExactlyOneAccount()
@@ -27,7 +29,8 @@ public sealed class IdentityServicesTests
     public async Task SignIn_ValidCredentialsReturnsAccount()
     {
         var registration = new RegistrationService(_accounts, _passwords, TimeProvider.System);
-        var signIn = new CredentialSignInService(_accounts, _passwords, TimeProvider.System, SecurityOptions);
+        var signIn = new CredentialSignInService(
+            _accounts, _passwords, TimeProvider.System, SecurityOptions, _securityEvents);
         await registration.RegisterAsync("learner@example.com", "correct horse battery staple");
 
         SignInResult result = await signIn.VerifyAsync(
@@ -43,7 +46,8 @@ public sealed class IdentityServicesTests
     [InlineData("not-an-email", "correct horse battery staple")]
     public async Task SignIn_UnknownOrMalformedIdentityUsesGenericFailure(string email, string password)
     {
-        var signIn = new CredentialSignInService(_accounts, _passwords, TimeProvider.System, SecurityOptions);
+        var signIn = new CredentialSignInService(
+            _accounts, _passwords, TimeProvider.System, SecurityOptions, _securityEvents);
 
         SignInResult result = await signIn.VerifyAsync(email, password);
 
@@ -56,7 +60,7 @@ public sealed class IdentityServicesTests
     {
         var time = new ManualTimeProvider(new DateTimeOffset(2026, 9, 2, 8, 0, 0, TimeSpan.Zero));
         var registration = new RegistrationService(_accounts, _passwords, time);
-        var signIn = new CredentialSignInService(_accounts, _passwords, time, SecurityOptions);
+        var signIn = new CredentialSignInService(_accounts, _passwords, time, SecurityOptions, _securityEvents);
         await registration.RegisterAsync("locked@example.com", "correct horse battery staple");
 
         for (int attempt = 0; attempt < SecurityOptions.MaxFailedAttempts; attempt++)
@@ -68,6 +72,8 @@ public sealed class IdentityServicesTests
         SignInResult duringLockout = await signIn.VerifyAsync(
             "locked@example.com", "correct horse battery staple");
         Assert.Equal(SignInStatus.AccountUnavailable, duringLockout.Status);
+        Assert.Single(_securityEvents.Events,
+            securityEvent => securityEvent.Type == SecurityEventType.AccountLockoutStarted);
 
         time.Advance(SecurityOptions.LockoutDuration.Add(TimeSpan.FromSeconds(1)));
         SignInResult recovered = await signIn.VerifyAsync(
@@ -83,7 +89,7 @@ public sealed class IdentityServicesTests
     {
         var time = new ManualTimeProvider(new DateTimeOffset(2026, 9, 2, 8, 0, 0, TimeSpan.Zero));
         var registration = new RegistrationService(_accounts, _passwords, time);
-        var signIn = new CredentialSignInService(_accounts, _passwords, time, SecurityOptions);
+        var signIn = new CredentialSignInService(_accounts, _passwords, time, SecurityOptions, _securityEvents);
         await registration.RegisterAsync("parallel@example.com", "correct horse battery staple");
 
         await Task.WhenAll(Enumerable.Range(0, 20).Select(_ =>
@@ -104,4 +110,18 @@ internal sealed class ManualTimeProvider(DateTimeOffset utcNow) : TimeProvider
     public override DateTimeOffset GetUtcNow() => _utcNow;
 
     public void Advance(TimeSpan duration) => _utcNow = _utcNow.Add(duration);
+}
+
+internal sealed class RecordingSecurityEventSink : ISecurityEventSink
+{
+    private readonly System.Collections.Concurrent.ConcurrentQueue<SecurityEvent> _events = new();
+
+    public IReadOnlyCollection<SecurityEvent> Events => _events.ToArray();
+
+    public ValueTask WriteAsync(SecurityEvent securityEvent, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        _events.Enqueue(securityEvent);
+        return ValueTask.CompletedTask;
+    }
 }

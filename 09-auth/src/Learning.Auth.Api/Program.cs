@@ -34,6 +34,7 @@ builder.Services.AddSingleton<IAccessTokenIssuer, JwtAccessTokenIssuer>();
 builder.Services.AddSingleton<IRefreshTokenService, CryptographicRefreshTokenService>();
 builder.Services.AddSingleton<IRefreshSessionStore, InMemoryRefreshSessionStore>();
 builder.Services.AddSingleton<ILearningDocumentRepository, InMemoryLearningDocumentRepository>();
+builder.Services.AddSingleton<ISecurityEventSink, StructuredSecurityEventSink>();
 builder.Services.AddTransient<RegistrationService>();
 builder.Services.AddTransient<CredentialSignInService>();
 builder.Services.AddTransient<SessionSignInService>();

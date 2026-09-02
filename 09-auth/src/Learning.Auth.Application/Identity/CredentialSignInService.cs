@@ -16,7 +16,8 @@ public sealed class CredentialSignInService(
     IUserAccountRepository accounts,
     IPasswordHashService passwords,
     TimeProvider timeProvider,
-    SignInSecurityOptions securityOptions)
+    SignInSecurityOptions securityOptions,
+    ISecurityEventSink securityEvents)
 {
     public async Task<SignInResult> VerifyAsync(
         string email,
@@ -32,6 +33,7 @@ public sealed class CredentialSignInService(
         {
             // Malformed and unknown identities share the same public outcome.
             passwords.VerifyUnknownAccount(password);
+            await WriteEventAsync(SecurityEventType.SignInRejected, null, cancellationToken).ConfigureAwait(false);
             return new SignInResult(SignInStatus.InvalidCredentials);
         }
 
@@ -42,21 +44,32 @@ public sealed class CredentialSignInService(
         if (account is null)
         {
             passwords.VerifyUnknownAccount(password);
+            await WriteEventAsync(SecurityEventType.SignInRejected, null, cancellationToken).ConfigureAwait(false);
             return new SignInResult(SignInStatus.InvalidCredentials);
         }
 
         PasswordVerification verification = passwords.Verify(account.PasswordHash, password);
         if (verification == PasswordVerification.Failed)
         {
+            bool wasLockedOut = account.IsLockedOut(timeProvider.GetUtcNow());
             account.RecordFailedSignIn(timeProvider.GetUtcNow(), securityOptions.MaxFailedAttempts,
                 securityOptions.LockoutDuration);
             await accounts.UpdateAsync(account, cancellationToken).ConfigureAwait(false);
+            await WriteEventAsync(SecurityEventType.SignInRejected, account.Id, cancellationToken)
+                .ConfigureAwait(false);
+            if (!wasLockedOut && account.IsLockedOut(timeProvider.GetUtcNow()))
+            {
+                await WriteEventAsync(SecurityEventType.AccountLockoutStarted, account.Id, cancellationToken)
+                    .ConfigureAwait(false);
+            }
             return new SignInResult(SignInStatus.InvalidCredentials);
         }
 
         DateTimeOffset now = timeProvider.GetUtcNow();
         if (account.Status != AccountStatus.Active || account.IsLockedOut(now))
         {
+            await WriteEventAsync(SecurityEventType.SignInRejected, account.Id, cancellationToken)
+                .ConfigureAwait(false);
             return new SignInResult(SignInStatus.AccountUnavailable);
         }
 
@@ -66,7 +79,13 @@ public sealed class CredentialSignInService(
         if (verification == PasswordVerification.SucceededRehashNeeded)
             account.ReplacePasswordHash(passwords.Hash(password));
         await accounts.UpdateAsync(account, cancellationToken).ConfigureAwait(false);
+        await WriteEventAsync(SecurityEventType.SignInSucceeded, account.Id, cancellationToken)
+            .ConfigureAwait(false);
 
         return new SignInResult(SignInStatus.Succeeded, account);
     }
+
+    private ValueTask WriteEventAsync(SecurityEventType type, Guid? subjectId,
+        CancellationToken cancellationToken) => securityEvents.WriteAsync(
+            new SecurityEvent(type, timeProvider.GetUtcNow(), subjectId), cancellationToken);
 }

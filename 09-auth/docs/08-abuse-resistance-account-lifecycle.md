@@ -188,4 +188,4 @@ monitoring and tuning after deployment.
 ## Navigation
 
 - Previous: [Browser security: cookies, CSRF, CORS, and token storage](07-browser-security-cookies-csrf-token-storage.md)
-- Next: Security testing and operations (planned)
+- Next: [Security testing, operations, and incident response](09-security-testing-operations-incident-response.md)
