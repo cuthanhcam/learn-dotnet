@@ -66,6 +66,14 @@ When an intentional dependency change updates the graph, run `dotnet restore lea
 Do not upgrade transitive packages blindly. Prefer updating the owning top-level dependency and review
 release notes for breaking behavior.
 
+Central package updates affect every project that consumes that package, even when a bot PR names
+only one project directory. After merging related bot updates, regenerate the entire master solution's
+lock graph with `dotnet restore learn-dotnet.slnx --force-evaluate`, review every changed lock file,
+and verify `dotnet restore learn-dotnet.slnx --locked-mode` before accepting the change. Never bypass
+locked restore in CI to accommodate a partial bot update. The SDK in `global.json`, the SDKs installed
+by Actions, the `dotnet-ef` local tool, and NuGet packages have separate version lifecycles; review
+each explicitly rather than assuming a package update also upgrades the compiler or runtime.
+
 ## Documentation Contract
 
 Publishable articles live under a phase `docs/` directory and use the front matter defined in
