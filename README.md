@@ -43,10 +43,10 @@ This repository is intended for **learning, practice, and long-term reference**,
 | 07 | [ASP.NET Core](07-aspnet-core/README.md) | Completed | .NET 10 |
 | 08 | [Entity Framework Core](08-ef-core/README.md) | Completed | .NET 10 |
 | 09 | [Authentication and Authorization](09-auth/README.md) | Completed | .NET 10 |
-| 10 | [Architecture and Best Practices](10-architecture/README.md) | Complete learning scope | .NET 10 |
+| 10 | [Architecture and Best Practices](10-architecture/README.md) | Architecture complete; design-patterns track in progress | .NET 10 |
 | 11–15 | Testing, projects, DevOps, system design, observability | Planned | To be defined |
 
-The maintained workspace currently contains 57 projects, 123 publishable articles, and 558 executable
+The maintained workspace currently contains 59 projects, 124 publishable articles, and 588 executable
 tests. `legacy/` preserves historical code for comparison but is excluded from the maintained solution
 and quality gates.
 
@@ -276,7 +276,7 @@ _Figure 1: Structured .NET Learning Journey from Fundamentals to Advanced System
 - Feature-based structure
 
 An advanced [GoF object-design track](10-architecture/design-patterns/README.md) is being delivered
-separately from the implemented architecture scenario, beginning with a complete Strategy lesson.
+separately from the implemented architecture scenario, with complete Strategy, Factory Method, and Adapter lessons.
 See the [design patterns curriculum and solution blueprint](docs/design-patterns-curriculum-plan.md)
 for all 23 patterns, phase ownership, focused solution structure, and incremental delivery gates.
 

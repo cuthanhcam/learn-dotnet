@@ -31,7 +31,7 @@ A folder name or an interface with an unfinished method does not count.
 1. [Pattern thinking and selection](01-pattern-thinking-and-selection.md).
 2. [Strategy](behavioral/strategy.md): interchangeable algorithms and delegate comparison.
 3. [Factory Method](creational/factory-method.md): extensible creation in a real creator workflow.
-4. Adapter: translate an incompatible provider contract without changing the client.
+4. [Adapter](structural/adapter.md): translate an incompatible provider contract without changing the client.
 5. Decorator: compose behavior while preserving a capability contract.
 6. Observer: subscriptions and lifecycle, not reliable cross-process delivery.
 7. Command and State: explicit requests and legal transitions.
@@ -46,7 +46,7 @@ Once the foundations are clear, the catalog is also a reference index.
 | Category | Delivered | Planned |
 |---|---|---|
 | Creational (5) | Factory Method | Abstract Factory, Builder, Prototype, Singleton |
-| Structural (7) | none yet | Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy |
+| Structural (7) | Adapter | Bridge, Composite, Decorator, Facade, Flyweight, Proxy |
 | Behavioral (11) | Strategy | Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Template Method, Visitor |
 
 Do not mistake the number of patterns delivered for a coverage percentage of software design. Each
@@ -58,7 +58,7 @@ pattern has a different depth and failure surface. The completion audit will map
 |---|---|---|
 | Algorithm varies independently | Strategy (delivered) | a small switch or delegate |
 | Subclasses need control over products used by a workflow | Factory Method (delivered) | constructor injection or a simple factory |
-| Provider API does not match client expectations | Adapter (planned) | a direct mapping function for a tiny stable contract |
+| Provider API does not match client expectations | Adapter (delivered) | a direct mapping function for a tiny stable contract |
 | Behavior must wrap an existing capability | Decorator (planned) | a direct explicit call sequence |
 | Many operations need notification | Observer (planned) | a direct callback with clear lifetime |
 | Behavior changes with legal lifecycle state | State (planned) | an enum and transition table |
@@ -78,7 +78,12 @@ rewritten, and the existing architecture solution is not repurposed as the patte
 | Curriculum blueprint | `docs/design-patterns-curriculum` | approved placement, solution and article contracts |
 | Strategy | `feature/10b-strategy` | baseline/interface/delegate, boundary tests, deterministic demo, detailed article |
 | Factory Method | `feature/10b-factory-method` | creator/product workflow, text/JSON, injection comparison, boundary tests, diagrams |
-| Adapter | `feature/10b-adapter` | planned |
+| Adapter | `feature/10b-adapter` | exact units/prices, typed outcomes, protocol failures, cancellation, ownership, diagrams |
+| Decorator | `feature/10b-decorator` | next planned topic; branch not created yet |
+
+Current pattern evidence: Strategy has 21 test cases, Factory Method 19, and Adapter 30. The catalog
+therefore has 70 delivered test cases across three independent category test projects. These counts
+describe discovered tests, not a coverage percentage or a claim that the other 20 patterns are finished.
 
 Create the next topic from the verified integration tip, not from an unrelated unreviewed feature.
 This avoids a long hidden dependency chain between topic PRs. When a topic introduces a category,

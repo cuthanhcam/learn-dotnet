@@ -8,8 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-- Phase 10B GoF track with focused solutions, baseline/interface/delegate Strategy examples,
-  21 pricing specifications, guided roadmap, and diagram-backed article.
+- Phase 10B GoF track with focused category solutions, Strategy pricing variants, Factory Method
+  report exporters, Adapter shipping integration, 70 specifications, topic-sized branches, and
+  diagram-backed articles with modern C# alternatives and explicit production boundaries.
 - Phase 10 architecture curriculum with immutable enrollment aggregates, bounded read projections,
   conditional relational writes, durable request receipts, outbox/inbox recovery, independently owned
   notification state, authenticated v1 HTTP endpoints, two ADRs, and 67 executable specifications.

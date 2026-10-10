@@ -21,7 +21,7 @@ to expose decisions that cannot be answered by folder names alone.
 
 The current enrollment curriculum is the completed architecture track (10A). The separately navigable
 [GoF catalog (10B)](design-patterns/README.md) is in progress, with its own solution, category libraries,
-guided reading path, and pattern-specific specifications. Strategy and Factory Method are delivered;
+guided reading path, and pattern-specific specifications. Strategy, Factory Method, and Adapter are delivered;
 the remaining catalog is explicitly tracked in its roadmap. See the approved
 [curriculum and solution blueprint](../docs/design-patterns-curriculum-plan.md) for delivery boundaries.
 
