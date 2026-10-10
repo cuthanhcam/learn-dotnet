@@ -238,4 +238,4 @@ renaming a generic repository to strategy without explaining the algorithm contr
 
 - Previous: [Pattern thinking and selection](../01-pattern-thinking-and-selection.md).
 - Catalog: [Guided roadmap](../00-roadmap.md).
-- Next guided topic: Factory Method (planned).
+- Next guided topic: [Factory Method](../creational/factory-method.md).
