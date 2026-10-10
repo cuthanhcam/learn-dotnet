@@ -17,12 +17,13 @@ to expose decisions that cannot be answered by folder names alone.
 
 ## Learning Outcomes
 
-### Proposed Advanced Object-Design Extension
+### Advanced Object-Design Track (10B)
 
-The current enrollment curriculum is the completed architecture track (10A). A separately navigable
-GoF catalog is proposed as Track 10B, with its own solution, category libraries, guided reading path,
-and complete pattern-specific specifications. It is not implemented yet; see the
-[curriculum and solution blueprint](../docs/design-patterns-curriculum-plan.md) before creating projects.
+The current enrollment curriculum is the completed architecture track (10A). The separately navigable
+[GoF catalog (10B)](design-patterns/README.md) is in progress, with its own solution, category libraries,
+guided reading path, and pattern-specific specifications. Strategy is the first delivered lesson;
+the remaining catalog is explicitly tracked in its roadmap. See the approved
+[curriculum and solution blueprint](../docs/design-patterns-curriculum-plan.md) for delivery boundaries.
 
 ### Architecture Track Outcomes
 

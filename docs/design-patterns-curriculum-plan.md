@@ -17,12 +17,13 @@ last-reviewed: 2026-10-10
 
 ## Status and Scope
 
-This is a proposed implementation blueprint, not a claim that the pattern catalog is already built.
+This blueprint is approved and implementation is in progress, not a claim that the entire catalog is built.
 The existing Phase 10 architecture scope remains complete. The proposal extends learning with a
 separately navigable Track 10B, without renumbering planned Phases 11 through 15.
 
-No projects, solution files, or runnable commands shown as proposed below exist merely because this
-plan describes them. Update this document and the active roadmap as each complete slice is delivered.
+Structures below describe the destination, not a claim that every proposed file/project already exists.
+See the [active delivery ledger](../10-architecture/docs/design-patterns/00-roadmap.md) for implemented
+topics, current commands, and topic-sized branches.
 
 ## Placement Decision
 
