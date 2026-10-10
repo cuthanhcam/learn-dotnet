@@ -43,8 +43,9 @@ interface. Domain types never resolve services, access configuration, inspect HT
 | ConsoleApp | construction and demonstration | duplicating business rules |
 
 The host can reference infrastructure to perform composition. That exception is localized and visible.
-When an API arrives, endpoint code should use application contracts; concrete adapters should remain
-confined to composition extensions and startup registration.
+The API follows the same rule: enrollment endpoints use application contracts; concrete adapter selection
+remains in startup registration. This diagram isolates the introductory path. The complete graph adds
+Contracts and Notifications, explained in [module boundaries](05-modules-events-outbox-inbox.md).
 
 ## Why the Port Is Specific
 
@@ -52,7 +53,7 @@ confined to composition extensions and startup registration.
 succeeded. This is a behavioral persistence contract. A generic `IRepository<T>.Update(T)` would hide
 the race that matters most to enrollment.
 
-EF Core already implements identity tracking and unit-of-work behavior. A future adapter should use EF
+EF Core already implements identity tracking and unit-of-work behavior. The relational adapter uses EF
 where appropriate, not wrap every method in an interface with identical signatures. The port is useful
 here because the application requires an explicit compare-and-save outcome across multiple adapters.
 

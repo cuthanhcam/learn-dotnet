@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Phase 10 architecture curriculum with immutable enrollment aggregates, bounded read projections,
+  conditional relational writes, durable request receipts, outbox/inbox recovery, independently owned
+  notification state, authenticated v1 HTTP endpoints, two ADRs, and 67 executable specifications.
 - Repository-wide `.slnx` workspace for all maintained projects.
 - Central package management, dependency vulnerability audit, CodeQL, Dependabot, and documentation gates.
 

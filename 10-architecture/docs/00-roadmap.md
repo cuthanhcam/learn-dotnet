@@ -67,11 +67,14 @@ introduced. Architecture does not replace their correctness requirements.
 - [x] Domain/application/infrastructure/host boundaries.
 - [x] Enrollment invariant and immutable aggregate snapshots.
 - [x] Explicit optimistic concurrency and deterministic negative specifications.
-- [ ] Read projection and DTO mapping.
-- [ ] Relational persistence and durable idempotency.
-- [ ] Module contracts and events.
-- [ ] HTTP security, validation, and versioning.
-- [ ] Architecture fitness checks and completion audit.
+- [x] Read projection and DTO mapping.
+- [x] Relational persistence and durable idempotency.
+- [x] Module contracts and integration events; domain-event distinction documented.
+- [x] HTTP security, validation, and explicit v1 evolution policy.
+- [x] Architecture fitness checks, decision records, and completion audit.
+
+The checked scope is a learning implementation, not a production certification. See the
+[completion audit](09-completion-audit.md) for the evidence matrix and explicit operational boundaries.
 
 ## References
 

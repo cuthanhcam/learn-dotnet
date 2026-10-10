@@ -30,8 +30,9 @@ The aggregate protects these invariants:
 - a successful new enrollment advances the version exactly once.
 
 `CourseOffering.Create` establishes valid initial state. Its constructor is private, its properties
-are read-only, and its learner set is immutable and never exposed. Callers cannot bypass enrollment by
-assigning a count or appending to a mutable collection.
+are read-only, and its internal learner set is immutable and never exposed as mutable state. The
+persistence adapter can read a detached immutable `LearnerIds` array. Callers cannot bypass enrollment
+by assigning a count or appending to a mutable collection.
 
 ## A Domain Transition Returns a Decision
 
@@ -78,9 +79,10 @@ A transaction alone is insufficient if its isolation and write conditions permit
 
 ## Retry and Idempotency
 
-This use case's duplicate learner rule is a business idempotency property. It does not yet implement a
-durable HTTP idempotency key with request hashing and stored response. That later contract is needed
-when clients repeat requests after an uncertain network response.
+This introductory handler's duplicate learner rule is a business idempotency property, not a durable
+HTTP request-key protocol. The [durable workflow](04-persistence-transactions-idempotency.md) adds a
+receipt bound to offering and learner input and stores the original semantic result. This stronger
+contract handles clients repeating a request after an uncertain network response.
 
 The handler does not automatically retry conflicts. A bounded caller retry can reload and decide that
 the course is now full or that the same learner was already enrolled. Blind retries become unsafe once
@@ -91,8 +93,8 @@ idempotency decisions before retries are introduced.
 
 The store checks cancellation before reading or changing state. A cancellation before save leaves the
 snapshot uncommitted. Cancellation after a successful database commit does not imply rollback: clients
-may receive no response even though the operation succeeded. A later durable idempotency contract must
-handle that uncertainty.
+may receive no response even though the operation succeeded. The durable request contract handles
+that uncertainty through replay under the same key in a fresh scope.
 
 Do not use cancellation as proof that an external operation did not happen. Query authoritative state
 or use an operation identifier before issuing a duplicate effect.
@@ -110,10 +112,13 @@ questions and together protect the behavior at the port boundary.
 
 ## Production Extensions
 
-The in-memory adapter loses data on restart and does not coordinate processes. The next persistence
-slice will need a schema, normalized learner/offering uniqueness, transaction boundary, concurrency
-token, migration history, and relational integration tests. Identity-derived learner IDs and resource
-authorization belong at the entry point, with trusted authority passed into the application.
+The in-memory adapter loses data on restart and does not coordinate processes. The relational slice
+adds a schema, conditional version updates, transaction ownership, receipts, and real SQL tests. It
+deliberately uses bounded learner snapshots; normalized membership with a database unique constraint
+is an extension discussed in the [persistence article](04-persistence-transactions-idempotency.md).
+Production migration history must be provisioned separately rather than inferred from `EnsureCreated`.
+Identity-derived learner IDs and authorization belong at the entry point, with trusted authority passed
+into the application; the [HTTP host](06-http-security-errors-versioning.md) demonstrates that boundary.
 
 ## Exercises
 
@@ -131,4 +136,4 @@ authorization belong at the entry point, with trusted authority passed into the 
 ## Navigation
 
 - Previous: [Dependency direction and project boundaries](01-dependency-direction-project-boundaries.md)
-- Next: Queries, DTOs, and validation (planned)
+- Next: [Queries, DTOs, and validation](03-queries-dtos-mapping-validation.md)
