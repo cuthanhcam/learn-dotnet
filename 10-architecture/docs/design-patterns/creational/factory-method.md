@@ -210,4 +210,4 @@ The sample has no filesystem dependence and does not require a DI container or e
 - Previous guided topic: [Strategy](../behavioral/strategy.md).
 - Comparison: [Factory vocabulary](../comparisons/factory-vocabulary.md).
 - Catalog: [Roadmap](../00-roadmap.md).
-- Next guided topic: Adapter (planned).
+- Next guided topic: [Adapter](../structural/adapter.md).

@@ -7,6 +7,9 @@
       },
       "learning.patterns.creational": {
         "type": "Project"
+      },
+      "learning.patterns.structural": {
+        "type": "Project"
       }
     }
   }

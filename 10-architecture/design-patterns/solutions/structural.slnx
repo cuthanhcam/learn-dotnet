@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="../src/Learning.Patterns.Structural/Learning.Patterns.Structural.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="../tests/Learning.Patterns.Structural.Tests/Learning.Patterns.Structural.Tests.csproj" />
+  </Folder>
+</Solution>

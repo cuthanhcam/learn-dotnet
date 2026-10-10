@@ -20,7 +20,8 @@ not implemented examples.
 2. Read [pattern thinking and selection](../docs/design-patterns/01-pattern-thinking-and-selection.md).
 3. Study [Strategy](../docs/design-patterns/behavioral/strategy.md), the first complete lesson.
 4. Continue with [Factory Method](../docs/design-patterns/creational/factory-method.md) and its vocabulary comparison.
-5. Use the catalog/problem index in the roadmap to find delivered alternatives and remaining topics.
+5. Study [Adapter](../docs/design-patterns/structural/adapter.md) for a semantic SDK integration boundary.
+6. Use the catalog/problem index in the roadmap to find delivered alternatives and remaining topics.
 
 ## Run One Lesson
 
@@ -31,8 +32,10 @@ dotnet restore 10-architecture/design-patterns/design-patterns.slnx --locked-mod
 dotnet run --project 10-architecture/design-patterns/src/Learning.Patterns.ConsoleApp -- --list
 dotnet run --project 10-architecture/design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern behavioral.strategy
 dotnet run --project 10-architecture/design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern creational.factory-method
+dotnet run --project 10-architecture/design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern structural.adapter
 dotnet test 10-architecture/design-patterns/solutions/behavioral.slnx --configuration Release
 dotnet test 10-architecture/design-patterns/solutions/creational.slnx --configuration Release
+dotnet test 10-architecture/design-patterns/solutions/structural.slnx --configuration Release
 ```
 
 The runner shows help by default. It never executes an entire growing catalog without an explicit
@@ -46,6 +49,8 @@ complete maintained workspace.
 design-patterns/
   design-patterns.slnx
   solutions/behavioral.slnx
+  solutions/creational.slnx
+  solutions/structural.slnx
   src/
     Learning.Patterns.Behavioral/
       Strategy/
@@ -56,11 +61,24 @@ design-patterns/
         PricingQuote.cs
         StrategyDemo.cs
     Learning.Patterns.ConsoleApp/
+    Learning.Patterns.Creational/FactoryMethod/
+      Baseline/            # Closed-list selection in the original workflow
+      Products/            # Text/JSON formatter contracts and implementations
+      Refactored/          # Creator workflow and subclass creation hook
+      Alternatives/        # Constructor-injection comparison
+    Learning.Patterns.Structural/Adapter/
+      Contracts/           # Client-owned request, result, and capability
+      Legacy/              # Incompatible SDK types and offline simulator
+      Baseline/            # Application coupled directly to provider details
+      Refactored/          # Translation of units, outcomes, failures, and cancellation
   tests/Learning.Patterns.Behavioral.Tests/Strategy/
+  tests/Learning.Patterns.Creational.Tests/FactoryMethod/
+  tests/Learning.Patterns.Structural.Tests/Adapter/
 ```
 
-Creational now contains the Factory Method lesson, its own category solution, and tests. Structural
-projects will appear with their first complete lesson, not as empty shells. Articles live under
+All three categories now have a complete first lesson, focused solution, and test project. There are
+seven runnable projects and 70 pattern specifications; the remaining 20 GoF patterns are planned, not
+scaffolded placeholders. Articles live under
 `10-architecture/docs/design-patterns/`, with metadata checked by the
 existing publishing gates. Each new pattern has its own topic branch and focused code/docs commits.
 
