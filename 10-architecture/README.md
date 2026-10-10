@@ -17,6 +17,15 @@ to expose decisions that cannot be answered by folder names alone.
 
 ## Learning Outcomes
 
+### Proposed Advanced Object-Design Extension
+
+The current enrollment curriculum is the completed architecture track (10A). A separately navigable
+GoF catalog is proposed as Track 10B, with its own solution, category libraries, guided reading path,
+and complete pattern-specific specifications. It is not implemented yet; see the
+[curriculum and solution blueprint](../docs/design-patterns-curriculum-plan.md) before creating projects.
+
+### Architecture Track Outcomes
+
 By the end of the phase, explain dependency direction, distinguish application services from domain
 behavior, organize features within layers, select purpose-specific persistence ports, separate commands
 and queries, and justify modular monolith versus service boundaries with evidence. Trace validation,

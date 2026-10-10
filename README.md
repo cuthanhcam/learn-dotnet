@@ -46,7 +46,7 @@ This repository is intended for **learning, practice, and long-term reference**,
 | 10 | [Architecture and Best Practices](10-architecture/README.md) | Complete learning scope | .NET 10 |
 | 11–15 | Testing, projects, DevOps, system design, observability | Planned | To be defined |
 
-The maintained workspace currently contains 52 projects, 117 publishable articles, and 518 executable
+The maintained workspace currently contains 52 projects, 118 publishable articles, and 518 executable
 tests. `legacy/` preserves historical code for comparison but is excluded from the maintained solution
 and quality gates.
 
@@ -274,6 +274,10 @@ _Figure 1: Structured .NET Learning Journey from Fundamentals to Advanced System
 - Domain-driven design (intro)
 - API versioning
 - Feature-based structure
+
+An advanced GoF object-design track is proposed separately from the implemented architecture scenario.
+See the [design patterns curriculum and solution blueprint](docs/design-patterns-curriculum-plan.md)
+for all 23 patterns, phase ownership, focused solution structure, and incremental delivery gates.
 
 ---
 
