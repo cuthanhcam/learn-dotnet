@@ -154,9 +154,9 @@ Architecture patterns should be selected to solve observed coupling, consistency
 problems. They must not hide authentication state in global helpers, move authorization exclusively to
 controllers, wrap EF Core in an anemic generic repository, or turn every operation into ceremony.
 
-Continue to Phase 10 — Architecture when that phase is implemented.
+Continue to [Phase 10 — Architecture](../../10-architecture/README.md).
 
 ## Navigation
 
 - Previous: [Security testing, operations, and incident response](09-security-testing-operations-incident-response.md)
-- Next: Phase 10 — Architecture (planned)
+- Next: [Phase 10 — Architecture](../../10-architecture/README.md)

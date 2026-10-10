@@ -10,6 +10,7 @@ param(
         "07-aspnet-core",
         "08-ef-core",
         "09-auth",
+        "10-architecture",
         "docs",
         "README.md",
         "CONTRIBUTING.md",

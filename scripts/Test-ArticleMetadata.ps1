@@ -9,6 +9,7 @@ param(
         "07-aspnet-core/docs",
         "08-ef-core/docs",
         "09-auth/docs",
+        "10-architecture/docs",
         "docs"
     )
 )

@@ -11,7 +11,8 @@ param(
         "06-async-concurrency",
         "07-aspnet-core",
         "08-ef-core",
-        "09-auth"
+        "09-auth",
+        "10-architecture"
     )
 )
 
