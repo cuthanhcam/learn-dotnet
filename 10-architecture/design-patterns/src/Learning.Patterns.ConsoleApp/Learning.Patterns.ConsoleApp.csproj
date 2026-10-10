@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="../Learning.Patterns.Creational/Learning.Patterns.Creational.csproj" />
     <ProjectReference Include="../Learning.Patterns.Behavioral/Learning.Patterns.Behavioral.csproj" />
   </ItemGroup>
 </Project>
