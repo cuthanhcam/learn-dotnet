@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Learning.Architecture.Domain/Learning.Architecture.Domain.csproj" />
+    <Project Path="src/Learning.Architecture.Application/Learning.Architecture.Application.csproj" />
+    <Project Path="src/Learning.Architecture.Infrastructure/Learning.Architecture.Infrastructure.csproj" />
+    <Project Path="src/Learning.Architecture.ConsoleApp/Learning.Architecture.ConsoleApp.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Learning.Architecture.Tests/Learning.Architecture.Tests.csproj" />
+  </Folder>
+</Solution>
