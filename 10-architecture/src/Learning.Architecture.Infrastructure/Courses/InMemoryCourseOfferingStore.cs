@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using Learning.Architecture.Application.Abstractions;
 using Learning.Architecture.Domain.Courses;
+using Learning.Architecture.Application.Offerings;
 
 namespace Learning.Architecture.Infrastructure.Courses;
 
@@ -9,9 +10,21 @@ namespace Learning.Architecture.Infrastructure.Courses;
 /// keep a safe snapshot; ConcurrentDictionary.TryUpdate atomically checks the original object.
 /// State is process-local and intentionally lost at restart. This is not a durable database adapter.
 /// </summary>
-public sealed class InMemoryCourseOfferingStore : ICourseOfferingStore
+public sealed class InMemoryCourseOfferingStore : ICourseOfferingStore, IOfferingQueries
 {
     private readonly ConcurrentDictionary<Guid, CourseOffering> _offerings = new();
+
+    public ValueTask<OfferingPage> ListAsync(ListOfferingsQuery query, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        // Enumerating immutable values is safe, but a page is not a database-wide snapshot. A stable
+        // order avoids arbitrary dictionary ordering; concurrent catalog changes can still shift pages.
+        OfferingSummary[] items = _offerings.Values.OrderBy(offering => offering.Id)
+            .Skip(query.Offset).Take(query.Limit)
+            .Select(offering => new OfferingSummary(offering.Id, offering.Title, offering.Capacity,
+                offering.EnrolledCount, offering.Version)).ToArray();
+        return ValueTask.FromResult(new OfferingPage(items, query.Offset, query.Limit));
+    }
 
     public bool TryAdd(CourseOffering offering)
     {
@@ -31,7 +44,7 @@ public sealed class InMemoryCourseOfferingStore : ICourseOfferingStore
     {
         cancellationToken.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(offering);
-        if (offering.Version != expectedVersion + 1)
+        if (expectedVersion < 0 || offering.Version != checked(expectedVersion + 1))
             throw new ArgumentException("A save must advance exactly one version.", nameof(offering));
 
         bool saved = _offerings.TryGetValue(offering.Id, out CourseOffering? current)
