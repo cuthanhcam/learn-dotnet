@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <ProjectReference Include="../Learning.Architecture.Infrastructure/Learning.Architecture.Infrastructure.csproj" />
+    <ProjectReference Include="../Learning.Architecture.Notifications/Learning.Architecture.Notifications.csproj" />
+  </ItemGroup>
+</Project>

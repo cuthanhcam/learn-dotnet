@@ -144,12 +144,16 @@
     <File Path="10-architecture/README.md" />
   </Folder>
   <Folder Name="/10 - Architecture/src/">
+    <Project Path="10-architecture/src/Learning.Architecture.Api/Learning.Architecture.Api.csproj" />
+    <Project Path="10-architecture/src/Learning.Architecture.Contracts/Learning.Architecture.Contracts.csproj" />
+    <Project Path="10-architecture/src/Learning.Architecture.Notifications/Learning.Architecture.Notifications.csproj" />
     <Project Path="10-architecture/src/Learning.Architecture.Domain/Learning.Architecture.Domain.csproj" />
     <Project Path="10-architecture/src/Learning.Architecture.Application/Learning.Architecture.Application.csproj" />
     <Project Path="10-architecture/src/Learning.Architecture.Infrastructure/Learning.Architecture.Infrastructure.csproj" />
     <Project Path="10-architecture/src/Learning.Architecture.ConsoleApp/Learning.Architecture.ConsoleApp.csproj" />
   </Folder>
   <Folder Name="/10 - Architecture/tests/">
+    <Project Path="10-architecture/tests/Learning.Architecture.IntegrationTests/Learning.Architecture.IntegrationTests.csproj" />
     <Project Path="10-architecture/tests/Learning.Architecture.Tests/Learning.Architecture.Tests.csproj" />
   </Folder>
 </Solution>
