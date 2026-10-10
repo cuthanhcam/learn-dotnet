@@ -176,16 +176,7 @@
           "SQLitePCLRaw.core": "2.1.12"
         }
       },
-      "learning.architecture.application": {
-        "type": "Project",
-        "dependencies": {
-          "Learning.Architecture.Domain": "[1.0.0, )"
-        }
-      },
       "learning.architecture.contracts": {
-        "type": "Project"
-      },
-      "learning.architecture.domain": {
         "type": "Project"
       }
     }

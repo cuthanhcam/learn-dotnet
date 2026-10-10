@@ -1,6 +1,13 @@
 using Learning.Architecture.Application.Enrollments;
 using Learning.Architecture.Domain.Courses;
 using Learning.Architecture.Infrastructure.Courses;
+using Learning.Architecture.ConsoleApp;
+
+if (args.Contains("--relational", StringComparer.Ordinal))
+{
+    await RelationalEnrollmentLab.RunAsync();
+    return;
+}
 
 // This is the composition root: only the host selects a concrete adapter. The handler depends on
 // the application port, and the domain can be exercised without constructing a host or database.

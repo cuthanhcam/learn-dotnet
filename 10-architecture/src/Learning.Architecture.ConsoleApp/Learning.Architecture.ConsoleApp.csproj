@@ -6,5 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../Learning.Architecture.Infrastructure/Learning.Architecture.Infrastructure.csproj" />
+    <ProjectReference Include="../Learning.Architecture.Notifications/Learning.Architecture.Notifications.csproj" />
   </ItemGroup>
 </Project>

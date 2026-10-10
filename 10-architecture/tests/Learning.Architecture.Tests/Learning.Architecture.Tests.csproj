@@ -11,6 +11,7 @@
     <PackageReference Include="xunit.runner.visualstudio" />
     <PackageReference Include="coverlet.collector" />
     <ProjectReference Include="../../src/Learning.Architecture.Infrastructure/Learning.Architecture.Infrastructure.csproj" />
+    <ProjectReference Include="../../src/Learning.Architecture.Notifications/Learning.Architecture.Notifications.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Using Include="Xunit" />

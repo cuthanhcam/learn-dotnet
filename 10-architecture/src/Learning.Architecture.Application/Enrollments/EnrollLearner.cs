@@ -4,7 +4,9 @@ using Learning.Architecture.Domain.Courses;
 namespace Learning.Architecture.Application.Enrollments;
 
 public sealed record EnrollLearnerCommand(Guid OfferingId, Guid LearnerId);
-public enum EnrollLearnerStatus { Enrolled, AlreadyEnrolled, Full, NotFound, Conflict }
+// Numeric values are persisted in durable receipts. Never renumber existing values when extending
+// this contract; a schema/result migration is required if their meaning changes.
+public enum EnrollLearnerStatus { Enrolled = 0, AlreadyEnrolled = 1, Full = 2, NotFound = 3, Conflict = 4 }
 public sealed record EnrollLearnerResult(EnrollLearnerStatus Status, long? Version = null);
 
 /// <summary>

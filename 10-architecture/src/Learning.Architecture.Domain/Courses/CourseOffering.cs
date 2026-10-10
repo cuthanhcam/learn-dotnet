@@ -28,6 +28,27 @@ public sealed class CourseOffering
     public int EnrolledCount => _learners.Count;
     public int AvailableSeats => Capacity - EnrolledCount;
 
+    /// <summary>A detached persistence snapshot; the immutable array cannot mutate this aggregate.</summary>
+    public ImmutableArray<Guid> LearnerIds => _learners.Order().ToImmutableArray();
+
+    /// <summary>
+    /// Reconstitutes stored state without replaying business actions. Storage is not automatically
+    /// trusted: corrupt counts, duplicate identities, and impossible versions must fail loudly.
+    /// This is not a public API contract and must never bind directly to an HTTP request body.
+    /// </summary>
+    public static CourseOffering Restore(Guid id, string title, int capacity, long version,
+        IEnumerable<Guid> learnerIds)
+    {
+        ArgumentNullException.ThrowIfNull(learnerIds);
+        CourseOffering empty = Create(id, title, capacity);
+        Guid[] learners = learnerIds.ToArray();
+        if (learners.Any(learner => learner == Guid.Empty) || learners.Distinct().Count() != learners.Length)
+            throw new ArgumentException("Stored learners must be nonempty and unique.", nameof(learnerIds));
+        if (learners.Length > capacity || version < learners.Length)
+            throw new ArgumentException("Stored state violates capacity or version invariants.", nameof(version));
+        return new CourseOffering(empty.Id, empty.Title, empty.Capacity, version, learners.ToImmutableHashSet());
+    }
+
     public static CourseOffering Create(Guid id, string title, int capacity)
     {
         if (id == Guid.Empty)
