@@ -46,7 +46,7 @@ This repository is intended for **learning, practice, and long-term reference**,
 | 10 | [Architecture and Best Practices](10-architecture/README.md) | Complete learning scope | .NET 10 |
 | 11–15 | Testing, projects, DevOps, system design, observability | Planned | To be defined |
 
-The maintained workspace currently contains 55 projects, 121 publishable articles, and 539 executable
+The maintained workspace currently contains 57 projects, 123 publishable articles, and 558 executable
 tests. `legacy/` preserves historical code for comparison but is excluded from the maintained solution
 and quality gates.
 
