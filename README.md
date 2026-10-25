@@ -49,7 +49,7 @@ This repository is intended for **learning, practice, and long-term reference**,
 | 08 | [Entity Framework Core](08-ef-core/README.md) | Completed | .NET 10 |
 | 09 | [Authentication and Authorization](09-auth/README.md) | Completed | .NET 10 |
 | 10 | [Architecture and Best Practices](10-architecture/README.md) | Architecture complete; design-patterns track in progress | .NET 10 |
-| 11 | [Testing](11-testing/README.md) | Unit foundations delivered; HTTP integration next | .NET 10 |
+| 11 | [Testing](11-testing/README.md) | Unit and HTTP foundations delivered; coverage/provider tracks planned | .NET 10 |
 | 12–15 | Projects, DevOps, system design, observability | Planned | To be defined |
 
 The maintained workspace includes Phases 01–11 and the first three Phase 10B pattern lessons.
@@ -297,7 +297,8 @@ for all 23 patterns, phase ownership, focused solution structure, and incrementa
 ### **11. Testing**
 
 Start with the [runnable testing curriculum](11-testing/README.md). Unit contracts, deterministic time,
-test doubles, cancellation, and failure lessons are delivered; the phase roadmap identifies later slices.
+test doubles, cancellation, failure, HTTP integration, and fixture ownership are delivered; the phase
+roadmap identifies later slices.
 
 📁 `11-testing/`
 
