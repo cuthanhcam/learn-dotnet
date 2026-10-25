@@ -65,7 +65,7 @@ dotnet format whitespace learn-dotnet.slnx --no-restore --verify-no-changes
 ```
 
 The phase contains nine projects: seven source projects and two test projects. Its current automated
-suite has 100 specifications: 78 core/relational/module fitness cases and 22 HTTP/JWT integration cases.
+suite has 110 specifications: 78 core/relational/module fitness cases and 32 HTTP/JWT integration cases.
 These are discovered test cases, including theory rows, not a code-coverage percentage.
 
 The basic console prints `Enrolled`, `AlreadyEnrolled`, and `Full`. The relational console prints one

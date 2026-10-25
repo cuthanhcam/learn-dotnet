@@ -1,6 +1,7 @@
 using Learning.Architecture.Application.Enrollments;
 using Learning.Architecture.Application.Offerings;
 using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 
 namespace Learning.Architecture.Api.Features;
 
@@ -48,10 +49,14 @@ public static class EnrollmentEndpoints
         }
         catch (SqliteException exception) when (exception.SqliteErrorCode is 5 or 6)
         {
-            // A provider lock timeout is transient infrastructure unavailability, not a full course.
-            // A retry must retain the request key and use a fresh request scope/DbContext.
-            context.Response.Headers.RetryAfter = "1";
-            return Results.Problem(statusCode: 503, title: "Enrollment storage is temporarily busy.");
+            return StorageBusy(context);
+        }
+        catch (DbUpdateException exception) when (exception.InnerException is SqliteException
+        { SqliteErrorCode: 5 or 6 })
+        {
+            // SaveChanges wraps provider errors; classify only the known busy/locked codes.
+            // Constraint violations and unrelated update failures must remain server failures.
+            return StorageBusy(context);
         }
         if (result.Status == EnrollmentRequestStatus.KeyReused)
             return Results.Problem(statusCode: 409, title: "Idempotency key was reused for another request.");
@@ -63,9 +68,19 @@ public static class EnrollmentEndpoints
         {
             EnrollLearnerStatus.NotFound => Results.Problem(statusCode: 404, title: "Offering was not found."),
             EnrollLearnerStatus.Full => Results.Problem(statusCode: 409, title: "Offering has no available seats."),
-            _ => Results.Ok(new EnrollmentResponse(enrollment.Status.ToString(), enrollment.Version!.Value,
-                result.Replayed))
+            EnrollLearnerStatus.Enrolled or EnrollLearnerStatus.AlreadyEnrolled when enrollment.Version is >= 1
+                => Results.Ok(new EnrollmentResponse(enrollment.Status.ToString(), enrollment.Version.Value,
+                    result.Replayed)),
+            _ => throw new InvalidOperationException("The enrollment workflow returned an invalid result.")
         };
+    }
+
+    private static IResult StorageBusy(HttpContext context)
+    {
+        // A provider lock timeout is transient infrastructure unavailability, not a full course.
+        // A retry must retain the request key and use a fresh request scope/DbContext.
+        context.Response.Headers.RetryAfter = "1";
+        return Results.Problem(statusCode: 503, title: "Enrollment storage is temporarily busy.");
     }
 }
 

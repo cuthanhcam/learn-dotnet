@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Tokens;
+using Learning.Architecture.Application.Enrollments;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Learning.Architecture.IntegrationTests;
 
@@ -24,10 +26,12 @@ internal sealed class EnrollmentApiFactory : WebApplicationFactory<Program>
     private readonly SqliteConnection _notifications;
     private readonly RSA _signer = RSA.Create(2048);
     private readonly bool _realJwt;
+    private readonly IEnrollmentRequests? _requestsOverride;
 
-    public EnrollmentApiFactory(bool realJwt = false)
+    public EnrollmentApiFactory(bool realJwt = false, IEnrollmentRequests? requestsOverride = null)
     {
         _realJwt = realJwt;
+        _requestsOverride = requestsOverride;
         // Keepers preserve isolated named in-memory databases while scoped contexts open their own
         // connections. Parallel tests never share a database, external identity server, or filesystem.
         string suffix = Guid.NewGuid().ToString("N");
@@ -50,6 +54,12 @@ internal sealed class EnrollmentApiFactory : WebApplicationFactory<Program>
                 ["Database:Initialize"] = "true",
                 ["Outbox:Enabled"] = "false"
             }));
+        if (_requestsOverride is not null)
+            builder.ConfigureServices(services =>
+            {
+                services.RemoveAll<IEnrollmentRequests>();
+                services.AddSingleton(_requestsOverride);
+            });
         if (_realJwt)
         {
             builder.ConfigureServices(services => services.PostConfigure<JwtBearerOptions>(
