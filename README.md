@@ -1,7 +1,7 @@
 # 🚀 Learn .NET
 
 ![Learning](https://img.shields.io/badge/Learning-Journey-blueviolet?logo=dotnet&logoColor=white)
-![.NET 8 | 10](https://img.shields.io/badge/.NET-8%20%7C%2010-blueviolet?logo=dotnet&logoColor=white)
+![.NET 10](https://img.shields.io/badge/.NET-10-blueviolet?logo=dotnet&logoColor=white)
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET-Core-blueviolet?logo=dotnet&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 [![CI](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/ci.yml)
@@ -57,8 +57,8 @@ case counts. `legacy/` preserves historical code for comparison but is excluded 
 solution and quality gates. Completed phases cover their stated scope; Phases 11–15 below are plans.
 
 All maintained phases now target .NET 10 and inherit the root SDK selection. The runtime migration
-is recorded in the [development plan](docs/repository-audit-and-development-plan.md); the final
-repository setup/CI cleanup follows as a separate delivery slice.
+is recorded in the [development plan](docs/repository-audit-and-development-plan.md). Local setup,
+CI, and CodeQL use this single runtime baseline; .NET 8 is no longer required for maintained lessons.
 
 ---
 
@@ -425,7 +425,7 @@ module/
 
 ## 🛠️ Tools & Technologies
 
-- **C# / .NET 8 and .NET 10**
+- **C# / .NET 10**
 - **ASP.NET Core**
 - **Entity Framework Core**
 - **SQLite for the fast EF Core relational suite; production-provider gates are documented separately**

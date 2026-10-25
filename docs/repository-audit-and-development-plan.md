@@ -57,22 +57,30 @@ Runtime maintenance is split into small branches, each based on the preceding ve
 Each branch gets its own PR, full local validation, hosted Windows/Linux/security checks, and a merge
 commit into `develop` after those checks pass. The existing promotion PR into `main` stays open.
 
-| Sequence | Branch | Scope |
-|---:|---|---|
-| 1 | `chore/net10-phases-01-02` | Retarget basics/OOP, regenerate locks, inherit root SDK, update local docs |
-| 2 | `chore/net10-phases-03-04` | Retarget core/performance, regenerate locks, inherit root SDK, update local docs |
-| 3 | `chore/net10-phases-05-06` | Retarget DSA/async, regenerate locks, inherit root SDK, update local docs |
-| 4 | `chore/net10-repository-baseline` | Remove mixed-runtime setup guidance and CI installation, verify one SDK baseline |
+| Sequence | Branch | Scope | Delivery |
+|---:|---|---|---|
+| 1 | `chore/net10-phases-01-02` | Retarget basics/OOP, regenerate locks, inherit root SDK, update local docs | [PR #86](https://github.com/cuthanhcam/learn-dotnet/pull/86), merged after all checks passed |
+| 2 | `chore/net10-phases-03-04` | Retarget core/performance, regenerate locks, inherit root SDK, update local docs | [PR #87](https://github.com/cuthanhcam/learn-dotnet/pull/87), merged after all checks passed |
+| 3 | `chore/net10-phases-05-06` | Retarget DSA/async, regenerate locks, inherit root SDK, update local docs | [PR #88](https://github.com/cuthanhcam/learn-dotnet/pull/88), merged after all checks passed |
+| 4 | `chore/net10-repository-baseline` | Remove mixed-runtime setup guidance and CI installation, verify one SDK baseline | Baseline finalization in this change |
 
 Dependency versions and teaching implementations remain scoped separately from the runtime migration.
 Historical statements such as “.NET 8 introduced TimeProvider” remain valid and are preserved.
+
+All 59 maintained projects now target `net10.0`; the six phase SDK selectors have been removed and
+the root selector explicitly disallows prerelease SDKs. CI and CodeQL install SDK 10 only. Setup docs
+require a single SDK, and the inventory gate rejects framework drift or nested SDK selectors.
+The existing 588 behavior contracts pass after retargeting. SDK selection and console smoke runs were
+checked from inside the migrated phases; benchmark catalogs were checked where their runners support
+listing. This validates behavior contracts, not a claim that runtime changes have identical performance.
+Re-run measurements before comparing numbers across runtimes.
 
 Use one bounded feature branch/PR per deliverable. Each row has observable exit criteria; creating
 empty folders or unchecked lists does not complete a phase.
 
 | Priority / sequence | Deliverable | Exit criteria |
 |---|---|---|
-| P0 — next runtime maintenance PR | Move Phases 01–06 to .NET 10 before 2026-11-10 | Review target frameworks, nested SDK files, package compatibility, examples, and README claims together; regenerate all locks; compare behavior and run the full Windows/Linux gate; preserve older-behavior comparisons with explicit labels |
+| P0 — delivered in runtime slices above | Move Phases 01–06 to .NET 10 before 2026-11-10 | Target frameworks, root SDK inheritance, locks, local docs, 588 tests, and Windows/Linux/security checks validated; repository baseline finalization is the last slice |
 | P1 — next curriculum phase | Phase 11 testing foundations | A runnable unit/integration teaching scenario with assertions, test naming, fixtures/lifetimes, deterministic time, cancellation, failure paths, test doubles, and exercises; explain tests already present in Phases 01–10 |
 | P1 — second testing slice | Production database tests | Pick and document one production provider; add isolated Testcontainers fixtures, migration-from-empty and upgrade tests, concurrency/query assertions, cleanup, and a clearly named CI job requiring Docker; SQLite tests remain a distinct fast suite |
 | P1 — parallel curriculum track in later PRs | Continue Phase 10B | Deliver the remaining 20 GoF patterns in the sequence of the [approved curriculum](design-patterns-curriculum-plan.md); each gets a baseline, refactor, modern alternative, runner command, focused tests, article, trade-offs, and exercises |
