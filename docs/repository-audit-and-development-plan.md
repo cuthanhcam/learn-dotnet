@@ -51,6 +51,29 @@ must still be verified after push before accepting the promotion PR.
 
 ## Delivery backlog
 
+### Phase 10 correctness and readability review
+
+The focused re-review covers the enrollment aggregate, application ports, both store adapters,
+durable receipts, module delivery, HTTP boundaries, tests, and the delivered pattern examples.
+Keep the existing phase and feature folders; the immediate problems are contract consistency and
+reader navigation rather than project placement. Use the
+[guided source tour](../10-architecture/docs/12-guided-source-tour.md) to follow the implementation.
+
+| Sequence | Small branch scope | Evidence and acceptance |
+|---:|---|---|
+| 1 | Align dictionary/SQLite saves and cancellation checkpoints | [PR #93](https://github.com/cuthanhcam/learn-dotnet/pull/93); 25 new contract/cancellation cases, merged after hosted checks |
+| 2 | Validate durable replay data and refresh completion guidance | [PR #94](https://github.com/cuthanhcam/learn-dotnet/pull/94); seven malformed-receipt regressions plus valid NotFound replay; full local gate |
+| 3 | Classify EF-wrapped SQLite locks and reject invalid HTTP success results | Direct/wrapped busy and constraint errors, retry hints, diagnostic suppression, and invalid-result pipeline tests |
+| 4 | Add Phase 11 coverage and test-quality lesson | Fresh per-project reports, branch analysis, and exercises; no claim that a percentage proves correctness |
+| 5 | Exercise intended deployment provider and concurrent connections | Run shared port contracts plus real contention/transaction cases; distinguish these from injected HTTP failures |
+| 6 | Extend public API contracts before production reuse | Stable problem identifiers, API specification, identity mapping edge cases, migration/retention and shutdown scenarios |
+| 7 | Continue GoF catalog one pattern per reviewed branch | Three delivered patterns, twenty planned; apply the existing lesson/source/test standard |
+
+Track 10A completion refers to its bounded educational scenario. Overall Phase 10 remains in progress
+because the GoF catalog is unfinished. Production-provider and operational extensions remain explicit
+work items rather than implied guarantees. Merge each branch into `develop` after local and hosted
+checks, then create the reviewed promotion PR to `main`.
+
 ### Runtime migration delivery sequence
 
 Runtime maintenance is split into small branches, each based on the preceding verified `develop`.

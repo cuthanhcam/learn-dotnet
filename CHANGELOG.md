@@ -26,6 +26,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Phase 10 HTTP mapping recognizes EF-wrapped SQLite busy/locked failures and rejects invalid
+  success outcomes, with pipeline tests for retry hints and private diagnostic suppression.
 - Phase 10 durable replay rejects malformed receipt results without mutating enrollment state;
   the completion audit now links delivered Phase 11 lessons and distinguishes the unfinished GoF catalog.
 - Phase 10 in-memory/SQLite stores now share definition/version/cancellation contract tests and reject

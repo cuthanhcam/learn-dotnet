@@ -129,6 +129,14 @@ handling, and status-code pages establish the host-level response policy. Framew
 are not application business results. Tests require problem JSON for explicit key validation but do not
 promise every middleware-generated 400 has an identical field dictionary.
 
+SQLite busy/locked codes 5 and 6 are recognized both directly and inside an EF `DbUpdateException`
+from `SaveChanges`. Other update errors, including constraint violations, remain generic server failures
+without a retry hint. [Boundary tests](../tests/Learning.Architecture.IntegrationTests/EnrollmentFailureTests.cs)
+inject these failures through the workflow port and exercise the real HTTP pipeline. These tests prove
+classification and information hiding, not physical lock contention between database connections.
+Only explicit `Enrolled` and `AlreadyEnrolled` outcomes with positive versions become success responses;
+unknown or invalid workflow results fail instead of falling through to HTTP 200.
+
 Do not overload 409 to mean the client should retry forever. A full course, key misuse, and a stale
 write have distinct meanings even when sharing a status code. For a production public API, add stable
 machine-readable problem type identifiers/error codes, contract tests, localization policy, and an
