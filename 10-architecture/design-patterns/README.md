@@ -77,7 +77,7 @@ design-patterns/
 ```
 
 All three categories now have a complete first lesson, focused solution, and test project. There are
-seven runnable projects and 70 pattern specifications; the remaining 20 GoF patterns are planned, not
+seven runnable projects and 71 pattern specifications; the remaining 20 GoF patterns are planned, not
 scaffolded placeholders. Articles live under
 `10-architecture/docs/design-patterns/`, with metadata checked by the
 existing publishing gates. Each new pattern has its own topic branch and focused code/docs commits.

@@ -9,6 +9,15 @@ namespace Learning.Patterns.Creational.Tests.FactoryMethod;
 
 public sealed class ReportExporterTests
 {
+    [Fact]
+    public void MutableProductMetadata_ReturnsTheValidatedSnapshot()
+    {
+        ExportArtifact artifact = new InjectedReportExporter(new ChangingMediaTypeFormatter())
+            .Export(new ReportDocument("Report", ["Body"]));
+        Assert.Equal("text/plain", artifact.MediaType);
+        Assert.Equal("Body", artifact.Content);
+    }
+
     [Theory]
     [InlineData(ReportFormat.Text)]
     [InlineData(ReportFormat.Json)]
@@ -147,5 +156,20 @@ public sealed class ReportExporterTests
     {
         public string MediaType => "text/plain";
         public string Format(ReportDocument document) => "";
+    }
+
+    private sealed class ChangingMediaTypeFormatter : IReportFormatter
+    {
+        private bool _read;
+        public string MediaType
+        {
+            get
+            {
+                string value = _read ? "" : "text/plain";
+                _read = true;
+                return value;
+            }
+        }
+        public string Format(ReportDocument document) => "Body";
     }
 }

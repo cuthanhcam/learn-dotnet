@@ -26,6 +26,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Factory Method export captures formatter metadata once and returns the validated snapshot,
+  including when an extension product has a stateful metadata property.
 - Phase 10 HTTP mapping recognizes EF-wrapped SQLite busy/locked failures and rejects invalid
   success outcomes, with pipeline tests for retry hints and private diagnostic suppression.
 - Phase 10 durable replay rejects malformed receipt results without mutating enrollment state;
