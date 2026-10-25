@@ -94,4 +94,4 @@ for the corresponding protocols.
 - [FakeTimeProvider testing](https://learn.microsoft.com/en-us/dotnet/core/extensions/timeprovider-testing)
 - [xUnit shared context](https://xunit.net/docs/shared-context)
 - Previous: [Unit test design](01-unit-test-design.md)
-- Next: HTTP integration slice in the [delivery ledger](00-roadmap.md)
+- Next: [HTTP integration and fixtures](03-http-integration-fixtures.md)

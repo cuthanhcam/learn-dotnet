@@ -1,0 +1,19 @@
+@baseUrl = http://127.0.0.1:5111
+
+### Live host: 200
+GET {{baseUrl}}/health
+
+### Due loan: 200 Sent (logs only; repeated requests produce repeated attempts)
+POST {{baseUrl}}/loans/20000000-0000-0000-0000-000000000001/reminders
+
+### Future loan: 200 NotRequired
+POST {{baseUrl}}/loans/20000000-0000-0000-0000-000000000002/reminders
+
+### Returned loan: 200 NotRequired
+POST {{baseUrl}}/loans/20000000-0000-0000-0000-000000000003/reminders
+
+### Missing loan: 404 Problem Details
+POST {{baseUrl}}/loans/20000000-0000-0000-0000-000000000004/reminders
+
+### Empty identifier: 400 Problem Details
+POST {{baseUrl}}/loans/00000000-0000-0000-0000-000000000000/reminders
