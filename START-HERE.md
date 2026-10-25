@@ -5,7 +5,7 @@ course made of independent samples, not a single application to deploy.
 
 ## Prepare your machine
 
-Install Git, the .NET 10 SDK, the .NET 8 SDK (including its runtime), and PowerShell 7. Use the .NET CLI,
+Install Git, the .NET 10 SDK (including its runtime), and PowerShell 7. Use the .NET CLI,
 VS Code with C# Dev Kit, Rider, or Visual Studio 2026 or later for the root `.slnx` solution.
 Windows PowerShell 5.1 (`powershell`) is different from PowerShell 7 (`pwsh`).
 
@@ -22,9 +22,8 @@ The root `global.json` selects .NET SDK 10. All maintained phases inherit that s
 .NET 10, including when your working directory is inside a phase. A solution path does not change
 the current working directory or SDK selection. Legacy projects have their own historical policies.
 
-The phase runtime migration is complete; the remaining mixed-runtime setup instructions are removed
-in the final [repository baseline slice](docs/repository-audit-and-development-plan.md). Keep the
-installed .NET 10 runtime patched. See the
+Keep the installed .NET 10 SDK/runtime patched. The completed runtime migration is recorded in the
+[development plan](docs/repository-audit-and-development-plan.md). See the
 [official support policy](https://dotnet.microsoft.com/en-us/platform/support/policy).
 
 ## Complete your first lesson
@@ -81,7 +80,7 @@ learning. Phase 01 also retains a historical `.sln`; prefer `.slnx` to follow th
 | Symptom | Check |
 |---|---|
 | SDK requested by `global.json` cannot be found | Run `dotnet --list-sdks` and check your current directory; install the requested major SDK |
-| Tests request `Microsoft.NETCore.App 8.0` | Install the .NET 8 runtime/SDK; SDK 10 alone does not supply it |
+| A maintained test requests `Microsoft.NETCore.App 8.0` | Check out the current `develop` branch and rebuild without `--no-build`; an old build or archived project may still target .NET 8 |
 | `pwsh` is not recognized | Install PowerShell 7 and reopen the terminal |
 | Locked restore reports a dependency mismatch | On an unchanged checkout, fetch the complete branch; for intentional dependency edits, follow the lock update procedure in Contributing |
 | `dotnet run` says the project is a library | Select the phase's console or API project, rather than its examples library |

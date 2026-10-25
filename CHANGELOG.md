@@ -22,6 +22,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Migrated Phases 01–06 and their exercises, tests, and benchmarks to .NET 10 through separate
+  reviewed PRs. All maintained projects inherit the root SDK; CI and setup now require only .NET 10.
+- The inventory gate rejects inconsistent target frameworks and nested maintained SDK selectors.
 - Markdown structure checks now include phase entry points and fail on missing configured roots;
   article metadata validation resolves paths relative to the repository.
 - Clarified .NET 8 support status and string comparison comments for beginners.

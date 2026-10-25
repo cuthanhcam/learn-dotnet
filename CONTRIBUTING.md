@@ -6,12 +6,13 @@ concept more accurate, executable, approachable, or operationally honest.
 ## Prerequisites
 
 - Git;
-- the .NET 8 and .NET 10 SDKs/runtimes;
+- the .NET 10 SDK/runtime;
 - PowerShell 7 (`pwsh`) for repository validation scripts;
 - Visual Studio 2026+, Rider, VS Code, or the .NET CLI.
 
-The root `global.json` selects the .NET 10 SDK. Earlier phases continue to target .NET 8 and therefore
-also require the .NET 8 runtime to execute their tests.
+The root `global.json` selects the .NET 10 SDK for every maintained phase. All maintained projects
+target `net10.0`; no separate .NET 8 installation is required. Keep SDK selection centralized at the
+root rather than adding a phase-level `global.json`. Historical `legacy/` projects are separate.
 
 ## Workflow
 

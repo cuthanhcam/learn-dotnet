@@ -39,6 +39,10 @@ VS Code full-validation commands use the same script. Each platform uploads its 
 artifact, including on failure; neither platform job cancels the other when it fails. See
 [Contributing](../CONTRIBUTING.md) for the equivalent individual commands.
 
+CI and CodeQL install only the .NET 10 SDK for the maintained workspace. All maintained projects
+declare `net10.0` and inherit the root `global.json`; the inventory gate rejects target-framework
+drift and nested phase SDK selectors. `legacy/` remains outside this runtime contract.
+
 ## Permission and Trust Rules
 
 - Build and analysis workflows receive read-only repository contents unless an output requires more.
