@@ -29,7 +29,7 @@ public sealed class DurableEnrollmentRequests(EnrollmentDbContext database) : IE
             if (receipt.OfferingId != request.OfferingId || receipt.LearnerId != request.LearnerId)
                 return new EnrollmentRequestResult(EnrollmentRequestStatus.KeyReused);
             return new EnrollmentRequestResult(EnrollmentRequestStatus.Completed,
-                new EnrollLearnerResult((EnrollLearnerStatus)receipt.Status, receipt.Version), Replayed: true);
+                RestoreResult(receipt), Replayed: true);
         }
 
         var handler = new EnrollLearnerHandler(new EfCourseOfferingStore(database));
@@ -64,5 +64,22 @@ public sealed class DurableEnrollmentRequests(EnrollmentDbContext database) : IE
         // Disposal rolls back on exceptions, including cancellation. A disconnect during commit can
         // leave the caller uncertain; retry the SAME key with a NEW scope to discover the durable result.
         // Provider lock/busy errors deliberately propagate: they are not semantic capacity conflicts.
+    }
+
+    private static EnrollLearnerResult RestoreResult(EnrollmentReceiptRow receipt)
+    {
+        var status = (EnrollLearnerStatus)receipt.Status;
+        // Persisted data is an input boundary too. Conflict is transient and is never receipted;
+        // unknown enum values must not silently become successful HTTP responses on replay.
+        bool valid = status switch
+        {
+            EnrollLearnerStatus.Enrolled or EnrollLearnerStatus.AlreadyEnrolled or EnrollLearnerStatus.Full
+                => receipt.Version is >= 1,
+            EnrollLearnerStatus.NotFound => receipt.Version is null,
+            _ => false
+        };
+        if (!valid)
+            throw new InvalidOperationException("The stored enrollment receipt has an invalid result.");
+        return new EnrollLearnerResult(status, receipt.Version);
     }
 }

@@ -119,6 +119,12 @@ be rolled back by the enrollment database. The outbox captures an intent that ca
 | New key, another learner on full offering | `Full` receipt | no enrollment event |
 | Conditional write loses a race | `Conflict`, no receipt | caller may retry same key in a fresh scope |
 
+Receipt rows are also an input boundary. Replay rejects unknown status values, transient `Conflict`
+receipts, missing/nonpositive versions for `Enrolled`, `AlreadyEnrolled`, or `Full`, and any version for
+`NotFound`. Invalid data raises an infrastructure failure rather than returning a fabricated success.
+The relational tests seed malformed rows and verify that rejection leaves seats, receipts, and outbox
+unchanged. Existing enum numbers are a persisted contract and must not be renumbered.
+
 The receipt stores a semantic result and aggregate version, not every HTTP byte. The adapter reconstructs
 the response contract from that result. If a production API promises byte-for-byte replay including
 headers/status, store those values explicitly and define their compatibility/retention policy.
