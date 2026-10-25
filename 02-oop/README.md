@@ -3,7 +3,7 @@ title: "Phase 02 — Object-Oriented Programming in C#"
 description: "A detailed guide to classes, invariants, inheritance, polymorphism, accessibility, lifetime, equality, records, composition, patterns, and SOLID design."
 phase: 2
 status: complete
-target-framework: net8.0
+target-framework: net10.0
 prerequisites: [phase-01-csharp-fundamentals]
 previous-phase: ../01-csharp-basics/README.md
 next-phase: ../03-core-dotnet/README.md
@@ -142,7 +142,7 @@ This module follows:
 
 ### Prerequisites
 
-- **.NET 8 LTS** (or later)
+- **.NET 10 SDK** selected by the repository-level `global.json`
 - **C# IDE** (VS 2022+, VS Code, Rider)
 - **Git** (basic familiarity)
 
