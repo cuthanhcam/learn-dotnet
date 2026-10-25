@@ -3,7 +3,7 @@ title: "Phase 01 — C# Fundamentals"
 description: "A detailed foundation in the .NET execution model, C# syntax, types, control flow, methods, collections, strings, nullability, and introductory memory concepts."
 phase: 1
 status: complete
-target-framework: net8.0
+target-framework: net10.0
 prerequisites: [terminal-basics, git-basics]
 next-phase: ../02-oop/README.md
 ---
@@ -36,7 +36,7 @@ After completing this phase, you should be able to:
 - The SDK selected by the repository-level [`global.json`](../global.json).
 - An editor with C# support: Visual Studio, VS Code with C# Dev Kit, or JetBrains Rider.
 
-The projects target .NET 8 so the learning material remains usable on the current long-term-support baseline. The SDK may be newer because it can build earlier target frameworks. Do not confuse the installed SDK version with a project's target framework.
+The projects target .NET 10 and inherit SDK selection from the repository-level `global.json`, including when commands run inside this phase. The SDK builds the project; the target framework determines the runtime and API baseline. See [Start Here](../START-HERE.md) for setup and first-run commands.
 
 ## Recommended learning path
 

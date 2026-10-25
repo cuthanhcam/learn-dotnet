@@ -6,12 +6,13 @@ concept more accurate, executable, approachable, or operationally honest.
 ## Prerequisites
 
 - Git;
-- the .NET 8 and .NET 10 SDKs/runtimes;
+- the .NET 10 SDK/runtime;
 - PowerShell 7 (`pwsh`) for repository validation scripts;
 - Visual Studio 2026+, Rider, VS Code, or the .NET CLI.
 
-The root `global.json` selects the .NET 10 SDK. Earlier phases continue to target .NET 8 and therefore
-also require the .NET 8 runtime to execute their tests.
+The root `global.json` selects the .NET 10 SDK for every maintained phase. All maintained projects
+target `net10.0`; no separate .NET 8 installation is required. Keep SDK selection centralized at the
+root rather than adding a phase-level `global.json`. Historical `legacy/` projects are separate.
 
 ## Workflow
 
@@ -23,6 +24,17 @@ also require the .NET 8 runtime to execute their tests.
 6. Run the complete local validation before opening a pull request.
 
 ## Build and Test
+
+Run the same maintained gates as CI with one command from any directory:
+
+```powershell
+pwsh -NoProfile -File scripts/Validate-Repository.ps1
+```
+
+The path above assumes the repository root; use an absolute script path from another directory.
+The script selects the root SDK, stops on the first failed gate, and saves test/coverage output under
+`artifacts/test-results/`. For a first lesson rather than a repository contribution, use
+[Start Here](START-HERE.md). The equivalent individual commands follow.
 
 ```powershell
 dotnet tool restore
@@ -65,6 +77,14 @@ When an intentional dependency change updates the graph, run `dotnet restore lea
 
 Do not upgrade transitive packages blindly. Prefer updating the owning top-level dependency and review
 release notes for breaking behavior.
+
+Central package updates affect every project that consumes that package, even when a bot PR names
+only one project directory. After merging related bot updates, regenerate the entire master solution's
+lock graph with `dotnet restore learn-dotnet.slnx --force-evaluate`, review every changed lock file,
+and verify `dotnet restore learn-dotnet.slnx --locked-mode` before accepting the change. Never bypass
+locked restore in CI to accommodate a partial bot update. The SDK in `global.json`, the SDKs installed
+by Actions, the `dotnet-ef` local tool, and NuGet packages have separate version lifecycles; review
+each explicitly rather than assuming a package update also upgrades the compiler or runtime.
 
 ## Documentation Contract
 

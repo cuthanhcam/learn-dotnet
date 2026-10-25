@@ -1,7 +1,7 @@
 # 🚀 Learn .NET
 
 ![Learning](https://img.shields.io/badge/Learning-Journey-blueviolet?logo=dotnet&logoColor=white)
-![.NET 8 | 10](https://img.shields.io/badge/.NET-8%20%7C%2010-blueviolet?logo=dotnet&logoColor=white)
+![.NET 10](https://img.shields.io/badge/.NET-10-blueviolet?logo=dotnet&logoColor=white)
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET-Core-blueviolet?logo=dotnet&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 [![CI](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/ci.yml)
@@ -10,6 +10,11 @@
 ---
 
 A structured journey from C# fundamentals to production-ready backend development with .NET
+
+**New here? Follow [Start Here](START-HERE.md)** for prerequisites, your first runnable lesson,
+SDK troubleshooting, and the study sequence. See the
+[repository audit and development plan](docs/repository-audit-and-development-plan.md) for known gaps,
+delivery priorities, and completion gates.
 
 ---
 
@@ -34,26 +39,34 @@ This repository is intended for **learning, practice, and long-term reference**,
 
 | Phase | Topic | Status | Runtime |
 |---:|---|---|---|
-| 01 | [C# Fundamentals](01-csharp-basics/README.md) | Completed | .NET 8 |
-| 02 | [Object-Oriented Programming](02-oop/README.md) | Completed | .NET 8 |
-| 03 | [Core .NET and Standard Library](03-core-dotnet/README.md) | Completed | .NET 8 |
-| 04 | [Memory and Performance](04-memory-performance/README.md) | Completed | .NET 8 |
-| 05 | [Data Structures and Algorithms](05-dsa/README.md) | Completed | .NET 8 |
-| 06 | [Async and Concurrency](06-async-concurrency/README.md) | Completed | .NET 8 |
+| 01 | [C# Fundamentals](01-csharp-basics/README.md) | Completed | .NET 10 |
+| 02 | [Object-Oriented Programming](02-oop/README.md) | Completed | .NET 10 |
+| 03 | [Core .NET and Standard Library](03-core-dotnet/README.md) | Completed | .NET 10 |
+| 04 | [Memory and Performance](04-memory-performance/README.md) | Completed | .NET 10 |
+| 05 | [Data Structures and Algorithms](05-dsa/README.md) | Completed | .NET 10 |
+| 06 | [Async and Concurrency](06-async-concurrency/README.md) | Completed | .NET 10 |
 | 07 | [ASP.NET Core](07-aspnet-core/README.md) | Completed | .NET 10 |
 | 08 | [Entity Framework Core](08-ef-core/README.md) | Completed | .NET 10 |
 | 09 | [Authentication and Authorization](09-auth/README.md) | Completed | .NET 10 |
-| 10–15 | Architecture, testing, projects, DevOps, system design, observability | Planned | To be defined |
+| 10 | [Architecture and Best Practices](10-architecture/README.md) | Architecture complete; design-patterns track in progress | .NET 10 |
+| 11 | [Testing](11-testing/README.md) | Unit foundations delivered; HTTP integration next | .NET 10 |
+| 12–15 | Projects, DevOps, system design, observability | Planned | To be defined |
 
-The maintained workspace currently contains 43 projects, 105 publishable articles, and 451 executable
-tests. `legacy/` preserves historical code for comparison but is excluded from the maintained solution
-and quality gates.
+The maintained workspace includes Phases 01–11 and the first three Phase 10B pattern lessons.
+The validation scripts report the current project and article inventory; test runs report executable
+case counts. `legacy/` preserves historical code for comparison but is excluded from the maintained
+solution and quality gates. Completed phases cover their stated scope; Phase 11 is in progress and
+Phases 12–15 below are plans.
+
+All maintained phases now target .NET 10 and inherit the root SDK selection. The runtime migration
+is recorded in the [development plan](docs/repository-audit-and-development-plan.md). Local setup,
+CI, and CodeQL use this single runtime baseline; .NET 8 is no longer required for maintained lessons.
 
 ---
 
 ## 🧩 Open the Complete Workspace
 
-Use the root solution to browse every active project from Phases 01–09 in one Visual Studio window:
+Use the root solution to browse every active project from Phases 01–11 in one Visual Studio window:
 
 ```text
 learn-dotnet.slnx
@@ -274,9 +287,17 @@ _Figure 1: Structured .NET Learning Journey from Fundamentals to Advanced System
 - API versioning
 - Feature-based structure
 
+An advanced [GoF object-design track](10-architecture/design-patterns/README.md) is being delivered
+separately from the implemented architecture scenario, with complete Strategy, Factory Method, and Adapter lessons.
+See the [design patterns curriculum and solution blueprint](docs/design-patterns-curriculum-plan.md)
+for all 23 patterns, phase ownership, focused solution structure, and incremental delivery gates.
+
 ---
 
 ### **11. Testing**
+
+Start with the [runnable testing curriculum](11-testing/README.md). Unit contracts, deterministic time,
+test doubles, cancellation, and failure lessons are delivered; the phase roadmap identifies later slices.
 
 📁 `11-testing/`
 
@@ -363,7 +384,7 @@ _Figure 1: Structured .NET Learning Journey from Fundamentals to Advanced System
 
 ```text
 learn-dotnet/
-├── 01-csharp-basics/ ... 09-auth/     # Maintained learning phases
+├── 01-csharp-basics/ ... 11-testing/      # Maintained learning phases
 │   ├── docs/                          # Publishable articles
 │   ├── src/                           # Runnable examples and implementations
 │   ├── exercises/                     # Practice projects where applicable
@@ -409,7 +430,7 @@ module/
 
 ## 🛠️ Tools & Technologies
 
-- **C# / .NET 8 and .NET 10**
+- **C# / .NET 10**
 - **ASP.NET Core**
 - **Entity Framework Core**
 - **SQLite for the fast EF Core relational suite; production-provider gates are documented separately**

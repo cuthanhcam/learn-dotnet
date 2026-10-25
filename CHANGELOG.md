@@ -8,11 +8,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Phase 11 unit-testing foundations: offline loan-reminder workflow, deterministic time, boundary
+  theories, recording doubles, awaited completion, failure/cancellation contracts, and guided exercises.
+- Beginner start guide with first-run commands, SDK/runtime troubleshooting, and a prioritized
+  repository audit covering runtime migration, Phase 11–15, and the remaining GoF lessons.
+- A shared fail-fast PowerShell validation entry point for local, VS Code, and Windows/Linux CI.
+- Phase 10B GoF track with focused category solutions, Strategy pricing variants, Factory Method
+  report exporters, Adapter shipping integration, 70 specifications, topic-sized branches, and
+  diagram-backed articles with modern C# alternatives and explicit production boundaries.
+- Phase 10 architecture curriculum with immutable enrollment aggregates, bounded read projections,
+  conditional relational writes, durable request receipts, outbox/inbox recovery, independently owned
+  notification state, authenticated v1 HTTP endpoints, two ADRs, and 67 executable specifications.
 - Repository-wide `.slnx` workspace for all maintained projects.
 - Central package management, dependency vulnerability audit, CodeQL, Dependabot, and documentation gates.
 
 ### Changed
 
+- Migrated Phases 01–06 and their exercises, tests, and benchmarks to .NET 10 through separate
+  reviewed PRs. All maintained projects inherit the root SDK; CI and setup now require only .NET 10.
+- The inventory gate rejects inconsistent target frameworks and nested maintained SDK selectors.
+- Markdown structure checks now include phase entry points and fail on missing configured roots;
+  article metadata validation resolves paths relative to the repository.
+- Clarified .NET 8 support status and string comparison comments for beginners.
 - CI now restores, builds, and tests the maintained master solution once and excludes historical code.
 - Safe configuration, migration history, and dependency lock files are treated as source-controlled contracts.
 

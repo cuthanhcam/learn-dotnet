@@ -10,7 +10,7 @@ estimated-reading-minutes: 18
 topics: [dotnet, clr, jit, assemblies]
 prerequisites: [csharp-fundamentals-roadmap]
 status: maintained
-last-reviewed: 2026-08-15
+last-reviewed: 2026-10-25
 ---
 
 # 🌍 .NET Ecosystem Fundamentals
@@ -33,21 +33,24 @@ Think of it like:
 ## Different .NET Versions
 
 ### ❌ .NET Framework (Legacy)
-- Old version (Windows only, 2002-2023)
-- Don't learn this
+- Windows-only platform used by existing applications; it has its own servicing lifecycle.
+- Learn it when maintaining an application that depends on it. This course uses modern .NET.
 
 ### ✅ .NET Core (Modern, 2016+)
 - Cross-platform (Windows, Mac, Linux)
 - Fast, lightweight
-- Version 3.1, 5, 6, 7, 8...
+- The .NET Core name covers releases 1.0 through 3.1.
 
 ### ✅ .NET (Current Name, 2020+)
 - Renamed from ".NET Core"
-- Latest: **.NET 8 LTS** (Long-Term Support)
-- What you should use
+- Releases from .NET 5 onward use the name **.NET**.
+- This course uses **.NET 10 LTS** (Long-Term Support).
 
 ### 📦 What We Use
-- **.NET 8 LTS** - Stable, supported until 2026
+- **.NET 10 LTS**, with the SDK selected by the root `global.json`.
+- Check the [official support policy](https://dotnet.microsoft.com/en-us/platform/support/policy)
+  for servicing dates and the [breaking-change catalog](https://learn.microsoft.com/en-us/dotnet/core/compatibility/10)
+  before changing a runtime target. An LTS label does not replace patch maintenance.
 
 ---
 
@@ -189,7 +192,7 @@ LearnDotnet.CSharpBasics.dll
 ```
 bin/
 ├── Debug/  or Release/
-    ├── net8.0/
+    ├── net10.0/
         ├── CSharpBasics.ConsoleApp.dll
         ├── CSharpBasics.Examples.dll
         └── ... (all dependencies)

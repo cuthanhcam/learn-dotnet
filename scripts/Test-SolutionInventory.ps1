@@ -2,6 +2,7 @@
 param(
     [string]$Solution = "learn-dotnet.slnx",
     [string]$WorkspaceSettings = ".vscode/settings.json",
+    [string]$ExpectedTargetFramework = "net10.0",
     [string[]]$Roots = @(
         "01-csharp-basics",
         "02-oop",
@@ -11,7 +12,9 @@ param(
         "06-async-concurrency",
         "07-aspnet-core",
         "08-ef-core",
-        "09-auth"
+        "09-auth",
+        "10-architecture",
+        "11-testing"
     )
 )
 
@@ -36,9 +39,24 @@ if ($workspaceConfiguration.'dotnet.defaultSolution' -ne $Solution) {
 $expected = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
 foreach ($root in $Roots) {
     $absoluteRoot = Join-Path $repositoryRoot $root
+    $nestedSdkSelectors = @(Get-ChildItem -LiteralPath $absoluteRoot -Recurse -File -Filter "global.json" |
+        Where-Object { $_.FullName -notmatch '[\\/](bin|obj|artifacts|BenchmarkDotNet\.Artifacts)[\\/]' })
+    if ($nestedSdkSelectors.Count -gt 0) {
+        throw "Maintained phases must inherit the root SDK selection; remove nested global.json: $($nestedSdkSelectors.FullName -join ', ')"
+    }
+
     foreach ($project in Get-ChildItem -LiteralPath $absoluteRoot -Recurse -File -Filter "*.csproj" |
         Where-Object { $_.FullName -notmatch '[\\/](bin|obj|artifacts)[\\/]' }) {
         $relative = $project.FullName.Substring($repositoryRoot.Length).TrimStart('\', '/').Replace('\', '/')
+        # Keep the learning runtime explicit in each project, rather than silently inheriting a
+        # different target or adding a second runtime that the course does not validate.
+        [xml]$projectXml = Get-Content -LiteralPath $project.FullName -Raw -Encoding utf8
+        $targetFrameworks = @($projectXml.GetElementsByTagName("TargetFramework"))
+        if ($targetFrameworks.Count -ne 1 -or
+            $targetFrameworks[0].InnerText -ne $ExpectedTargetFramework -or
+            $projectXml.GetElementsByTagName("TargetFrameworks").Count -ne 0) {
+            throw "${relative}: maintained projects must declare exactly one TargetFramework '$ExpectedTargetFramework'."
+        }
         [void]$expected.Add($relative)
     }
 }
@@ -63,5 +81,5 @@ if ($missing.Count -gt 0 -or $unexpected.Count -gt 0) {
     exit 1
 }
 
-Write-Output "Validated master solution inventory and VS Code default: $($actual.Count) maintained projects."
+Write-Output "Validated master solution inventory, VS Code default, and root SDK inheritance: $($actual.Count) maintained $ExpectedTargetFramework projects."
 $global:LASTEXITCODE = 0

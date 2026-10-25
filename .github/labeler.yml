@@ -25,6 +25,12 @@ phase-08:
 phase-09:
   - changed-files:
       - any-glob-to-any-file: "09-auth/**"
+phase-10:
+  - changed-files:
+      - any-glob-to-any-file: "10-architecture/**"
+phase-11:
+  - changed-files:
+      - any-glob-to-any-file: "11-testing/**"
 documentation:
   - changed-files:
       - any-glob-to-any-file:

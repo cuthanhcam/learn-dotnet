@@ -3,7 +3,7 @@ title: "Phase 06 — Async and Concurrency"
 description: "A detailed guide to tasks, async/await, cancellation, threads, synchronization, parallelism, channels, concurrent collections, deadlocks, and asynchronous design."
 phase: 6
 status: complete
-target-framework: net8.0
+target-framework: net10.0
 prerequisites: [phase-05-dsa]
 previous-phase: ../05-dsa/README.md
 next-phase: ../07-aspnet-core/README.md
@@ -14,6 +14,8 @@ next-phase: ../07-aspnet-core/README.md
 > Build responsive, bounded, cancellable, and race-free workflows without confusing asynchronous waiting with parallel execution.
 
 ## Learning Outcomes
+
+Projects target .NET 10 and inherit SDK selection from the repository-level `global.json`.
 
 After this phase, you should be able to explain task lifecycles, compose independent operations, propagate cancellation, distinguish I/O-bound work from CPU-bound work, protect shared state, limit concurrency, use channels for backpressure, select concurrent collections, diagnose deadlocks, and test asynchronous behavior without timing-dependent assertions.
 

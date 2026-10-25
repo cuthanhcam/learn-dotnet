@@ -10,7 +10,7 @@ estimated-reading-minutes: 22
 topics: [oop, composition, design-patterns]
 prerequisites: [csharp-polymorphism-and-abstraction]
 status: maintained
-last-reviewed: 2026-08-15
+last-reviewed: 2026-10-10
 ---
 
 # OOP Patterns (Intro)
@@ -98,12 +98,14 @@ Test the public contract, not that one collaborator method was called unless the
 - Publishing mutable internal state through an event payload.
 - Treating in-process events as reliable integration messages.
 - Naming ordinary conditional logic a “pattern” without clarifying the problem solved.
-- **Singleton:** Only one instance exists.
+- **Singleton (introductory construction example):** One lazily initialized instance is exposed. Safe
+  initialization does not make future mutable state thread-safe. Prefer explicit dependencies and
+  carefully chosen DI lifetimes over global access in application code.
 	```csharp
 	public class Singleton
 	{
-		private static Singleton _instance;
-		public static Singleton Instance => _instance ??= new Singleton();
+		private static readonly Lazy<Singleton> _instance = new(() => new Singleton());
+		public static Singleton Instance => _instance.Value;
 		private Singleton() { }
 	}
 	```
@@ -111,16 +113,25 @@ Test the public contract, not that one collaborator method was called unless the
 	```csharp
 	public class AnimalFactory
 	{
-		public static Animal Create(string type) =>
-			type == "dog" ? new Dog() : new Cat();
+		public static Animal Create(string type) => type switch
+		{
+			"dog" => new Dog(),
+			"cat" => new Cat(),
+			_ => throw new ArgumentException("Unknown animal type.", nameof(type))
+		};
 	}
 	```
 
 ## Practice Exercise
 
 **Task:**
-1. Implement a singleton Logger class.
-2. Create a factory for shapes (circle, rectangle).
+1. Explain safe singleton initialization versus safe shared mutable state. Do not replace the .NET
+   logging framework with a global custom logger in application code.
+2. Create a factory for shapes (circle, rectangle) and reject unknown inputs explicitly. This is a
+   simple factory exercise, not yet the full GoF Factory Method collaboration.
+
+For the advanced catalog, follow [Phase 10B's guided roadmap](../../10-architecture/docs/design-patterns/00-roadmap.md).
+Phase 02 intentionally remains a foundation rather than duplicating all GoF implementations.
 
 ## Interview Questions
 

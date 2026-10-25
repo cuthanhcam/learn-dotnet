@@ -3,7 +3,7 @@ title: "Phase 05 — Data Structures and Algorithms"
 description: "A practical C# curriculum for complexity analysis, core data structures, traversal, searching, sorting, recursion, backtracking, and deliberate problem-solving practice."
 phase: 5
 status: complete
-target-framework: net8.0
+target-framework: net10.0
 prerequisites: [phase-04-memory-performance]
 previous-phase: ../04-memory-performance/README.md
 next-phase: ../06-async-concurrency/README.md
@@ -31,6 +31,8 @@ You will learn:
 - Recursion, backtracking, pruning, and state restoration
 
 ## Setup
+
+Projects target .NET 10 and inherit SDK selection from the repository-level `global.json`.
 
 ```bash
 cd 05-dsa

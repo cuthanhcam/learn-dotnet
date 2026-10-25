@@ -3,7 +3,7 @@ title: "Phase 04 — Memory and Performance"
 description: "A measurement-first guide to .NET memory, garbage collection, allocation patterns, spans, pooling, profiling, and trustworthy benchmarking."
 phase: 4
 status: complete
-target-framework: net8.0
+target-framework: net10.0
 prerequisites: [phase-03-core-dotnet]
 previous-phase: ../03-core-dotnet/README.md
 next-phase: ../05-dsa/README.md
@@ -42,6 +42,9 @@ After completing this phase, you should be able to:
 - design BenchmarkDotNet comparisons that preserve observable work and representative inputs.
 
 ## Setup
+
+Projects target .NET 10 and inherit SDK selection from the root `global.json`. Re-run performance
+measurements after changing the runtime; results from different runtimes are not interchangeable.
 
 ```bash
 cd 04-memory-performance

@@ -3,7 +3,7 @@ title: "Phase 03 — Core .NET and the Standard Library"
 description: "A detailed guide to collections, generics, exceptions, LINQ, delegates, events, files, time, attributes, reflection, and nullable API contracts."
 phase: 3
 status: complete
-target-framework: net8.0
+target-framework: net10.0
 prerequisites: [phase-01-csharp-fundamentals, phase-02-oop]
 previous-phase: ../02-oop/README.md
 next-phase: ../04-memory-performance/README.md
@@ -38,7 +38,7 @@ After completing this phase, you should be able to:
 - [Phase 02 — Object-Oriented Programming](../02-oop/README.md)
 - The SDK selected by the repository-level [`global.json`](../global.json)
 
-Projects target .NET 8. A newer compatible SDK may build that target framework; the SDK version and target framework describe different parts of the toolchain.
+Projects target .NET 10 and inherit the SDK selection from the repository-level `global.json`, including when commands run inside this phase. The SDK and target framework describe different parts of the toolchain.
 
 ## Study path
 
