@@ -2,7 +2,7 @@
 title: "Phase 10 — Architecture and Best Practices"
 description: "Build an enrollment module with explicit business invariants, application boundaries, concurrency contracts, and architecture decisions."
 phase: 10
-status: complete
+status: in-progress
 target-framework: net10.0
 prerequisites: [phase-09-auth]
 previous-phase: ../09-auth/README.md
@@ -33,6 +33,8 @@ and queries, and justify modular monolith versus service boundaries with evidenc
 authorization, transactions, idempotency, and concurrency across the complete request path.
 
 ## Study Path
+
+For a file-by-file reading route, start with the [guided source tour](docs/12-guided-source-tour.md).
 
 | Order | Article | Current scope |
 |---:|---|---|
@@ -85,7 +87,7 @@ The basic console demonstrates successful enrollment, a repeated request for the
 full offering. The relational walkthrough uses two real SQLite databases to show durable request replay,
 outbox dispatch, and one deduplicated welcome work item without requiring an external identity provider.
 
-The architecture track has **92 executable specifications**: 70 domain/application/relational/module/fitness cases
+The architecture track has **100 executable specifications**: 78 domain/application/relational/module/fitness cases
 and 22 HTTP/JWT cases. Tests cover immutable snapshots, invalid restoration, racing saves, stale SQL
 writes, explicit conflicts, missing resources, validation, cancellation, rollback after mutation,
 request-key misuse, delivery acknowledgement loss, bounded batches, and real token validation failures.
