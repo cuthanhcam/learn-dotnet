@@ -67,7 +67,7 @@ commit into `develop` after those checks pass. The existing promotion PR into `m
 Dependency versions and teaching implementations remain scoped separately from the runtime migration.
 Historical statements such as “.NET 8 introduced TimeProvider” remain valid and are preserved.
 
-All 59 maintained projects now target `net10.0`; the six phase SDK selectors have been removed and
+At runtime migration completion, all 59 maintained projects targeted `net10.0`; the six phase SDK selectors were removed and
 the root selector explicitly disallows prerelease SDKs. CI and CodeQL install SDK 10 only. Setup docs
 require a single SDK, and the inventory gate rejects framework drift or nested SDK selectors.
 The existing 588 behavior contracts pass after retargeting. SDK selection and console smoke runs were
@@ -81,7 +81,7 @@ empty folders or unchecked lists does not complete a phase.
 | Priority / sequence | Deliverable | Exit criteria |
 |---|---|---|
 | P0 — delivered in runtime slices above | Move Phases 01–06 to .NET 10 before 2026-11-10 | Target frameworks, root SDK inheritance, locks, local docs, 588 tests, and Windows/Linux/security checks validated; repository baseline finalization is the last slice |
-| P1 — next curriculum phase | Phase 11 testing foundations | A runnable unit/integration teaching scenario with assertions, test naming, fixtures/lifetimes, deterministic time, cancellation, failure paths, test doubles, and exercises; explain tests already present in Phases 01–10 |
+| P1 — in progress | [Phase 11 testing foundations](../11-testing/README.md) | Unit contracts, deterministic time, explicit doubles, failure/cancellation, and exercises delivered; HTTP integration and fixture lifetime are the next slice |
 | P1 — second testing slice | Production database tests | Pick and document one production provider; add isolated Testcontainers fixtures, migration-from-empty and upgrade tests, concurrency/query assertions, cleanup, and a clearly named CI job requiring Docker; SQLite tests remain a distinct fast suite |
 | P1 — parallel curriculum track in later PRs | Continue Phase 10B | Deliver the remaining 20 GoF patterns in the sequence of the [approved curriculum](design-patterns-curriculum-plan.md); each gets a baseline, refactor, modern alternative, runner command, focused tests, article, trade-offs, and exercises |
 | P2 — after testing foundations | Phase 12 first capstone | One bounded API combining identity, persistence, pagination, idempotency, and authorization; include acceptance criteria and negative HTTP tests rather than copying every architecture pattern |

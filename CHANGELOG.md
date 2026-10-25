@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Phase 11 unit-testing foundations: offline loan-reminder workflow, deterministic time, boundary
+  theories, recording doubles, awaited completion, failure/cancellation contracts, and guided exercises.
 - Beginner start guide with first-run commands, SDK/runtime troubleshooting, and a prioritized
   repository audit covering runtime migration, Phase 11–15, and the remaining GoF lessons.
 - A shared fail-fast PowerShell validation entry point for local, VS Code, and Windows/Linux CI.
