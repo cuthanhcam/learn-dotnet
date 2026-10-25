@@ -51,6 +51,22 @@ must still be verified after push before accepting the promotion PR.
 
 ## Delivery backlog
 
+### Runtime migration delivery sequence
+
+Runtime maintenance is split into small branches, each based on the preceding verified `develop`.
+Each branch gets its own PR, full local validation, hosted Windows/Linux/security checks, and a merge
+commit into `develop` after those checks pass. The existing promotion PR into `main` stays open.
+
+| Sequence | Branch | Scope |
+|---:|---|---|
+| 1 | `chore/net10-phases-01-02` | Retarget basics/OOP, regenerate locks, inherit root SDK, update local docs |
+| 2 | `chore/net10-phases-03-04` | Retarget core/performance, regenerate locks, inherit root SDK, update local docs |
+| 3 | `chore/net10-phases-05-06` | Retarget DSA/async, regenerate locks, inherit root SDK, update local docs |
+| 4 | `chore/net10-repository-baseline` | Remove mixed-runtime setup guidance and CI installation, verify one SDK baseline |
+
+Dependency versions and teaching implementations remain scoped separately from the runtime migration.
+Historical statements such as “.NET 8 introduced TimeProvider” remain valid and are preserved.
+
 Use one bounded feature branch/PR per deliverable. Each row has observable exit criteria; creating
 empty folders or unchecked lists does not complete a phase.
 
