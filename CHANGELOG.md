@@ -26,6 +26,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Phase 10 in-memory/SQLite stores now share definition/version/cancellation contract tests and reject
+  incompatible immutable metadata; the handler observes cancellation before and after lookup.
 - Migrated Phases 01–06 and their exercises, tests, and benchmarks to .NET 10 through separate
   reviewed PRs. All maintained projects inherit the root SDK; CI and setup now require only .NET 10.
 - The inventory gate rejects inconsistent target frameworks and nested maintained SDK selectors.

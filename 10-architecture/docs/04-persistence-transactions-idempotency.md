@@ -10,7 +10,7 @@ estimated-reading-minutes: 35
 topics: [ef-core, transactions, optimistic-concurrency, idempotency, persistence]
 prerequisites: [architecture-queries-dtos-mapping-validation]
 status: maintained
-last-reviewed: 2026-10-10
+last-reviewed: 2026-10-25
 ---
 
 # Persistence, Transactions, and Durable Idempotency
@@ -62,12 +62,22 @@ The adapter's update is conceptually:
 ```sql
 UPDATE Offerings
 SET EnrolledCount = @count, LearnersJson = @learners, Version = @nextVersion
-WHERE Id = @id AND Version = @expectedVersion;
+WHERE Id = @id AND Version = @expectedVersion
+  AND Title = @title AND Capacity = @capacity;
 ```
 
 One affected row means the caller owned the expected version at mutation time. Zero means missing or
 changed state and returns `false` to the application contract. The handler exposes `Conflict`; it does
 not relabel a lost update as a full offering.
+
+Enrollment does not edit title/capacity. Both adapters reject a snapshot with an incompatible immutable
+definition, instead of one adapter replacing that metadata while the other silently retains it.
+Callers derive the candidate using `Enroll` on a loaded aggregate; `Restore` is for persistence
+reconstitution, not an alternative edit API. The shared
+[store contract suite](../tests/Learning.Architecture.Tests/Contracts/CourseOfferingStoreContractTests.cs)
+runs the same save, stale-version, definition, missing-state, invalid-transition, and cancellation
+cases against the dictionary and real SQLite adapters. SQLite's current title comparison is case
+sensitive. Preserve that contract explicitly when choosing another provider/collation.
 
 `ExecuteUpdateAsync` executes immediately and bypasses the change tracker. The explicit `WHERE Version`
 predicate is therefore essential. Marking a property as a concurrency token alone does not make this
@@ -138,6 +148,10 @@ Cancellation before work should prevent writes. Cancellation during work should 
 calls, and an uncommitted transaction should be disposed. Cancellation near commit is more subtle:
 the caller may not know whether storage committed. Never tell a user “nothing happened” merely because
 the HTTP request was canceled.
+
+The introductory handler also checks cancellation before lookup and after the awaited lookup, so a
+port that completes while ignoring cancellation cannot cause it to deliberately start a new write.
+This checkpoint does not make a remote commit atomic with token cancellation.
 
 The recovery protocol is to retry the same request key in a fresh scope. A receipt proves the durable
 outcome; absence permits another attempt under the concurrency rules. Do not reuse a failed context,

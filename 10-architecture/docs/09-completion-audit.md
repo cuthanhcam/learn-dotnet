@@ -10,7 +10,7 @@ estimated-reading-minutes: 18
 topics: [architecture, completion-audit, testing, production-readiness]
 prerequisites: [architecture-common-pitfalls]
 status: maintained
-last-reviewed: 2026-10-10
+last-reviewed: 2026-10-25
 ---
 
 # Phase 10 Completion Audit and Testing Handoff
@@ -62,7 +62,7 @@ dotnet format whitespace learn-dotnet.slnx --no-restore --verify-no-changes
 ```
 
 The phase contains nine projects: seven source projects and two test projects. Its current automated
-suite has 67 specifications: 45 core/relational/module fitness cases and 22 HTTP/JWT integration cases.
+suite has 92 specifications: 70 core/relational/module fitness cases and 22 HTTP/JWT integration cases.
 These are discovered test cases, including theory rows, not a code-coverage percentage.
 
 The basic console prints `Enrolled`, `AlreadyEnrolled`, and `Full`. The relational console prints one
