@@ -18,14 +18,14 @@ dotnet --list-runtimes
 dotnet --version
 ```
 
-The root `global.json` selects .NET SDK 10. Phases 01–04 inherit that selection and target .NET 10;
-Phases 05–06 temporarily retain their own SDK 8 selection when your working directory is inside those
-folders. A solution path does not change the current working directory or SDK selection. SDK 10 can
-build the earlier targets, but .NET 8 tests still need the .NET 8 runtime.
+The root `global.json` selects .NET SDK 10. All maintained phases inherit that selection and target
+.NET 10, including when your working directory is inside a phase. A solution path does not change
+the current working directory or SDK selection. Legacy projects have their own historical policies.
 
-As reviewed on 2026-10-25, .NET 8 support ends on **2026-11-10**. The earlier phases retain this target
-pending the [planned migration](docs/repository-audit-and-development-plan.md); keep the installed
-runtime patched. See the [official support policy](https://dotnet.microsoft.com/en-us/platform/support/policy).
+The phase runtime migration is complete; the remaining mixed-runtime setup instructions are removed
+in the final [repository baseline slice](docs/repository-audit-and-development-plan.md). Keep the
+installed .NET 10 runtime patched. See the
+[official support policy](https://dotnet.microsoft.com/en-us/platform/support/policy).
 
 ## Complete your first lesson
 
