@@ -10,6 +10,7 @@ param(
         "08-ef-core/docs",
         "09-auth/docs",
         "10-architecture/docs",
+        "11-testing/docs",
         "docs"
     )
 )

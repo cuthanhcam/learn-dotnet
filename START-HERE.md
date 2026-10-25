@@ -55,12 +55,14 @@ Passing existing tests alone does not mean you have mastered the topic.
 | Understand performance and algorithms | Continue through Phase 04 → 05 → 06; benchmarks are optional |
 | Build APIs | Complete the foundations, then Phase 07 → 08 → 09 → 10 |
 | Study design patterns | Finish OOP and architecture, then use the [10B lesson catalog](10-architecture/design-patterns/README.md) |
+| Learn to design tests | Follow the [Phase 11 testing roadmap](11-testing/docs/00-roadmap.md) after the earlier phases |
 | Contribute a change | Read [Contributing](CONTRIBUTING.md), then run `pwsh -NoProfile -File scripts/Validate-Repository.ps1` |
 | Find unfinished material | Read the [audit and delivery plan](docs/repository-audit-and-development-plan.md) |
 
 `Completed` in the course index means the scoped lesson set is delivered, not that the subject is
 exhausted or that the sample is ready for an internet-facing production deployment. Phase 10B has
-3 of 23 GoF patterns. Phase 11–15 are planned and their folders do not yet exist.
+3 of 23 GoF patterns. Phase 11 is in progress with runnable unit foundations; Phases 12–15 are planned
+and their folders do not yet exist.
 
 ## Find the right files
 

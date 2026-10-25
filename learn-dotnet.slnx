@@ -170,4 +170,14 @@
     <Project Path="10-architecture/design-patterns/tests/Learning.Patterns.Creational.Tests/Learning.Patterns.Creational.Tests.csproj" />
     <Project Path="10-architecture/design-patterns/tests/Learning.Patterns.Behavioral.Tests/Learning.Patterns.Behavioral.Tests.csproj" />
   </Folder>
+  <Folder Name="/11 - Testing/">
+    <File Path="11-testing/README.md" />
+  </Folder>
+  <Folder Name="/11 - Testing/src/">
+    <Project Path="11-testing/src/Learning.Testing.Examples/Learning.Testing.Examples.csproj" />
+    <Project Path="11-testing/src/Learning.Testing.ConsoleApp/Learning.Testing.ConsoleApp.csproj" />
+  </Folder>
+  <Folder Name="/11 - Testing/tests/">
+    <Project Path="11-testing/tests/Learning.Testing.UnitTests/Learning.Testing.UnitTests.csproj" />
+  </Folder>
 </Solution>

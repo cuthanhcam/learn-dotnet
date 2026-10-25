@@ -49,12 +49,14 @@ This repository is intended for **learning, practice, and long-term reference**,
 | 08 | [Entity Framework Core](08-ef-core/README.md) | Completed | .NET 10 |
 | 09 | [Authentication and Authorization](09-auth/README.md) | Completed | .NET 10 |
 | 10 | [Architecture and Best Practices](10-architecture/README.md) | Architecture complete; design-patterns track in progress | .NET 10 |
-| 11–15 | Testing, projects, DevOps, system design, observability | Planned | To be defined |
+| 11 | [Testing](11-testing/README.md) | Unit foundations delivered; HTTP integration next | .NET 10 |
+| 12–15 | Projects, DevOps, system design, observability | Planned | To be defined |
 
-The maintained workspace includes Phases 01–10 and the first three Phase 10B pattern lessons.
+The maintained workspace includes Phases 01–11 and the first three Phase 10B pattern lessons.
 The validation scripts report the current project and article inventory; test runs report executable
 case counts. `legacy/` preserves historical code for comparison but is excluded from the maintained
-solution and quality gates. Completed phases cover their stated scope; Phases 11–15 below are plans.
+solution and quality gates. Completed phases cover their stated scope; Phase 11 is in progress and
+Phases 12–15 below are plans.
 
 All maintained phases now target .NET 10 and inherit the root SDK selection. The runtime migration
 is recorded in the [development plan](docs/repository-audit-and-development-plan.md). Local setup,
@@ -64,7 +66,7 @@ CI, and CodeQL use this single runtime baseline; .NET 8 is no longer required fo
 
 ## 🧩 Open the Complete Workspace
 
-Use the root solution to browse every active project from Phases 01–10 in one Visual Studio window:
+Use the root solution to browse every active project from Phases 01–11 in one Visual Studio window:
 
 ```text
 learn-dotnet.slnx
@@ -294,6 +296,9 @@ for all 23 patterns, phase ownership, focused solution structure, and incrementa
 
 ### **11. Testing**
 
+Start with the [runnable testing curriculum](11-testing/README.md). Unit contracts, deterministic time,
+test doubles, cancellation, and failure lessons are delivered; the phase roadmap identifies later slices.
+
 📁 `11-testing/`
 
 > Ensure code quality and reliability
@@ -379,7 +384,7 @@ for all 23 patterns, phase ownership, focused solution structure, and incrementa
 
 ```text
 learn-dotnet/
-├── 01-csharp-basics/ ... 10-architecture/ # Maintained learning phases
+├── 01-csharp-basics/ ... 11-testing/      # Maintained learning phases
 │   ├── docs/                          # Publishable articles
 │   ├── src/                           # Runnable examples and implementations
 │   ├── exercises/                     # Practice projects where applicable
