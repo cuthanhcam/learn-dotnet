@@ -32,8 +32,11 @@ public sealed class EfCourseOfferingStore(EnrollmentDbContext database) : ICours
         // One SQL UPDATE performs comparison and mutation atomically. Checking Version in C# and
         // then issuing an unconditional UPDATE would reintroduce the last-seat lost-update bug.
         // ExecuteUpdate executes immediately, bypasses the tracker, and joins any current transaction.
+        // Title and capacity are not edited by enrollment. Reject an incompatible reconstructed
+        // definition rather than saving memberships under metadata different from the caller's view.
         int affected = await database.Offerings
-            .Where(row => row.Id == offering.Id && row.Version == expectedVersion)
+            .Where(row => row.Id == offering.Id && row.Version == expectedVersion
+                && row.Title == offering.Title && row.Capacity == offering.Capacity)
             .ExecuteUpdateAsync(update => update
                 .SetProperty(row => row.EnrolledCount, offering.EnrolledCount)
                 .SetProperty(row => row.LearnersJson, learners)

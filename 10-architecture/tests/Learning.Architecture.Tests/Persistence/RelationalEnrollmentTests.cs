@@ -10,6 +10,66 @@ namespace Learning.Architecture.Tests.Persistence;
 public sealed class RelationalEnrollmentTests
 {
     [Fact]
+    public async Task NotFoundReceipt_ReplaysOriginalResultWithoutCreatingEnrollment()
+    {
+        await using var fixture = await EnrollmentDatabase.CreateAsync();
+        var request = new EnrollmentRequest(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+        await using (var first = fixture.CreateContext())
+        {
+            EnrollmentRequestResult original = await new DurableEnrollmentRequests(first).ExecuteAsync(request);
+            Assert.Equal(EnrollLearnerStatus.NotFound, original.Enrollment!.Status);
+            Assert.False(original.Replayed);
+        }
+
+        await using var second = fixture.CreateContext();
+        EnrollmentRequestResult replay = await new DurableEnrollmentRequests(second).ExecuteAsync(request);
+        Assert.True(replay.Replayed);
+        Assert.Equal(EnrollLearnerStatus.NotFound, replay.Enrollment!.Status);
+        Assert.Null(replay.Enrollment.Version);
+        Assert.Single(await second.Receipts.ToArrayAsync());
+        Assert.Empty(await second.Outbox.ToArrayAsync());
+        Assert.Empty(await second.Offerings.ToArrayAsync());
+    }
+
+    [Theory]
+    [InlineData(99, 1L)]
+    [InlineData(4, null)]
+    [InlineData(0, null)]
+    [InlineData(0, 0L)]
+    [InlineData(1, 0L)]
+    [InlineData(2, -1L)]
+    [InlineData(3, 1L)]
+    public async Task InvalidReceipt_IsRejectedWithoutChangingDurableState(int status, long? version)
+    {
+        CourseOffering offering = CourseOffering.Create(Guid.NewGuid(), "Corrupt receipt", 2);
+        await using var fixture = await EnrollmentDatabase.CreateAsync(offering);
+        var request = new EnrollmentRequest(Guid.NewGuid(), offering.Id, Guid.NewGuid());
+        await using (var seed = fixture.CreateContext())
+        {
+            seed.Receipts.Add(new EnrollmentReceiptRow
+            {
+                RequestId = request.RequestId,
+                OfferingId = request.OfferingId,
+                LearnerId = request.LearnerId,
+                Status = status,
+                Version = version
+            });
+            await seed.SaveChangesAsync();
+        }
+
+        await using (var replay = fixture.CreateContext())
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await new DurableEnrollmentRequests(replay).ExecuteAsync(request));
+
+        await using var verification = fixture.CreateContext();
+        Assert.Equal(0, (await verification.Offerings.SingleAsync()).EnrolledCount);
+        Assert.Empty(await verification.Outbox.ToArrayAsync());
+        EnrollmentReceiptRow unchanged = await verification.Receipts.SingleAsync();
+        Assert.Equal(status, unchanged.Status);
+        Assert.Equal(version, unchanged.Version);
+    }
+
+    [Fact]
     public async Task IndependentContexts_RejectTheSecondStaleSnapshot()
     {
         CourseOffering initial = CourseOffering.Create(Guid.NewGuid(), "Last seat", 1);

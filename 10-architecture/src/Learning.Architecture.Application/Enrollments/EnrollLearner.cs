@@ -23,8 +23,12 @@ public sealed class EnrollLearnerHandler(ICourseOfferingStore offerings)
         if (command.OfferingId == Guid.Empty || command.LearnerId == Guid.Empty)
             throw new ArgumentException("Offering and learner identifiers are required.", nameof(command));
 
+        cancellationToken.ThrowIfCancellationRequested();
         CourseOffering? current = await offerings.FindAsync(command.OfferingId, cancellationToken)
             .ConfigureAwait(false);
+        // A port may complete without observing the token. Do not begin a write after cancellation
+        // has been observed here; cancellation during the actual commit still requires recovery.
+        cancellationToken.ThrowIfCancellationRequested();
         if (current is null)
             return new EnrollLearnerResult(EnrollLearnerStatus.NotFound);
 

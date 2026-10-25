@@ -11,9 +11,11 @@ public interface ICourseOfferingStore
     ValueTask<CourseOffering?> FindAsync(Guid id, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Saves only if the stored version still equals expectedVersion. False means a concurrent change
-    /// or deletion; callers must not present it as a successful enrollment. Database implementations
-    /// should use a concurrency token or a conditional update in a transaction.
+    /// Saves the next enrollment snapshot only if the stored version equals expectedVersion and its
+    /// immutable title/capacity match the supplied snapshot. The snapshot must advance exactly one
+    /// version. False means a missing or incompatible stored state; it must not be reported as success.
+    /// Callers derive the snapshot with Enroll on the loaded aggregate, not arbitrary reconstruction.
+    /// Database implementations must perform comparison and mutation atomically.
     /// </summary>
     ValueTask<bool> TrySaveAsync(CourseOffering offering, long expectedVersion,
         CancellationToken cancellationToken);

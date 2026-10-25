@@ -26,6 +26,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Factory Method export captures formatter metadata once and returns the validated snapshot,
+  including when an extension product has a stateful metadata property.
+- Phase 10 HTTP mapping recognizes EF-wrapped SQLite busy/locked failures and rejects invalid
+  success outcomes, with pipeline tests for retry hints and private diagnostic suppression.
+- Phase 10 durable replay rejects malformed receipt results without mutating enrollment state;
+  the completion audit now links delivered Phase 11 lessons and distinguishes the unfinished GoF catalog.
+- Phase 10 in-memory/SQLite stores now share definition/version/cancellation contract tests and reject
+  incompatible immutable metadata; the handler observes cancellation before and after lookup.
 - Migrated Phases 01–06 and their exercises, tests, and benchmarks to .NET 10 through separate
   reviewed PRs. All maintained projects inherit the root SDK; CI and setup now require only .NET 10.
 - The inventory gate rejects inconsistent target frameworks and nested maintained SDK selectors.

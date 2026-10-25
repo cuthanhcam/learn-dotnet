@@ -49,6 +49,7 @@ public sealed class InMemoryCourseOfferingStore : ICourseOfferingStore, IOfferin
 
         bool saved = _offerings.TryGetValue(offering.Id, out CourseOffering? current)
             && current.Version == expectedVersion
+            && current.Title == offering.Title && current.Capacity == offering.Capacity
             && _offerings.TryUpdate(offering.Id, offering, current);
         return ValueTask.FromResult(saved);
     }
