@@ -36,7 +36,7 @@ After completing this phase, you should be able to:
 - The SDK selected by the repository-level [`global.json`](../global.json).
 - An editor with C# support: Visual Studio, VS Code with C# Dev Kit, or JetBrains Rider.
 
-The projects target .NET 8 so the learning material remains usable on the current long-term-support baseline. The SDK may be newer because it can build earlier target frameworks. Do not confuse the installed SDK version with a project's target framework.
+The projects currently target .NET 8. Its support ends on 2026-11-10; see the [runtime migration plan](../docs/repository-audit-and-development-plan.md). The root directory selects SDK 10, while this phase's nested `global.json` selects SDK 8 when your working directory is inside the phase. Do not confuse SDK selection with the project's target framework. See [Start Here](../START-HERE.md) for setup and first-run commands.
 
 ## Recommended learning path
 

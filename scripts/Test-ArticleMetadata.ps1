@@ -15,6 +15,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$repositoryRoot = Split-Path -Parent $PSScriptRoot
 
 $requiredKeys = @(
     "title",
@@ -38,11 +39,12 @@ $articles = [System.Collections.Generic.List[object]]::new()
 $errors = [System.Collections.Generic.List[string]]::new()
 
 foreach ($root in $Roots) {
-    if (-not (Test-Path -LiteralPath $root)) {
-        continue
+    $absoluteRoot = Join-Path $repositoryRoot $root
+    if (-not (Test-Path -LiteralPath $absoluteRoot)) {
+        throw "Configured article root does not exist: $root"
     }
 
-    foreach ($file in Get-ChildItem -LiteralPath $root -Recurse -Filter *.md) {
+    foreach ($file in Get-ChildItem -LiteralPath $absoluteRoot -Recurse -File -Filter *.md) {
         $lines = Get-Content -LiteralPath $file.FullName -Encoding utf8
         if ($lines.Count -lt 3 -or $lines[0] -ne "---") {
             $errors.Add("$($file.FullName): missing YAML front matter")

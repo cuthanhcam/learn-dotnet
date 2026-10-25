@@ -13,6 +13,7 @@ param(
         "10-architecture",
         "docs",
         "README.md",
+        "START-HERE.md",
         "CONTRIBUTING.md",
         "SECURITY.md",
         "CHANGELOG.md"

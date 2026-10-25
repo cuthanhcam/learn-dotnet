@@ -24,6 +24,17 @@ also require the .NET 8 runtime to execute their tests.
 
 ## Build and Test
 
+Run the same maintained gates as CI with one command from any directory:
+
+```powershell
+pwsh -NoProfile -File scripts/Validate-Repository.ps1
+```
+
+The path above assumes the repository root; use an absolute script path from another directory.
+The script selects the root SDK, stops on the first failed gate, and saves test/coverage output under
+`artifacts/test-results/`. For a first lesson rather than a repository contribution, use
+[Start Here](START-HERE.md). The equivalent individual commands follow.
+
 ```powershell
 dotnet tool restore
 dotnet restore learn-dotnet.slnx --locked-mode

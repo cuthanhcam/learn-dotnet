@@ -10,7 +10,7 @@ estimated-reading-minutes: 14
 topics: [github-actions, automation, supply-chain-security, maintenance]
 prerequisites: [article-metadata-schema]
 status: maintained
-last-reviewed: 2026-09-02
+last-reviewed: 2026-10-25
 ---
 
 # Repository Automation and Security Gates
@@ -33,6 +33,11 @@ token permissions, and a documented decision about whether failure blocks a pull
 | Gitleaks | PRs, protected pushes, weekly | New findings block | detect credential patterns in committed content and history |
 | PR Labeler | PR metadata changes | Non-content mutation only | apply phase and change-type labels |
 | OpenSSF Scorecard | `main`, weekly/manual | Does not block PRs | publish repository security-posture findings as SARIF |
+
+CI runs `scripts/Validate-Repository.ps1` on both `ubuntu-latest` and `windows-latest`. Local and
+VS Code full-validation commands use the same script. Each platform uploads its own TRX and coverage
+artifact, including on failure; neither platform job cancels the other when it fails. See
+[Contributing](../CONTRIBUTING.md) for the equivalent individual commands.
 
 ## Permission and Trust Rules
 

@@ -11,6 +11,11 @@
 
 A structured journey from C# fundamentals to production-ready backend development with .NET
 
+**New here? Follow [Start Here](START-HERE.md)** for prerequisites, your first runnable lesson,
+SDK troubleshooting, and the study sequence. See the
+[repository audit and development plan](docs/repository-audit-and-development-plan.md) for known gaps,
+delivery priorities, and completion gates.
+
 ---
 
 ## 📖 Overview
@@ -46,9 +51,14 @@ This repository is intended for **learning, practice, and long-term reference**,
 | 10 | [Architecture and Best Practices](10-architecture/README.md) | Architecture complete; design-patterns track in progress | .NET 10 |
 | 11–15 | Testing, projects, DevOps, system design, observability | Planned | To be defined |
 
-The maintained workspace currently contains 59 projects, 124 publishable articles, and 588 executable
-tests. `legacy/` preserves historical code for comparison but is excluded from the maintained solution
-and quality gates.
+The maintained workspace includes Phases 01–10 and the first three Phase 10B pattern lessons.
+The validation scripts report the current project and article inventory; test runs report executable
+case counts. `legacy/` preserves historical code for comparison but is excluded from the maintained
+solution and quality gates. Completed phases cover their stated scope; Phases 11–15 below are plans.
+
+Phases 01–06 currently target .NET 8, whose support ends on **2026-11-10**. A migration to .NET 10 is
+the first runtime-maintenance priority in the development plan. See the
+[official support policy](https://dotnet.microsoft.com/en-us/platform/support/policy).
 
 ---
 

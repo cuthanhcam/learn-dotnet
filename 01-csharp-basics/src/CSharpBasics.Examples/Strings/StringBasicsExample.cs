@@ -32,13 +32,13 @@
     /// - Use string.Equals with StringComparison param for case-insensitive
     /// - Use StringBuilder for heavy manipulation
     /// - Use Trim/TrimStart/TrimEnd appropriately
-    /// - Normalize case before comparisons
+    /// - Choose StringComparison explicitly instead of changing case just to compare
     /// 
     /// String comparison modes:
-    /// - Ordinal: code-unit comparison (fastest, culture-independent)
+    /// - Ordinal: UTF-16 code-unit comparison, culture-independent
     /// - OrdinalIgnoreCase: code-unit comparison, case-insensitive
-    /// - CurrentCulture: culture-aware (slower)
-    /// - InvariantCulture: culture-independent (slower than Ordinal)
+    /// - CurrentCulture: linguistic comparison using the current culture
+    /// - InvariantCulture: linguistic comparison using the invariant culture
     /// </summary>
     public static class StringBasicsExample
     {
@@ -179,7 +179,7 @@
             // Modern: string interpolation
             Console.WriteLine(BuildProfileLine(name, age));
 
-            // Old approach (discouraged):
+            // Composite formatting remains useful when the format is supplied separately:
             // string.Format("Name: {0}, Age: {1}", name, age)
             // $"Name: {name}, Age: {age}"  // Expression interpolation
 
@@ -266,7 +266,7 @@
 
             Console.WriteLine();
             Console.WriteLine("StringComparison options:");
-            Console.WriteLine("  Ordinal: fast, byte comparison, culture-independent");
+            Console.WriteLine("  Ordinal: UTF-16 code-unit comparison, culture-independent");
             Console.WriteLine("  OrdinalIgnoreCase: fast, case-insensitive");
             Console.WriteLine("  CurrentCulture: slower, culture-aware");
             Console.WriteLine("  InvariantCulture: slower, but consistent");

@@ -95,16 +95,9 @@
     },
     {
       "label": "Repository: Validate all",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        ".NET: Verify formatting",
-        ".NET: Test master solution (Release)",
-        "Repository: Article metadata",
-        "Repository: Markdown quality",
-        "Repository: Local Markdown links",
-        "Repository: Solution inventory",
-        "Repository: Package vulnerabilities"
-      ],
+      "type": "process",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-File", "scripts/Validate-Repository.ps1"],
       "problemMatcher": []
     }
   ]

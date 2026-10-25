@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Beginner start guide with first-run commands, SDK/runtime troubleshooting, and a prioritized
+  repository audit covering runtime migration, Phase 11–15, and the remaining GoF lessons.
+- A shared fail-fast PowerShell validation entry point for local, VS Code, and Windows/Linux CI.
 - Phase 10B GoF track with focused category solutions, Strategy pricing variants, Factory Method
   report exporters, Adapter shipping integration, 70 specifications, topic-sized branches, and
   diagram-backed articles with modern C# alternatives and explicit production boundaries.
@@ -19,6 +22,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Markdown structure checks now include phase entry points and fail on missing configured roots;
+  article metadata validation resolves paths relative to the repository.
+- Clarified .NET 8 support status and string comparison comments for beginners.
 - CI now restores, builds, and tests the maintained master solution once and excludes historical code.
 - Safe configuration, migration history, and dependency lock files are treated as source-controlled contracts.
 

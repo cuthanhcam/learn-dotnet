@@ -1,18 +1,19 @@
 [CmdletBinding()]
 param(
     [string[]]$Roots = @(
-        "01-csharp-basics/docs",
-        "02-oop/docs",
-        "03-core-dotnet/docs",
-        "04-memory-performance/docs",
-        "05-dsa/docs",
-        "06-async-concurrency/docs",
-        "07-aspnet-core/docs",
-        "08-ef-core/docs",
-        "09-auth/docs",
-        "10-architecture/docs",
+        "01-csharp-basics",
+        "02-oop",
+        "03-core-dotnet",
+        "04-memory-performance",
+        "05-dsa",
+        "06-async-concurrency",
+        "07-aspnet-core",
+        "08-ef-core",
+        "09-auth",
+        "10-architecture",
         "docs",
         "README.md",
+        "START-HERE.md",
         "CONTRIBUTING.md",
         "SECURITY.md",
         "CHANGELOG.md"
@@ -27,7 +28,7 @@ $checkedFiles = 0
 foreach ($root in $Roots) {
     $absoluteRoot = Join-Path $repositoryRoot $root
     if (-not (Test-Path -LiteralPath $absoluteRoot)) {
-        continue
+        throw "Configured Markdown root does not exist: $root"
     }
 
     $markdownFiles = if (Test-Path -LiteralPath $absoluteRoot -PathType Leaf) {
@@ -35,7 +36,7 @@ foreach ($root in $Roots) {
     }
     else {
         Get-ChildItem -LiteralPath $absoluteRoot -Recurse -File -Filter "*.md" |
-            Where-Object { $_.FullName -notmatch '[\\/](bin|obj|artifacts)[\\/]' }
+            Where-Object { $_.FullName -notmatch '[\\/](bin|obj|artifacts|BenchmarkDotNet\.Artifacts)[\\/]' }
     }
 
     foreach ($file in $markdownFiles) {
