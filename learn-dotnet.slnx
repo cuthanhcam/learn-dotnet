@@ -174,10 +174,12 @@
     <File Path="11-testing/README.md" />
   </Folder>
   <Folder Name="/11 - Testing/src/">
+    <Project Path="11-testing/src/Learning.Testing.Api/Learning.Testing.Api.csproj" />
     <Project Path="11-testing/src/Learning.Testing.Examples/Learning.Testing.Examples.csproj" />
     <Project Path="11-testing/src/Learning.Testing.ConsoleApp/Learning.Testing.ConsoleApp.csproj" />
   </Folder>
   <Folder Name="/11 - Testing/tests/">
+    <Project Path="11-testing/tests/Learning.Testing.IntegrationTests/Learning.Testing.IntegrationTests.csproj" />
     <Project Path="11-testing/tests/Learning.Testing.UnitTests/Learning.Testing.UnitTests.csproj" />
   </Folder>
 </Solution>

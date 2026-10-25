@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Phase 11 HTTP integration lesson with an offline API, real pipeline tests, Problem Details,
+  request-abort propagation, isolated write fixtures, and shared read-only host ownership.
 - Phase 11 unit-testing foundations: offline loan-reminder workflow, deterministic time, boundary
   theories, recording doubles, awaited completion, failure/cancellation contracts, and guided exercises.
 - Beginner start guide with first-run commands, SDK/runtime troubleshooting, and a prioritized

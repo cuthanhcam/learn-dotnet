@@ -26,13 +26,17 @@ machine time, or an external service that the test does not control.
 | Slice | Status | Scope and exit criteria |
 |---|---|---|
 | Unit foundations | Delivered | Pure deadline policy, awaited workflow, fixed clock, explicit doubles, failure/cancellation tests, console, docs and exercises |
-| HTTP integration | Next | Real routing/DI/serialization/error handling with controlled ports, status/body assertions, isolated state, and fixture-lifetime guidance |
+| HTTP integration | Delivered | Real routing/DI/serialization/error handling, status/body assertions, isolated state, cancellation, and fixture ownership |
 | Coverage and test quality | Planned | Reproducible coverage commands, branch versus line coverage, mutation exercises, filtered suites, test-data ownership, and failure diagnosis |
 | Production provider | Planned separately | One explicitly chosen provider, Docker fixtures, migration/upgrade and concurrency tests, cleanup, and a dedicated CI job |
 | Completion audit | Planned | Trace outcomes to code/tests, verify all commands, and document remaining operational boundaries |
 
 Each slice uses its own branch and PR into `develop`, following the existing runtime delivery model.
 Do not mark the whole phase complete merely because the first unit suite passes.
+
+Unit foundations were merged in [PR #90](https://github.com/cuthanhcam/learn-dotnet/pull/90) after all
+hosted checks passed. HTTP integration follows on `feature/11-testing-http-integration`, based on that
+verified `develop` rather than a stacked unmerged branch.
 
 ## Study sequence
 
@@ -41,8 +45,8 @@ Do not mark the whole phase complete merely because the first unit suite passes.
 3. Read [time, doubles, and async](02-time-doubles-async.md). Trace the same workflow through success,
    missing data, cancellation, and dependency failure.
 4. Attempt the exercises before consulting the reference implementation.
-5. Continue to the integration slice when it is delivered; it adds evidence about framework wiring,
-   not a replacement for unit-level boundary tests.
+5. Study [HTTP integration and fixtures](03-http-integration-fixtures.md). It adds evidence about
+   framework wiring and state ownership rather than replacing unit-level boundary tests.
 
 ## Reuse the earlier phases deliberately
 

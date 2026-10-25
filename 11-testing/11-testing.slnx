@@ -1,9 +1,11 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/Learning.Testing.Api/Learning.Testing.Api.csproj" />
     <Project Path="src/Learning.Testing.Examples/Learning.Testing.Examples.csproj" />
     <Project Path="src/Learning.Testing.ConsoleApp/Learning.Testing.ConsoleApp.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Learning.Testing.IntegrationTests/Learning.Testing.IntegrationTests.csproj" />
     <Project Path="tests/Learning.Testing.UnitTests/Learning.Testing.UnitTests.csproj" />
   </Folder>
 </Solution>
