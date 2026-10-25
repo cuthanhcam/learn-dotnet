@@ -41,8 +41,8 @@ This repository is intended for **learning, practice, and long-term reference**,
 |---:|---|---|---|
 | 01 | [C# Fundamentals](01-csharp-basics/README.md) | Completed | .NET 10 |
 | 02 | [Object-Oriented Programming](02-oop/README.md) | Completed | .NET 10 |
-| 03 | [Core .NET and Standard Library](03-core-dotnet/README.md) | Completed | .NET 8 |
-| 04 | [Memory and Performance](04-memory-performance/README.md) | Completed | .NET 8 |
+| 03 | [Core .NET and Standard Library](03-core-dotnet/README.md) | Completed | .NET 10 |
+| 04 | [Memory and Performance](04-memory-performance/README.md) | Completed | .NET 10 |
 | 05 | [Data Structures and Algorithms](05-dsa/README.md) | Completed | .NET 8 |
 | 06 | [Async and Concurrency](06-async-concurrency/README.md) | Completed | .NET 8 |
 | 07 | [ASP.NET Core](07-aspnet-core/README.md) | Completed | .NET 10 |
@@ -56,7 +56,7 @@ The validation scripts report the current project and article inventory; test ru
 case counts. `legacy/` preserves historical code for comparison but is excluded from the maintained
 solution and quality gates. Completed phases cover their stated scope; Phases 11–15 below are plans.
 
-Phases 03–06 currently target .NET 8, whose support ends on **2026-11-10**. A migration to .NET 10 is
+Phases 05–06 currently target .NET 8, whose support ends on **2026-11-10**. A migration to .NET 10 is
 the first runtime-maintenance priority in the development plan. See the
 [official support policy](https://dotnet.microsoft.com/en-us/platform/support/policy).
 
