@@ -66,6 +66,8 @@ and their folders do not yet exist.
 
 ## Find the right files
 
+For API launch commands, stable local ports, and IDE profiles, see [local API profiles](docs/local-api-profiles.md).
+
 - `README.md` in each phase: outcomes, prerequisites, runnable commands, and navigation.
 - `docs/`: explanations, trade-offs, and links to the matching code.
 - `src/`: runnable applications and supporting libraries; select an application for `dotnet run`.

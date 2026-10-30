@@ -63,7 +63,7 @@ For a local learning host, set configuration for your identity provider in the c
 $env:ASPNETCORE_ENVIRONMENT = "Development"
 $env:Identity__Authority = "https://your-identity-provider.example"
 $env:Identity__Audience = "your-enrollment-api-audience"
-dotnet run --project 11-architecture/src/Learning.Architecture.Api -- --urls http://localhost:5180
+dotnet run --project 11-architecture/src/Learning.Architecture.Api --launch-profile http
 ```
 
 Replace the example values; they are not a hosted identity service. Loopback HTTP here is a local lab
@@ -88,7 +88,7 @@ $enrollmentHeaders = @{
     "Idempotency-Key" = [guid]::NewGuid().ToString()
 }
 Invoke-RestMethod -Method Post `
-    -Uri "http://localhost:5180/api/v1/offerings/10000000-0000-0000-0000-000000000001/enrollments" `
+    -Uri "http://127.0.0.1:5180/api/v1/offerings/10000000-0000-0000-0000-000000000001/enrollments" `
     -Headers $enrollmentHeaders
 ```
 

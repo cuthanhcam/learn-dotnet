@@ -65,10 +65,13 @@ implementation without rewriting the endpoint contract.
 dotnet restore 07-aspnet-core.slnx
 dotnet build 07-aspnet-core.slnx --no-restore
 dotnet test 07-aspnet-core.slnx --no-build
-dotnet run --project src/Learning.Api
+dotnet run --project src/Learning.Api --launch-profile http
 ```
 
 Example requests:
+
+The tracked HTTP profile listens on `http://127.0.0.1:5070`; the optional HTTPS profile adds
+`https://localhost:7070`. See [shared local API profiles](../docs/local-api-profiles.md).
 
 ```http
 GET /health/live

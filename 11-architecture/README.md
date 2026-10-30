@@ -132,6 +132,8 @@ Comments explain transaction timing, retry scope, and provider boundaries near t
 Follow the [HTTP tutorial](docs/06-http-security-errors-versioning.md) to configure an HTTPS OAuth/OIDC
 authority and audience. There is no checked-in secret, token issuer, or permissive development-auth
 handler. Without valid identity configuration the API intentionally fails startup validation.
+The tracked `http` profile uses `http://127.0.0.1:5180`; `https` adds `https://localhost:7180`.
+See [local API profiles](../docs/local-api-profiles.md) for the shared conventions.
 
 The anonymous catalog route is `GET /api/v1/offerings`. Self-enrollment uses
 `POST /api/v1/offerings/{id}/enrollments`, a GUID `Idempotency-Key`, and a validated token carrying the
