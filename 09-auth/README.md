@@ -6,7 +6,7 @@ status: completed
 target-framework: net10.0
 prerequisites: [phase-08-entity-framework-core]
 previous-phase: ../08-ef-core/README.md
-next-phase: ../10-architecture/README.md
+next-phase: ../10-design-patterns/README.md
 ---
 
 # Authentication and Authorization
@@ -35,7 +35,7 @@ claim, policy, and resource-based authorization, and test both successful and ad
 | 7 | [Browser security: cookies, CSRF, CORS, and token storage](docs/07-browser-security-cookies-csrf-token-storage.md) | BFF, hardened cookies, antiforgery, origins, and browser storage |
 | 8 | [Abuse resistance and account lifecycle](docs/08-abuse-resistance-account-lifecycle.md) | partitioned throttling, atomic lockout, recovery, proxy trust, and audit events |
 | 9 | [Security testing, operations, and incident response](docs/09-security-testing-operations-incident-response.md) | negative tests, safe audit events, key rotation, telemetry, and response playbooks |
-| 10 | [Completion audit](docs/10-completion-audit.md) | coverage matrix, verification evidence, production boundaries, and Phase 10 handoff |
+| 10 | [Completion audit](docs/10-completion-audit.md) | coverage matrix, verification evidence, production boundaries, and Phase 11 handoff |
 
 ## Structure
 

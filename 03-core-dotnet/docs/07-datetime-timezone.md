@@ -465,4 +465,4 @@ if (localAsUtc > utc) { }
 
 - Previous: [File I/O](06-file-io.md)
 - Next: [Attributes and reflection](08-attributes.md)
-- Practice: [Phase 03 exercises](../exercises/CoreDotNet.Exercises/)
+- Practice: [Phase 03 exercises](../exercises/CoreDotNet.Exercises)

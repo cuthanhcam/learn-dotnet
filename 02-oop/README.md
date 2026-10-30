@@ -96,7 +96,7 @@ dotnet test
 | **Static Members** | Static fields, methods, properties |
 | **Design Patterns** | OOP best practices (intro) |
 
-**👉 Deep dives** are in [`docs/`](docs/) — this README is your **entry point**, not a textbook.
+**👉 Deep dives** are in [`docs/`](docs) — this README is your **entry point**, not a textbook.
 
 ---
 

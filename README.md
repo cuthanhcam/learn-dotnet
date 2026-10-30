@@ -1,482 +1,53 @@
-# 🚀 Learn .NET
+# Learn .NET
 
-![Learning](https://img.shields.io/badge/Learning-Journey-blueviolet?logo=dotnet&logoColor=white)
-![.NET 10](https://img.shields.io/badge/.NET-10-blueviolet?logo=dotnet&logoColor=white)
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET-Core-blueviolet?logo=dotnet&logoColor=white)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 [![CI](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/codeql.yml/badge.svg?branch=develop)](https://github.com/cuthanhcam/learn-dotnet/actions/workflows/codeql.yml)
 
----
+A progressive C# and .NET 10 learning workspace with runnable examples, focused tests, and guided articles.
 
-A structured journey from C# fundamentals to production-ready backend development with .NET
+**New here? Read [Start Here](START-HERE.md)** for setup and your first lesson.
+Use [Contributing](CONTRIBUTING.md) for validation and [the development plan](docs/repository-audit-and-development-plan.md) for unfinished work.
 
-**New here? Follow [Start Here](START-HERE.md)** for prerequisites, your first runnable lesson,
-SDK troubleshooting, and the study sequence. See the
-[repository audit and development plan](docs/repository-audit-and-development-plan.md) for known gaps,
-delivery priorities, and completion gates.
+## Course Index
 
----
+| Phase | Topic | Status |
+|---:|---|---|
+| 01 | [C# Fundamentals](01-csharp-basics/README.md) | Delivered |
+| 02 | [Object-Oriented Programming](02-oop/README.md) | Delivered |
+| 03 | [Core .NET](03-core-dotnet/README.md) | Delivered |
+| 04 | [Memory and Performance](04-memory-performance/README.md) | Delivered |
+| 05 | [Data Structures and Algorithms](05-dsa/README.md) | Delivered |
+| 06 | [Async and Concurrency](06-async-concurrency/README.md) | Delivered |
+| 07 | [ASP.NET Core](07-aspnet-core/README.md) | Delivered |
+| 08 | [Entity Framework Core](08-ef-core/README.md) | Delivered |
+| 09 | [Authentication and Authorization](09-auth/README.md) | Delivered |
+| 10 | [Design Patterns](10-design-patterns/README.md) | In progress: 4 of 23 GoF patterns |
+| 11 | [Software Architecture](11-architecture/README.md) | Enrollment baseline delivered |
+| 12 | [Testing](12-testing/README.md) | Foundations, coverage, and PostgreSQL baseline delivered; schema evolution/audit remain |
+| 13–16 | Projects, DevOps, system design, observability | Planned |
 
-## 📖 Overview
+Each phase README owns its detailed study path, prerequisites, commands, and limits.
+Design Patterns covers object collaboration; Architecture covers application/module boundaries.
+Delivered lessons cover their stated scope and do not certify production readiness.
+See the [phase reorganization note](docs/phase-reorganization.md) if you use an older checkout or saved path.
 
-This repository documents my **learning journey with C# and .NET**, starting from the fundamentals and progressing toward **backend architecture, APIs, and real-world systems**.
+## Open and Validate
 
-The goal of this project is to:
-
-- Build a **strong C# foundation**
-- Master **Object-Oriented Programming (OOP)**
-- Understand **.NET internals and performance**
-- Practice **Data Structures & Algorithms (DSA)**
-- Learn **asynchronous and concurrent programming**
-- Build **production-ready backend services with ASP.NET Core**
-
-This repository is intended for **learning, practice, and long-term reference**, especially for backend engineers working with .NET.
-
----
-
-## Repository Status
-
-| Phase | Topic | Status | Runtime |
-|---:|---|---|---|
-| 01 | [C# Fundamentals](01-csharp-basics/README.md) | Completed | .NET 10 |
-| 02 | [Object-Oriented Programming](02-oop/README.md) | Completed | .NET 10 |
-| 03 | [Core .NET and Standard Library](03-core-dotnet/README.md) | Completed | .NET 10 |
-| 04 | [Memory and Performance](04-memory-performance/README.md) | Completed | .NET 10 |
-| 05 | [Data Structures and Algorithms](05-dsa/README.md) | Completed | .NET 10 |
-| 06 | [Async and Concurrency](06-async-concurrency/README.md) | Completed | .NET 10 |
-| 07 | [ASP.NET Core](07-aspnet-core/README.md) | Completed | .NET 10 |
-| 08 | [Entity Framework Core](08-ef-core/README.md) | Completed | .NET 10 |
-| 09 | [Authentication and Authorization](09-auth/README.md) | Completed | .NET 10 |
-| 10 | [Architecture and Best Practices](10-architecture/README.md) | Enrollment baseline delivered; GoF curriculum in progress | .NET 10 |
-| 11 | [Testing](11-testing/README.md) | Unit and HTTP foundations delivered; coverage/provider tracks planned | .NET 10 |
-| 12–15 | Projects, DevOps, system design, observability | Planned | To be defined |
-
-The maintained workspace includes Phases 01–11 and the first four Phase 10B pattern lessons.
-The validation scripts report the current project and article inventory; test runs report executable
-case counts. `legacy/` preserves historical code for comparison but is excluded from the maintained
-solution and quality gates. Completed phases cover their stated scope; Phase 11 is in progress and
-Phases 12–15 below are plans.
-
-All maintained phases now target .NET 10 and inherit the root SDK selection. The runtime migration
-is recorded in the [development plan](docs/repository-audit-and-development-plan.md). Local setup,
-CI, and CodeQL use this single runtime baseline; .NET 8 is no longer required for maintained lessons.
-
----
-
-## 🧩 Open the Complete Workspace
-
-Use the root solution to browse every active project from Phases 01–11 in one Visual Studio window:
-
-```text
-learn-dotnet.slnx
-```
-
-The solution groups projects by phase and then by responsibility (`src`, `tests`, `exercises`, and
-`benchmarks`). Historical projects under `legacy/` remain intentionally separate from the maintained
-learning path.
-
-From PowerShell, open the solution with Visual Studio or validate it with the .NET CLI:
+Open `learn-dotnet.slnx` for the maintained workspace, or a phase solution for a focused view.
+All maintained projects use .NET 10 and inherit the root SDK selection.
 
 ```powershell
-start learn-dotnet.slnx
-dotnet tool restore
-dotnet restore learn-dotnet.slnx
+dotnet restore learn-dotnet.slnx --locked-mode
 dotnet build learn-dotnet.slnx --configuration Release --no-restore
-dotnet test learn-dotnet.slnx --configuration Release --no-build
+pwsh -NoProfile -File scripts/Validate-Repository.ps1
 ```
 
-Individual phase solutions remain available when a smaller and more focused workspace is preferable.
-
-VS Code opens the same root solution through the tracked `.vscode/settings.json`. Recommended
-extensions and reusable tasks are included under `.vscode/`; run `Repository: Validate all` from
-**Terminal → Run Task** to execute the maintained local quality gates.
-
----
-
-## 🧭 Learning Roadmap
-
-The repository is organized progressively from **fundamentals → advanced → real-world backend development**.
-
-![.NET Learning Roadmap](images/dotnet-learning-roadmap.png)
-_Figure 1: Structured .NET Learning Journey from Fundamentals to Advanced System Design._
-
----
-
-### **1. C# Fundamentals**
-
-📁 `01-csharp-basics/`
-
-> Learn the core syntax and behavior of C#
-
-- Overview of .NET ecosystem (CLR, JIT)
-- Variables & data types
-- `var` vs `dynamic`
-- Operators & control flow (`if`, `switch`, loops)
-- Methods & parameter modifiers (`ref`, `out`, `in`)
-- Arrays & basic collections
-- String handling (`string` vs `StringBuilder`)
-- Null handling & basic memory concepts
-
----
-
-### **2. Object-Oriented Programming (OOP)**
-
-📁 `02-oop/`
-
-> Master the core paradigm of C#
-
-- Classes & objects
-- Encapsulation
-- Inheritance
-- Polymorphism
-- Abstraction
-- Interfaces vs Abstract classes
-- Access modifiers
-- `Equals()`, `GetHashCode()`, `ToString()`
-- SOLID principles (introduction)
-
-### Bonus
-
-- Records vs Classes
-- Immutability
-
----
-
-### **3. Core .NET & Standard Library**
-
-📁 `03-core-dotnet/`
-
-> Understand how .NET works under the hood
-
-- Collections (`List<T>`, `Dictionary<TKey, TValue>`, `HashSet<T>`)
-- Generics
-- Exception handling
-- LINQ (core skill)
-- Delegates & Events
-- File I/O
-- DateTime & TimeZone
-- Attributes
-- Nullable reference types
-
----
-
-### **4. Memory & Performance**
-
-📁 `04-memory-performance/`
-
-> Critical for writing efficient and scalable applications
-
-- Stack vs Heap
-- Value types vs Reference types
-- Garbage Collection (GC)
-- Boxing / Unboxing
-- `Span<T>`, `Memory<T>`
-- Performance optimization techniques
-
----
-
-### **5. Data Structures & Algorithms (DSA)**
-
-📁 `05-dsa/`
-
-> Build problem-solving and algorithmic thinking
-
-- Big-O notation
-- Arrays & Strings
-- Linked Lists
-- Stacks & Queues
-- Hash tables
-- Trees & Graphs
-- Sorting & Searching
-- Recursion & Backtracking
-
----
-
-### **6. Async & Concurrency**
-
-📁 `06-async-concurrency/`
-
-> Essential for modern backend systems
-
-- `async/await`
-- `Task` and `Task<T>`
-- Threading basics
-- ThreadPool
-- Parallel programming
-- Synchronization (`lock`, `SemaphoreSlim`)
-- Deadlocks (common scenarios)
-- `ConfigureAwait(false)`
-- I/O-bound vs CPU-bound
-- `CancellationToken` (best practices)
-- Channels / Pipelines (advanced)
-- Concurrent collections
-
----
-
-### **7. ASP.NET Core**
-
-📁 `07-aspnet-core/`
-
-> Build modern web APIs with ASP.NET Core
-
-- Web API fundamentals
-- Controllers & routing
-- Dependency Injection
-- Middleware pipeline
-- Configuration & Logging
-- Model binding & validation
-
----
-
-### **8. Database & ORM (EF Core)**
-
-📁 `08-ef-core/`
-
-> Work with databases using Entity Framework Core
-
-- DbContext & DbSet
-- Migrations
-- Relationships
-- Query optimization
-- Transactions
-- Tracking vs No-Tracking
-- N+1 Query problem
-- Compiled queries
-- Indexing strategies
-- Raw SQL vs LINQ
-- Bulk operations
-- Performance profiling (EF logs)
-
----
-
-### **9. Authentication & Authorization**
-
-📁 `09-auth/`
-
-> Secure backend systems
-
-- JWT Authentication
-- Role-based authorization
-- Policy-based authorization
-- Refresh Token flow
-- Token rotation
-- OAuth2 & OpenID Connect (concept)
-- API rate limiting
-- OWASP Top 10 basics
-- Secure password storage (hashing + salt)
-
----
-
-### **10. Architecture & Best Practices**
-
-📁 `10-architecture/`
-
-> Write production-level code
-
-- Clean Architecture
-- Layered architecture
-- Repository pattern
-- Service pattern
-- DTOs & mapping
-- Validation strategies
-- Monolith vs Microservices
-- Modular monolith (recommended)
-- CQRS (basic)
-- Domain-driven design (intro)
-- API versioning
-- Feature-based structure
-
-An advanced [GoF object-design track](10-architecture/design-patterns/README.md) is being delivered
-separately from the implemented architecture scenario, with Strategy, Factory Method, Adapter, and Decorator lessons.
-See the [design patterns curriculum and solution blueprint](docs/design-patterns-curriculum-plan.md)
-for all 23 patterns, phase ownership, focused solution structure, and incremental delivery gates.
-
----
-
-### **11. Testing**
-
-Start with the [runnable testing curriculum](11-testing/README.md). Unit contracts, deterministic time,
-test doubles, cancellation, failure, HTTP integration, and fixture ownership are delivered; the phase
-roadmap identifies later slices.
-
-📁 `11-testing/`
-
-> Ensure code quality and reliability
-
-- Unit testing
-- Integration testing
-- xUnit / NUnit
-- Mocking
-- Testcontainers (real DB testing)
-- API testing automation
-- Test data management
-- Code coverage basics
-- Integration test best practices
-
----
-
-### **12. Real Projects**
-
-📁 `12-projects/`
-
-> Apply everything into real-world applications
-
-### Suggested Projects
-
-- Sales Management API
-- Authentication Service (RBAC)
-- File Storage Service
-- Mini E-commerce API
-
----
-
-### **13. DevOps & Deployment**
-
-📁 `13-devops/`
-
-> Learn how to package, deploy, and run applications in real environments
-
-- Docker (Dockerfile, multi-stage build)
-- Docker Compose
-- Environment configs (dev/staging/prod)
-- CI/CD (GitHub Actions)
-- Secret management
-- Logging setup (Serilog)
-- Deploy to cloud (basic: VPS / Azure / AWS)
-
----
-
-### **14. System Design Basics**
-
-📁 `14-system-design/`
-
-> Develop the ability to design scalable and maintainable backend systems
-
-- Monolith vs Microservices (trade-offs)
-- Caching (Redis)
-- Message Queue (RabbitMQ / Kafka – basic)
-- Rate limiting strategies
-- API Gateway concept
-- Scalability:
-    - Horizontal vs Vertical
-    - Load balancing
-
-- Database scaling basics
-
----
-
-### **15. Observability**
-
-📁 `15-observability/`
-
-> Understand how to monitor, debug, and maintain systems in production
-
-- Structured logging
-- Correlation ID
-- Distributed tracing (concept)
-- Metrics (Prometheus basics)
-- Monitoring (Grafana basics)
-- Alerting basics
-
----
-
-## 🏗️ Project Structure
-
-```text
-learn-dotnet/
-├── 01-csharp-basics/ ... 11-testing/      # Maintained learning phases
-│   ├── docs/                          # Publishable articles
-│   ├── src/                           # Runnable examples and implementations
-│   ├── exercises/                     # Practice projects where applicable
-│   ├── benchmarks/                    # BenchmarkDotNet projects where applicable
-│   └── tests/                         # Executable specifications
-├── docs/                              # Repository-wide publishing contracts
-├── scripts/                           # Cross-platform quality gates
-├── .github/                           # CI, security, and contribution automation
-├── legacy/                            # Historical, non-maintained code
-├── Directory.Build.props              # Shared compiler policy
-├── Directory.Packages.props           # Central NuGet versions
-└── learn-dotnet.slnx                  # Maintained master solution
-```
-
----
-
-## 📌 Learning Strategy
-
-This repository is not just for reading — it is designed to be **actively used**.
-
-Each module should include:
-
-```text
-module/
-├── README.md     # Entry point, outcomes, and navigation
-├── docs/         # Article-ready theory and operational guidance
-├── src/          # Production-oriented examples
-├── tests/        # Executable specifications
-└── exercises/    # Practice problems where appropriate
-```
-
----
-
-## 🎯 Learning Goals
-
-- Write **clean, maintainable, and scalable C# code**
-- Understand **how .NET works internally**
-- Be confident in building **backend APIs**
-- Apply **best practices and architecture patterns**
-- Prepare for **technical interviews and real-world projects**
-
----
-
-## 🛠️ Tools & Technologies
-
-- **C# / .NET 10**
-- **ASP.NET Core**
-- **Entity Framework Core**
-- **SQLite for the fast EF Core relational suite; production-provider gates are documented separately**
-- **xUnit**
-- **Git & GitHub**
-- IDE: Visual Studio / VS Code / Rider
-
----
-
-## 🚀 Best Practices
-
-- Focus on **understanding concepts**, not just syntax
-- Write code with **real-world scenarios**
-- Refactor regularly
-- Keep notes in `/docs`
-- Apply what you learn to **actual projects**
-
----
-
-## 📚 References & Resources
-
-- Official .NET Documentation
-  [https://learn.microsoft.com/en-us/dotnet/](https://learn.microsoft.com/en-us/dotnet/)
-
-- ASP.NET Core Docs
-  [https://learn.microsoft.com/en-us/aspnet/core/](https://learn.microsoft.com/en-us/aspnet/core/)
-
-- Entity Framework Core Docs
-  [https://learn.microsoft.com/en-us/ef/core/](https://learn.microsoft.com/en-us/ef/core/)
-
-- C# Programming Guide
-  [https://learn.microsoft.com/en-us/dotnet/csharp/](https://learn.microsoft.com/en-us/dotnet/csharp/)
-
----
-
-## 📝 Notes
-
-- This repository is **continuously updated**
-- Code examples prioritize **clarity over complexity**
-- Mistakes and refactoring are part of the learning process
-
----
-
-## 📄 License
-
-This project is for **learning and educational purposes**.
-
-Feel free to explore, fork, and adapt it for your own journey.
+The validation script runs portable tests and repository checks. PostgreSQL tests have a separate
+Docker-backed command: `pwsh -NoProfile -File scripts/Test-PostgresProvider.ps1`.
+CI runs portable Windows/Linux jobs and the PostgreSQL job; inspect all checks before merging.
+
+Phase folders keep lessons beside their `docs/`, `src/`, and `tests/` where applicable.
+`legacy/` is historical material outside the maintained build. Generated `bin/`, `obj/`, and `artifacts/`
+are local output and must not be committed.
+
+Licensed under [MIT](LICENSE).

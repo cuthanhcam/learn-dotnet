@@ -45,10 +45,10 @@ must still be verified after push before accepting the promotion PR.
 | [#104](https://github.com/cuthanhcam/learn-dotnet/pull/104) | Merged dependency reconciliation | Complete current lock graph, 667 portable plus 15 PostgreSQL cases locally, hosted checks passed |
 | #80, #98, #99, #100 | Closed as superseded by #104 | Exact proposed versions included; old runs failed in SDK/runtime downloads before source validation |
 
-Reviewing dependencies did not certify the unfinished curriculum. Phase 10 remains the current
+Reviewing dependencies did not certify the unfinished curriculum. Phase 11 remains the current
 curriculum priority: its enrollment baseline, object-design catalog, and whole-phase completion
-criteria must be presented separately. The [phase entry point](../10-architecture/README.md) and
-[design-principle walkthrough](../10-architecture/docs/13-design-principles-in-source.md) make that scope visible.
+criteria must be presented separately. The [phase entry point](../11-architecture/README.md) and
+[design-principle walkthrough](../11-architecture/docs/13-design-principles-in-source.md) make that scope visible.
 
 ### Original onboarding corrections
 
@@ -67,26 +67,26 @@ criteria must be presented separately. The [phase entry point](../10-architectur
 
 ## Delivery backlog
 
-### Phase 10 correctness and readability review
+### Phase 11 correctness and readability review
 
 The focused re-review covers the enrollment aggregate, application ports, both store adapters,
 durable receipts, module delivery, HTTP boundaries, tests, and the delivered pattern examples.
-Keep the existing phase and feature folders; the immediate problems are contract consistency and
-reader navigation rather than project placement. Use the
-[guided source tour](../10-architecture/docs/12-guided-source-tour.md) to follow the implementation.
+The current phase ownership follows the [independent Design Patterns reorganization](phase-reorganization.md).
+Keep feature folders within each separate phase and use the
+[guided source tour](../11-architecture/docs/12-guided-source-tour.md) to follow the implementation.
 
 | Sequence | Small branch scope | Evidence and acceptance |
 |---:|---|---|
 | 1 | Align dictionary/SQLite saves and cancellation checkpoints | [PR #93](https://github.com/cuthanhcam/learn-dotnet/pull/93); 25 new contract/cancellation cases, merged after hosted checks |
 | 2 | Validate durable replay data and refresh completion guidance | [PR #94](https://github.com/cuthanhcam/learn-dotnet/pull/94); seven malformed-receipt regressions plus valid NotFound replay; full local gate |
 | 3 | Classify EF-wrapped SQLite locks and reject invalid HTTP success results | Direct/wrapped busy and constraint errors, retry hints, diagnostic suppression, and invalid-result pipeline tests |
-| 4 | Add Phase 11 coverage and test-quality lesson | [Delivered lesson](../11-testing/docs/04-coverage-and-test-quality.md) with fresh per-project reports, branch analysis, and mutation exercises; no combined or correctness percentage |
-| 5 | Exercise PostgreSQL and concurrent connections | [Provider baseline](../11-testing/docs/05-postgresql-provider-tests.md) delivers shared contracts and competing-write/transaction cases; populated-schema migrations remain next |
+| 4 | Add Phase 12 coverage and test-quality lesson | [Delivered lesson](../12-testing/docs/04-coverage-and-test-quality.md) with fresh per-project reports, branch analysis, and mutation exercises; no combined or correctness percentage |
+| 5 | Exercise PostgreSQL and concurrent connections | [Provider baseline](../12-testing/docs/05-postgresql-provider-tests.md) delivers shared contracts and competing-write/transaction cases; populated-schema migrations remain next |
 | 6 | Extend public API contracts before production reuse | Stable problem identifiers, API specification, identity mapping edge cases, migration/retention and shutdown scenarios |
 | 7 | Continue GoF catalog one pattern per reviewed branch | Four delivered patterns, nineteen planned; Observer is next, followed by Command/State and category completion; comparison lessons/case study/final audit also remain |
 
-Track 10A's evidence audit refers to its bounded educational baseline. Overall Phase 10 remains in progress
-because the GoF catalog is unfinished. Production-provider and operational extensions remain explicit
+Phase 11's evidence audit refers to its bounded educational baseline. Phase 10's GoF catalog remains
+in progress independently. Production-provider and operational extensions remain explicit
 work items rather than implied guarantees. Merge each branch into `develop` after local and hosted
 checks, then create the reviewed promotion PR to `main`.
 
@@ -120,13 +120,13 @@ empty folders or unchecked lists does not complete a phase.
 | Priority / sequence | Deliverable | Exit criteria |
 |---|---|---|
 | P0 — delivered in runtime slices above | Move Phases 01–06 to .NET 10 before 2026-11-10 | Target frameworks, root SDK inheritance, locks, local docs, 588 tests, and Windows/Linux/security checks validated; repository baseline finalization is the last slice |
-| P1 — testing baseline delivered | [Phase 11 testing foundations](../11-testing/README.md) | Unit/HTTP contracts, coverage quality, and PostgreSQL Docker baseline delivered; schema evolution and completion audit remain |
-| P1 — queued after the current Phase 10 slice | PostgreSQL schema evolution | Add reviewed migrations, populated-schema upgrade tests, compatibility and recovery assertions; reuse the isolated Compose fixture and dedicated Docker CI job |
-| P1 — current curriculum priority | Continue Phase 10B | Deliver the remaining 19 GoF patterns in the sequence of the [approved curriculum](design-patterns-curriculum-plan.md); each gets a baseline, refactor, modern alternative, runner command, focused tests, article, trade-offs, and exercises |
-| P2 — after testing foundations | Phase 12 first capstone | One bounded API combining identity, persistence, pagination, idempotency, and authorization; include acceptance criteria and negative HTTP tests rather than copying every architecture pattern |
-| P2 — after a runnable capstone | Phase 13 packaging and deployment | Multi-stage image, non-root runtime, `.dockerignore`, health checks, graceful shutdown, Compose, safe example configuration, smoke tests, and documented rollback; CI builds/tests the image; deployment uses a concrete target and scoped credentials |
-| P2 — before calling the capstone operational | Phase 15 observability | Structured/redacted logs, trace propagation, metrics, health signals, a reproducible local dashboard, and one tested incident exercise; explain cardinality and sensitive-data boundaries |
-| P3 — after measuring the capstone | Phase 14 system design | Document workload and limits; compare cache, queue, retries, backpressure, and scaling choices using measurable experiments and failure scenarios |
+| P1 — testing baseline delivered | [Phase 12 testing foundations](../12-testing/README.md) | Unit/HTTP contracts, coverage quality, and PostgreSQL Docker baseline delivered; schema evolution and completion audit remain |
+| P1 — queued after the current Phase 11 slice | PostgreSQL schema evolution | Add reviewed migrations, populated-schema upgrade tests, compatibility and recovery assertions; reuse the isolated Compose fixture and dedicated Docker CI job |
+| P1 — current curriculum priority | Continue Phase 10 | Deliver the remaining 19 GoF patterns in the sequence of the [approved curriculum](design-patterns-curriculum-plan.md); each gets a baseline, refactor, modern alternative, runner command, focused tests, article, trade-offs, and exercises |
+| P2 — after testing foundations | Phase 13 first capstone | One bounded API combining identity, persistence, pagination, idempotency, and authorization; include acceptance criteria and negative HTTP tests rather than copying every architecture pattern |
+| P2 — after a runnable capstone | Phase 14 packaging and deployment | Multi-stage image, non-root runtime, `.dockerignore`, health checks, graceful shutdown, Compose, safe example configuration, smoke tests, and documented rollback; CI builds/tests the image; deployment uses a concrete target and scoped credentials |
+| P2 — before calling the capstone operational | Phase 16 observability | Structured/redacted logs, trace propagation, metrics, health signals, a reproducible local dashboard, and one tested incident exercise; explain cardinality and sensitive-data boundaries |
+| P3 — after measuring the capstone | Phase 15 system design | Document workload and limits; compare cache, queue, retries, backpressure, and scaling choices using measurable experiments and failure scenarios |
 | Ongoing | Dependency and automation maintenance | Review the existing bot PRs individually, reconcile the central lock graph, review action release notes, and wait for required hosted checks; never merge a bot branch solely because it is newer |
 
 .NET 8 support ends on 2026-11-10; .NET 10 is supported through 2028-11-14 according to the
@@ -140,12 +140,12 @@ slugs, focused solutions, and tests. A global move into `src/` and `tests/` woul
 and create link churn without improving the learning path.
 
 - Keep shared operational references in root `docs/`; phase-specific explanations stay beside their phase.
-- Keep GoF implementation under `10-architecture/design-patterns/` and articles under
-  `10-architecture/docs/design-patterns/`; the catalog links these deliberately separate views.
-- Add `11-testing/`, `12-projects/`, `13-devops/`, `14-system-design/`, and `15-observability/` only
+- Keep GoF implementation under `10-design-patterns/` and articles under
+  `10-design-patterns/docs/`; the catalog links these deliberately separate views.
+- Add `12-testing/`, `13-projects/`, `14-devops/`, `15-system-design/`, and `16-observability/` only
   with their first coherent lesson. Register each real project in the master solution and update the
   root lists in inventory, metadata, Markdown gates, and external-link configuration as appropriate.
-- Prefer feature folders within application projects, following Phase 10; introduce layers only when
+- Prefer feature folders within application projects, following Phase 11; introduce layers only when
   the lesson explains ownership and dependency direction.
 - Retain the Phase 01 `.sln` as a compatibility artifact for now. Document `.slnx` as the maintained
   entry point; remove the duplicate in a dedicated change after checking IDE consumers.
