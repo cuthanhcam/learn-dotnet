@@ -124,7 +124,7 @@ skip—when a repository declares a production provider and its required databas
 | Topic | Destination or trigger |
 |---|---|
 | Authentication user/token persistence | Phase 09 — Authentication and Authorization |
-| Repository/CQRS/DDD boundaries | Phase 10 — Architecture, selected per use case |
+| Repository/CQRS/DDD boundaries | Phase 11 — Architecture, selected per use case |
 | Distributed cache and database invalidation | caching/distributed-systems phase |
 | Broker delivery for outbox messages | messaging and background processing phase |
 | SQL Server `rowversion` or PostgreSQL system columns | chosen production-provider implementation |

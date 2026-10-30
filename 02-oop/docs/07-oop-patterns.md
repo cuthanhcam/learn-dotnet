@@ -130,7 +130,7 @@ Test the public contract, not that one collaborator method was called unless the
 2. Create a factory for shapes (circle, rectangle) and reject unknown inputs explicitly. This is a
    simple factory exercise, not yet the full GoF Factory Method collaboration.
 
-For the advanced catalog, follow [Phase 10B's guided roadmap](../../10-architecture/docs/design-patterns/00-roadmap.md).
+For the advanced catalog, follow [Phase 10's guided roadmap](../../10-design-patterns/docs/00-roadmap.md).
 Phase 02 intentionally remains a foundation rather than duplicating all GoF implementations.
 
 ## Interview Questions

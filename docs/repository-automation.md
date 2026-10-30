@@ -42,7 +42,7 @@ artifact, including on failure; neither platform job cancels the other when it f
 The portable gate excludes `Category=Postgres`. A separate Linux CI job runs
 `scripts/Test-PostgresProvider.ps1`, provisions its own Docker fixture, and uploads provider TRX/server
 logs. It fails when setup or tests fail; missing Docker does not become skipped test success. Review
-all three CI jobs before merge. See the [provider lesson](../11-testing/docs/05-postgresql-provider-tests.md)
+all three CI jobs before merge. See the [provider lesson](../12-testing/docs/05-postgresql-provider-tests.md)
 for isolation, cleanup, and migration limits.
 
 CI and CodeQL install only the .NET 10 SDK for the maintained workspace. All maintained projects

@@ -143,9 +143,9 @@ must be investigated rather than bypassed.
 - [x] Security events use a closed safe contract and operations include rotation, alert, and incident guidance.
 - [x] Phase and repository build, test, documentation, package, workflow, and secret gates pass.
 
-## Handoff to Phase 10
+## Handoff to Phase 11
 
-Phase 10 can now study architecture using meaningful security boundaries rather than generic layers. It
+Phase 11 can now study architecture using meaningful security boundaries rather than generic layers. It
 should preserve domain-owned invariants, application ports, infrastructure adapters, composition-root
 configuration, transactional persistence, explicit authorization at every entry point, and non-secret
 operational events.
@@ -154,9 +154,9 @@ Architecture patterns should be selected to solve observed coupling, consistency
 problems. They must not hide authentication state in global helpers, move authorization exclusively to
 controllers, wrap EF Core in an anemic generic repository, or turn every operation into ceremony.
 
-Continue to [Phase 10 — Architecture](../../10-architecture/README.md).
+Continue to [Phase 11 — Architecture](../../11-architecture/README.md).
 
 ## Navigation
 
 - Previous: [Security testing, operations, and incident response](09-security-testing-operations-incident-response.md)
-- Next: [Phase 10 — Architecture](../../10-architecture/README.md)
+- Next: [Phase 11 — Architecture](../../11-architecture/README.md)

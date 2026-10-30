@@ -27,10 +27,13 @@ phase-09:
       - any-glob-to-any-file: "09-auth/**"
 phase-10:
   - changed-files:
-      - any-glob-to-any-file: "10-architecture/**"
+      - any-glob-to-any-file: "10-design-patterns/**"
 phase-11:
   - changed-files:
-      - any-glob-to-any-file: "11-testing/**"
+      - any-glob-to-any-file: "11-architecture/**"
+phase-12:
+  - changed-files:
+      - any-glob-to-any-file: "12-testing/**"
 documentation:
   - changed-files:
       - any-glob-to-any-file:
