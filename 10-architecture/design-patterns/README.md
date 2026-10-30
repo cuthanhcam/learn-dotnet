@@ -10,7 +10,7 @@ prerequisites: [phase-02-oop, phase-10-architecture]
 # Object Design and GoF Patterns
 
 This is the advanced object-design track inside Phase 10. The existing enrollment architecture example
-remains separate and unchanged. Read one complete lesson, run its named demo, inspect its tests, and
+remains a separate scenario. Read one complete lesson, run its named demo, inspect its tests, and
 only then move to the next pattern. The catalog is being delivered incrementally; planned entries are
 not implemented examples.
 
@@ -21,7 +21,8 @@ not implemented examples.
 3. Study [Strategy](../docs/design-patterns/behavioral/strategy.md), the first complete lesson.
 4. Continue with [Factory Method](../docs/design-patterns/creational/factory-method.md) and its vocabulary comparison.
 5. Study [Adapter](../docs/design-patterns/structural/adapter.md) for a semantic SDK integration boundary.
-6. Use the catalog/problem index in the roadmap to find delivered alternatives and remaining topics.
+6. Study [Decorator](../docs/design-patterns/structural/decorator.md) for wrapper order, bounded retry, and required audit.
+7. Use the catalog/problem index in the roadmap to find delivered alternatives and remaining topics.
 
 ## Run One Lesson
 
@@ -33,6 +34,7 @@ dotnet run --project 10-architecture/design-patterns/src/Learning.Patterns.Conso
 dotnet run --project 10-architecture/design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern behavioral.strategy
 dotnet run --project 10-architecture/design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern creational.factory-method
 dotnet run --project 10-architecture/design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern structural.adapter
+dotnet run --project 10-architecture/design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern structural.decorator
 dotnet test 10-architecture/design-patterns/solutions/behavioral.slnx --configuration Release
 dotnet test 10-architecture/design-patterns/solutions/creational.slnx --configuration Release
 dotnet test 10-architecture/design-patterns/solutions/structural.slnx --configuration Release
@@ -71,13 +73,19 @@ design-patterns/
       Legacy/              # Incompatible SDK types and offline simulator
       Baseline/            # Application coupled directly to provider details
       Refactored/          # Translation of units, outcomes, failures, and cancellation
+    Learning.Patterns.Structural/Decorator/
+      Baseline/            # Correct fixed retry-then-audit workflow
+      Contracts/           # Required audit and retry-delay boundaries
+      Refactored/          # Independent wrappers with observable composition order
+      DecoratorDemo.cs     # Offline adapter plus controlled audit/delay collaborators
   tests/Learning.Patterns.Behavioral.Tests/Strategy/
   tests/Learning.Patterns.Creational.Tests/FactoryMethod/
   tests/Learning.Patterns.Structural.Tests/Adapter/
+  tests/Learning.Patterns.Structural.Tests/Decorator/
 ```
 
 All three categories now have a complete first lesson, focused solution, and test project. There are
-seven runnable projects and 71 pattern specifications; the remaining 20 GoF patterns are planned, not
+seven runnable projects and 100 pattern specifications; the remaining 19 GoF patterns are planned, not
 scaffolded placeholders. Articles live under
 `10-architecture/docs/design-patterns/`, with metadata checked by the
 existing publishing gates. Each new pattern has its own topic branch and focused code/docs commits.

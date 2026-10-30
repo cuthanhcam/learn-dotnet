@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Phase 10B Decorator lesson with independent bounded-retry/required-audit wrappers, ordering and
+  cancellation tests, correct baseline, and offline demo. Added a source-based design-principle guide
+  and clarified the remaining whole-phase curriculum instead of implying Phase 10 completion.
 - Phase 11 PostgreSQL/Docker provider baseline with shared Phase 10 store contracts, independent
   connection writes, atomic rollback/replay checks, disposable fixtures, and dedicated CI evidence.
 - Phase 11 coverage and test-quality lesson with fresh per-test-project/module reports for Phases

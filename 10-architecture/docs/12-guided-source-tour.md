@@ -84,9 +84,9 @@ for observable responses. Test-only identity headers are not an application logi
 Keep the current feature folders and explicit project boundaries. A generic repository, mediator,
 additional deployment, or extra layer needs a concrete learning problem before it earns a place here.
 
-Track 10A is complete within the [documented learning scope](09-completion-audit.md), with provider,
-migration, concurrency, and operational limits still visible. Track 10B delivers three GoF patterns;
-the other twenty remain on [its roadmap](../design-patterns/README.md). Continue testing practice in
+Track 10A implements the [documented learning baseline](09-completion-audit.md), with provider,
+migration, concurrency, and operational limits still visible. Track 10B delivers four GoF patterns;
+the other nineteen remain on [its roadmap](../design-patterns/README.md). Continue testing practice in
 [Phase 11](../../11-testing/README.md). A green build verifies the checked behavior, not every possible
 deployment or future modification.
 

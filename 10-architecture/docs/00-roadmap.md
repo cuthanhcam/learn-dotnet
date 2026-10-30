@@ -10,12 +10,16 @@ estimated-reading-minutes: 22
 topics: [architecture, dependency-inversion, domain-modeling, concurrency]
 prerequisites: [auth-phase-09-completion-audit]
 status: maintained
-last-reviewed: 2026-10-10
+last-reviewed: 2026-10-30
 ---
 
 # Architecture Learning Roadmap
 
 ## The Scenario
+
+This roadmap covers **track 10A**, the enrollment architecture baseline. Phase 10 also contains the
+[10B GoF curriculum](design-patterns/00-roadmap.md), which is still in progress. Checked items below
+do not mark the entire phase or its catalog complete. The [phase entry point](../README.md) tracks both.
 
 A training organization publishes scheduled offerings. Learners request enrollment, each offering has
 limited capacity, and retries must not consume a second seat for the same learner. Two callers may
@@ -35,7 +39,7 @@ services before understanding its invariants obscures the reason for each bounda
 6. Introduce module contracts and domain/integration events when a second capability needs them.
 7. Add authenticated HTTP entry points, resource authorization, error mapping, and API versioning.
 8. Record architecture decisions and enforce dependency rules with executable checks.
-9. Audit every promised outcome and hand off the finished system to Phase 11 testing.
+9. Audit the enrollment learning outcomes and hand off explicit tested contracts and limits to Phase 11.
 
 Each slice must state the problem, show its observable behavior, test failure paths, and record the
 production boundary. Do not declare the whole phase complete when only the directory scaffold exists.
