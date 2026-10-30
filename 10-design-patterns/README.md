@@ -25,7 +25,8 @@ not implemented examples.
 4. Continue with [Factory Method](docs/creational/factory-method.md) and its vocabulary comparison.
 5. Study [Adapter](docs/structural/adapter.md) for a semantic SDK integration boundary.
 6. Study [Decorator](docs/structural/decorator.md) for wrapper order, bounded retry, and required audit.
-7. Use the catalog/problem index in the roadmap to find delivered alternatives and remaining topics.
+7. Study [Observer](docs/behavioral/observer.md) for subscription ownership, terminal signals, and callback failures.
+8. Use the catalog/problem index in the roadmap to find delivered alternatives and remaining topics.
 
 ## Run One Lesson
 
@@ -38,6 +39,7 @@ dotnet run --project 10-design-patterns/src/Learning.Patterns.ConsoleApp -- --pa
 dotnet run --project 10-design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern creational.factory-method
 dotnet run --project 10-design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern structural.adapter
 dotnet run --project 10-design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern structural.decorator
+dotnet run --project 10-design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern behavioral.observer
 dotnet test 10-design-patterns/solutions/behavioral.slnx --configuration Release
 dotnet test 10-design-patterns/solutions/creational.slnx --configuration Release
 dotnet test 10-design-patterns/solutions/structural.slnx --configuration Release
@@ -65,6 +67,13 @@ complete maintained workspace.
         PricingRequest.cs
         PricingQuote.cs
         StrategyDemo.cs
+      Observer/
+        Baseline/          # Fixed pair of known consumers
+        Refactored/        # Disposable bounded subscriptions and explicit terminal/failure rules
+        Observers/         # Latest-price display and threshold counter
+        ModernCSharp/      # Smaller event-based alternative
+        PriceUpdate.cs
+        ObserverDemo.cs
     Learning.Patterns.ConsoleApp/
     Learning.Patterns.Creational/FactoryMethod/
       Baseline/            # Closed-list selection in the original workflow
@@ -82,13 +91,14 @@ complete maintained workspace.
       Refactored/          # Independent wrappers with observable composition order
       DecoratorDemo.cs     # Offline adapter plus controlled audit/delay collaborators
   tests/Learning.Patterns.Behavioral.Tests/Strategy/
+  tests/Learning.Patterns.Behavioral.Tests/Observer/
   tests/Learning.Patterns.Creational.Tests/FactoryMethod/
   tests/Learning.Patterns.Structural.Tests/Adapter/
   tests/Learning.Patterns.Structural.Tests/Decorator/
 ```
 
 All three categories now have a complete first lesson, focused solution, and test project. There are
-seven runnable projects and 100 pattern specifications; the remaining 19 GoF patterns are planned, not
+seven runnable projects and 133 pattern specifications; the remaining 18 GoF patterns are planned, not
 scaffolded placeholders. Articles live under
 `10-design-patterns/docs/`, with metadata checked by the
 existing publishing gates. Each new pattern has its own topic branch and focused code/docs commits.

@@ -61,7 +61,7 @@ Passing existing tests alone does not mean you have mastered the topic.
 
 `Delivered` in the course index means the scoped lesson set is available, not that the subject is
 exhausted or that the sample is ready for an internet-facing production deployment. Phase 10 has
-4 of 23 GoF patterns. Phase 12 has unit/HTTP, coverage, and PostgreSQL foundations; Phases 13–16 are planned
+5 of 23 GoF patterns. Phase 12 has unit/HTTP, coverage, and PostgreSQL foundations; Phases 13–16 are planned
 and their folders do not yet exist.
 
 ## Find the right files

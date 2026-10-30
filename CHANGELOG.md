@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Observer lesson with disposable bounded subscriptions, explicit callback/terminal policies,
+  event-based alternative, deterministic demo, and lifecycle/concurrency behavior tests.
 - Phase 10 Decorator lesson with independent bounded-retry/required-audit wrappers, ordering and
   cancellation tests, correct baseline, and offline demo. Added a source-based design-principle guide
   and clarified the remaining whole-phase curriculum instead of implying Phase 11 completion.
