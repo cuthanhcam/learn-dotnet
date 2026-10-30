@@ -85,8 +85,8 @@ Keep the current feature folders and explicit project boundaries. A generic repo
 additional deployment, or extra layer needs a concrete learning problem before it earns a place here.
 
 Phase 11 implements the [documented learning baseline](09-completion-audit.md), with provider,
-migration, concurrency, and operational limits still visible. Phase 10 delivers four GoF patterns;
-the other nineteen remain on [its roadmap](../../10-design-patterns/README.md). Continue testing practice in
+migration, concurrency, and operational limits still visible. Phase 10 delivers five GoF patterns;
+the other eighteen remain on [its roadmap](../../10-design-patterns/README.md). Continue testing practice in
 [Phase 12](../../12-testing/README.md). A green build verifies the checked behavior, not every possible
 deployment or future modification.
 

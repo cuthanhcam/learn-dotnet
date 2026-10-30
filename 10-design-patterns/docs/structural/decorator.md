@@ -166,4 +166,4 @@ second production implementation or an unfinished scaffold.
 - [GoF catalog and structural taxonomy](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780321770462)
 - Previous: [Adapter](adapter.md)
 - Return: [GoF delivery ledger](../00-roadmap.md)
-- Next planned topic: Observer, with explicit subscription lifetime and failure semantics.
+- Next: [Observer](../behavioral/observer.md), with explicit subscription lifetime and failure semantics.
