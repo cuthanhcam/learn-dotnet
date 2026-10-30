@@ -41,10 +41,15 @@ dotnet tool restore
 dotnet restore learn-dotnet.slnx --locked-mode
 dotnet format whitespace learn-dotnet.slnx --verify-no-changes --no-restore
 dotnet build learn-dotnet.slnx --configuration Release --no-restore
-dotnet test learn-dotnet.slnx --configuration Release --no-build
+dotnet test learn-dotnet.slnx --configuration Release --no-build --filter "Category!=Postgres"
 ```
 
 Run repository quality gates:
+
+The portable test command excludes `Category=Postgres` so it needs no Docker engine. For changes to
+persistence or the provider lesson, also run `pwsh -NoProfile -File scripts/Test-PostgresProvider.ps1`.
+CI requires a separate PostgreSQL job. Direct execution of that test project requires its disposable
+fixture; see [provider testing](11-testing/docs/05-postgresql-provider-tests.md).
 
 ```powershell
 ./scripts/Test-ArticleMetadata.ps1

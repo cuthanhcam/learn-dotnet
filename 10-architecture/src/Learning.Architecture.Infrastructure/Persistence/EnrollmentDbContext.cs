@@ -24,9 +24,11 @@ public sealed class EnrollmentDbContext(DbContextOptions<EnrollmentDbContext> op
             entity.Property(row => row.Version).IsConcurrencyToken();
             entity.ToTable("Offerings", table =>
             {
-                table.HasCheckConstraint("CK_Offerings_Capacity", "Capacity BETWEEN 1 AND 1000");
-                table.HasCheckConstraint("CK_Offerings_Count", "EnrolledCount BETWEEN 0 AND Capacity");
-                table.HasCheckConstraint("CK_Offerings_Version", "Version >= EnrolledCount");
+                // EF creates case-sensitive quoted names on PostgreSQL. Quote identifiers here too;
+                // unquoted names fold to lowercase there. SQLite accepts the same standard quoting.
+                table.HasCheckConstraint("CK_Offerings_Capacity", "\"Capacity\" BETWEEN 1 AND 1000");
+                table.HasCheckConstraint("CK_Offerings_Count", "\"EnrolledCount\" BETWEEN 0 AND \"Capacity\"");
+                table.HasCheckConstraint("CK_Offerings_Version", "\"Version\" >= \"EnrolledCount\"");
             });
         });
         modelBuilder.Entity<EnrollmentReceiptRow>().HasKey(row => row.RequestId);

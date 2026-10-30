@@ -47,3 +47,29 @@ jobs:
           path: artifacts/test-results/
           if-no-files-found: warn
           retention-days: 14
+
+  postgres-provider:
+    name: PostgreSQL contracts and transactions
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Run disposable PostgreSQL fixture
+        shell: pwsh
+        run: ./scripts/Test-PostgresProvider.ps1
+
+      - name: Upload provider results and server logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: postgres-results-${{ github.run_attempt }}
+          path: artifacts/postgres/
+          if-no-files-found: warn
+          retention-days: 14

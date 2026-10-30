@@ -8,4 +8,7 @@
     <Project Path="tests/Learning.Testing.IntegrationTests/Learning.Testing.IntegrationTests.csproj" />
     <Project Path="tests/Learning.Testing.UnitTests/Learning.Testing.UnitTests.csproj" />
   </Folder>
+  <Folder Name="/providers/">
+    <Project Path="tests/Learning.Testing.PostgresTests/Learning.Testing.PostgresTests.csproj" />
+  </Folder>
 </Solution>
