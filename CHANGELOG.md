@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Phase 11 coverage and test-quality lesson with fresh per-test-project/module reports for Phases
+  10/11, focused diagnosis, mutation exercises, and explicit limits on percentage interpretation.
 - Phase 11 HTTP integration lesson with an offline API, real pipeline tests, Problem Details,
   request-abort propagation, isolated write fixtures, and shared read-only host ownership.
 - Phase 11 unit-testing foundations: offline loan-reminder workflow, deterministic time, boundary
