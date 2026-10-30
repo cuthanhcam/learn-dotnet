@@ -38,6 +38,8 @@ The [helper](../../scripts/Measure-PhaseCoverage.ps1) restores locked packages, 
 phase in Release, and runs each declared test project separately. It uses the existing xUnit v2/VSTest
 setup and [collector settings](../coverage.runsettings), not another test platform or package.
 Phase 10 means the architecture solution; its separately maintained GoF solutions are outside this run.
+The helper selects the `/tests/` solution folder; the `/providers/` folder is intentionally separate.
+Run [PostgreSQL provider tests](05-postgresql-provider-tests.md) through their Docker runner.
 
 Each invocation creates `artifacts/coverage/phase-<number>/<timestamp>-<unique-id>/`. Expect TRX and
 Cobertura XML under each test project's directory and a `summary.md` at the run root. The console prints
@@ -122,14 +124,14 @@ but keep the important deadline, learner identity, or version visible in the sce
 
 ## CI and Remaining Evidence
 
-The shared [repository gate](../../scripts/Validate-Repository.ps1) already collects coverage for all
-maintained test projects. [CI](../../.github/workflows/ci.yml) uploads TRX and coverage artifacts on both
+The shared [repository gate](../../scripts/Validate-Repository.ps1) collects coverage for the portable
+suite, excluding `Category=Postgres`. [CI](../../.github/workflows/ci.yml) uploads TRX and coverage artifacts on both
 Windows and Linux. This focused helper is for interpreting a selected phase without re-running the
 entire course. It does not add a second redundant CI test pass or an arbitrary percentage threshold.
 
-Production-provider fixtures, real concurrent connections, schema upgrades, and the phase completion
-audit remain separate work in the [roadmap](00-roadmap.md). Coverage of a fake or SQLite adapter does
-not substitute for those capabilities.
+The [PostgreSQL lesson](05-postgresql-provider-tests.md) supplies separate fixture and connection-race
+evidence. Schema upgrades and the phase completion audit remain work in the [roadmap](00-roadmap.md).
+Coverage of a fake or SQLite adapter does not substitute for those capabilities.
 
 ## References
 

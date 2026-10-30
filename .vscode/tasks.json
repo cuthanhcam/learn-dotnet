@@ -51,6 +51,8 @@
         "--configuration",
         "Release",
         "--no-build",
+        "--filter",
+        "Category!=Postgres",
         "--no-restore",
         "--nologo"
       ],

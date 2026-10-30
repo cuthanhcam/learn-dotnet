@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Phase 11 PostgreSQL/Docker provider baseline with shared Phase 10 store contracts, independent
+  connection writes, atomic rollback/replay checks, disposable fixtures, and dedicated CI evidence.
 - Phase 11 coverage and test-quality lesson with fresh per-test-project/module reports for Phases
   10/11, focused diagnosis, mutation exercises, and explicit limits on percentage interpretation.
 - Phase 11 HTTP integration lesson with an offline API, real pipeline tests, Problem Details,
@@ -28,6 +30,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Enrollment schema constraints quote identifiers for SQLite/PostgreSQL compatibility. Portable
+  validation excludes PostgreSQL cases, which run explicitly in their own Docker-backed gate.
 - Factory Method export captures formatter metadata once and returns the validated snapshot,
   including when an extension product has a stateful metadata property.
 - Phase 10 HTTP mapping recognizes EF-wrapped SQLite busy/locked failures and rejects invalid

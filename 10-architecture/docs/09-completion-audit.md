@@ -23,9 +23,10 @@ not mean this repository is a deployable training SaaS or that every production 
 The articles explicitly distinguish tested guarantees from provider/operational extensions.
 
 [Phase 11](../../11-testing/README.md) now delivers unit-testing foundations, HTTP integration
-fixtures, and [coverage interpretation](../../11-testing/docs/04-coverage-and-test-quality.md).
-The handoff below includes follow-up exercises and remaining tests against the intended production
-database. Track 10A is complete within its learning scope; the separate
+fixtures, [coverage interpretation](../../11-testing/docs/04-coverage-and-test-quality.md), and a
+[PostgreSQL contract/transaction baseline](../../11-testing/docs/05-postgresql-provider-tests.md).
+The handoff below includes follow-up exercises and remaining migration, outage, and deployment tests.
+Track 10A is complete within its learning scope; the separate
 [10B pattern catalog](../design-patterns/README.md) remains in progress.
 
 ## Objective-to-Evidence Matrix
