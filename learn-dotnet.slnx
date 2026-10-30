@@ -173,6 +173,9 @@
   <Folder Name="/11 - Testing/">
     <File Path="11-testing/README.md" />
   </Folder>
+  <Folder Name="/11 - Testing/providers/">
+    <Project Path="11-testing/tests/Learning.Testing.PostgresTests/Learning.Testing.PostgresTests.csproj" />
+  </Folder>
   <Folder Name="/11 - Testing/src/">
     <Project Path="11-testing/src/Learning.Testing.Api/Learning.Testing.Api.csproj" />
     <Project Path="11-testing/src/Learning.Testing.Examples/Learning.Testing.Examples.csproj" />

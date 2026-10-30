@@ -22,6 +22,7 @@ Start with the [roadmap and delivery ledger](docs/00-roadmap.md).
 | Deterministic time, doubles, failure, cancellation | [Time and asynchronous boundaries](docs/02-time-doubles-async.md) | `LoanReminderServiceTests` |
 | HTTP integration and fixture ownership | [Real pipeline and isolated state](docs/03-http-integration-fixtures.md) | `ReminderHttpTests`, `ReadOnlyHostTests` |
 | Coverage and test quality | [Interpret reports and challenge assertions](docs/04-coverage-and-test-quality.md) | `scripts/Measure-PhaseCoverage.ps1 -Phase 11` |
+| PostgreSQL provider contracts | [Disposable Docker fixture](docs/05-postgresql-provider-tests.md) | `scripts/Test-PostgresProvider.ps1` |
 
 The example sends an offline reminder when a loan is unreturned and the decision instant is at or
 after its deadline. The policy is pure; the workflow reads a loan, samples an injected clock, and
@@ -34,7 +35,7 @@ test server. Neither suite needs a database, real email service, or Docker.
 dotnet restore 11-testing/11-testing.slnx --locked-mode
 dotnet build 11-testing/11-testing.slnx --configuration Release --no-restore
 dotnet run --project 11-testing/src/Learning.Testing.ConsoleApp --configuration Release --no-build
-dotnet test 11-testing/11-testing.slnx --configuration Release --no-build --no-restore
+dotnet test 11-testing/11-testing.slnx --configuration Release --no-build --no-restore --filter "Category!=Postgres"
 dotnet test 11-testing/11-testing.slnx --configuration Release --no-build --filter "Category=Unit"
 dotnet test 11-testing/11-testing.slnx --configuration Release --no-build --filter "Category=Integration"
 ```
@@ -90,7 +91,10 @@ send twice. Cancellation after an external service accepts a message cannot retr
 transaction, delivery receipt, deduplication, account authorization, scheduler, or email adapter here.
 Phase 10 explains durable outbox/inbox protocols; this phase explains how to test such contracts.
 
-Production-provider tests and a completion audit are tracked in the
+PostgreSQL tests run separately through `pwsh -NoProfile -File scripts/Test-PostgresProvider.ps1`.
+They require a running Linux Docker engine and exercise the Phase 10 adapter. The runner provisions
+and removes its own disposable server. Calling the provider test project without its fixture fails
+with setup guidance; it never silently skips. Migration/upgrade tests and a completion audit remain in the
 roadmap. Phase 11 is **in progress** until those scoped
 lessons and their exit gates are delivered. Phase 12 remains planned.
 

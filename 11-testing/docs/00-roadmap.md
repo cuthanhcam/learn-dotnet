@@ -28,7 +28,8 @@ machine time, or an external service that the test does not control.
 | Unit foundations | Delivered | Pure deadline policy, awaited workflow, fixed clock, explicit doubles, failure/cancellation tests, console, docs and exercises |
 | HTTP integration | Delivered | Real routing/DI/serialization/error handling, status/body assertions, isolated state, cancellation, and fixture ownership |
 | Coverage and test quality | Delivered | Fresh per-project/module reports for Phases 10/11, branch versus line interpretation, mutation exercises, focused suites, and failure diagnosis |
-| Production provider | Planned separately | One explicitly chosen provider, Docker fixtures, migration/upgrade and concurrency tests, cleanup, and a dedicated CI job |
+| PostgreSQL provider baseline | Delivered | Docker fixture, shared store contracts, competing connections, rollback, replay, server constraints, cleanup, and a dedicated CI job |
+| Provider schema evolution | Planned | Reviewed PostgreSQL migrations, populated-schema upgrade tests, deployment compatibility, and recovery limits |
 | Completion audit | Planned | Trace outcomes to code/tests, verify all commands, and document remaining operational boundaries |
 
 Each slice uses its own branch and PR into `develop`, following the existing runtime delivery model.
@@ -49,6 +50,8 @@ Coverage and test quality continues in its own branch with full local validation
    framework wiring and state ownership rather than replacing unit-level boundary tests.
 6. Collect [coverage and evaluate test quality](04-coverage-and-test-quality.md); explain one missed
    branch and reproduce one deliberate defect before restoring the correct implementation.
+7. Run [PostgreSQL provider tests](05-postgresql-provider-tests.md) and distinguish server evidence
+   from SQLite and injected failures.
 
 ## Reuse the earlier phases deliberately
 

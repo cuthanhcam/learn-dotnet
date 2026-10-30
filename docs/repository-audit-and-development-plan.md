@@ -65,7 +65,7 @@ reader navigation rather than project placement. Use the
 | 2 | Validate durable replay data and refresh completion guidance | [PR #94](https://github.com/cuthanhcam/learn-dotnet/pull/94); seven malformed-receipt regressions plus valid NotFound replay; full local gate |
 | 3 | Classify EF-wrapped SQLite locks and reject invalid HTTP success results | Direct/wrapped busy and constraint errors, retry hints, diagnostic suppression, and invalid-result pipeline tests |
 | 4 | Add Phase 11 coverage and test-quality lesson | [Delivered lesson](../11-testing/docs/04-coverage-and-test-quality.md) with fresh per-project reports, branch analysis, and mutation exercises; no combined or correctness percentage |
-| 5 | Exercise intended deployment provider and concurrent connections | Run shared port contracts plus real contention/transaction cases; distinguish these from injected HTTP failures |
+| 5 | Exercise PostgreSQL and concurrent connections | [Provider baseline](../11-testing/docs/05-postgresql-provider-tests.md) delivers shared contracts and competing-write/transaction cases; populated-schema migrations remain next |
 | 6 | Extend public API contracts before production reuse | Stable problem identifiers, API specification, identity mapping edge cases, migration/retention and shutdown scenarios |
 | 7 | Continue GoF catalog one pattern per reviewed branch | Three delivered patterns, twenty planned; apply the existing lesson/source/test standard |
 
