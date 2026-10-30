@@ -49,7 +49,7 @@ Run repository quality gates:
 The portable test command excludes `Category=Postgres` so it needs no Docker engine. For changes to
 persistence or the provider lesson, also run `pwsh -NoProfile -File scripts/Test-PostgresProvider.ps1`.
 CI requires a separate PostgreSQL job. Direct execution of that test project requires its disposable
-fixture; see [provider testing](11-testing/docs/05-postgresql-provider-tests.md).
+fixture; see [provider testing](12-testing/docs/05-postgresql-provider-tests.md).
 
 ```powershell
 ./scripts/Test-ArticleMetadata.ps1

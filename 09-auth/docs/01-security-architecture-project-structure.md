@@ -75,7 +75,7 @@ Phase 07 isolates ASP.NET Core behaviors in one API so middleware, hosting, rout
 testing remain easy to trace. Phase 08 isolates relational behavior in one persistence library so SQL
 and `DbContext` semantics remain visible. Splitting either retroactively into four layers would add
 navigation cost without teaching its primary topic. Phase 09 introduces stronger boundaries because
-multiple security responsibilities genuinely evolve independently and Phase 10 will compare this
+multiple security responsibilities genuinely evolve independently and Phase 11 will compare this
 approach with layered, clean, vertical-slice, and modular-monolith alternatives.
 
 ## Review Checklist

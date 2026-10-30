@@ -1,15 +1,19 @@
 #requires -Version 7.0
 [CmdletBinding()]
 param(
-    [ValidateSet(10, 11)]
-    [int]$Phase = 11
+    [ValidateSet(10, 11, 12)]
+    [int]$Phase = 12
 )
 
 $ErrorActionPreference = "Stop"
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$phaseDirectory = if ($Phase -eq 10) { "10-architecture" } else { "11-testing" }
+$phaseDirectory = switch ($Phase) {
+    10 { "10-design-patterns" }
+    11 { "11-architecture" }
+    12 { "12-testing" }
+}
 $solution = Join-Path $repositoryRoot "$phaseDirectory/$phaseDirectory.slnx"
-$settings = Join-Path $repositoryRoot "11-testing/coverage.runsettings"
+$settings = Join-Path $repositoryRoot "12-testing/coverage.runsettings"
 # Never scan old artifacts: each invocation owns a fresh directory, even when tests fail.
 $runId = "{0}-{1}" -f [DateTime]::UtcNow.ToString("yyyyMMddTHHmmssZ"), [Guid]::NewGuid().ToString("N").Substring(0, 8)
 $results = Join-Path $repositoryRoot "artifacts/coverage/phase-$Phase/$runId"
