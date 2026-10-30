@@ -10,7 +10,7 @@ estimated-reading-minutes: 18
 topics: [architecture, completion-audit, testing, production-readiness]
 prerequisites: [architecture-common-pitfalls]
 status: maintained
-last-reviewed: 2026-10-25
+last-reviewed: 2026-10-30
 ---
 
 # Phase 10 Completion Audit and Testing Handoff
@@ -22,9 +22,11 @@ relational adapter, two separately owned modules, and authenticated HTTP entry p
 not mean this repository is a deployable training SaaS or that every production concern has been solved.
 The articles explicitly distinguish tested guarantees from provider/operational extensions.
 
-[Phase 11](../../11-testing/README.md) now delivers unit-testing foundations and HTTP integration
-fixtures. The handoff below identifies further work, including coverage analysis and tests against the
-intended production database. Track 10A is complete within its learning scope; the separate
+[Phase 11](../../11-testing/README.md) now delivers unit-testing foundations, HTTP integration
+fixtures, [coverage interpretation](../../11-testing/docs/04-coverage-and-test-quality.md), and a
+[PostgreSQL contract/transaction baseline](../../11-testing/docs/05-postgresql-provider-tests.md).
+The handoff below includes follow-up exercises and remaining migration, outage, and deployment tests.
+Track 10A is complete within its learning scope; the separate
 [10B pattern catalog](../design-patterns/README.md) remains in progress.
 
 ## Objective-to-Evidence Matrix
