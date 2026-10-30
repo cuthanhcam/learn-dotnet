@@ -30,6 +30,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Align .NET 10 platform/auth packages and the EF tool at 10.0.14, update VSTest tooling to
+  18.11.0 and its xUnit adapter to 4.0.1, and regenerate the complete maintained lock graph.
 - Enrollment schema constraints quote identifiers for SQLite/PostgreSQL compatibility. Portable
   validation excludes PostgreSQL cases, which run explicitly in their own Docker-backed gate.
 - Factory Method export captures formatter metadata once and returns the validated snapshot,
