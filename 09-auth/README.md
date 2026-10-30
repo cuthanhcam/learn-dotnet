@@ -72,6 +72,12 @@ dotnet build 09-auth.slnx --configuration Release --no-restore
 dotnet test 09-auth.slnx --configuration Release --no-build
 ```
 
+## Local API
+
+The tracked local profiles use `http://127.0.0.1:5090` and optional `https://localhost:7090`.
+Supply `Jwt__SigningKey` outside source control before starting the host; see
+[local API profiles](../docs/local-api-profiles.md) and the [token configuration lesson](docs/03-authentication-schemes-jwt.md).
+
 ## Status
 
 The project boundary, credential model, adaptive password hashing, atomic registration contract,
