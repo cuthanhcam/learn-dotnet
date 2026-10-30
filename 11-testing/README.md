@@ -21,6 +21,7 @@ Start with the [roadmap and delivery ledger](docs/00-roadmap.md).
 | Unit contracts and boundary cases | [Unit test design](docs/01-unit-test-design.md) | `ReminderPolicyTests` |
 | Deterministic time, doubles, failure, cancellation | [Time and asynchronous boundaries](docs/02-time-doubles-async.md) | `LoanReminderServiceTests` |
 | HTTP integration and fixture ownership | [Real pipeline and isolated state](docs/03-http-integration-fixtures.md) | `ReminderHttpTests`, `ReadOnlyHostTests` |
+| Coverage and test quality | [Interpret reports and challenge assertions](docs/04-coverage-and-test-quality.md) | `scripts/Measure-PhaseCoverage.ps1 -Phase 11` |
 
 The example sends an offline reminder when a loan is unreturned and the decision instant is at or
 after its deadline. The policy is pure; the workflow reads a loan, samples an injected clock, and
@@ -89,7 +90,7 @@ send twice. Cancellation after an external service accepts a message cannot retr
 transaction, delivery receipt, deduplication, account authorization, scheduler, or email adapter here.
 Phase 10 explains durable outbox/inbox protocols; this phase explains how to test such contracts.
 
-Coverage interpretation, production-provider tests, and a completion audit are tracked in the
+Production-provider tests and a completion audit are tracked in the
 roadmap. Phase 11 is **in progress** until those scoped
 lessons and their exit gates are delivered. Phase 12 remains planned.
 

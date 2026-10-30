@@ -10,7 +10,7 @@ estimated-reading-minutes: 12
 topics: [roadmap, maintenance, onboarding, testing, devops]
 prerequisites: []
 status: maintained
-last-reviewed: 2026-10-25
+last-reviewed: 2026-10-30
 ---
 
 # Repository Audit and Development Plan
@@ -64,7 +64,7 @@ reader navigation rather than project placement. Use the
 | 1 | Align dictionary/SQLite saves and cancellation checkpoints | [PR #93](https://github.com/cuthanhcam/learn-dotnet/pull/93); 25 new contract/cancellation cases, merged after hosted checks |
 | 2 | Validate durable replay data and refresh completion guidance | [PR #94](https://github.com/cuthanhcam/learn-dotnet/pull/94); seven malformed-receipt regressions plus valid NotFound replay; full local gate |
 | 3 | Classify EF-wrapped SQLite locks and reject invalid HTTP success results | Direct/wrapped busy and constraint errors, retry hints, diagnostic suppression, and invalid-result pipeline tests |
-| 4 | Add Phase 11 coverage and test-quality lesson | Fresh per-project reports, branch analysis, and exercises; no claim that a percentage proves correctness |
+| 4 | Add Phase 11 coverage and test-quality lesson | [Delivered lesson](../11-testing/docs/04-coverage-and-test-quality.md) with fresh per-project reports, branch analysis, and mutation exercises; no combined or correctness percentage |
 | 5 | Exercise intended deployment provider and concurrent connections | Run shared port contracts plus real contention/transaction cases; distinguish these from injected HTTP failures |
 | 6 | Extend public API contracts before production reuse | Stable problem identifiers, API specification, identity mapping edge cases, migration/retention and shutdown scenarios |
 | 7 | Continue GoF catalog one pattern per reviewed branch | Three delivered patterns, twenty planned; apply the existing lesson/source/test standard |

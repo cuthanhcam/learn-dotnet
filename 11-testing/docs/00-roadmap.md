@@ -10,7 +10,7 @@ estimated-reading-minutes: 8
 topics: [testing, roadmap, xunit, test-design]
 prerequisites: [architecture-learning-roadmap]
 status: maintained
-last-reviewed: 2026-10-25
+last-reviewed: 2026-10-30
 ---
 
 # Testing Learning Roadmap
@@ -27,7 +27,7 @@ machine time, or an external service that the test does not control.
 |---|---|---|
 | Unit foundations | Delivered | Pure deadline policy, awaited workflow, fixed clock, explicit doubles, failure/cancellation tests, console, docs and exercises |
 | HTTP integration | Delivered | Real routing/DI/serialization/error handling, status/body assertions, isolated state, cancellation, and fixture ownership |
-| Coverage and test quality | Planned | Reproducible coverage commands, branch versus line coverage, mutation exercises, filtered suites, test-data ownership, and failure diagnosis |
+| Coverage and test quality | Delivered | Fresh per-project/module reports for Phases 10/11, branch versus line interpretation, mutation exercises, focused suites, and failure diagnosis |
 | Production provider | Planned separately | One explicitly chosen provider, Docker fixtures, migration/upgrade and concurrency tests, cleanup, and a dedicated CI job |
 | Completion audit | Planned | Trace outcomes to code/tests, verify all commands, and document remaining operational boundaries |
 
@@ -35,8 +35,8 @@ Each slice uses its own branch and PR into `develop`, following the existing run
 Do not mark the whole phase complete merely because the first unit suite passes.
 
 Unit foundations were merged in [PR #90](https://github.com/cuthanhcam/learn-dotnet/pull/90) after all
-hosted checks passed. HTTP integration follows on `feature/11-testing-http-integration`, based on that
-verified `develop` rather than a stacked unmerged branch.
+hosted checks passed. HTTP integration was merged in [PR #91](https://github.com/cuthanhcam/learn-dotnet/pull/91).
+Coverage and test quality continues in its own branch with full local validation and hosted checks.
 
 ## Study sequence
 
@@ -47,6 +47,8 @@ verified `develop` rather than a stacked unmerged branch.
 4. Attempt the exercises before consulting the reference implementation.
 5. Study [HTTP integration and fixtures](03-http-integration-fixtures.md). It adds evidence about
    framework wiring and state ownership rather than replacing unit-level boundary tests.
+6. Collect [coverage and evaluate test quality](04-coverage-and-test-quality.md); explain one missed
+   branch and reproduce one deliberate defect before restoring the correct implementation.
 
 ## Reuse the earlier phases deliberately
 
