@@ -48,11 +48,11 @@ This repository is intended for **learning, practice, and long-term reference**,
 | 07 | [ASP.NET Core](07-aspnet-core/README.md) | Completed | .NET 10 |
 | 08 | [Entity Framework Core](08-ef-core/README.md) | Completed | .NET 10 |
 | 09 | [Authentication and Authorization](09-auth/README.md) | Completed | .NET 10 |
-| 10 | [Architecture and Best Practices](10-architecture/README.md) | Architecture complete; design-patterns track in progress | .NET 10 |
+| 10 | [Architecture and Best Practices](10-architecture/README.md) | Enrollment baseline delivered; GoF curriculum in progress | .NET 10 |
 | 11 | [Testing](11-testing/README.md) | Unit and HTTP foundations delivered; coverage/provider tracks planned | .NET 10 |
 | 12–15 | Projects, DevOps, system design, observability | Planned | To be defined |
 
-The maintained workspace includes Phases 01–11 and the first three Phase 10B pattern lessons.
+The maintained workspace includes Phases 01–11 and the first four Phase 10B pattern lessons.
 The validation scripts report the current project and article inventory; test runs report executable
 case counts. `legacy/` preserves historical code for comparison but is excluded from the maintained
 solution and quality gates. Completed phases cover their stated scope; Phase 11 is in progress and
@@ -288,7 +288,7 @@ _Figure 1: Structured .NET Learning Journey from Fundamentals to Advanced System
 - Feature-based structure
 
 An advanced [GoF object-design track](10-architecture/design-patterns/README.md) is being delivered
-separately from the implemented architecture scenario, with complete Strategy, Factory Method, and Adapter lessons.
+separately from the implemented architecture scenario, with Strategy, Factory Method, Adapter, and Decorator lessons.
 See the [design patterns curriculum and solution blueprint](docs/design-patterns-curriculum-plan.md)
 for all 23 patterns, phase ownership, focused solution structure, and incremental delivery gates.
 

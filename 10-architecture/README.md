@@ -1,6 +1,6 @@
 ---
 title: "Phase 10 — Architecture and Best Practices"
-description: "Build an enrollment module with explicit business invariants, application boundaries, concurrency contracts, and architecture decisions."
+description: "Study a working enrollment architecture baseline and an incremental GoF catalog, with explicit contracts, evidence, and remaining curriculum."
 phase: 10
 status: in-progress
 target-framework: net10.0
@@ -15,13 +15,24 @@ Architecture is the set of decisions that makes a system understandable and chan
 constraints. This phase develops a course-enrollment module, using limited seats and concurrent requests
 to expose decisions that cannot be answered by folder names alone.
 
+## Delivery Status: This Phase Is Still in Progress
+
+| Track | Delivered | Remaining |
+|---|---|---|
+| 10A: application architecture | Runnable enrollment baseline, articles, ADRs, source tour, design-principle walkthrough, and 110 specifications | Production extensions remain explicit; see the evidence audit |
+| 10B: object design | Strategy, Factory Method, Adapter, Decorator: 4 of 23 GoF patterns | 19 patterns, comparison lessons, refactoring case study, and whole-catalog audit |
+
+The [10A evidence audit](docs/09-completion-audit.md) covers the enrollment scenario; it is **not** a
+completion certificate for this entire directory. Follow the [GoF delivery ledger](docs/design-patterns/00-roadmap.md)
+for unfinished curriculum. No planned pattern is represented by an empty or placeholder implementation.
+
 ## Learning Outcomes
 
 ### Advanced Object-Design Track (10B)
 
-The current enrollment curriculum is the completed architecture track (10A). The separately navigable
+The current enrollment curriculum is the implemented architecture baseline (10A). The separately navigable
 [GoF catalog (10B)](design-patterns/README.md) is in progress, with its own solution, category libraries,
-guided reading path, and pattern-specific specifications. Strategy, Factory Method, and Adapter are delivered;
+guided reading path, and pattern-specific specifications. Strategy, Factory Method, Adapter, and Decorator are delivered;
 the remaining catalog is explicitly tracked in its roadmap. See the approved
 [curriculum and solution blueprint](../docs/design-patterns-curriculum-plan.md) for delivery boundaries.
 
@@ -35,6 +46,8 @@ authorization, transactions, idempotency, and concurrency across the complete re
 ## Study Path
 
 For a file-by-file reading route, start with the [guided source tour](docs/12-guided-source-tour.md).
+Then use [design principles in source](docs/13-design-principles-in-source.md) to connect SOLID,
+DRY, KISS, and YAGNI to real decisions rather than memorizing names.
 
 | Order | Article | Current scope |
 |---:|---|---|
@@ -47,7 +60,7 @@ For a file-by-file reading route, start with the [guided source tour](docs/12-gu
 | 6 | [HTTP security, errors, and version evolution](docs/06-http-security-errors-versioning.md) | real JWT validation, self-enrollment policy, and v1 contracts |
 | 7 | [Architecture decisions and fitness checks](docs/07-decisions-fitness-maintainability.md) | project graph enforcement, trade-offs, and two ADRs |
 | 8 | [Common pitfalls](docs/08-common-pitfalls.md) | diagnosis and production adoption checklist |
-| 9 | [Completion audit](docs/09-completion-audit.md) | objective-to-evidence matrix and Phase 11 handoff |
+| 9 | [10A evidence audit](docs/09-completion-audit.md) | enrollment objective-to-evidence matrix and Phase 11 handoff |
 
 ## Project Structure
 
@@ -71,6 +84,11 @@ For a file-by-file reading route, start with the [guided source tour](docs/12-gu
 Features remain visible inside each project. Project boundaries express compile-time dependencies;
 feature folders express the use cases a reader is looking for. Introduce another project only when it
 protects a meaningful boundary, not merely to mirror a diagram.
+
+This tree describes track 10A. Track 10B lives in `design-patterns/` with its own
+[catalog solution and focused category solutions](design-patterns/README.md); its publishable lessons
+live in `docs/design-patterns/`. Keeping the two scenarios separate avoids making the pattern catalog
+a dependency of the enrollment application.
 
 ## Run and Verify
 
@@ -134,14 +152,15 @@ lab's `learner_id` mapping and `enrollment.write` scope. Database initialization
 
 ## Current Boundary
 
-The architecture learning scope is complete, with evidence and limits in the
-[completion audit](docs/09-completion-audit.md). The API uses file-backed SQLite; tests and the offline
+The enrollment architecture baseline is implemented, with evidence and limits in the
+[10A audit](docs/09-completion-audit.md). Whole-phase completion still requires the remaining GoF
+curriculum. The API uses file-backed SQLite; tests and the offline
 console use isolated in-memory SQLite databases. Notification work is prepared, not actually emailed.
 Delivery is an in-process, single-worker example with at-least-once recovery, not a broker or distributed
 transaction. Multi-worker leases, poison handling, retention, production migrations, multitenancy,
 and deployment hardening are explicit extensions—not hidden capabilities.
 
 Phase 08 supplies provider/migration fundamentals, Phase 09 supplies security fundamentals, and Phase 11
-will deepen testing of the contracts and failure protocols established here. Read the two
+now adds coverage interpretation and PostgreSQL contract/transaction tests. Read the two
 [architecture decision records](docs/07-decisions-fitness-maintainability.md) before adapting the structure
 to a different workload.
