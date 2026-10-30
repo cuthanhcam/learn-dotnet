@@ -68,7 +68,7 @@ The root solution also includes these projects. To validate a contribution, run
 In one terminal at the repository root, after building the phase:
 
 ```powershell
-dotnet run --project 12-testing/src/Learning.Testing.Api --configuration Release --no-build --no-launch-profile -- --urls http://127.0.0.1:5111
+dotnet run --project 12-testing/src/Learning.Testing.Api --configuration Release --no-build --launch-profile http
 ```
 
 In another terminal:

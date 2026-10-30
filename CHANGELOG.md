@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Observer lesson with disposable bounded subscriptions, explicit callback/terminal policies,
+  event-based alternative, deterministic demo, and lifecycle/concurrency behavior tests.
 - Phase 10 Decorator lesson with independent bounded-retry/required-audit wrappers, ordering and
   cancellation tests, correct baseline, and offline demo. Added a source-based design-principle guide
   and clarified the remaining whole-phase curriculum instead of implying Phase 11 completion.
@@ -33,6 +35,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- Standardize tracked API launch profiles and loopback ports across Phases 07/09/11/12, with
+  optional HTTPS, explicit configuration requirements, and a shared local-development guide.
 - Split Design Patterns into Phase 10, move Architecture to Phase 11 and Testing to Phase 12,
   update navigation/solutions/validation, and replace the long root roadmap with a compact index.
 - Align .NET 10 platform/auth packages and the EF tool at 10.0.14, update VSTest tooling to

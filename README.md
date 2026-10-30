@@ -21,7 +21,7 @@ Use [Contributing](CONTRIBUTING.md) for validation and [the development plan](do
 | 07 | [ASP.NET Core](07-aspnet-core/README.md) | Delivered |
 | 08 | [Entity Framework Core](08-ef-core/README.md) | Delivered |
 | 09 | [Authentication and Authorization](09-auth/README.md) | Delivered |
-| 10 | [Design Patterns](10-design-patterns/README.md) | In progress: 4 of 23 GoF patterns |
+| 10 | [Design Patterns](10-design-patterns/README.md) | In progress: 5 of 23 GoF patterns |
 | 11 | [Software Architecture](11-architecture/README.md) | Enrollment baseline delivered |
 | 12 | [Testing](12-testing/README.md) | Foundations, coverage, and PostgreSQL baseline delivered; schema evolution/audit remain |
 | 13–16 | Projects, DevOps, system design, observability | Planned |
