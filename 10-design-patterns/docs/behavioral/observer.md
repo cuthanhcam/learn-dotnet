@@ -179,4 +179,4 @@ unimplemented future pattern.
 - [.NET Observer guidance](https://learn.microsoft.com/en-us/dotnet/standard/events/observer-design-pattern-best-practices)
 - Previous: [Decorator](../structural/decorator.md)
 - Return: [GoF delivery ledger](../00-roadmap.md)
-- Next planned topics: Command and State.
+- Next: [Command](command.md); State remains planned.
