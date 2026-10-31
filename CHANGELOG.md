@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Command lesson with deferred requests, bounded undo, conflict detection, failure rules,
+  callback alternative, deterministic demo, and 23 behavioral test cases.
+
 - Observer lesson with disposable bounded subscriptions, explicit callback/terminal policies,
   event-based alternative, deterministic demo, and lifecycle/concurrency behavior tests.
 - Phase 10 Decorator lesson with independent bounded-retry/required-audit wrappers, ordering and

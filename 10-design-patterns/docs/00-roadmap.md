@@ -34,9 +34,10 @@ A folder name or an interface with an unfinished method does not count.
 4. [Adapter](structural/adapter.md): translate an incompatible provider contract without changing the client.
 5. [Decorator](structural/decorator.md): compose behavior while preserving a capability contract.
 6. [Observer](behavioral/observer.md): subscriptions and lifecycle, not reliable cross-process delivery.
-7. Command and State: explicit requests and legal transitions.
-8. Complete the category catalogs and compare look-alike patterns.
-9. Apply a small justified subset in a refactoring case study.
+7. [Command](behavioral/command.md): explicit requests and bounded undo history.
+8. State (planned): legal transitions.
+9. Complete the category catalogs and compare look-alike patterns.
+10. Apply a small justified subset in a refactoring case study.
 
 The order is pedagogical, not alphabetical or a claim that Strategy is required for every other pattern.
 Once the foundations are clear, the catalog is also a reference index.
@@ -47,7 +48,7 @@ Once the foundations are clear, the catalog is also a reference index.
 |---|---|---|
 | Creational (5) | Factory Method | Abstract Factory, Builder, Prototype, Singleton |
 | Structural (7) | Adapter, Decorator | Bridge, Composite, Facade, Flyweight, Proxy |
-| Behavioral (11) | Strategy, Observer | Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, State, Template Method, Visitor |
+| Behavioral (11) | Strategy, Observer, Command | Chain of Responsibility, Interpreter, Iterator, Mediator, Memento, State, Template Method, Visitor |
 
 Do not mistake the number of patterns delivered for a coverage percentage of software design. Each
 pattern has a different depth and failure surface. The completion audit will map all 23 to executable evidence.
@@ -61,6 +62,7 @@ pattern has a different depth and failure surface. The completion audit will map
 | Provider API does not match client expectations | Adapter (delivered) | a direct mapping function for a tiny stable contract |
 | Behavior must wrap an existing capability | Decorator (delivered) | a direct explicit call sequence |
 | Many operations need notification | Observer (delivered) | a direct callback with clear lifetime |
+| Requests need deferred execution and undo | Command (delivered) | direct call or Action callback |
 | Behavior changes with legal lifecycle state | State (planned) | an enum and transition table |
 
 This index should grow with delivered articles. Do not link to nonexistent pages or imply a planned
@@ -82,12 +84,12 @@ rewritten, and the existing architecture solution is not repurposed as the patte
 | Adapter | `feature/10b-adapter` | exact units/prices, typed outcomes, protocol failures, cancellation, ownership, diagrams |
 | Decorator | `feature/10b-decorator` | fixed workflow, independently composed retry/audit, ordering, failure/cancellation, deterministic demo, article |
 | Observer | `feature/patterns-observer` | fixed publisher, disposable subscriptions, terminal state, snapshot/concurrency and failure policies, event alternative, tests/demo/article |
-| Command | `feature/patterns-command` | next planned topic; request/execution boundary and failure/idempotency scope required |
+| Command | `feature/patterns-command` | deferred requests, bounded undo, conflicts, atomic failure, delegate alternative, tests/demo/article |
 
-Current pattern evidence: Strategy has 21 test cases, Factory Method 20, Adapter 30, Decorator 29, and Observer 33.
-The catalog therefore has 133 delivered test cases across three independent category test projects.
-These counts describe discovered tests, not a coverage percentage or a claim that the other 18
-patterns are finished. Five patterns are delivered; the category comparisons, case study, and final
+Current pattern evidence: Strategy has 21 test cases, Factory Method 20, Adapter 30, Decorator 29, Observer 33, and Command 23.
+The catalog therefore has 156 delivered test cases across three independent category test projects.
+These counts describe discovered tests, not a coverage percentage or a claim that the other 17
+patterns are finished. Six patterns are delivered; the category comparisons, case study, and final
 whole-catalog audit also remain unfinished.
 
 Create the next topic from the verified integration tip, not from an unrelated unreviewed feature.

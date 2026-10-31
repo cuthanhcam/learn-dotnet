@@ -57,11 +57,11 @@ entries remain explicit in the [active ledger](../10-design-patterns/docs/00-roa
 | Behavioral | Chain of Responsibility, Command, Interpreter, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor |
 
 Begin with pattern thinking, Strategy, Factory Method and its vocabulary comparison, Adapter, and
-Decorator, then Observer. Command/State are next, followed by the remaining category lessons. Finish
+Decorator, then Observer and Command. State is next, followed by the remaining category lessons. Finish
 with category comparisons, assessed exercises, a small refactoring case study, and a whole-catalog audit.
 
-The current phase delivers five patterns and 133 executable cases. This is not a coverage percentage;
-the other eighteen patterns and final comparative/case-study work remain planned. Do not create empty
+The current phase delivers six patterns and 156 executable cases. This is not a coverage percentage;
+the other seventeen patterns and final comparative/case-study work remain planned. Do not create empty
 directories, `NotImplementedException` examples, or skipped placeholder tests to imply delivery.
 
 ## Physical Structure

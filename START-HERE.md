@@ -51,7 +51,7 @@ Passing existing tests alone does not mean you have mastered the topic.
 
 | Your goal | Next action |
 |---|---|
-| New to C# | Follow Phase 01 → 02 → 03 in the [course index](README.md#course-index) |
+| New to C# | Follow [Phase 01](01-csharp-basics/README.md) → [02](02-oop/README.md) → [03](03-core-dotnet/README.md) |
 | Understand performance and algorithms | Continue through Phase 04 → 05 → 06; benchmarks are optional |
 | Build APIs | Complete the foundations, then Phase 07 → 08 → 09; study object design in 10 and architecture in 11 |
 | Study design patterns | Finish OOP and async foundations, then use the [Phase 10 lesson catalog](10-design-patterns/README.md) |
@@ -59,9 +59,9 @@ Passing existing tests alone does not mean you have mastered the topic.
 | Contribute a change | Read [Contributing](CONTRIBUTING.md), then run `pwsh -NoProfile -File scripts/Validate-Repository.ps1` |
 | Find unfinished material | Read the [audit and delivery plan](docs/repository-audit-and-development-plan.md) |
 
-`Delivered` in the course index means the scoped lesson set is available, not that the subject is
+A delivered phase means the scoped lesson set is available, not that the subject is
 exhausted or that the sample is ready for an internet-facing production deployment. Phase 10 has
-5 of 23 GoF patterns. Phase 12 has unit/HTTP, coverage, and PostgreSQL foundations; Phases 13–16 are planned
+6 of 23 GoF patterns. Phase 12 has unit/HTTP, coverage, and PostgreSQL foundations; Phases 13–16 are planned
 and their folders do not yet exist.
 
 ## Find the right files
