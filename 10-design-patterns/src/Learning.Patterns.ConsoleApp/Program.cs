@@ -1,3 +1,4 @@
+using Learning.Patterns.Behavioral.Command;
 using Learning.Patterns.Behavioral.Strategy;
 using Learning.Patterns.Behavioral.Observer;
 using Learning.Patterns.Creational.FactoryMethod;
@@ -9,7 +10,7 @@ using Learning.Patterns.Structural.Decorator;
 if (args.Length == 0 || args.SequenceEqual(new[] { "--help" }) || args.SequenceEqual(new[] { "--list" }))
 {
     Console.WriteLine("Usage: dotnet run --project <runner> -- --pattern behavioral.strategy");
-    Console.WriteLine("Available: behavioral.strategy, creational.factory-method, structural.adapter, structural.decorator, behavioral.observer");
+    Console.WriteLine("Available: behavioral.strategy, creational.factory-method, structural.adapter, structural.decorator, behavioral.observer, behavioral.command");
     return 0;
 }
 if (args.SequenceEqual(new[] { "--pattern", "behavioral.strategy" }))
@@ -35,6 +36,11 @@ if (args.SequenceEqual(new[] { "--pattern", "structural.decorator" }))
 if (args.SequenceEqual(new[] { "--pattern", "behavioral.observer" }))
 {
     ObserverDemo.Run(Console.Out);
+    return 0;
+}
+if (args.SequenceEqual(new[] { "--pattern", "behavioral.command" }))
+{
+    CommandDemo.Run(Console.Out);
     return 0;
 }
 Console.Error.WriteLine("Unknown pattern or arguments. Use --list to see delivered demos.");

@@ -83,7 +83,7 @@ Keep feature folders within each separate phase and use the
 | 4 | Add Phase 12 coverage and test-quality lesson | [Delivered lesson](../12-testing/docs/04-coverage-and-test-quality.md) with fresh per-project reports, branch analysis, and mutation exercises; no combined or correctness percentage |
 | 5 | Exercise PostgreSQL and concurrent connections | [Provider baseline](../12-testing/docs/05-postgresql-provider-tests.md) delivers shared contracts and competing-write/transaction cases; populated-schema migrations remain next |
 | 6 | Extend public API contracts before production reuse | Stable problem identifiers, API specification, identity mapping edge cases, migration/retention and shutdown scenarios |
-| 7 | Continue GoF catalog one pattern per reviewed branch | Five delivered patterns, eighteen planned; Command/State are next, followed by category completion; comparison lessons/case study/final audit also remain |
+| 7 | Continue GoF catalog one pattern per reviewed branch | Six delivered patterns, seventeen planned; State is next, followed by category completion; comparison lessons/case study/final audit also remain |
 
 Phase 11's evidence audit refers to its bounded educational baseline. Phase 10's GoF catalog remains
 in progress independently. Production-provider and operational extensions remain explicit
