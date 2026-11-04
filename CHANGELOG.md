@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Builder lesson with interchangeable plan/JSON representations, a shared director, bounded
+  reusable drafts, immutable products, deterministic demo, and 28 ownership/validation cases.
+
 - State lesson with a correct enum/switch baseline, lifecycle-specific state objects, complete
   transition-table tests, ownership/failure rules, deterministic demo, and 37 new cases.
 
