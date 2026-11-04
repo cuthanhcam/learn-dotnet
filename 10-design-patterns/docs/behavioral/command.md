@@ -169,5 +169,5 @@ They need no timing assumptions or external provider.
 - [GoF catalog and original book](https://www.informit.com/store/design-patterns-elements-of-reusable-object-oriented-9780321770462).
 - [Microsoft ICommand API](https://learn.microsoft.com/en-us/dotnet/api/system.windows.input.icommand?view=net-10.0).
 - Previous: [Observer](observer.md).
-- Next planned topic: State.
+- Next: [State](state.md).
 - [Delivery ledger](../00-roadmap.md).

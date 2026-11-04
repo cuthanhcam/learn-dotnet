@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- State lesson with a correct enum/switch baseline, lifecycle-specific state objects, complete
+  transition-table tests, ownership/failure rules, deterministic demo, and 37 new cases.
+
 - Command lesson with deferred requests, bounded undo, conflict detection, failure rules,
   callback alternative, deterministic demo, and 23 behavioral test cases.
 
