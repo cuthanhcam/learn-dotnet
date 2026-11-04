@@ -28,7 +28,8 @@ not implemented examples.
 7. Study [Observer](docs/behavioral/observer.md) for subscription ownership, terminal signals, and callback failures.
 8. Study [Command](docs/behavioral/command.md) for deferred requests, bounded history, and undo conflicts.
 9. Study [State](docs/behavioral/state.md) for legal transitions and lifecycle-owned behavior.
-10. Use the catalog/problem index in the roadmap to find delivered alternatives and remaining topics.
+10. Study [Builder](docs/creational/builder.md) for construction recipes and product snapshots.
+11. Use the catalog/problem index in the roadmap to find delivered alternatives and remaining topics.
 
 ## Run One Lesson
 
@@ -44,6 +45,7 @@ dotnet run --project 10-design-patterns/src/Learning.Patterns.ConsoleApp -- --pa
 dotnet run --project 10-design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern behavioral.observer
 dotnet run --project 10-design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern behavioral.command
 dotnet run --project 10-design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern behavioral.state
+dotnet run --project 10-design-patterns/src/Learning.Patterns.ConsoleApp -- --pattern creational.builder
 dotnet test 10-design-patterns/solutions/behavioral.slnx --configuration Release
 dotnet test 10-design-patterns/solutions/creational.slnx --configuration Release
 dotnet test 10-design-patterns/solutions/structural.slnx --configuration Release
@@ -81,6 +83,9 @@ complete maintained workspace.
         PriceUpdate.cs
         ObserverDemo.cs
     Learning.Patterns.ConsoleApp/
+    Learning.Patterns.Creational/Builder/
+      Baseline/            # Direct validated construction
+      Refactored/          # Director, typed/JSON builders, and bounded draft
     Learning.Patterns.Creational/FactoryMethod/
       Baseline/            # Closed-list selection in the original workflow
       Products/            # Text/JSON formatter contracts and implementations
@@ -101,12 +106,13 @@ complete maintained workspace.
   tests/Learning.Patterns.Behavioral.Tests/Command/
   tests/Learning.Patterns.Behavioral.Tests/State/
   tests/Learning.Patterns.Creational.Tests/FactoryMethod/
+  tests/Learning.Patterns.Creational.Tests/Builder/
   tests/Learning.Patterns.Structural.Tests/Adapter/
   tests/Learning.Patterns.Structural.Tests/Decorator/
 ```
 
 All three categories now have a complete first lesson, focused solution, and test project. There are
-seven runnable projects and 193 pattern specifications; the remaining 16 GoF patterns are planned, not
+seven runnable projects and 221 pattern specifications; the remaining 15 GoF patterns are planned, not
 scaffolded placeholders. Articles live under
 `10-design-patterns/docs/`, with metadata checked by the
 existing publishing gates. Each new pattern has its own topic branch and focused code/docs commits.

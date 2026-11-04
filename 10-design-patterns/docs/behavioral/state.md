@@ -169,4 +169,4 @@ reflection or a test-only state setter.
 - Previous: [Command](command.md).
 - [Strategy comparison](strategy.md).
 - [Guided delivery ledger](../00-roadmap.md).
-- Next planned catalog lesson: Builder.
+- Next: [Builder](../creational/builder.md).
