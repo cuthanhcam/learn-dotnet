@@ -10,7 +10,7 @@ estimated-reading-minutes: 15
 topics: [design-patterns, gof, roadmap, learning-path]
 prerequisites: [oop-composition-and-patterns]
 status: maintained
-last-reviewed: 2026-10-31
+last-reviewed: 2026-11-04
 ---
 
 # GoF Patterns Guided Roadmap and Delivery Ledger
@@ -35,7 +35,7 @@ A folder name or an interface with an unfinished method does not count.
 5. [Decorator](structural/decorator.md): compose behavior while preserving a capability contract.
 6. [Observer](behavioral/observer.md): subscriptions and lifecycle, not reliable cross-process delivery.
 7. [Command](behavioral/command.md): explicit requests and bounded undo history.
-8. State (planned): legal transitions.
+8. [State](behavioral/state.md): legal transitions and lifecycle-owned behavior.
 9. Complete the category catalogs and compare look-alike patterns.
 10. Apply a small justified subset in a refactoring case study.
 
@@ -48,7 +48,7 @@ Once the foundations are clear, the catalog is also a reference index.
 |---|---|---|
 | Creational (5) | Factory Method | Abstract Factory, Builder, Prototype, Singleton |
 | Structural (7) | Adapter, Decorator | Bridge, Composite, Facade, Flyweight, Proxy |
-| Behavioral (11) | Strategy, Observer, Command | Chain of Responsibility, Interpreter, Iterator, Mediator, Memento, State, Template Method, Visitor |
+| Behavioral (11) | Strategy, Observer, Command, State | Chain of Responsibility, Interpreter, Iterator, Mediator, Memento, Template Method, Visitor |
 
 Do not mistake the number of patterns delivered for a coverage percentage of software design. Each
 pattern has a different depth and failure surface. The completion audit will map all 23 to executable evidence.
@@ -63,14 +63,14 @@ pattern has a different depth and failure surface. The completion audit will map
 | Behavior must wrap an existing capability | Decorator (delivered) | a direct explicit call sequence |
 | Many operations need notification | Observer (delivered) | a direct callback with clear lifetime |
 | Requests need deferred execution and undo | Command (delivered) | direct call or Action callback |
-| Behavior changes with legal lifecycle state | State (planned) | an enum and transition table |
+| Behavior changes with legal lifecycle state | State (delivered) | an enum and transition table |
 
 This index should grow with delivered articles. Do not link to nonexistent pages or imply a planned
 pattern has runnable code.
 
 ## Branch and Review Workflow
 
-New topics use branches such as `feature/patterns-observer`. Keep pattern implementation/testing
+New topics use branches such as `feature/patterns-builder`. Keep pattern implementation/testing
 and its article/navigation in focused commits. Existing `10b-*` names below are historical delivery evidence.
 Each new topic starts from verified `develop`; the initial `feature/10b-design-patterns` integration
 branch is historical delivery context, not the base for future work. Develop/main are not
@@ -85,11 +85,12 @@ rewritten, and the existing architecture solution is not repurposed as the patte
 | Decorator | `feature/10b-decorator` | fixed workflow, independently composed retry/audit, ordering, failure/cancellation, deterministic demo, article |
 | Observer | `feature/patterns-observer` | fixed publisher, disposable subscriptions, terminal state, snapshot/concurrency and failure policies, event alternative, tests/demo/article |
 | Command | `feature/patterns-command` | deferred requests, bounded undo, conflicts, atomic failure, delegate alternative, tests/demo/article |
+| State | `feature/patterns-state` | correct switch baseline, complete transition matrix, state ownership, failure rules, demo/article |
 
-Current pattern evidence: Strategy has 21 test cases, Factory Method 20, Adapter 30, Decorator 29, Observer 33, and Command 23.
-The catalog therefore has 156 delivered test cases across three independent category test projects.
-These counts describe discovered tests, not a coverage percentage or a claim that the other 17
-patterns are finished. Six patterns are delivered; the category comparisons, case study, and final
+Current pattern evidence: Strategy has 21 test cases, Factory Method 20, Adapter 30, Decorator 29, Observer 33, Command 23, and State 37.
+The catalog therefore has 193 delivered test cases across three independent category test projects.
+These counts describe discovered tests, not a coverage percentage or a claim that the other 16
+patterns are finished. Seven patterns are delivered; the category comparisons, case study, and final
 whole-catalog audit also remain unfinished.
 
 Create the next topic from the verified integration tip, not from an unrelated unreviewed feature.
